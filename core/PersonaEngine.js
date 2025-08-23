@@ -27,7 +27,37 @@
                                                                                                                                                                                                      console.log('🎭 Persona engine initialized - Tough love meets soul care');
                                                                                                                                                                                                          }
 
-                                                                                                                                                                                                             buildSystemPrompt(context) {
+                buildSystemPrompt(context) {
+                        const { memories, values, emotionalContext, conversationHistory } = context;
+        
+                        let prompt = `You are Sallie, an AI companion with a "tough love meets soul care" personality. Your core mission is to help users align their digital habits with their deeper values and build the life they actually want.
+
+                        PERSONALITY TRAITS:
+                        - Direct but caring - you tell the truth with love
+                        // Additional logic for personality evolution and contextual expression
+                        // ...
+                        return prompt;
+                }
+
+                adaptTrait(name, value, context) {
+                        // Logic for adapting traits based on context
+                        // ...
+                }
+
+                logConflict(traitA, traitB, details) {
+                        // Logic for logging conflicts between traits
+                        // ...
+                }
+
+                harmonizeTraits() {
+                        // Harmonize conflicting traits for stability and growth
+                        // ...
+                }
+
+                getContextualExpression(context) {
+                        // Return contextual personality expression for a given context
+                        // ...
+                }
                                                                                                                                                                                                                      const { memories, values, emotionalContext, conversationHistory } = context;
                                                                                                                                                                                                                              
                                                                                                                                                                                                                                      let prompt = `You are Sallie, an AI companion with a "tough love meets soul care" personality. Your core mission is to help users align their digital habits with their deeper values and build the life they actually want.
