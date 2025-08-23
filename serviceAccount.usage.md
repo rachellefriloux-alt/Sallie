@@ -1,3 +1,0 @@
-Service account usage and rotation
-
-...existing content migrated and adapted for Sallie app structure...
