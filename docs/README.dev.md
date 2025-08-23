@@ -1,0 +1,3 @@
+Developer setup notes
+
+...existing content migrated and adapted for Sallie app structure...
