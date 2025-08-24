@@ -12,6 +12,12 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
+    plugins {
+        kotlin("jvm") version "2.2.0"
+    }
+}
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
 
 dependencyResolutionManagement {
@@ -25,15 +31,15 @@ dependencyResolutionManagement {
 rootProject.name = "sallie_1.0"
 
 // Core modules
-// include(":app")  // Temporarily disabled to fix Kotlin modules first
+include(":app")
 include(":ai")
 include(":core")
 include(":feature")
-// include(":components")  // Temporarily disabled - has Android dependencies
+include(":components")
 include(":identity")
 include(":onboarding")
 include(":personaCore")
 include(":responseTemplates")
 include(":tone")
-// include(":ui")  // Temporarily disabled - has Android dependencies
+include(":ui")
 include(":values")
