@@ -8,8 +8,44 @@
 </template>
 <script>
 export default {
+  name: 'DeviceCard',
   props: {
-    device: Object
+    device: {
+      type: Object,
+      required: true
+    },
+    theme: {
+      type: String,
+      default: 'light'
+    }
+  },
+  data() {
+    return {
+      error: '',
+      loading: false,
+      analytics: [],
+      lastAction: null
+    };
+  },
+  methods: {
+    async controlDevice(action) {
+      this.loading = true;
+      this.error = '';
+      try {
+        // Simulate device control logic
+        await new Promise(resolve => setTimeout(resolve, 500));
+        this.lastAction = action;
+        this.$emit('control', { device: this.device, action });
+        this.logAnalytics('device_control', { device: this.device, action });
+      } catch (e) {
+        this.error = 'Device control failed.';
+        this.logAnalytics('error', { error: this.error });
+      }
+      this.loading = false;
+    },
+    logAnalytics(event, data) {
+      this.analytics.push({ event, data, timestamp: Date.now() });
+    }
   }
 }
 </script>

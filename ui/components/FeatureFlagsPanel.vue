@@ -14,8 +14,21 @@
 </template>
 <script>
 export default {
+  name: 'FeatureFlagsPanel',
   props: {
-    flags: Array
+    flags: { type: Array, required: true },
+    theme: { type: String, default: 'dark' }
+  },
+  data() {
+    return {
+      error: '',
+      analytics: []
+    };
+  },
+  methods: {
+    logAnalytics(event, data) {
+      this.analytics.push({ event, data, timestamp: Date.now() });
+    }
   }
 }
 </script>
