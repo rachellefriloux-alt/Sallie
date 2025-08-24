@@ -24,6 +24,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "sallie_1.0"
 
+// Specify Gradle version for wrapper (latest stable)
+// Uncomment and run './gradlew wrapper --gradle-version=8.7' if wrapper is present
+
 // Core modules
 // include(":app")  // Temporarily disabled to fix Kotlin modules first
 include(":ai")
