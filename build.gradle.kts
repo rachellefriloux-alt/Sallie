@@ -11,6 +11,7 @@ buildscript {
 // Root build: alignment, verification, coverage, formatting – privacy-first (no new network code)
 plugins {
     id("org.jlleitschuh.gradle.ktlint") version "11.6.1" apply false
+    id("io.gitlab.arturbosch.detekt") version "1.23.1" apply false
     jacoco
     kotlin("jvm")
 }
@@ -29,6 +30,7 @@ apply(from = "verification.gradle.kts")
 subprojects {
     plugins.withId("org.jetbrains.kotlin.jvm") {
         apply(plugin = "org.jlleitschuh.gradle.ktlint")
+        apply(plugin = "io.gitlab.arturbosch.detekt")
         apply(plugin = "jacoco")
         tasks.withType<Test>().configureEach { useJUnitPlatform() }
         if (tasks.findByName("jacocoTestReport") == null) {
@@ -40,15 +42,16 @@ subprojects {
                 sourceDirectories.setFrom(files("src/main/kotlin"))
             }
         }
-        java {
-            toolchain {
-                languageVersion.set(JavaLanguageVersion.of(21))
-            }
+        extensions.configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
+            config = files("${rootProject.projectDir}/detekt.yml")
+            buildUponDefaultConfig = true
+            allRules = false
         }
-        tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEach {
-            compilerOptions {
-                jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
-            }
+        kotlin {
+            jvmToolchain(21)
+        }
+        tasks.withType<JavaCompile>().configureEach {
+            options.release.set(21)
         }
     }
 }
