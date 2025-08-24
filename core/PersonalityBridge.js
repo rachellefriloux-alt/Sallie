@@ -1,12 +1,26 @@
-// Salle Persona Module
-// PersonalityBridge.js (converted from TypeScript)
-// TODO: Review and adapt TypeScript-specific logic for JS compatibility
 
 class PersonalityBridge {
-    constructor() {
-        // Initialization logic
+    constructor(engine) {
+        this.engine = engine;
     }
-    // ...existing methods...
+
+    processExternalInput(input) {
+        // Transform and route input to persona engine
+        const transformed = this.transformInput(input);
+        return this.engine.updatePersona(transformed);
+    }
+
+    transformInput(input) {
+        // Example transformation logic
+        if (typeof input === 'string') {
+            return { message: input };
+        }
+        return input;
+    }
+
+    getCurrentPersona() {
+        return this.engine.getPersonaState();
+    }
 }
 
 module.exports = PersonalityBridge;

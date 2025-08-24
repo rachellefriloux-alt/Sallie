@@ -7,9 +7,35 @@
 </template>
 <script>
 export default {
+  name: 'InsightCard',
   props: {
-    title: String,
-    insight: String
+    title: {
+      type: String,
+      required: true
+    },
+    insight: {
+      type: String,
+      required: true
+    },
+    details: {
+      type: String,
+      default: ''
+    },
+    theme: {
+      type: String,
+      default: 'light'
+    }
+  },
+  data() {
+    return {
+      analytics: [],
+      error: ''
+    };
+  },
+  methods: {
+    logAnalytics(event, data) {
+      this.analytics.push({ event, data, timestamp: Date.now() });
+    }
   }
 }
 </script>
