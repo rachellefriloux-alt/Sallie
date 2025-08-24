@@ -7,6 +7,24 @@
 </template>
 <script>
 export default {
+  name: 'CommunicationPanel',
+  props: {
+    theme: {
+      type: String,
+      default: 'light'
+    }
+  },
+  data() {
+    return {
+      analytics: [],
+      error: ''
+    };
+  },
+  methods: {
+    logAnalytics(event, data) {
+      this.analytics.push({ event, data, timestamp: Date.now() });
+    }
+  }
 }
 </script>
 <style scoped>

@@ -6,10 +6,26 @@
 </template>
 <script>
 export default {
+  name: 'EmotionOverlay',
   props: {
     overlayColor: {
       type: String,
       default: 'rgba(99,102,241,0.2)'
+    },
+    theme: {
+      type: String,
+      default: 'light'
+    }
+  },
+  data() {
+    return {
+      analytics: [],
+      error: ''
+    };
+  },
+  methods: {
+    logAnalytics(event, data) {
+      this.analytics.push({ event, data, timestamp: Date.now() });
     }
   }
 }
