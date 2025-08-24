@@ -1,11 +1,8 @@
-// Salle UI Component
-// EmotionMeter.kt
-// Migrated and upgraded for Sallie 2.0
-// TODO: Integrate with ToneEngine and Persona UI
-
+data class Emotion(val name: String, val intensity: Double, val timestamp: Long)
 
 package com.sallie.components
 
+import android.util.Log
 import kotlin.math.roundToInt
 
 data class Emotion(val name: String, val intensity: Double, val timestamp: Long)
@@ -14,8 +11,13 @@ class EmotionMeter {
     private val emotionHistory = mutableListOf<Emotion>()
 
     fun recordEmotion(name: String, intensity: Double) {
-        val emotion = Emotion(name, intensity.coerceIn(0.0, 1.0), System.currentTimeMillis())
-        emotionHistory.add(emotion)
+        try {
+            val emotion = Emotion(name, intensity.coerceIn(0.0, 1.0), System.currentTimeMillis())
+            emotionHistory.add(emotion)
+            Log.i("EmotionMeter", "Recorded emotion: $emotion")
+        } catch (e: Exception) {
+            Log.e("EmotionMeter", "Error recording emotion: ${e.message}", e)
+        }
     }
 
     fun getCurrentEmotion(): Emotion? = emotionHistory.lastOrNull()
@@ -34,5 +36,10 @@ class EmotionMeter {
         } else {
             "No emotion data recorded."
         }
+    }
+
+    fun clearHistory() {
+        emotionHistory.clear()
+        Log.i("EmotionMeter", "Emotion history cleared.")
     }
 }

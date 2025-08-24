@@ -2,11 +2,6 @@ plugins {
     kotlin("jvm") version "2.2.0"
 }
 
-repositories {
-    mavenCentral()
-    google()
-}
-
 dependencies {
     implementation(kotlin("stdlib"))
     testImplementation("org.jetbrains.kotlin:kotlin-test")

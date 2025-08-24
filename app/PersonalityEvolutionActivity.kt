@@ -1,18 +1,38 @@
-// Salle Persona Module
-// PersonalityEvolutionActivity.kt
-// Migrated and upgraded for Sallie 2.0
-// TODO: Integrate with Sallie core persona engine and UI modules
 
 package com.sallie.app
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.sallie.personacore.PersonaEngine
 
 class PersonalityEvolutionActivity : AppCompatActivity() {
+    private lateinit var personaEngine: PersonaEngine
+    private lateinit var personaStatusView: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // TODO: Connect to PersonaEngine and update UI
+        personaEngine = PersonaEngine()
+        personaEngine.initialize()
+
+        personaStatusView = TextView(this)
+        setContentView(personaStatusView)
+        updatePersonaStatus()
     }
-    // TODO: Add lifecycle hooks and persona evolution logic
+
+    override fun onResume() {
+        super.onResume()
+        personaEngine.evolve("resume")
+        updatePersonaStatus()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        personaEngine.evolve("pause")
+    }
+
+    private fun updatePersonaStatus() {
+        val status = personaEngine.getStatus()
+        personaStatusView.text = "Persona Status: $status"
+    }
 }

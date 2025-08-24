@@ -1,18 +1,38 @@
-// Salle Persona Demo Module
-// PersonalityEvolutionDemoActivity.kt
-// Migrated and upgraded for Sallie 2.0
-// TODO: Integrate with PersonaEngine demo features
 
 package com.sallie.demo
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.sallie.personacore.PersonaEngineDemo
 
 class PersonalityEvolutionDemoActivity : AppCompatActivity() {
+    private lateinit var personaDemo: PersonaEngineDemo
+    private lateinit var demoStatusView: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // TODO: Connect to PersonaEngineDemo and update demo UI
+        personaDemo = PersonaEngineDemo()
+        personaDemo.initializeDemo()
+
+        demoStatusView = TextView(this)
+        setContentView(demoStatusView)
+        updateDemoStatus()
     }
-    // TODO: Add demo logic and persona evolution showcase
+
+    override fun onResume() {
+        super.onResume()
+        personaDemo.runDemoStep("resume")
+        updateDemoStatus()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        personaDemo.runDemoStep("pause")
+    }
+
+    private fun updateDemoStatus() {
+        val status = personaDemo.getDemoStatus()
+        demoStatusView.text = "Demo Persona Status: $status"
+    }
 }
