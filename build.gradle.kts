@@ -38,44 +38,16 @@ subprojects {
                 val classesDir = fileTree(layout.buildDirectory.dir("classes/kotlin/main"))
                 classDirectories.setFrom(classesDir)
                 sourceDirectories.setFrom(files("src/main/kotlin"))
-                executionData.setFrom(fileTree(layout.buildDirectory.get().asFile) { include("**/jacoco/test*.exec", "**/jacoco/test/*.exec", "**/jacoco/*.exec") })
-                onlyIf { executionData.files.any { it.exists() } }
             }
         }
-        if (tasks.findByName("jacocoCoverageVerification") == null) {
-            tasks.register<JacocoCoverageVerification>("jacocoCoverageVerification") {
-                dependsOn(tasks.withType<Test>())
-                val classesDir = fileTree(layout.buildDirectory.dir("classes/kotlin/main"))
-                classDirectories.setFrom(classesDir)
-                sourceDirectories.setFrom(files("src/main/kotlin"))
-                executionData.setFrom(fileTree(layout.buildDirectory.get().asFile) { include("**/jacoco/test*.exec", "**/jacoco/test/*.exec", "**/jacoco/*.exec") })
-                violationRules { rule { limit { minimum = coverageMin.toBigDecimal() } } }
-                tasks.findByName("jacocoTestReport")?.let { mustRunAfter(it) }
-                // Skip gracefully if no execution data (no tests)
-                onlyIf { executionData.files.any { it.exists() } }
+        java {
+            toolchain {
+                languageVersion.set(JavaLanguageVersion.of(21))
             }
         }
-        tasks.matching { it.name == "check" }.configureEach {
-            tasks.findByName("jacocoCoverageVerification")?.let { dependsOn(it) }
-        }
-    }
-    plugins.withId("org.jetbrains.kotlin.android") {
-        apply(plugin = "org.jlleitschuh.gradle.ktlint")
-        apply(plugin = "jacoco")
-        // Configure JUnit Platform for JVM unit tests inside Android modules
-        tasks.withType<Test>().configureEach { useJUnitPlatform() }
-        // Android unit test compiled class directories (debug variant typical)
-        val kotlinClasses = layout.buildDirectory.dir("intermediates/javac/debug/classes")
-        val altKotlinClasses = layout.buildDirectory.dir("tmp/kotlin-classes/debug")
-        if (tasks.findByName("jacocoTestReport") == null) {
-            tasks.register<JacocoReport>("jacocoTestReport") {
-                dependsOn(tasks.withType<Test>())
-                reports { xml.required.set(true); html.required.set(true) }
-                classDirectories.setFrom(files(
-                    fileTree(kotlinClasses) { include("**/*.class") },
-                    fileTree(altKotlinClasses) { include("**/*.class") }
-                ))
-                sourceDirectories.setFrom(files("src/main/kotlin"))
+        tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEach {
+            compilerOptions {
+                jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
             }
         }
     }

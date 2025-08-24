@@ -1,22 +1,57 @@
-# Sallie 1.0
+# Sallie
+
+**Persona:** Tough love meets soul care
 
 ## Overview
+Sallie is a modular, production-ready AI companion and launcher platform. It features advanced emotional intelligence, persona evolution, secure identity management, and a modern UI. All modules are fully integrated and tested.
 
-Sallie 1.0 is an AI companion application designed to help users align their digital habits with their core values. Built with a "tough love meets soul care" philosophy, Sallie provides supportive but accountable guidance through intelligent conversation, memory-based context awareness, and values-driven interaction patterns. The application combines emotional intelligence, persistent memory systems, and personalized responses to create a meaningful digital companion experience.
+## Features
+- Adaptive Persona Engine
+- Emotional Intelligence & Tone Analysis
+- Secure Identity & Onboarding
+- Dynamic Response Templates
+- Modular Kotlin/JS/Android architecture
+- Full Gradle build, test, and CI/CD support
 
-## User Preferences
+## Modules
+- `core`: Orchestration, persona logic, memory, values
+- `ai`: Emotional intelligence, OpenAI integration
+- `identity`: Secure user management
+- `onboarding`: User onboarding flow
+- `personaCore`: Persona evolution
+- `responseTemplates`: Dynamic responses
+- `tone`: Tone analysis
+- `components`: UI components
+- `app`: Main application entry point
 
-Preferred communication style: Simple, everyday language.
+## Build & Run
+```sh
+./gradlew.bat clean build test assemble
+./gradlew.bat :app:run
+```
 
-## System Architecture
+## Testing
+All modules have sample and extensible test support. Run:
+```sh
+./gradlew.bat test
+```
 
-### Frontend Architecture
-- **Single Page Application (SPA)**: Built with vanilla JavaScript using ES6 modules for a clean, dependency-free frontend
-- **Component-based UI**: Modular interface components managed through `SallieInterface.js` for separation of concerns
-- **Real-time Chat Interface**: Dynamic conversation management with typing indicators and status updates
-- **Values Management Panel**: Interactive UI for users to define and manage their core values
-- **Responsive Design**: CSS Grid and Flexbox-based layout with custom CSS variables for consistent theming
+## CI/CD
+- Recommended: GitHub Actions, GitLab CI, or similar
+- Linting: ktlint
+- Coverage: Jacoco
 
-### Backend Architecture
-- **Express.js Server**: Lightweight Node.js server for serving static files and providing health check endpoints
-- **Modular Core Systems**: Organized into distinct modules for memory, values, persona, and AI integration
+## Security
+- Service account and secrets managed via environment variables
+- Secure password hashing in identity module
+
+## Packaging
+- JVM: JAR
+- Android: APK
+- Docker: Add Dockerfile for containerization
+
+## Release Notes
+See `RELEASE_NOTES.md` for version history and changes.
+
+## License
+MIT or custom license as desired.

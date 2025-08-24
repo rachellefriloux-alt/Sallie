@@ -1,0 +1,13 @@
+build:
+  maxIssues: 0
+style:
+  MagicNumber:
+    active: true
+    ignoreNumbers: ["-1", "0", "1", "2"]
+  WildcardImport:
+    active: true
+performance:
+  ForEachOnRange:
+    active: true
+  SpreadOperator:
+    active: true
