@@ -1,3 +1,9 @@
+---
+provenance:
+  repo: Sallie
+  path: /docs
+  scope: canonical
+---
 Developer setup notes
 
 Add local credential files to run Firebase and signed builds. Do NOT commit these to git.

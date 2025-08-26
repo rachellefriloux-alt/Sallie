@@ -1,3 +1,9 @@
+---
+provenance:
+	repo: Sallie
+	path: /docs
+	scope: canonical
+---
 # Sallie 2.0 - Comprehensive Implementation Plan
 
 This document outlines the detailed implementation plan for Sallie 2.0, ensuring all components are fully implemented, thoroughly documented, and properly integrated.

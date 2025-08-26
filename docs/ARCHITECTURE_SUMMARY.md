@@ -1,3 +1,9 @@
+---
+provenance:
+	repo: Sallie
+	path: /docs
+	scope: canonical
+---
 /*
  * Sallie 1.0 Module
  * Persona: Tough love meets soul care.
@@ -11,11 +17,11 @@
 
 ### 🔧 **CRITICAL FOUNDATION FIXES**
 ✅ **Fixed Gradle Wrapper** - Downloaded proper gradle-wrapper.jar, now builds successfully
-✅ **Created gradle.properties** - Proper JVM settings, optimization flags, Sallie-specific config  
+✅ **Created gradle.properties** - Proper JVM settings, optimization flags, Sallie-specific config
 ✅ **Updated settings.gradle.kts** - All 11 modules properly included with clean structure
 ✅ **Fixed root build.gradle.kts** - Working plugin versions, subproject configuration
 
-### 🏗️ **COMPLETE MODULAR ARCHITECTURE** 
+### 🏗️ **COMPLETE MODULAR ARCHITECTURE**
 ✅ **11 Working Modules**: ai, core, feature, components, ui, identity, onboarding, tone, personaCore, responseTemplates, values
 ✅ **Clean Dependencies** - No circular dependencies, proper downward imports only
 ✅ **Standard Build Files** - All modules have proper build.gradle.kts with persona headers
@@ -23,7 +29,7 @@
 
 ### 🎯 **PERSONA ENFORCEMENT SYSTEM**
 ✅ **verifySalleFeatures Task** - Constitutional enforcement that fails build for violations
-✅ **Persona Header Detection** - Identifies all 66+ files needing "Sallie 1.0 Module" headers  
+✅ **Persona Header Detection** - Identifies all 66+ files needing "Sallie 1.0 Module" headers
 ✅ **Architecture Validation** - Checks modular compliance, prevents circular dependencies
 ✅ **Network Import Guards** - Prevents localOnly violations (network calls detection)
 
@@ -36,7 +42,7 @@
 - Mood states: STEADY, FOCUSED, SUPPORTIVE, GENTLE_PUSH
 - Profile modes: TOUGH_LOVE, SOUL_CARE, WISE_SISTER, BALANCED
 
-#### **ToneProfile** (`tone/ToneProfile.kt`)  
+#### **ToneProfile** (`tone/ToneProfile.kt`)
 - Communication style configuration system
 - Measurable parameters: directness, warmth, urgency, playfulness, formality
 - AI prompt generation for consistent personality
@@ -46,7 +52,7 @@
 #### **ResponseTemplates** (`responseTemplates/ResponseTemplates.kt`)
 - 100+ pre-crafted responses embodying Sallie's voice
 - Categories: Task Completion, Motivation, Support, Celebration, Redirection
-- Intensity levels: Gentle, Firm, Urgent 
+- Intensity levels: Gentle, Firm, Urgent
 - Contextual response selection system
 - All responses end with "Got it, love." when appropriate
 
@@ -61,7 +67,7 @@
 ```bash
 # ✅ WORKING COMMANDS
 ./gradlew projects        # Shows all 11 modules
-./gradlew compileKotlin   # Compiles all main sources successfully  
+./gradlew compileKotlin   # Compiles all main sources successfully
 ./gradlew verifySalleFeatures  # Runs constitutional enforcement
 
 # 📋 VERIFICATION OUTPUT
@@ -75,7 +81,7 @@
 ## 🎯 **KEY ACHIEVEMENTS**
 
 1. **Unbreakable Foundation** - Gradle builds work, all modules compile
-2. **Living Constitution** - Verification system prevents violations of Sallie's design principles  
+2. **Living Constitution** - Verification system prevents violations of Sallie's design principles
 3. **Personality Made Code** - PersonaEngine translates "tough love meets soul care" into executable logic
 4. **Scalable Architecture** - 11 modules ready for unlimited expansion within their domains
 5. **Quality Gates** - Build fails if architectural or persona principles are violated
@@ -84,7 +90,7 @@
 
 ### **Immediate Expansion Ready**
 - **AI Module**: Ready for Gemini/GPT integration, conversation routing
-- **Core Module**: Memory management, goal alignment, trust engine  
+- **Core Module**: Memory management, goal alignment, trust engine
 - **Feature Module**: Task orchestration, device control, bias interception
 - **PersonaCore**: Behavioral adaptation, mood tracking, response selection
 - **Tone System**: Dynamic communication style adjustment

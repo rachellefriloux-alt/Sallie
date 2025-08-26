@@ -1,3 +1,9 @@
+---
+provenance:
+	repo: Sallie
+	path: /docs
+	scope: canonical
+---
 # Sallie 2.0 - Future Enhancements Completed
 
 ## Summary of Achievements
@@ -25,7 +31,7 @@ Four major advanced systems have been fully implemented and tested:
 	- Creates skill proficiency tracking and improvement system
 	- Adds resource collection and development steps for each skill
 	- Builds skill recommendation engine based on user needs
-   
+
 4. **Device Transfer System**
 	- Enables secure device-to-device transfer of Sallie's personality and memories
 	- Implements selective transfer options for different memory components
@@ -48,7 +54,7 @@ A comprehensive plan for the remaining future enhancements has been created, inc
 
 - **Expanded AI Orchestration Module** ✅ (COMPLETE)
 - **Device Control Integration**
-- **Voice/ASR Integration** 
+- **Voice/ASR Integration**
 - **Compose UI Components**
 - **Persistence Layer**
 - **Multimodal Input Processing**

@@ -1,3 +1,9 @@
+---
+provenance:
+  repo: Sallie
+  path: /docs
+  scope: canonical
+---
 ## Customizing Launcher Icons with Open-Source Resources
 
 Sallie can easily update the app's launcher icons using free, open-source icon sets. Here’s how:

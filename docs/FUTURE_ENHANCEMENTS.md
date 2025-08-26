@@ -1,3 +1,9 @@
+---
+provenance:
+	repo: Sallie
+	path: /docs
+	scope: canonical
+---
  Sallie 2.0 - Future Enhancements Plan
 
 This document outlines the planned future enhancements for Sallie 2.0, including detailed descriptions, technical requirements, and implementation strategies.

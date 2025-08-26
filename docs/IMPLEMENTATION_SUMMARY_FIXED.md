@@ -1,3 +1,9 @@
+---
+provenance:
+	repo: Sallie
+	path: /docs
+	scope: canonical
+---
 # Sallie 2.0 - Implementation Summary
 
 ## ✅ **COMPLETED - Enhanced Cognitive, Visual & Advanced Interactive Systems**

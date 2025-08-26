@@ -1,3 +1,9 @@
+---
+provenance:
+	repo: Sallie
+	path: /docs
+	scope: canonical
+---
 # Sallie Implementation
 
 ## Salle 1.0 Task List

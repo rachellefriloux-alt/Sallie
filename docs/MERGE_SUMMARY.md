@@ -1,3 +1,9 @@
+---
+provenance:
+	repo: Sallie
+	path: /docs
+	scope: canonical
+---
 # Branch Merge Summary
 
 ## Purpose
@@ -18,12 +24,12 @@ This document tracks the comprehensive merge of all branches in the Salle 1.0 re
 
 ### Unique Files Added from copilot/fix-2561f70f-de34-4613-8ef2-35bfb2e96dff
 - `App_old.vue` - Backup version of main Vue component with enhanced UI features
-- `MERGE_SUMMARY.md` - This documentation file 
+- `MERGE_SUMMARY.md` - This documentation file
 - `eslint.config.js` - ESLint configuration for Vue/JavaScript code quality
 - `index.html` - HTML entry point for web version development
 - `tsconfig.json` - TypeScript configuration for type checking
 - `tsconfig.node.json` - TypeScript Node.js specific configuration
-- `vite.config.js` - Vite build tool configuration for modern web development  
+- `vite.config.js` - Vite build tool configuration for modern web development
 - `vitest.config.js` - Vitest testing framework configuration
 
 ### Configuration Files Enhanced
@@ -56,11 +62,11 @@ This document tracks the comprehensive merge of all branches in the Salle 1.0 re
 - **Build Configurations**: 3 JavaScript config files added (ESLint, Vite, Vitest)
 
 ## Architecture Compliance
-✅ All merges follow Salle 1.0 Operating Constitution requirements  
-✅ Modular structure preserved with proper module separation  
-✅ Persona header requirements maintained in core files  
-✅ No network permissions added to localOnly flavor  
-✅ Build verification tasks updated and functional  
+✅ All merges follow Salle 1.0 Operating Constitution requirements
+✅ Modular structure preserved with proper module separation
+✅ Persona header requirements maintained in core files
+✅ No network permissions added to localOnly flavor
+✅ Build verification tasks updated and functional
 
 ## Got it, love.
 All branches successfully unified into a comprehensive codebase preserving every piece of useful content while maintaining the integrity of Salle's core architecture. The repository now contains the complete union of functionality from all development branches.

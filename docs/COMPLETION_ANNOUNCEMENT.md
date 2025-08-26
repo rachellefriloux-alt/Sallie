@@ -1,3 +1,9 @@
+---
+provenance:
+	repo: Sallie
+	path: /docs
+	scope: canonical
+---
 # 🎉 Sallie 1.0 Implementation Complete! 🎉
 
 ## Achievement Unlocked: Full Feature Implementation
