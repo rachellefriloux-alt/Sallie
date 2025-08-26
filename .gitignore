@@ -1,0 +1,11 @@
+# Core ignores for Sallie repo
+node_modules/
+dist/
+build/
+.gradle/
+.kotlin/
+local.properties
+Thumbs.db
+.DS_Store
+# Add patterns for deduplicated files
+sequinseal.*
