@@ -1,2 +1,0 @@
-# FUTURE_ENHANCEMENTS.md
-Migrated from sallie_1.00/FUTURE_ENHANCEMENTS.md

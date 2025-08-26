@@ -1,17 +1,6 @@
 {
   "version": "0.2.0",
-  "configurations": [{
-  "type": "java",
-  "request": "launch",
-  "name": "Launch Sallie App",
-  "mainClass": "com.sallie.app.MainActivity",
-  "projectName": "app",
-  "args": "",
-  "vmArgs": "",
-  "console": "internalConsole",
-  "stopOnEntry": false
-}
-
+  "configurations": [
     {
       "type": "java",
       "request": "launch",
