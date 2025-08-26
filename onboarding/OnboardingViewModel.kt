@@ -38,7 +38,8 @@ class OnboardingViewModel(
         if (isFirstGift) {
             Log.d("Sallie", "🎀 Consider this my house‑warming gift — a little extra sparkle for our partnership.")
             prefs.edit().putBoolean(GIFT_KEY, false).apply()
-            // TODO: Trigger actual theme unlock or tone pack enable
+            unlockThemePack()
+            enableTonePack()
         }
     }
 

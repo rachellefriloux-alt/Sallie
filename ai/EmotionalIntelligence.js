@@ -57,7 +57,14 @@
      * }
      */
     initializeEmotionPatterns() {
-        // TODO: Populate with actual emotion patterns for analysis
+        this.emotionPatterns = [
+            { name: 'joy', keywords: ['happy', 'joyful', 'delighted'] },
+            { name: 'anger', keywords: ['angry', 'mad', 'furious'] },
+            { name: 'sadness', keywords: ['sad', 'down', 'depressed'] },
+            { name: 'fear', keywords: ['afraid', 'scared', 'nervous'] },
+            { name: 'surprise', keywords: ['surprised', 'shocked', 'amazed'] },
+            { name: 'disgust', keywords: ['disgusted', 'gross', 'nauseated'] }
+        ];
         return {};
     }
 

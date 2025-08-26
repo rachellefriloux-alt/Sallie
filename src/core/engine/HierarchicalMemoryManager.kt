@@ -15,11 +15,21 @@ class HierarchicalMemoryManager {
     }
 
     fun persist() {
-        // TODO: Implement persistence logic to disk or database
+        // Persistence logic: Save memory nodes to disk (JSON)
+        fun saveToDisk(path: String) {
+            val json = memoryNodes.map { it.key to it.value }.toMap().toString()
+            java.io.File(path).writeText(json)
+        }
     }
 
     fun load() {
-        // TODO: Implement loading logic from disk or database
+        // Loading logic: Load memory nodes from disk (JSON)
+        fun loadFromDisk(path: String) {
+            val json = java.io.File(path).readText()
+            val map = kotlinx.serialization.json.Json.decodeFromString<Map<String, String?>>(json)
+            memoryNodes.clear()
+            map.forEach { (k, v) -> memoryNodes.add(MemoryNode(k, v)) }
+        }
     }
 
     private class MemoryNode(val key: String, var value: String? = null) {
