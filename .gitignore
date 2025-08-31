@@ -9,3 +9,13 @@ Thumbs.db
 .DS_Store
 # Add patterns for deduplicated files
 sequinseal.*
+node_modules/@babel/parser/bin/babel-parser.js
+node_modules/@babel/parser/bin/babel-parser.js
+node_modules/@babel/parser/bin/babel-parser.js
+node_modules/@babel/parser/bin/babel-parser.js
+node_modules/@babel/parser/bin/babel-parser.js
+/node_modules
+/node_modules
+/node_modules/@babel
+/node_modules/esbuild
+/node_modules/nanoid/bin
