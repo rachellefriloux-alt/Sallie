@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Progeny Runtime
+*.log
+logs/*.log
+logs/archive/*
+logs/sessions/*
+.dream_lock
+core/dream_checkpoint.json
+
+# Data / State
+memory/qdrant/
+# We keep soul.json tracked for now as the "seed", but in production it might be ignored.
+# limbic/soul.json 
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+secrets.json

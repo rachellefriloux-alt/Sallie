@@ -1,0 +1,25 @@
+fastapi>=0.109.0
+uvicorn>=0.27.0
+qdrant-client>=1.7.1
+# sentence-transformers>=2.2.2
+numpy>=1.26.3
+python-multipart>=0.0.6
+python-jose[cryptography]>=3.3.0
+watchdog>=3.0.0
+requests>=2.31.0
+pydantic>=2.5.3
+pytest>=8.0.0
+# openai-whisper>=20231117
+# TTS>=0.22.0
+sounddevice>=0.4.6
+scipy>=1.11.4
+psutil>=5.9.8
+# Dev Tools
+black>=24.1.1
+ruff>=0.1.14
+mypy>=1.8.0
+
+
+plyer>=2.1.0
+pystray>=0.19.5
+Pillow>=10.2.0

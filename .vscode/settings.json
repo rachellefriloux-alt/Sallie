@@ -1,0 +1,8 @@
+{
+    "git.alwaysShowStagedChangesResourceGroup": true,
+    "git.autofetchPeriod": 400,
+    "git.enableCommitSigning": true,
+    "git.enableSmartCommit": true,
+    "git.autofetch": true,
+    "terminal.integrated.shellIntegration.enabled": true
+}
