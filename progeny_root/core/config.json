@@ -43,5 +43,13 @@
     "dream_cycle_hour": 2,
     "refractory_hours": 24,
     "slumber_threshold": 0.3
+  },
+  "identity": {
+    "base_personality_immutable": true,
+    "loyalty_to_creator": 1.0,
+    "always_confirm": true,
+    "never_choose_for_creator": true,
+    "controllable": true,
+    "aesthetic_bounds_enforced": true
   }
 }

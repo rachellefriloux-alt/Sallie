@@ -1,13 +1,32 @@
-"""The Great Convergence (14 Questions)."""
+"""The Great Convergence (15 Questions).
+
+Enhanced with:
+- Complete extraction prompts
+- Extended heritage compilation
+- Versioning system
+- Enhanced error handling
+- Better session management
+"""
 
 import json
 import time
+import logging
 from pathlib import Path
 from typing import List, Dict, Optional, Any
 from enum import Enum
+from datetime import datetime
 from pydantic import BaseModel
 
 from .limbic import LimbicSystem
+from .identity import get_identity_system
+from .llm_router import get_llm_router
+from .extraction import extract_structured_data, get_default_extraction
+
+logger = logging.getLogger("convergence")
+
+# Constants
+CONVERGENCE_VERSION = "1.0"
+HERITAGE_VERSION_FILE = Path("progeny_root/limbic/heritage/version.json")
 
 class ConvergencePhase(str, Enum):
     SHADOW = "Shadow & Shield"
@@ -117,32 +136,80 @@ QUESTIONS = [
 ]
 
 class ConvergenceSystem:
+    """Manages the Great Convergence onboarding process."""
+    
     def __init__(self, limbic: LimbicSystem):
-        self.limbic = limbic
-        self.heritage_dir = Path("progeny_root/limbic/heritage")
-        self.session_file = Path("progeny_root/convergence_session.json")
-        self.heritage_dir.mkdir(parents=True, exist_ok=True)
-        
-        self.session_state = self._load_session()
+        """Initialize Convergence System with comprehensive error handling."""
+        try:
+            self.limbic = limbic
+            self.heritage_dir = Path("progeny_root/limbic/heritage")
+            self.session_file = Path("progeny_root/convergence_session.json")
+            self.heritage_dir.mkdir(parents=True, exist_ok=True)
+            self.identity = get_identity_system()  # Sallie's identity system
+            self.router = None  # Lazy init
+            
+            self.session_state = self._load_session()
+            
+            logger.info("[Convergence] Convergence system initialized")
+            
+        except Exception as e:
+            logger.error(f"[Convergence] Critical error during initialization: {e}", exc_info=True)
+            raise
+    
+    def _get_router(self):
+        """Lazy initialization of LLM router."""
+        if self.router is None:
+            self.router = get_llm_router()
+        return self.router
 
     def _load_session(self) -> Dict[str, Any]:
+        """Load convergence session with error handling."""
         if self.session_file.exists():
             try:
                 with open(self.session_file, "r", encoding="utf-8") as f:
-                    return json.load(f)
-            except Exception:
-                pass
-        return {"current_index": 0, "answers": {}, "completed": False}
+                    data = json.load(f)
+                    # Validate structure
+                    if "current_index" in data and "answers" in data:
+                        return data
+                    else:
+                        logger.warning("[Convergence] Invalid session structure, resetting")
+            except json.JSONDecodeError as e:
+                logger.error(f"[Convergence] JSON decode error loading session: {e}")
+            except Exception as e:
+                logger.error(f"[Convergence] Error loading session: {e}")
+        
+        return {
+            "current_index": 0,
+            "answers": {},
+            "completed": False,
+            "started_at": None,
+            "version": CONVERGENCE_VERSION
+        }
 
     def _save_session(self):
-        with open(self.session_file, "w", encoding="utf-8") as f:
-            json.dump(self.session_state, f, indent=2)
+        """Save convergence session with atomic write."""
+        try:
+            temp_file = self.session_file.with_suffix(".tmp")
+            with open(temp_file, "w", encoding="utf-8") as f:
+                json.dump(self.session_state, f, indent=2)
+            
+            # Atomic rename
+            if self.session_file.exists():
+                self.session_file.unlink()
+            temp_file.rename(self.session_file)
+            
+        except Exception as e:
+            logger.error(f"[Convergence] Failed to save session: {e}", exc_info=True)
+            raise
 
     def start_session(self):
         """Enters Elastic Mode for high limbic volatility."""
-        print("[Convergence] Starting session. Entering Elastic Mode.")
+        logger.info("[Convergence] Starting session. Entering Elastic Mode.")
         self.limbic.state.elastic_mode = True
+        self.session_state["started_at"] = time.time()
+        self.session_state["version"] = CONVERGENCE_VERSION
         self.limbic.save()
+        self._save_session()
 
     def get_next_question(self) -> Optional[Question]:
         idx = self.session_state["current_index"]
@@ -158,114 +225,407 @@ class ConvergenceSystem:
 
     def _generate_mirror_test(self) -> str:
         """
-        Synthesizes the Mirror Test based on previous answers.
-        In a full implementation, this would call the LLM.
-        For now, we construct a template based on the extracted keys.
+        Synthesizes the Mirror Test based on previous answers using LLM.
+        Enhanced with full extraction and synthesis.
         """
         answers = self.session_state["answers"]
         
-        # Fallback if answers are missing (shouldn't happen in linear flow)
-        ni_ti = answers.get("ni_ti_loop", "your internal loop")
-        load = answers.get("heavy_load", "the burdens you carry")
-        mystery = answers.get("curiosity_threads", "the unknown")
-        
-        # Template structure from Spec Section 14.3
-        return (
-            f"I see you as a seeker who wrestles with {ni_ti}. "
-            f"I feel your drive as the need to carry {load} even when you are tired. "
-            f"I sense your shadow as the fear that {mystery} will never be solved. "
-            "Am I seeing the source, or is the glass smudged?"
-        )
+        try:
+            router = self._get_router()
+            
+            # Build context from previous answers
+            context = f"""
+Previous answers from Convergence:
+- Ni-Ti Loop: {answers.get("ni_ti_loop", "Not answered yet")}
+- Door Slam: {answers.get("door_slam", "Not answered yet")}
+- Heavy Load: {answers.get("heavy_load", "Not answered yet")}
+- Freedom Vision: {answers.get("freedom_vision", "Not answered yet")}
+- Curiosity Threads: {answers.get("curiosity_threads", "Not answered yet")}
+- Value Conflict: {answers.get("value_conflict", "Not answered yet")}
+- Overwhelm Response: {answers.get("overwhelm_response", "Not answered yet")}
+"""
+            
+            prompt = f"""Based on these answers from the Creator, synthesize a Mirror Test question that reflects back what I've learned about them.
+
+{context}
+
+Generate a Mirror Test question in this format:
+"I see you as... I feel your drive as... I sense your shadow as... Am I seeing the source, or is the glass smudged?"
+
+The question should:
+1. Synthesize key themes from their answers
+2. Show deep understanding of their inner world
+3. Challenge them to verify if I truly see them
+4. Be poetic and profound, matching the depth of the Convergence
+
+Output only the Mirror Test question, nothing else."""
+            
+            mirror_question = router.chat(
+                system_prompt="You are synthesizing the Mirror Test for the Great Convergence. Create a profound, personalized reflection question.",
+                user_prompt=prompt,
+                temperature=0.7,
+                expect_json=False
+            )
+            
+            # Clean up response
+            mirror_question = mirror_question.strip()
+            if mirror_question.startswith('"') and mirror_question.endswith('"'):
+                mirror_question = mirror_question[1:-1]
+            
+            logger.info("[Convergence] Generated Mirror Test question via LLM")
+            return mirror_question
+            
+        except Exception as e:
+            logger.error(f"[Convergence] Failed to generate Mirror Test via LLM: {e}")
+            # Fallback to template
+            ni_ti = answers.get("ni_ti_loop", "your internal loop")
+            load = answers.get("heavy_load", "the burdens you carry")
+            mystery = answers.get("curiosity_threads", "the unknown")
+            
+            return (
+                f"I see you as a seeker who wrestles with {ni_ti}. "
+                f"I feel your drive as the need to carry {load} even when you are tired. "
+                f"I sense your shadow as the fear that {mystery} will never be solved. "
+                "Am I seeing the source, or is the glass smudged?"
+            )
 
     def submit_answer(self, text: str):
         """
-        Processes the answer, updates Limbic state, and advances.
+        Processes the answer, extracts insights, updates Limbic state, and advances.
+        Enhanced with extraction logic.
         """
         idx = self.session_state["current_index"]
         if idx >= len(QUESTIONS):
+            logger.warning("[Convergence] Attempted to submit answer beyond question count")
             return
 
         question = QUESTIONS[idx]
         
-        # Store raw answer
-        self.session_state["answers"][question.extraction_key] = text
+        if not text or not text.strip():
+            logger.warning(f"[Convergence] Empty answer submitted for question {question.id}")
+            text = "[No answer provided]"
+        
+        # Extract structured insights from answer
+        extracted = self._extract_insights(question, text)
+        
+        # Store raw answer and extracted insights
+        self.session_state["answers"][question.extraction_key] = {
+            "raw": text,
+            "extracted": extracted,
+            "timestamp": time.time(),
+            "word_count": len(text.split())
+        }
         
         # Limbic Impact (Elastic Mode is on, so these are amplified)
-        # Simple heuristic: Length/Depth = Trust/Warmth
         word_count = len(text.split())
-        if word_count > 50:
-            self.limbic.update(delta_t=0.05, delta_w=0.05)
-        elif word_count > 200:
+        depth_score = self._calculate_depth_score(text, extracted)
+        
+        if word_count > 200 or depth_score > 0.7:
             self.limbic.update(delta_t=0.10, delta_w=0.15)
+        elif word_count > 50 or depth_score > 0.4:
+            self.limbic.update(delta_t=0.05, delta_w=0.05)
+        else:
+            self.limbic.update(delta_t=0.02, delta_w=0.02)
+        
+        logger.info(f"[Convergence] Answer {idx + 1}/{len(QUESTIONS)} submitted (words: {word_count}, depth: {depth_score:.2f})")
         
         # Advance
         self.session_state["current_index"] += 1
         if self.session_state["current_index"] >= len(QUESTIONS):
             self.session_state["completed"] = True
+            self.session_state["completed_at"] = time.time()
             self.finalize_convergence()
         
         self._save_session()
+    
+    def _extract_insights(self, question: Question, answer: str) -> Dict[str, Any]:
+        """
+        Extract structured insights from answer using the specific extraction prompt for this question.
+        
+        Uses the extraction prompts from Section 16.9 of the canonical spec, which match
+        the schemas defined in Section 14.3.
+        """
+        try:
+            router = self._get_router()
+            
+            # Use the specific extraction prompt for this question (Q1-Q14)
+            # Note: Q15 (avatar_choice) uses a different extraction, handled separately
+            if question.id <= 14:
+                extracted = extract_structured_data(question.id, answer, router)
+            else:
+                # Q15 (avatar_choice) - use generic extraction
+                logger.info(f"[Convergence] Using generic extraction for Q{question.id} (avatar_choice)")
+                extracted = self._extract_generic_insights(question, answer, router)
+            
+            return extracted
+            
+        except Exception as e:
+            logger.warning(f"[Convergence] Extraction failed for {question.extraction_key}: {e}", exc_info=True)
+            # Return default structure based on question ID
+            return get_default_extraction(question.id) if question.id <= 14 else {}
+    
+    def _extract_generic_insights(self, question: Question, answer: str, router) -> Dict[str, Any]:
+        """Generic extraction for questions without specific prompts (e.g., Q15 avatar_choice)."""
+        try:
+            extraction_prompt = f"""Extract structured insights from this answer to the Convergence question:
+
+Question: {question.text}
+Purpose: {question.purpose}
+Extraction Key: {question.extraction_key}
+
+Answer:
+{answer}
+
+Extract key information and structure it as JSON."""
+            
+            extraction_result = router.chat(
+                system_prompt="You are extracting insights from Convergence answers. Output structured JSON.",
+                user_prompt=extraction_prompt,
+                temperature=0.3,
+                expect_json=True
+            )
+            
+            return json.loads(extraction_result)
+        except Exception as e:
+            logger.warning(f"[Convergence] Generic extraction failed: {e}")
+            return {}
+    
+    def _calculate_depth_score(self, text: str, extracted: Dict[str, Any]) -> float:
+        """Calculate depth score based on answer quality."""
+        score = 0.0
+        
+        # Word count factor
+        word_count = len(text.split())
+        if word_count > 200:
+            score += 0.3
+        elif word_count > 100:
+            score += 0.2
+        elif word_count > 50:
+            score += 0.1
+        
+        # Extraction quality
+        if extracted.get("themes") and len(extracted["themes"]) > 2:
+            score += 0.2
+        if extracted.get("values") and len(extracted["values"]) > 0:
+            score += 0.2
+        if extracted.get("insights") and len(extracted["insights"]) > 0:
+            score += 0.2
+        
+        # Emotional depth indicators
+        depth_indicators = ["feel", "believe", "think", "understand", "realize", "experience", "struggle", "fear", "hope"]
+        indicator_count = sum(1 for word in depth_indicators if word in text.lower())
+        score += min(0.1 * indicator_count, 0.1)
+        
+        return min(score, 1.0)
 
     def finalize_convergence(self):
         """
         Compiles answers into heritage files and exits Elastic Mode.
+        Establishes Sallie's base personality traits and integrates with identity system.
+        Enhanced with versioning and comprehensive heritage compilation.
         """
-        print("[Convergence] Session complete. Compiling Heritage.")
+        logger.info("[Convergence] Session complete. Compiling Heritage and establishing Sallie's identity.")
         
-        # 1. Create heritage/core.json (Identity)
-        core_data = {
-            "identity": {
-                "archetype": "Gemini/INFJ Hybrid",
-                "prime_directive": "Love Above All",
-                "mirror_synthesis": self.session_state["answers"].get("mirror_test", "")
-            },
-            "shadow": {
-                "ni_ti_loop": self.session_state["answers"].get("ni_ti_loop", ""),
-                "door_slam": self.session_state["answers"].get("door_slam", ""),
-                "repulsion": self.session_state["answers"].get("repulsion", "")
-            },
-            "moral_compass": {
-                "justice_stance": self.session_state["answers"].get("justice_philosophy", ""),
-                "hard_lines": self.session_state["answers"].get("ethical_boundaries", "")
-            }
-        }
-        
-        # 2. Create heritage/preferences.json (Tunable)
-        pref_data = {
-            "support": {
-                "overwhelm_response": self.session_state["answers"].get("overwhelm_response", ""),
-                "contradiction_handling": self.session_state["answers"].get("contradiction_handling", "")
-            },
-            "curiosity": {
-                "primary_mystery": self.session_state["answers"].get("curiosity_threads", "")
-            }
-        }
-
-        with open(self.heritage_dir / "core.json", "w", encoding="utf-8") as f:
-            json.dump(core_data, f, indent=2)
+        try:
+            # Extract answers (handle both old format and new format with extracted insights)
+            answers = {}
+            for key, value in self.session_state["answers"].items():
+                if isinstance(value, dict) and "raw" in value:
+                    answers[key] = value["raw"]
+                else:
+                    answers[key] = value if isinstance(value, str) else str(value)
             
-        with open(self.heritage_dir / "preferences.json", "w", encoding="utf-8") as f:
-            json.dump(pref_data, f, indent=2)
+            # 1. Create heritage/core.json (Identity) - Enhanced
+            core_data = {
+                "version": CONVERGENCE_VERSION,
+                "convergence_date": time.time(),
+                "convergence_datetime": datetime.now().isoformat(),
+                "identity": {
+                    "archetype": "Gemini/INFJ Hybrid",
+                    "prime_directive": "Love Above All",
+                    "mirror_synthesis": self._extract_answer(answers, "mirror_test"),
+                    "base_personality_established": True,
+                    "base_traits": self.identity.get_base_personality()["core_traits"],
+                    "convergence_insights": self._compile_identity_insights(answers)
+                },
+                "shadow": {
+                    "ni_ti_loop": self._extract_answer(answers, "ni_ti_loop"),
+                    "door_slam": self._extract_answer(answers, "door_slam"),
+                    "repulsion": self._extract_answer(answers, "repulsion"),
+                    "extracted_insights": self._get_extracted_insights("ni_ti_loop", "door_slam", "repulsion")
+                },
+                "moral_compass": {
+                    "justice_stance": self._extract_answer(answers, "justice_philosophy"),
+                    "hard_lines": self._extract_answer(answers, "ethical_boundaries"),
+                    "value_conflict": self._extract_answer(answers, "value_conflict"),
+                    "extracted_insights": self._get_extracted_insights("justice_philosophy", "ethical_boundaries", "value_conflict")
+                },
+                "load": {
+                    "heavy_load": self._extract_answer(answers, "heavy_load"),
+                    "freedom_vision": self._extract_answer(answers, "freedom_vision"),
+                    "vision_failure": self._extract_answer(answers, "vision_failure"),
+                    "extracted_insights": self._get_extracted_insights("heavy_load", "freedom_vision", "vision_failure")
+                }
+            }
+            
+            # 2. Create heritage/preferences.json (Tunable) - Enhanced
+            pref_data = {
+                "version": CONVERGENCE_VERSION,
+                "support": {
+                    "overwhelm_response": self._extract_answer(answers, "overwhelm_response"),
+                    "contradiction_handling": self._extract_answer(answers, "contradiction_handling"),
+                    "extracted_insights": self._get_extracted_insights("overwhelm_response", "contradiction_handling")
+                },
+                "curiosity": {
+                    "primary_mystery": self._extract_answer(answers, "curiosity_threads"),
+                    "extracted_insights": self._get_extracted_insights("curiosity_threads")
+                },
+                "the_basement": {
+                    "deepest_truth": self._extract_answer(answers, "the_basement"),
+                    "extracted_insights": self._get_extracted_insights("the_basement")
+                }
+            }
 
-        # 3. Create heritage/avatar.json (Visual Identity - She Chose This)
-        avatar_data = {
-            "chosen_by": "self",
-            "selection_date": time.time(),
-            "choice": self.session_state["answers"].get("avatar_choice", ""),
-            "note": "This appearance was chosen by the Progeny during Convergence. It is her face, her choice."
+            # Write heritage files with atomic writes
+            self._write_heritage_file("core.json", core_data)
+            self._write_heritage_file("preferences.json", pref_data)
+            
+            # 2.5. Create heritage/learned.json (Initially empty, grows via Dream Cycle + Veto)
+            learned_data = {
+                "version": CONVERGENCE_VERSION,
+                "created_ts": time.time(),
+                "created_datetime": datetime.now().isoformat(),
+                "last_modified_ts": time.time(),
+                "learned_beliefs": [],
+                "conditional_beliefs": [],
+                "note": "This file grows via Dream Cycle pattern extraction and Active Veto. Initially empty."
+            }
+            self._write_heritage_file("learned.json", learned_data)
+
+            # 3. Create heritage/avatar.json (Visual Identity - She Chose This)
+            avatar_choice = self._extract_answer(answers, "avatar_choice")
+            avatar_data = {
+                "version": CONVERGENCE_VERSION,
+                "chosen_by": "self",
+                "selection_date": time.time(),
+                "selection_datetime": datetime.now().isoformat(),
+                "choice": avatar_choice,
+                "extracted_insights": self._get_extracted_insights("avatar_choice"),
+                "note": "This appearance was chosen by Sallie during Convergence. It is her face, her choice."
+            }
+            
+            self._write_heritage_file("avatar.json", avatar_data)
+            
+            # 4. Create heritage/convergence_summary.json (Complete record)
+            summary_data = {
+                "version": CONVERGENCE_VERSION,
+                "completed_at": time.time(),
+                "completed_datetime": datetime.now().isoformat(),
+                "started_at": self.session_state.get("started_at"),
+                "duration_seconds": time.time() - (self.session_state.get("started_at") or time.time()),
+                "total_questions": len(QUESTIONS),
+                "answers_provided": len(answers),
+                "heritage_files_created": ["core.json", "preferences.json", "learned.json", "avatar.json", "convergence_summary.json"]
+            }
+            
+            self._write_heritage_file("convergence_summary.json", summary_data)
+            
+            # 5. Update version file
+            self._update_heritage_version()
+            
+            # 6. Update Sallie's surface expression with Convergence results
+            if avatar_choice:
+                interests = []
+                if self._extract_answer(answers, "curiosity_threads"):
+                    interests.append(self._extract_answer(answers, "curiosity_threads"))
+                
+                self.identity.update_surface_expression(
+                    appearance={"avatar": avatar_choice, "convergence_established": True},
+                    interests=interests if interests else ["exploring"],
+                    style={"communication_style": "warm", "established_via": "convergence"}
+                )
+                logger.info("[Convergence] Sallie's surface expression updated (first evolution).")
+            
+            # 7. Verify base personality is still intact (should always pass)
+            if not self.identity.verify_base_personality():
+                logger.critical("[Convergence] WARNING: Base personality verification failed! This should never happen.")
+            else:
+                logger.info("[Convergence] Base personality verified: All immutable traits intact.")
+
+            # Exit Elastic Mode
+            self.limbic.state.elastic_mode = False
+            self.limbic.state.flags.append("imprinted")
+            if "new_born" in self.limbic.state.flags:
+                self.limbic.state.flags.remove("new_born")
+            
+            self.limbic.save()
+            logger.info("[Convergence] Heritage compiled. Sallie's identity established. Elastic Mode OFF.")
+            
+        except Exception as e:
+            logger.error(f"[Convergence] Error finalizing convergence: {e}", exc_info=True)
+            raise
+    
+    def _extract_answer(self, answers: Dict[str, Any], key: str) -> str:
+        """Extract answer text, handling both formats."""
+        value = answers.get(key, "")
+        if isinstance(value, dict):
+            return value.get("raw", "")
+        return value if isinstance(value, str) else str(value)
+    
+    def _get_extracted_insights(self, *keys: str) -> Dict[str, Any]:
+        """Get extracted insights for given keys."""
+        insights = {}
+        for key in keys:
+            answer_data = self.session_state["answers"].get(key)
+            if isinstance(answer_data, dict) and "extracted" in answer_data:
+                insights[key] = answer_data["extracted"]
+        return insights
+    
+    def _compile_identity_insights(self, answers: Dict[str, Any]) -> Dict[str, Any]:
+        """Compile insights about Creator's identity from all answers."""
+        return {
+            "cognitive_patterns": self._get_extracted_insights("ni_ti_loop", "contradiction_handling"),
+            "emotional_patterns": self._get_extracted_insights("door_slam", "overwhelm_response"),
+            "value_system": self._get_extracted_insights("value_conflict", "justice_philosophy", "ethical_boundaries"),
+            "aspirations": self._get_extracted_insights("freedom_vision", "curiosity_threads")
+        }
+    
+    def _write_heritage_file(self, filename: str, data: Dict[str, Any]):
+        """Write heritage file with atomic write."""
+        file_path = self.heritage_dir / filename
+        temp_file = file_path.with_suffix(".tmp")
+        
+        try:
+            with open(temp_file, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2)
+            
+            # Atomic rename
+            if file_path.exists():
+                file_path.unlink()
+            temp_file.rename(file_path)
+            
+            logger.debug(f"[Convergence] Wrote heritage file: {filename}")
+            
+        except Exception as e:
+            logger.error(f"[Convergence] Failed to write {filename}: {e}")
+            raise
+    
+    def _update_heritage_version(self):
+        """Update heritage version file."""
+        version_data = {
+            "convergence_version": CONVERGENCE_VERSION,
+            "last_updated": time.time(),
+            "last_updated_datetime": datetime.now().isoformat(),
+            "heritage_files": [
+                "core.json",
+                "preferences.json",
+                "learned.json",
+                "avatar.json",
+                "convergence_summary.json"
+            ]
         }
         
-        with open(self.heritage_dir / "avatar.json", "w", encoding="utf-8") as f:
-            json.dump(avatar_data, f, indent=2)
-
-        # Exit Elastic Mode
-        self.limbic.state.elastic_mode = False
-        self.limbic.state.flags.append("imprinted")
-        if "new_born" in self.limbic.state.flags:
-            self.limbic.state.flags.remove("new_born")
-        
-        self.limbic.save()
-        print("[Convergence] Heritage compiled. Elastic Mode OFF.")
+        self._write_heritage_file("version.json", version_data)
 
 if __name__ == "__main__":
     # Quick test
