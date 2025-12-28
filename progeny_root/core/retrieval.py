@@ -17,13 +17,7 @@ from pathlib import Path
 from datetime import datetime
 
 import requests
-try:
-    import numpy as np
-except ImportError as e:
-    raise ImportError(
-        "numpy is required for progeny_root.core.retrieval. "
-        "Please install it with 'pip install numpy'."
-    ) from e
+import numpy as np
 from pydantic import BaseModel, Field
 from qdrant_client import QdrantClient
 from qdrant_client.http import models

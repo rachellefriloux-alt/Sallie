@@ -29,7 +29,6 @@ logger = setup_logging("learning")
 # Constants
 LEARNING_PROGRESS_FILE = Path("progeny_root/limbic/heritage/learning_progress.json")
 LEARNING_LOG_FILE = Path("progeny_root/logs/learning.log")
-CODE_EXECUTION_TIMEOUT = 5  # Timeout in seconds for code execution to prevent resource exhaustion
 
 
 class LearningSystem:
@@ -558,9 +557,9 @@ Output JSON with: execution_result, output, success, notes"""
             
             # Safety checks
             dangerous_patterns = [
-                # Block direct or combined imports of sensitive modules
-                r'^\s*import\s+(os|subprocess|sys)(\s|$|,|;|#)',
-                r'^\s*from\s+(os|subprocess|sys)\b\s*import\b',
+                r'import\s+os\s*$',
+                r'import\s+subprocess\s*$',
+                r'import\s+sys\s*$',
                 r'__import__',
                 r'eval\s*\(',
                 r'exec\s*\(',
@@ -592,8 +591,7 @@ Output JSON with: execution_result, output, success, notes"""
                     ["python", str(code_file)],
                     capture_output=True,
                     text=True,
-                    timeout=CODE_EXECUTION_TIMEOUT,
-                    timeout=5,
+                    timeout=10,
                     cwd=str(practice_dir),
                     check=False  # Don't raise on non-zero exit
                 )
@@ -614,7 +612,7 @@ Output JSON with: execution_result, output, success, notes"""
                 
             except subprocess.TimeoutExpired:
                 logger.warning(f"[LEARNING] Code execution timed out")
-                return {"status": "timeout", "message": "Code execution exceeded 5 second timeout"}
+                return {"status": "timeout", "message": "Code execution exceeded 10 second timeout"}
             except Exception as e:
                 logger.error(f"[LEARNING] Code execution error: {e}")
                 return {"status": "error", "message": str(e)}

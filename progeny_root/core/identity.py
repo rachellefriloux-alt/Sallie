@@ -95,9 +95,7 @@ class SurfaceExpression(BaseModel):
             if key in v and v[key]:
                 color = str(v[key])
                 if color.startswith("#"):
-                    hex_part = color[1:]
-                    # Support both 3-digit (#RGB) and 6-digit (#RRGGBB) hex colors
-                    if len(hex_part) not in (3, 6) or not all(c in "0123456789abcdefABCDEF" for c in hex_part):
+                    if len(color) != 7 or not all(c in "0123456789abcdefABCDEF" for c in color[1:]):
                         raise AestheticViolation(f"Invalid color format for {key}: {color}")
         
         return v

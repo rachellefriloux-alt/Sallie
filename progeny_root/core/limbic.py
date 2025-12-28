@@ -485,7 +485,7 @@ class LimbicSystem:
             "posture": self.state.posture.value,
             "tier": self.get_tier(),
             "interaction_count": self.state.interaction_count,
-            "last_interaction": datetime.fromtimestamp(self.state.last_interaction_ts).isoformat() if self.state.last_interaction_ts and self.state.last_interaction_ts > 0 else None,
+            "last_interaction": datetime.fromtimestamp(self.state.last_interaction_ts).isoformat() if self.state.last_interaction_ts else None,
             "door_slam_active": self.state.door_slam_active,
             "crisis_active": self.state.crisis_active,
             "elastic_mode": self.state.elastic_mode,
