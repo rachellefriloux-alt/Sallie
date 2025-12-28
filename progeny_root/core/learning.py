@@ -557,9 +557,11 @@ Output JSON with: execution_result, output, success, notes"""
             
             # Safety checks
             dangerous_patterns = [
-                r'import\s+os\s*$',
-                r'import\s+subprocess\s*$',
-                r'import\s+sys\s*$',
+                # Block direct or combined imports of sensitive modules
+                r'^\s*import\s+.*\bos\b',
+                r'^\s*import\s+.*\bsubprocess\b',
+                r'^\s*import\s+.*\bsys\b',
+                r'^\s*from\s+(os|subprocess|sys)\s+import\b',
                 r'__import__',
                 r'eval\s*\(',
                 r'exec\s*\(',
