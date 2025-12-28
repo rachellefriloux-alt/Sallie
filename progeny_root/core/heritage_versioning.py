@@ -120,7 +120,7 @@ class HeritageVersioning:
                 changelog = "# Heritage Changelog\n\n"
             
             # Append new entry
-            timestamp = int(time.time())
+            timestamp = time.time()
             timestamp_str = datetime.fromtimestamp(timestamp).strftime("%Y-%m-%d %H:%M:%S")
             trust_str = f" (Trust: {trust_at_time:.2f})" if trust_at_time else ""
             
