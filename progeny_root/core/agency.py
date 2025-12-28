@@ -61,11 +61,11 @@ class AgencySystem:
     def __init__(self, limbic: LimbicSystem):
         """Initialize Agency System with comprehensive error handling."""
         try:
-        self.limbic = limbic
-        self.tools = ToolRegistry()
-        self.whitelist = [
-            Path("progeny_root/drafts"),
-            Path("progeny_root/working"),
+            self.limbic = limbic
+            self.tools = ToolRegistry()
+            self.whitelist = [
+                Path("progeny_root/drafts"),
+                Path("progeny_root/working"),
                 Path("progeny_root/outbox"),
                 Path("progeny_root/projects"),
                 Path("progeny_root/practice")
