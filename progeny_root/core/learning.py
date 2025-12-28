@@ -614,7 +614,7 @@ Output JSON with: execution_result, output, success, notes"""
                 
             except subprocess.TimeoutExpired:
                 logger.warning(f"[LEARNING] Code execution timed out")
-                return {"status": "timeout", "message": "Code execution exceeded 10 second timeout"}
+                return {"status": "timeout", "message": "Code execution exceeded 5 second timeout"}
             except Exception as e:
                 logger.error(f"[LEARNING] Code execution error: {e}")
                 return {"status": "error", "message": str(e)}
