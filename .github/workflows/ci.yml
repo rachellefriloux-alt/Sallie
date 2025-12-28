@@ -45,10 +45,17 @@ jobs:
     - name: Lint
       run: |
         cd progeny_root
-        pip install ruff black mypy || true
-        ruff check core/ || echo "Ruff not configured"
-        black --check core/ || echo "Black not configured"
-        mypy core/ --ignore-missing-imports || echo "MyPy checks skipped"
+        pip install ruff black mypy
+        if command -v ruff &> /dev/null; then
+          ruff check core/ || echo "⚠️  Ruff found issues (non-blocking)"
+        fi
+        if command -v black &> /dev/null; then
+          black --check core/ || echo "⚠️  Black found formatting issues (non-blocking)"
+        fi
+        if command -v mypy &> /dev/null; then
+          mypy core/ --ignore-missing-imports || echo "⚠️  MyPy found type issues (non-blocking)"
+        fi
+      continue-on-error: true
 
   build-web:
     runs-on: ubuntu-latest
