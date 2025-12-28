@@ -34,9 +34,9 @@
 ### ✅ Date Placeholders Updated
 - Created `scripts/update_dates.py` utility script
 - All markdown files in `sallie/` directory have date placeholders replaced:
-  - `2025-01-XX` → `2025-12-27`
-  - `YYYYMMDD` → `20251227`
-  - `202501XX` → `20251227`
+  - `2025-12-28` → `2025-12-27`
+  - `20251228` → `20251227`
+  - `20251228` → `20251227`
 
 ### ✅ Code Quality Improvements
 - Improved error handling across multiple modules
@@ -122,7 +122,7 @@ python scripts/setup_wizard.py
 - `progeny_root/core/monologue.py`
 - `progeny_root/core/spontaneity.py`
 - `progeny_root/core/device_access/app_control.py`
-- `sallie/deviations/api-path-convention-202501XX.md` (approved)
+- `sallie/deviations/api-path-convention-20251228.md` (approved)
 
 ## What's Ready to Use
 
