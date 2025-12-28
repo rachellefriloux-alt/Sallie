@@ -165,6 +165,7 @@ class HeritageVersioning:
             
             current_version = data.get("version", 1)
             data["version"] = current_version + 1
+            data["last_modified_ts"] = int(time.time())
             data["last_modified_ts"] = time.time()
             
             with open(file_path, "w", encoding="utf-8") as f:
