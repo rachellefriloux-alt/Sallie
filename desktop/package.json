@@ -12,7 +12,8 @@
     "build:mac": "electron-builder --mac",
     "build:linux": "electron-builder --linux",
     "build:all": "electron-builder -mwl",
-    "pack": "electron-builder --dir"
+    "pack": "electron-builder --dir",
+    "lint": "eslint ."
   },
   "build": {
     "appId": "com.digitalprogeny.sallie",
@@ -123,7 +124,8 @@
     "axios": "^1.6.2"
   },
   "devDependencies": {
-    "electron-builder": "^24.9.1"
+    "electron-builder": "^24.9.1",
+    "eslint": "^8.55.0"
   }
 }
 
