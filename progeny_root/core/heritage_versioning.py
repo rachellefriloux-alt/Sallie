@@ -87,7 +87,7 @@ class HeritageVersioning:
         current_version = self.get_current_version(heritage_type)
         
         # Create snapshot
-        timestamp = int(time.time())
+        timestamp = time.time()
         snapshot_name = f"{timestamp}_{heritage_type}_v{current_version}.json"
         snapshot_path = HISTORY_DIR / snapshot_name
         
