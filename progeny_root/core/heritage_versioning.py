@@ -9,6 +9,7 @@ Manages version history for heritage files:
 import json
 import logging
 import shutil
+import time
 from pathlib import Path
 from typing import Dict, Any, Optional
 from datetime import datetime
@@ -86,7 +87,7 @@ class HeritageVersioning:
         current_version = self.get_current_version(heritage_type)
         
         # Create snapshot
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        timestamp = int(time.time())
         snapshot_name = f"{timestamp}_{heritage_type}_v{current_version}.json"
         snapshot_path = HISTORY_DIR / snapshot_name
         
@@ -119,11 +120,12 @@ class HeritageVersioning:
                 changelog = "# Heritage Changelog\n\n"
             
             # Append new entry
-            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            timestamp = int(time.time())
+            timestamp_str = datetime.fromtimestamp(timestamp).strftime("%Y-%m-%d %H:%M:%S")
             trust_str = f" (Trust: {trust_at_time:.2f})" if trust_at_time else ""
             
             entry = f"""
-## Version {version + 1} - {timestamp}
+## Version {version + 1} - {timestamp_str}
 
 ### File: {heritage_type}.json
 ### Reason: {reason}
@@ -160,7 +162,7 @@ class HeritageVersioning:
             
             current_version = data.get("version", 1)
             data["version"] = current_version + 1
-            data["last_modified_ts"] = datetime.now().isoformat()
+            data["last_modified_ts"] = time.time()
             
             with open(file_path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2)
