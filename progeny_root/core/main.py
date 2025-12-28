@@ -1277,8 +1277,11 @@ async def get_convergence_question(question_id: int):
     if "convergence" not in systems:
         raise HTTPException(status_code=503, detail="Convergence system not available")
     
-    if question_id < 1 or question_id > 15:
-        raise HTTPException(status_code=400, detail="Question ID must be between 1 and 15")
+    if question_id < 1 or question_id > len(QUESTIONS):
+        raise HTTPException(
+            status_code=400,
+            detail=f"Question ID must be between 1 and {len(QUESTIONS)}"
+        )
     
     # Get question from QUESTIONS list
     if question_id <= len(QUESTIONS):
