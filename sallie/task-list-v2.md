@@ -1,6 +1,6 @@
 # Task List v2 - Digital Progeny Completion (Expanded Vision)
 
-**Generated**: 2025-01-XX  
+**Generated**: 2025-12-28  
 **Total Estimated Effort**: ~450 hours (~11 weeks at 40hrs/week)  
 **Canonical Reference**: TheDigitalProgeny5.2fullthing.txt v5.4.1  
 **Approved Deviations**: Expanded Identity & Capabilities, Adaptive UI
@@ -12,7 +12,7 @@
 ### TASK-028: Implement Hard-Coded Base Personality System
 - **Description**: Create immutable base personality traits that define Sallie fundamentally
 - **Files**: `core/identity.py`, `limbic/heritage/sallie_identity.json`, `core/config.py` (add base traits)
-- **Branch**: `sallie/complete/base-personality-202501XX`
+- **Branch**: `sallie/complete/base-personality-20251228`
 - **Est. Hours**: 12
 - **Dependencies**: TASK-001
 - **Commits**:
@@ -25,7 +25,7 @@
 ### TASK-029: Implement Advisory Trust Tier Model
 - **Description**: Convert trust tiers from restrictive to advisory-only, add override mechanism
 - **Files**: `core/agency.py`, `core/agency_state.json` (new)
-- **Branch**: `sallie/complete/advisory-trust-202501XX`
+- **Branch**: `sallie/complete/advisory-trust-20251228`
 - **Est. Hours**: 16
 - **Dependencies**: TASK-028
 - **Commits**:
@@ -38,7 +38,7 @@
 ### TASK-030: Implement Control Mechanism
 - **Description**: Create system for Creator to always control Sallie if necessity arises
 - **Files**: `core/control.py`, `core/control_state.json` (new), `core/main.py` (add control endpoints)
-- **Branch**: `sallie/complete/control-mechanism-202501XX`
+- **Branch**: `sallie/complete/control-mechanism-20251228`
 - **Est. Hours**: 12
 - **Dependencies**: TASK-028
 - **Commits**:
@@ -51,7 +51,7 @@
 ### TASK-031: Implement Identity Evolution Tracking
 - **Description**: Track identity changes (surface only), ensure base remains constant
 - **Files**: `core/identity.py`, `limbic/heritage/sallie_identity.json`
-- **Branch**: `sallie/complete/identity-evolution-202501XX`
+- **Branch**: `sallie/complete/identity-evolution-20251228`
 - **Est. Hours**: 10
 - **Dependencies**: TASK-028
 - **Commits**:
@@ -64,7 +64,7 @@
 ### TASK-032: Implement Sallie's Avatar & Visual Identity System
 - **Description**: Allow Sallie to customize her appearance (within aesthetic bounds)
 - **Files**: `core/identity.py`, `interface/web/` (avatar components), `sallie/avatar-system.md`
-- **Branch**: `sallie/complete/avatar-system-202501XX`
+- **Branch**: `sallie/complete/avatar-system-20251228`
 - **Est. Hours**: 16
 - **Dependencies**: TASK-031, TASK-011
 - **Commits**:
@@ -77,7 +77,7 @@
 ### TASK-033: Build Local-First API Alternatives
 - **Description**: Build own versions of APIs when possible (quality: "just as good or better")
 - **Files**: `core/local_apis/` (new directory), various API implementations
-- **Branch**: `sallie/complete/local-apis-202501XX`
+- **Branch**: `sallie/complete/local-apis-20251228`
 - **Est. Hours**: 40
 - **Dependencies**: TASK-004
 - **Commits**:
@@ -91,7 +91,7 @@
 ### TASK-034: Implement Enhanced Learning System
 - **Description**: Add explicit learning workflows (read, write, create, autonomous exploration)
 - **Files**: `core/learning.py` (new), `core/memory.py` (enhance)
-- **Branch**: `sallie/complete/enhanced-learning-202501XX`
+- **Branch**: `sallie/complete/enhanced-learning-20251228`
 - **Est. Hours**: 24
 - **Dependencies**: TASK-028, TASK-033
 - **Commits**:
@@ -105,7 +105,7 @@
 ### TASK-035: Update Agency System for Maximum Capabilities
 - **Description**: Remove hard restrictions, add safety nets (transparency + rollback)
 - **Files**: `core/agency.py`, `core/tools.py`
-- **Branch**: `sallie/complete/max-capabilities-202501XX`
+- **Branch**: `sallie/complete/max-capabilities-20251228`
 - **Est. Hours**: 20
 - **Dependencies**: TASK-029, TASK-030
 - **Commits**:
@@ -118,7 +118,7 @@
 ### TASK-036: Integrate Identity into Dream Cycle
 - **Description**: Make Dream Cycle identity-aware, prevent identity drift
 - **Files**: `core/dream.py`, `core/identity.py`
-- **Branch**: `sallie/complete/dream-identity-integration-202501XX`
+- **Branch**: `sallie/complete/dream-identity-integration-20251228`
 - **Est. Hours**: 12
 - **Dependencies**: TASK-005, TASK-031
 - **Commits**:
@@ -131,7 +131,7 @@
 ### TASK-037: Update Convergence for Sallie Identity
 - **Description**: Integrate Sallie's identity into Convergence flow
 - **Files**: `core/convergence.py`, `core/identity.py`
-- **Branch**: `sallie/complete/convergence-identity-202501XX`
+- **Branch**: `sallie/complete/convergence-identity-20251228`
 - **Est. Hours**: 10
 - **Dependencies**: TASK-006, TASK-031
 - **Commits**:
@@ -147,7 +147,7 @@
 ### TASK-010: Complete Agency Safety (Git Rollback) - UPDATED
 - **Description**: Implement Git safety net, rollback mechanism, capability contracts (now with advisory trust model)
 - **Files**: `core/agency.py`, `core/tools.py`, `core/main.py`
-- **Branch**: `sallie/complete/agency-safety-202501XX`
+- **Branch**: `sallie/complete/agency-safety-20251228`
 - **Est. Hours**: 20 (increased from 16)
 - **Dependencies**: TASK-004, TASK-029
 - **Commits**:
@@ -161,7 +161,7 @@
 ### TASK-011: Upgrade Web UI (React + Next.js + Tailwind) - UPDATED
 - **Description**: Migrate to React + Next.js with adaptive layouts and Sallie's visual identity
 - **Files**: `interface/web/` (new React app), `sallie/style-guide.md`
-- **Branch**: `sallie/complete/web-ui-upgrade-202501XX`
+- **Branch**: `sallie/complete/web-ui-upgrade-20251228`
 - **Est. Hours**: 48 (increased from 40)
 - **Dependencies**: TASK-001, TASK-012, TASK-032
 - **Commits**:

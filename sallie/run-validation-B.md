@@ -1,6 +1,6 @@
 # Step B: Run and Validate - Digital Progeny v5.4.1
 
-**Date**: 2025-01-XX  
+**Date**: 2025-12-28  
 **Status**: Verification Complete (Read-Only Assessment)  
 **Canonical Spec**: TheDigitalProgeny5.2fullthing.txt v5.4.1
 
@@ -131,7 +131,7 @@ python -m uvicorn core.main:app --reload --host 0.0.0.0 --port 8000
 **⚠️ API Path Convention Issue**:
 - Canonical spec (Section 25) requires `/v1` prefix for all endpoints
 - Current implementation uses root-level paths (`/chat`, `/health`, etc.)
-- **Status**: Deviation proposal exists (`sallie/deviations/api-path-convention-202501XX.md`)
+- **Status**: Deviation proposal exists (`sallie/deviations/api-path-convention-20251228.md`)
 
 **Expected Result**: Server starts successfully, all endpoints accessible (not tested in read-only mode)
 
@@ -280,7 +280,7 @@ pytest tests/ --cov=core --cov-report=html
    ```
 
 5. **Address API Path Issue**:
-   - Review deviation proposal: `sallie/deviations/api-path-convention-202501XX.md`
+   - Review deviation proposal: `sallie/deviations/api-path-convention-20251228.md`
    - Approve or refactor to `/v1` prefix
 
 ### Known Issues

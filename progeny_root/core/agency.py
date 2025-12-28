@@ -300,7 +300,7 @@ class AgencySystem:
         """
         # In advisory mode, we don't block anything - we provide guidance
         # The actual decision to proceed is made by Sallie with transparency
-            return True
+        return True
 
     def log_override(self, action_type: str, recommendation: str, reason: str, target_path: Optional[str] = None):
         """

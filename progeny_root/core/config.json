@@ -4,7 +4,7 @@
     "id": "progeny-local-01",
     "owner": "Creator",
     "log_level": "INFO",
-    "test_mode": true
+    "environment": "production"
   },
   "paths": {
     "whitelist": [
