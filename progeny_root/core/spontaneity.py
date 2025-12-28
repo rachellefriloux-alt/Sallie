@@ -18,8 +18,6 @@ from .limbic import LimbicSystem
 
 logger = logging.getLogger("spontaneity")
 
-logger = logging.getLogger("spontaneity")
-
 
 class SpontaneityType(str, Enum):
     """Types of spontaneous behaviors."""

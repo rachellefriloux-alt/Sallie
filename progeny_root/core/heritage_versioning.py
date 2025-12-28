@@ -86,6 +86,8 @@ class HeritageVersioning:
         current_version = self.get_current_version(heritage_type)
         
         # Create snapshot
+        # Note: Using strftime for human-readable filenames and changelog entries.
+        # Unix timestamps (time.time()) are used elsewhere for programmatic comparisons.
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         snapshot_name = f"{timestamp}_{heritage_type}_v{current_version}.json"
         snapshot_path = HISTORY_DIR / snapshot_name
