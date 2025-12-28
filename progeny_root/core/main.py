@@ -1284,21 +1284,18 @@ async def get_convergence_question(question_id: int):
         )
     
     # Get question from QUESTIONS list
-    if question_id <= len(QUESTIONS):
-        question = QUESTIONS[question_id - 1]
-        # If Q13, generate dynamic Mirror Test
-        if question.id == 13:
-            question.text = systems["convergence"]._generate_mirror_test()
-        
-        return {
-            "id": question.id,
-            "phase": question.phase.value,
-            "text": question.text,
-            "purpose": question.purpose,
-            "extraction_key": question.extraction_key
-        }
+    question = QUESTIONS[question_id - 1]
+    # If Q13, generate dynamic Mirror Test
+    if question.id == 13:
+        question.text = systems["convergence"]._generate_mirror_test()
     
-    raise HTTPException(status_code=404, detail="Question not found")
+    return {
+        "id": question.id,
+        "phase": question.phase.value,
+        "text": question.text,
+        "purpose": question.purpose,
+        "extraction_key": question.extraction_key
+    }
 
 @app.get("/convergence/question")
 async def get_current_question():
