@@ -1,0 +1,9 @@
+{
+  "creator_has_control": false,
+  "emergency_stop_active": false,
+  "state_locked": false,
+  "control_history": [],
+  "last_control_ts": null,
+  "control_reason": null
+}
+

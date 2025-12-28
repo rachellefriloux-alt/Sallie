@@ -1,19 +1,54 @@
-"""Environmental monitoring and sensors."""
+"""Environmental monitoring and sensors (Section 10).
+
+Enhanced with:
+- File watcher with pattern detection
+- System load monitoring with stress detection
+- Refractory period enforcement
+- Pattern detection for proactive engagement
+"""
 
 import time
 import psutil
 import os
+import json
+import logging
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
+from datetime import datetime
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
+
+logger = logging.getLogger("sensors")
 
 class SensorSystem:
     """
-    Provides peripheral awareness of the Creator's environment.
-    Monitors system load, battery status, and file activity.
+    Sensor Array - peripheral awareness system (Section 10).
+    
+    Monitors:
+    - File activity (metadata only)
+    - System load (CPU, memory, window switches)
+    - Pattern detection (workload spikes, abandonment, focus shifts)
     """
+    
     def __init__(self):
         self.last_scan_time = time.time()
         self._file_cache: Dict[str, float] = {}
+        self.last_seed_time = 0.0
+        self.refractory_period = 86400  # 24 hours (Section 10.4.2)
+        self.file_activity_history: List[Dict[str, Any]] = []
+        self.system_load_history: List[Dict[str, Any]] = []
+        
+        # Pattern detection thresholds (Section 10.2.3)
+        self.workload_spike_threshold = 10  # files/hour
+        self.abandonment_days = 7
+        self.stress_cpu_threshold = 80.0
+        self.stress_window_switches = 20  # per hour
+        
+        # File watcher
+        self.observer = None
+        self.watched_paths: List[Path] = []
+        
+        logger.info("[Sensors] Sensor system initialized")
 
     def scan_system_load(self) -> Dict[str, float]:
         """

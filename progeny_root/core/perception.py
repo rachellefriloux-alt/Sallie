@@ -120,11 +120,25 @@ class PerceptionSystem:
         elif neg_count > pos_count:
             sentiment = max(-0.8, -neg_count * 0.2)
         
-        # Take the wheel detection
-        take_wheel = any(phrase in text_lower for phrase in [
-            "just do it", "handle it", "take over", "you decide", "your call",
-            "do what you think", "figure it out", "i don't care how"
-        ])
+        # Take the wheel detection (explicit delegation keywords)
+        explicit_delegation_keywords = [
+            "handle it", "take the wheel", "your court", "fix this",
+            "take it off my plate", "just do it", "take over", "you decide",
+            "your call", "do what you think", "figure it out", "i don't care how",
+            "you handle", "you take care", "deal with it", "make it happen"
+        ]
+        
+        take_wheel = any(phrase in text_lower for phrase in explicit_delegation_keywords)
+        
+        # Confidence level for delegation
+        delegation_confidence = 0.5  # Default
+        if take_wheel:
+            # High confidence keywords
+            high_confidence = ["take the wheel", "handle it", "your court", "fix this", "take it off my plate"]
+            if any(phrase in text_lower for phrase in high_confidence):
+                delegation_confidence = 0.9
+            else:
+                delegation_confidence = 0.7
         
         # Suggested posture based on analysis
         if load > 0.5:
@@ -141,6 +155,7 @@ class PerceptionSystem:
             "load": load,
             "sentiment": sentiment,
             "take_the_wheel": take_wheel,
+            "delegation_confidence": delegation_confidence if take_wheel else 0.0,
             "suggested_posture": posture,
             "intent": "unknown",
             "entities": [],
@@ -149,20 +164,26 @@ class PerceptionSystem:
 
     def _merge_analysis(self, quick: Dict[str, Any], llm: Dict[str, Any]) -> Dict[str, Any]:
         """Merge quick scan with LLM analysis, preferring LLM but keeping quick scan fallbacks."""
+        # Use LLM's take_the_wheel if present, otherwise use quick scan
+        take_wheel = llm.get("take_the_wheel", quick.get("take_the_wheel", False))
+        delegation_confidence = llm.get("delegation_confidence", quick.get("delegation_confidence", 0.0))
+        
+        # If quick scan detected something LLM missed, use quick scan
+        if quick.get("take_the_wheel") and not take_wheel:
+            take_wheel = True
+            delegation_confidence = quick.get("delegation_confidence", 0.7)
+        
         result = {
             "urgency": llm.get("urgency", quick.get("urgency", 0.0)),
             "load": llm.get("load", quick.get("load", 0.0)),
             "sentiment": llm.get("sentiment", quick.get("sentiment", 0.0)),
-            "take_the_wheel": llm.get("take_the_wheel", quick.get("take_the_wheel", False)),
+            "take_the_wheel": take_wheel,
+            "delegation_confidence": delegation_confidence,
             "suggested_posture": llm.get("suggested_posture", quick.get("suggested_posture", "PEER")),
             "intent": llm.get("intent", quick.get("intent", "unknown")),
             "entities": llm.get("entities", quick.get("entities", [])),
             "source": "llm" if "urgency" in llm else "quick_scan"
         }
-        
-        # If quick scan detected something LLM missed, boost it
-        if quick.get("take_the_wheel") and not result["take_the_wheel"]:
-            result["take_the_wheel"] = True
             
         return result
 

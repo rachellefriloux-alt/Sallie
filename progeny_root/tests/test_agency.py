@@ -1,87 +1,106 @@
-import sys
-import os
-from pathlib import Path
+"""Tests for Advisory Trust System."""
 
-# Add project root to path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import pytest
+from unittest.mock import Mock
 
-from core.limbic import LimbicSystem
-from core.agency import AgencySystem, TrustTier
+from core.agency import AgencySystem, TrustTier, AdvisoryRecommendation
+from core.limbic import LimbicSystem, LimbicState
 
-def test_agency():
-    print("=== Testing Agency System ===")
-    
-    # 1. Initialize Limbic System
-    limbic = LimbicSystem()
-    agency = AgencySystem(limbic)
-    
-    # 2. Test Tier Calculation
-    print("\n--- Testing Trust Tiers ---")
-    
-    # Default Trust is 0.1 -> Stranger
-    # Note: LimbicSystem initializes with 0.55 trust by default in some versions, or 0.1. 
-    # Let's force it to known values for testing.
-    limbic.state.trust = 0.1
-    print(f"Trust: {limbic.state.trust}, Tier: {agency.get_tier().name}")
-    assert agency.get_tier() == TrustTier.STRANGER
-    
-    # Boost Trust to Associate (0.65)
-    # limbic.update(delta_t=0.5) # We can skip update logic and set state directly for unit testing Agency
-    limbic.state.trust = 0.65
-    print(f"Trust: {limbic.state.trust}, Tier: {agency.get_tier().name}")
-    assert agency.get_tier() == TrustTier.ASSOCIATE
 
-    # Boost Trust to Partner (0.85)
-    limbic.state.trust = 0.85
-    print(f"Trust: {limbic.state.trust}, Tier: {agency.get_tier().name}")
-    assert agency.get_tier() == TrustTier.PARTNER
+class TestAgencySystem:
+    """Test advisory trust system functionality."""
+    
+    @pytest.fixture
+    def limbic_system(self):
+        """Create limbic system for testing."""
+        limbic = LimbicSystem()
+        return limbic
+    
+    @pytest.fixture
+    def agency_system(self, limbic_system):
+        """Create agency system for testing."""
+        return AgencySystem(limbic_system)
+    
+    def test_get_tier(self, agency_system, limbic_system):
+        """Test trust tier calculation."""
+        # Test different trust levels
+        limbic_system.state.trust = 0.5
+        assert agency_system.get_tier() == TrustTier.STRANGER
+        
+        limbic_system.state.trust = 0.7
+        assert agency_system.get_tier() == TrustTier.ASSOCIATE
+        
+        limbic_system.state.trust = 0.85
+        assert agency_system.get_tier() == TrustTier.PARTNER
+        
+        limbic_system.state.trust = 0.95
+        assert agency_system.get_tier() == TrustTier.SURROGATE
+    
+    def test_advisory_recommendation(self, agency_system, limbic_system):
+        """Test advisory recommendations."""
+        # Stranger tier
+        limbic_system.state.trust = 0.5
+        rec = agency_system.get_advisory_recommendation("read")
+        assert rec == AdvisoryRecommendation.ADVISORY_ALLOW
+        
+        rec = agency_system.get_advisory_recommendation("write")
+        assert rec == AdvisoryRecommendation.ADVISORY_RESTRICTION
+        
+        # Partner tier
+        limbic_system.state.trust = 0.85
+        rec = agency_system.get_advisory_recommendation("write")
+        assert rec == AdvisoryRecommendation.ADVISORY_ALLOW
+        
+        rec = agency_system.get_advisory_recommendation("shell_exec")
+        assert rec == AdvisoryRecommendation.ADVISORY_CAUTION
+    
+    def test_check_permission_always_true(self, agency_system):
+        """Test that check_permission always returns True in advisory mode."""
+        # In advisory mode, permissions are not restrictive
+        assert agency_system.check_permission("read") is True
+        assert agency_system.check_permission("write") is True
+        assert agency_system.check_permission("shell_exec") is True
+    
+    def test_log_override(self, agency_system):
+        """Test override logging."""
+        agency_system.log_override(
+            "write",
+            AdvisoryRecommendation.ADVISORY_RESTRICTION,
+            "Test override reason",
+            "/test/path"
+        )
+        
+        history = agency_system.get_override_history()
+        assert len(history) > 0
+        assert history[-1]["action_type"] == "write"
+        assert history[-1]["override_reason"] == "Test override reason"
+    
+    def test_execute_tool_with_override(self, agency_system, limbic_system):
+        """Test tool execution with override."""
+        limbic_system.state.trust = 0.5  # Stranger tier
+        
+        # Should still execute (advisory mode)
+        result = agency_system.execute_tool(
+            "read_file",
+            {"path": "/test/path"},
+            override_reason="Test override"
+        )
+        
+        # Should log override
+        history = agency_system.get_override_history()
+        assert len(history) > 0
+    
+    def test_get_advisory_summary(self, agency_system, limbic_system):
+        """Test getting advisory summary."""
+        limbic_system.state.trust = 0.85
+        
+        summary = agency_system.get_advisory_summary()
+        
+        assert summary["mode"] == "advisory"
+        assert summary["current_tier"] == "PARTNER"
+        assert summary["trust_level"] == 0.85
+        assert "total_overrides" in summary
 
-    # Boost Trust to Surrogate (0.95)
-    limbic.state.trust = 0.95
-    print(f"Trust: {limbic.state.trust}, Tier: {agency.get_tier().name}")
-    assert agency.get_tier() == TrustTier.SURROGATE
-
-    # 3. Test Permissions
-    print("\n--- Testing Permissions ---")
-    
-    # Reset to Stranger
-    limbic.state.trust = 0.1
-    print(f"Tier: {agency.get_tier().name}")
-    print(f"Read Permission: {agency.check_permission('read')}")
-    print(f"Write Permission: {agency.check_permission('write')}")
-    assert agency.check_permission('read') == True
-    assert agency.check_permission('write') == False
-
-    # Set to Associate
-    limbic.state.trust = 0.65
-    print(f"Tier: {agency.get_tier().name}")
-    # Write to random path -> Denied
-    print(f"Write Random: {agency.check_permission('write', 'random.txt')}")
-    assert agency.check_permission('write', 'random.txt') == False
-    
-    # Write to Whitelist -> Allowed
-    draft_path = str(Path("progeny_root/drafts/test.txt").resolve())
-    # Note: Whitelist check relies on path resolution, might be tricky in test env if dirs don't exist
-    # But let's try.
-    
-    # 4. Test Tool Execution
-    print("\n--- Testing Tool Execution ---")
-    # Set to Partner for write access
-    limbic.state.trust = 0.85 
-    
-    test_file = "test_agency_write.txt"
-    result = agency.execute_tool("write_file", {"path": test_file, "content": "Hello Agency"})
-    print(f"Write Result: {result}")
-    
-    if result["status"] == "success":
-        print("File write successful.")
-        # Clean up
-        if os.path.exists(test_file):
-            os.remove(test_file)
-    else:
-        print(f"File write failed: {result}")
-
-    print("\n=== Agency System Tests Complete ===")
 
 if __name__ == "__main__":
-    test_agency()
+    pytest.main([__file__, "-v"])

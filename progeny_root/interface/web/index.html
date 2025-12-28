@@ -488,13 +488,136 @@
             40% { transform: scale(1); opacity: 1; }
         }
 
+        /* Mode Selector */
+        .mode-selector {
+            display: flex;
+            gap: 8px;
+            margin-right: auto;
+        }
+
+        .mode-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 13px;
+        }
+
+        .mode-btn:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--mode-primary, var(--accent-violet));
+        }
+
+        .mode-btn.active {
+            background: var(--mode-primary, var(--accent-violet));
+            border-color: var(--mode-primary, var(--accent-violet));
+            color: white;
+        }
+
+        .mode-icon {
+            font-size: 16px;
+        }
+
+        .mode-name {
+            font-weight: 500;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .quick-action {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .quick-action:hover {
+            background: var(--bg-tertiary);
+            color: var(--mode-primary, var(--accent-violet));
+            border-color: var(--mode-primary, var(--accent-violet));
+        }
+
+        /* Mode-specific Layouts */
+        .layout-compact .main-stage {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .layout-spacious .main-stage {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .layout-minimal .sidebar {
+            display: none;
+        }
+
+        .layout-minimal .main-stage {
+            width: 100%;
+        }
+
+        .layout-flexible .main-stage {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .layout-structured .main-stage {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Density Variations */
+        .density-high .app-container {
+            padding: 12px;
+            gap: 12px;
+        }
+
+        .density-high .glass-panel {
+            padding: 16px;
+        }
+
+        .density-medium .app-container {
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .density-low .app-container {
+            padding: 32px;
+            gap: 32px;
+        }
+
+        .density-low .glass-panel {
+            padding: 32px;
+        }
+
         /* Responsive */
         @media (max-width: 900px) {
             .sidebar {
                 display: none;
             }
+            .mode-selector {
+                display: none;
+            }
         }
     </style>
+    <script src="app.js"></script>
 </head>
 <body>
 
@@ -723,6 +846,9 @@
     
     // Start connection
     connect();
+    
+    // Make ws available globally for adaptive UI
+    window.ws = ws;
 </script>
 
 </body>
