@@ -558,10 +558,8 @@ Output JSON with: execution_result, output, success, notes"""
             # Safety checks
             dangerous_patterns = [
                 # Block direct or combined imports of sensitive modules
-                r'^\s*import\s+.*\bos\b',
-                r'^\s*import\s+.*\bsubprocess\b',
-                r'^\s*import\s+.*\bsys\b',
-                r'^\s*from\s+(os|subprocess|sys)\s+import\b',
+                r'^\s*import\s+(os|subprocess|sys)(\s|$|,|;|#)',
+                r'^\s*from\s+(os|subprocess|sys)\b\s*import\b',
                 r'__import__',
                 r'eval\s*\(',
                 r'exec\s*\(',
@@ -593,7 +591,7 @@ Output JSON with: execution_result, output, success, notes"""
                     ["python", str(code_file)],
                     capture_output=True,
                     text=True,
-                    timeout=10,
+                    timeout=5,
                     cwd=str(practice_dir),
                     check=False  # Don't raise on non-zero exit
                 )
@@ -614,7 +612,7 @@ Output JSON with: execution_result, output, success, notes"""
                 
             except subprocess.TimeoutExpired:
                 logger.warning(f"[LEARNING] Code execution timed out")
-                return {"status": "timeout", "message": "Code execution exceeded 10 second timeout"}
+                return {"status": "timeout", "message": "Code execution exceeded 5 second timeout"}
             except Exception as e:
                 logger.error(f"[LEARNING] Code execution error: {e}")
                 return {"status": "error", "message": str(e)}
