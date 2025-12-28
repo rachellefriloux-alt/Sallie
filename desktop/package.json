@@ -1,131 +1,22 @@
 {
   "name": "sallie-desktop",
-  "version": "5.4.2",
-  "description": "Sallie - Your AI Cognitive Partner",
-  "author": "Digital Progeny",
+  "version": "1.0.0",
+  "description": "Sallie - Digital Progeny Windows Desktop App",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dev": "electron . --dev",
     "build": "electron-builder",
-    "build:win": "electron-builder --win",
-    "build:mac": "electron-builder --mac",
-    "build:linux": "electron-builder --linux",
-    "build:all": "electron-builder -mwl",
-    "pack": "electron-builder --dir",
-    "lint": "eslint ."
-  },
-  "build": {
-    "appId": "com.digitalprogeny.sallie",
-    "productName": "Sallie",
-    "copyright": "Copyright © 2025 Digital Progeny",
-    "directories": {
-      "output": "dist",
-      "buildResources": "assets"
-    },
-    "files": [
-      "main.js",
-      "preload.js",
-      "package.json",
-      "assets/**/*"
-    ],
-    "win": {
-      "target": [
-        {
-          "target": "nsis",
-          "arch": ["x64", "arm64"]
-        },
-        {
-          "target": "portable",
-          "arch": ["x64"]
-        }
-      ],
-      "icon": "assets/icon.png",
-      "artifactName": "Sallie-Setup-${version}.${ext}"
-    },
-    "nsis": {
-      "oneClick": false,
-      "perMachine": false,
-      "allowToChangeInstallationDirectory": true,
-      "deleteAppDataOnUninstall": false,
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true,
-      "shortcutName": "Sallie"
-    },
-    "mac": {
-      "target": [
-        {
-          "target": "dmg",
-          "arch": ["x64", "arm64"]
-        },
-        {
-          "target": "zip",
-          "arch": ["x64", "arm64"]
-        }
-      ],
-      "category": "public.app-category.productivity",
-      "icon": "assets/icon.icns",
-      "artifactName": "Sallie-${version}-${arch}.${ext}",
-      "hardenedRuntime": true,
-      "gatekeeperAssess": false,
-      "entitlements": "assets/entitlements.mac.plist",
-      "entitlementsInherit": "assets/entitlements.mac.plist"
-    },
-    "dmg": {
-      "title": "Sallie ${version}",
-      "icon": "assets/icon.icns",
-      "window": {
-        "width": 540,
-        "height": 380
-      },
-      "contents": [
-        {
-          "x": 144,
-          "y": 150,
-          "type": "file"
-        },
-        {
-          "x": 396,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ]
-    },
-    "linux": {
-      "target": [
-        {
-          "target": "AppImage",
-          "arch": ["x64", "arm64"]
-        },
-        {
-          "target": "deb",
-          "arch": ["x64", "arm64"]
-        },
-        {
-          "target": "tar.gz",
-          "arch": ["x64", "arm64"]
-        }
-      ],
-      "category": "Office",
-      "icon": "assets/icon.png",
-      "artifactName": "Sallie-${version}-${arch}.${ext}",
-      "desktop": {
-        "Name": "Sallie",
-        "Comment": "Your AI Cognitive Partner",
-        "Categories": "Office;Utility;",
-        "StartupWMClass": "sallie-desktop"
-      }
-    }
+    "dev": "concurrently \"npm run dev:react\" \"wait-on http://localhost:3000 && electron .\"",
+    "dev:react": "cd src && npm start"
   },
   "dependencies": {
     "electron": "^28.0.0",
-    "electron-store": "^8.1.0",
-    "axios": "^1.6.2"
+    "electron-store": "^8.1.0"
   },
   "devDependencies": {
     "electron-builder": "^24.9.1",
-    "eslint": "^8.55.0"
+    "concurrently": "^8.2.2",
+    "wait-on": "^7.2.0"
   }
 }
 

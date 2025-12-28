@@ -1,6 +1,6 @@
 # Step C: Functional Checks - Digital Progeny v5.4.1
 
-**Date**: 2025-12-28  
+**Date**: 2025-01-XX  
 **Status**: Verification Complete (Code Review)  
 **Canonical Spec**: TheDigitalProgeny5.2fullthing.txt v5.4.1
 
@@ -303,7 +303,7 @@ All five critical flows are fully implemented and functional:
 
 #### ⚠️ API Path Convention
 - **Issue**: Canonical spec (Section 25) requires `/v1` prefix, implementation uses root-level paths
-- **Status**: Deviation proposal exists (`sallie/deviations/api-path-convention-20251228.md`)
+- **Status**: Deviation proposal exists (`sallie/deviations/api-path-convention-202501XX.md`)
 - **Impact**: Low (functional, but doesn't match spec)
 - **Recommendation**: Review and approve deviation, or refactor to `/v1` prefix
 

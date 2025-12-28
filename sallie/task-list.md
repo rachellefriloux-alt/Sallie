@@ -1,6 +1,6 @@
 # Task List - Digital Progeny Completion
 
-**Generated**: 2025-12-28  
+**Generated**: 2025-01-XX  
 **Total Estimated Effort**: ~353.5 hours (~9 weeks at 40hrs/week)  
 **Canonical Reference**: TheDigitalProgeny5.2fullthing.txt v5.4.1
 
@@ -12,7 +12,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 - **ID**: Unique identifier
 - **Description**: What needs to be done
 - **Files**: Which files will change
-- **Branch**: Git branch name (format: `sallie/complete/{task-slug}-20251228`)
+- **Branch**: Git branch name (format: `sallie/complete/{task-slug}-YYYYMMDD`)
 - **Est. Hours**: Time estimate
 - **Dependencies**: Other tasks that must complete first
 
@@ -23,7 +23,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-001: Create sallie/ Directory Structure
 - **Description**: Create `sallie/` directory with subdirectories for plan, deviations, docs
 - **Files**: New directory structure
-- **Branch**: `sallie/complete/setup-directory-20251228`
+- **Branch**: `sallie/complete/setup-directory-202501XX`
 - **Est. Hours**: 0.5
 - **Dependencies**: None
 - **Commits**:
@@ -32,7 +32,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-002: Create RUNNING.md
 - **Description**: Write exact local run steps, environment variables, troubleshooting
 - **Files**: `RUNNING.md` (root)
-- **Branch**: `sallie/complete/running-doc-20251228`
+- **Branch**: `sallie/complete/running-doc-202501XX`
 - **Est. Hours**: 2
 - **Dependencies**: None
 - **Commits**:
@@ -41,7 +41,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-003: Create Documentation Files
 - **Description**: Create changes-log.md, checklist-done.md, delivery-summary.md templates
 - **Files**: `sallie/changes-log.md`, `sallie/checklist-done.md`, `sallie/delivery-summary.md`
-- **Branch**: `sallie/complete/doc-templates-20251228`
+- **Branch**: `sallie/complete/doc-templates-202501XX`
 - **Est. Hours**: 1
 - **Dependencies**: TASK-001
 - **Commits**:
@@ -50,7 +50,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-004: Comprehensive Test Suite
 - **Description**: Expand test coverage to >60%, add unit tests for all core modules
 - **Files**: `tests/test_limbic.py`, `tests/test_retrieval.py`, `tests/test_synthesis.py`, `tests/test_perception.py`, `tests/test_agency_tools.py`, `tests/test_dream.py`, `tests/test_convergence.py`
-- **Branch**: `sallie/complete/test-suite-20251228`
+- **Branch**: `sallie/complete/test-suite-202501XX`
 - **Est. Hours**: 16
 - **Dependencies**: None
 - **Commits**:
@@ -68,7 +68,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-005: Complete Dream Cycle Implementation
 - **Description**: Implement full hypothesis extraction, conflict detection, conditional belief synthesis, heritage promotion
 - **Files**: `core/dream.py`, `core/extraction.py`, `memory/patches.json` (schema updates)
-- **Branch**: `sallie/complete/dream-cycle-20251228`
+- **Branch**: `sallie/complete/dream-cycle-202501XX`
 - **Est. Hours**: 24
 - **Dependencies**: TASK-004 (tests)
 - **Commits**:
@@ -81,7 +81,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-006: Complete Great Convergence
 - **Description**: Implement all 14 extraction prompts, heritage compilation, versioning
 - **Files**: `core/convergence.py`, `core/extraction.py`, `core/mirror.py`
-- **Branch**: `sallie/complete/convergence-20251228`
+- **Branch**: `sallie/complete/convergence-202501XX`
 - **Est. Hours**: 20
 - **Dependencies**: TASK-004
 - **Commits**:
@@ -94,7 +94,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-007: Implement "Take the Wheel" Protocol
 - **Description**: Add explicit delegation detection, scope confirmation, execution within trust tiers
 - **Files**: `core/monologue.py`, `core/perception.py`, `core/agency.py`
-- **Branch**: `sallie/complete/take-the-wheel-20251228`
+- **Branch**: `sallie/complete/take-the-wheel-202501XX`
 - **Est. Hours**: 12
 - **Dependencies**: TASK-004
 - **Commits**:
@@ -106,7 +106,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-008: Add Moral Friction Reconciliation
 - **Description**: Implement reconciliation dialogue when request violates Prime Directive
 - **Files**: `core/monologue.py`, `core/prompts.py` (add moral friction prompt)
-- **Branch**: `sallie/complete/moral-friction-20251228`
+- **Branch**: `sallie/complete/moral-friction-202501XX`
 - **Est. Hours**: 8
 - **Dependencies**: TASK-004
 - **Commits**:
@@ -118,7 +118,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-009: Implement One-Question Enforcement
 - **Description**: Add runtime guard to enforce single-question rule in synthesis
 - **Files**: `core/synthesis.py`
-- **Branch**: `sallie/complete/one-question-20251228`
+- **Branch**: `sallie/complete/one-question-202501XX`
 - **Est. Hours**: 4
 - **Dependencies**: TASK-004
 - **Commits**:
@@ -129,7 +129,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-010: Complete Agency Safety (Git Rollback)
 - **Description**: Implement Git safety net, rollback mechanism, capability contracts
 - **Files**: `core/agency.py`, `core/tools.py`, `core/main.py` (add rollback endpoint)
-- **Branch**: `sallie/complete/agency-safety-20251228`
+- **Branch**: `sallie/complete/agency-safety-202501XX`
 - **Est. Hours**: 16
 - **Dependencies**: TASK-004
 - **Commits**:
@@ -142,7 +142,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-011: Upgrade Web UI (React + Next.js + Tailwind)
 - **Description**: Migrate from vanilla HTML to React + Next.js with Tailwind CSS and design tokens
 - **Files**: `interface/web/` (new React app), `sallie/style-guide.md`
-- **Branch**: `sallie/complete/web-ui-upgrade-20251228`
+- **Branch**: `sallie/complete/web-ui-upgrade-202501XX`
 - **Est. Hours**: 40
 - **Dependencies**: TASK-001, TASK-012
 - **Commits**:
@@ -157,7 +157,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-012: Create Style Guide
 - **Description**: Document design tokens, typography scale, spacing rhythm, colors, accessibility
 - **Files**: `sallie/style-guide.md`
-- **Branch**: `sallie/complete/style-guide-20251228`
+- **Branch**: `sallie/complete/style-guide-202501XX`
 - **Est. Hours**: 8
 - **Dependencies**: TASK-001
 - **Commits**:
@@ -169,7 +169,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-013: Accessibility Audit & Fixes
 - **Description**: Add ARIA labels, complete keyboard navigation, verify contrast ratios
 - **Files**: `interface/web/index.html` (or React components), `sallie/accessibility-audit.md`
-- **Branch**: `sallie/complete/accessibility-20251228`
+- **Branch**: `sallie/complete/accessibility-202501XX`
 - **Est. Hours**: 12
 - **Dependencies**: TASK-011
 - **Commits**:
@@ -181,7 +181,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-014: Complete Degradation System
 - **Description**: Implement full failure matrix, AMNESIA/OFFLINE/DEAD state handling
 - **Files**: `core/degradation.py`, `core/monologue.py` (add degradation checks)
-- **Branch**: `sallie/complete/degradation-20251228`
+- **Branch**: `sallie/complete/degradation-202501XX`
 - **Est. Hours**: 12
 - **Dependencies**: TASK-004
 - **Commits**:
@@ -194,7 +194,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-015: Add CI/CD Pipeline
 - **Description**: Set up GitHub Actions for linting, testing, security scanning
 - **Files**: `.github/workflows/ci.yml`, `.github/workflows/test.yml`
-- **Branch**: `sallie/complete/cicd-20251228`
+- **Branch**: `sallie/complete/cicd-202501XX`
 - **Est. Hours**: 8
 - **Dependencies**: TASK-004
 - **Commits**:
@@ -205,7 +205,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-016: Add API Documentation
 - **Description**: Generate OpenAPI/Swagger docs from FastAPI
 - **Files**: `core/main.py` (add OpenAPI metadata), `docs/api.md`
-- **Branch**: `sallie/complete/api-docs-20251228`
+- **Branch**: `sallie/complete/api-docs-202501XX`
 - **Est. Hours**: 6
 - **Dependencies**: None
 - **Commits**:
@@ -216,7 +216,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-017: Security Audit
 - **Description**: Perform security audit per Section 22, create audit report
 - **Files**: `sallie/security-audit.md`
-- **Branch**: `sallie/complete/security-audit-20251228`
+- **Branch**: `sallie/complete/security-audit-202501XX`
 - **Est. Hours**: 4
 - **Dependencies**: TASK-010
 - **Commits**:
@@ -231,7 +231,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-018: Complete Ghost Interface
 - **Description**: Implement system tray, pulse animation, shoulder tap notifications, veto popup
 - **Files**: `core/ghost.py`, `interface/ghost.py`
-- **Branch**: `sallie/complete/ghost-interface-20251228`
+- **Branch**: `sallie/complete/ghost-interface-202501XX`
 - **Est. Hours**: 16
 - **Dependencies**: TASK-005 (for veto popup)
 - **Commits**:
@@ -243,7 +243,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-019: Complete Sensor System
 - **Description**: Implement file watcher, system load monitoring, refractory period logic
 - **Files**: `core/sensors.py`
-- **Branch**: `sallie/complete/sensors-20251228`
+- **Branch**: `sallie/complete/sensors-202501XX`
 - **Est. Hours**: 16
 - **Dependencies**: None
 - **Commits**:
@@ -255,7 +255,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-020: Complete Voice Interface
 - **Description**: Integrate STT/TTS, wake word detection, voice commands
 - **Files**: `core/voice.py`
-- **Branch**: `sallie/complete/voice-interface-20251228`
+- **Branch**: `sallie/complete/voice-interface-202501XX`
 - **Est. Hours**: 24
 - **Dependencies**: None
 - **Commits**:
@@ -268,7 +268,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-021: Implement Foundry
 - **Description**: Create fine-tuning pipeline, evaluation harness, drift reports
 - **Files**: `core/foundry.py`, `foundry/benchmarks/`
-- **Branch**: `sallie/complete/foundry-20251228`
+- **Branch**: `sallie/complete/foundry-202501XX`
 - **Est. Hours**: 32
 - **Dependencies**: TASK-004
 - **Commits**:
@@ -281,7 +281,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-022: Complete Kinship System
 - **Description**: Implement multi-user context isolation, authentication API
 - **Files**: `core/kinship.py`, `core/main.py` (add auth endpoints)
-- **Branch**: `sallie/complete/kinship-20251228`
+- **Branch**: `sallie/complete/kinship-202501XX`
 - **Est. Hours**: 20
 - **Dependencies**: TASK-004
 - **Commits**:
@@ -294,7 +294,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-023: Implement Second Brain Hygiene
 - **Description**: Add Daily Morning Reset, Weekly Review workflows
 - **Files**: `core/dream.py`
-- **Branch**: `sallie/complete/second-brain-hygiene-20251228`
+- **Branch**: `sallie/complete/second-brain-hygiene-202501XX`
 - **Est. Hours**: 8
 - **Dependencies**: TASK-005
 - **Commits**:
@@ -306,7 +306,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-024: Add Backup/Restore Scripts
 - **Description**: Create backup and restore utilities per Section 17.6
 - **Files**: `scripts/backup.py`, `scripts/restore.py`
-- **Branch**: `sallie/complete/backup-restore-20251228`
+- **Branch**: `sallie/complete/backup-restore-202501XX`
 - **Est. Hours**: 8
 - **Dependencies**: None
 - **Commits**:
@@ -317,7 +317,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-025: Add Health Monitoring Script
 - **Description**: Create health check script per Section 17.5.2
 - **Files**: `scripts/health_check.py`
-- **Branch**: `sallie/complete/health-monitoring-20251228`
+- **Branch**: `sallie/complete/health-monitoring-202501XX`
 - **Est. Hours**: 4
 - **Dependencies**: None
 - **Commits**:
@@ -327,7 +327,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-026: Implement Refraction Check
 - **Description**: Add consistency analysis comparing Heritage claims to observed behavior
 - **Files**: `core/dream.py` (add refraction check), new module if needed
-- **Branch**: `sallie/complete/refraction-check-20251228`
+- **Branch**: `sallie/complete/refraction-check-202501XX`
 - **Est. Hours**: 12
 - **Dependencies**: TASK-005
 - **Commits**:
@@ -339,7 +339,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 ### TASK-027: Complete Posture System Integration
 - **Description**: Fully integrate posture prompts per Section 16.10
 - **Files**: `core/prompts.py`, `core/synthesis.py`
-- **Branch**: `sallie/complete/posture-integration-20251228`
+- **Branch**: `sallie/complete/posture-integration-202501XX`
 - **Est. Hours**: 6
 - **Dependencies**: TASK-004
 - **Commits**:
@@ -365,7 +365,7 @@ Tasks are organized by priority (P0 → P1 → P2) and grouped into logical work
 5. **Week 6+**: TASK-018 through TASK-027 (Advanced Features, as time permits)
 
 ### Branch Naming Convention
-- Format: `sallie/complete/{task-slug}-20251228`
+- Format: `sallie/complete/{task-slug}-YYYYMMDD`
 - Example: `sallie/complete/dream-cycle-20250115`
 - Use descriptive slugs: `dream-cycle`, `convergence`, `web-ui-upgrade`, etc.
 

@@ -1,6 +1,6 @@
 # Project Inventory - Digital Progeny v5.4.1
 
-**Generated**: 2025-12-28  
+**Generated**: 2025-01-XX  
 **Workspace**: C:\Sallie  
 **Canonical Spec**: TheDigitalProgeny5.2fullthing.txt (v5.4.1, 3506 lines)
 

@@ -1,6 +1,6 @@
 # Digital Progeny - Completion Checklist (Verified)
 
-**Date**: 2025-12-28  
+**Date**: 2025-01-XX  
 **Status**: Post-Verification Update  
 **Canonical Spec**: TheDigitalProgeny5.2fullthing.txt v5.4.1
 
@@ -214,7 +214,7 @@
 
 **Status**: ✅ Deviation proposal created and documented
 
-**File**: `sallie/deviations/api-path-convention-20251228.md`
+**File**: `sallie/deviations/api-path-convention-202501XX.md`
 
 **Recommendation**: Approve deviation - root-level paths are simpler and common practice
 
@@ -268,4 +268,4 @@
 
 ---
 
-**Last Updated**: 2025-12-28 (Completion Pass Complete)
+**Last Updated**: 2025-01-XX (Completion Pass Complete)

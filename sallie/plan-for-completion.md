@@ -1,7 +1,7 @@
 # Plan for Completion - Digital Progeny v5.4.1
 
 **Status**: Draft for Review  
-**Date**: 2025-12-28  
+**Date**: 2025-01-XX  
 **Canonical Reference**: TheDigitalProgeny5.2fullthing.txt (v5.4.1, Sections 1-25)
 
 ---
@@ -435,7 +435,7 @@ Exit Elastic Mode
 
 This plan assumes we will implement features as specified in TheDigitalProgeny5.2fullthing.txt. If any proposed change deviates from the canonical file:
 
-1. Create a deviation proposal in `sallie/deviations/{feature-name}-20251228.md`
+1. Create a deviation proposal in `sallie/deviations/{feature-name}-YYYYMMDD.md`
 2. Include: excerpt of canonical text, proposed change, justification, tradeoffs, migration plan, tests
 3. Present in chat and wait for explicit `APPROVE <filename>` before implementing
 4. After approval, append to TheDigitalProgeny5.2fullthing.txt under "Approved Deviations"
