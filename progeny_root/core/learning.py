@@ -29,6 +29,7 @@ logger = setup_logging("learning")
 # Constants
 LEARNING_PROGRESS_FILE = Path("progeny_root/limbic/heritage/learning_progress.json")
 LEARNING_LOG_FILE = Path("progeny_root/logs/learning.log")
+CODE_EXECUTION_TIMEOUT = 5  # Timeout in seconds for code execution to prevent resource exhaustion
 
 
 class LearningSystem:
@@ -591,6 +592,7 @@ Output JSON with: execution_result, output, success, notes"""
                     ["python", str(code_file)],
                     capture_output=True,
                     text=True,
+                    timeout=CODE_EXECUTION_TIMEOUT,
                     timeout=5,
                     cwd=str(practice_dir),
                     check=False  # Don't raise on non-zero exit
