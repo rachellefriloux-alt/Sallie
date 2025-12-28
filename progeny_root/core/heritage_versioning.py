@@ -11,7 +11,7 @@ import logging
 import shutil
 import time
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Optional
 from datetime import datetime
 
 logger = logging.getLogger("heritage.versioning")
