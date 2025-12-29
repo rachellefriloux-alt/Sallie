@@ -367,7 +367,8 @@ class SallieLauncher:
                         ['npm', 'install'],
                         capture_output=True,
                         text=True,
-                        timeout=300
+                        timeout=300,
+                        shell=self.is_windows  # Use shell=True on Windows for npm
                     )
                     if npm_install.returncode != 0:
                         self.log(f"✗ npm install failed: {npm_install.stderr}", 'ERROR')
@@ -386,7 +387,8 @@ class SallieLauncher:
                         web_cmd,
                         stdout=web_log,
                         stderr=subprocess.STDOUT,
-                        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
+                        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
+                        shell=self.is_windows  # Use shell=True on Windows for npm
                     )
                 else:
                     self.processes['web'] = subprocess.Popen(
