@@ -3,55 +3,223 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sallie - Digital Progeny</title>
+  <title>Sallie - Connection Required</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+    body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: #1a1a2e;
-      color: #eee;
+      background: linear-gradient(180deg, #111827 0%, #1f2937 50%, #4c1d95 100%);
+      color: #f3f4f6;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
+      padding: 2rem;
     }
     .container {
-      text-align: center;
       max-width: 600px;
-      padding: 2rem;
+      width: 100%;
+      background: #1f2937;
+      border-radius: 1rem;
+      padding: 2.5rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+      border: 1px solid #374151;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
     }
     h1 {
       color: #a78bfa;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      color: #9ca3af;
+      font-size: 1rem;
+    }
+    .status-box {
+      background: #991b1b;
+      background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%);
+      border: 1px solid #dc2626;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    .status-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #fca5a5;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .status-message {
+      color: #fecaca;
+      line-height: 1.6;
       margin-bottom: 1rem;
     }
-    p {
+    .instructions {
+      background: #111827;
+      border-radius: 0.5rem;
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+    .instructions-title {
+      color: #d1d5db;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+    }
+    .instructions ol {
+      margin-left: 1.25rem;
       color: #9ca3af;
+      line-height: 1.8;
+    }
+    .instructions ol li {
+      margin-bottom: 0.5rem;
+    }
+    .instructions code {
+      background: #1f2937;
+      color: #a78bfa;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+    .actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary {
+      background: #7c3aed;
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #6d28d9;
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: #374151;
+      color: #d1d5db;
+    }
+    .btn-secondary:hover {
+      background: #4b5563;
+    }
+    .help-text {
+      text-align: center;
+      color: #6b7280;
+      font-size: 0.875rem;
+      margin-top: 1.5rem;
       line-height: 1.6;
     }
-    .loading {
-      margin-top: 2rem;
-      display: inline-block;
-      width: 50px;
-      height: 50px;
-      border: 3px solid rgba(167, 139, 250, 0.3);
-      border-radius: 50%;
-      border-top-color: #a78bfa;
-      animation: spin 1s ease-in-out infinite;
+    .help-text a {
+      color: #a78bfa;
+      text-decoration: none;
     }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    .help-text a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Sallie - Digital Progeny</h1>
-    <p>Loading your AI cognitive partner...</p>
-    <div class="loading"></div>
-    <p style="margin-top: 2rem; font-size: 0.9rem;">
-      For development, run the web app with <code>npm run dev</code> in the web directory.
+    <div class="header">
+      <div class="icon">🌟</div>
+      <h1>Welcome to Sallie</h1>
+      <p class="subtitle">Your AI Cognitive Partner</p>
+    </div>
+    
+    <div class="status-box">
+      <div class="status-title">
+        <span>⚠️</span>
+        <span>Backend Connection Required</span>
+      </div>
+      <p class="status-message">
+        The Sallie desktop app needs to connect to the backend server to function. 
+        The backend server is not currently running or cannot be reached.
+      </p>
+      
+      <div class="instructions">
+        <p class="instructions-title">Quick Fix:</p>
+        <ol>
+          <li>Make sure Docker Desktop is running</li>
+          <li>Open terminal in Sallie directory</li>
+          <li>Run: <code>./start-sallie.sh</code> (Mac/Linux) or <code>start-sallie.bat</code> (Windows)</li>
+          <li>Wait for services to start (30-60 seconds)</li>
+          <li>Close and reopen this app</li>
+        </ol>
+      </div>
+    </div>
+    
+    <div class="actions">
+      <button class="btn btn-primary" onclick="location.reload()">
+        ↻ Retry Connection
+      </button>
+      <button class="btn btn-secondary" onclick="openDocs()">
+        📚 View Setup Guide
+      </button>
+    </div>
+    
+    <p class="help-text">
+      Need help? Check the <a href="#" onclick="openDocs(); return false;">README.md</a> 
+      or visit the backend at <a href="http://localhost:8000/docs" target="_blank">http://localhost:8000/docs</a>
     </p>
   </div>
+  
+  <script>
+    function openDocs() {
+      // Try to open the backend docs
+      window.open('http://localhost:8000/docs', '_blank');
+    }
+    
+    // Auto-retry connection every 10 seconds
+    let retryCount = 0;
+    const maxRetries = 30; // Try for 5 minutes
+    
+    function checkBackend() {
+      fetch('http://localhost:3000')
+        .then(response => {
+          if (response.ok) {
+            // Backend is up, reload to web app
+            window.location.href = 'http://localhost:3000';
+          } else if (retryCount < maxRetries) {
+            retryCount++;
+            setTimeout(checkBackend, 10000);
+          }
+        })
+        .catch(error => {
+          if (retryCount < maxRetries) {
+            retryCount++;
+            setTimeout(checkBackend, 10000);
+          }
+        });
+    }
+    
+    // Start checking after 5 seconds
+    setTimeout(checkBackend, 5000);
+  </script>
 </body>
 </html>
