@@ -252,7 +252,7 @@ class SallieLauncher:
             # Start auto-discovery FIRST
             self.log("[0/3] Starting auto-discovery...", 'INFO')
             try:
-                sys.path.insert(0, str(SCRIPT_DIR / 'progeny_root'))
+                sys.path.insert(0, str(SCRIPT_DIR / 'progeny_root' / 'Peer'))
                 from core.discovery import get_discovery
                 
                 discovery = get_discovery()
@@ -362,33 +362,42 @@ class SallieLauncher:
             # Check if node_modules exists
             if not (SCRIPT_DIR / 'web' / 'node_modules').exists():
                 self.log("Installing dependencies (first time only)...", 'INFO')
-                npm_install = subprocess.run(
-                    ['npm', 'install'],
-                    capture_output=True,
-                    text=True,
-                    timeout=300
-                )
-                if npm_install.returncode != 0:
-                    self.log(f"✗ npm install failed: {npm_install.stderr}", 'ERROR')
+                try:
+                    npm_install = subprocess.run(
+                        ['npm', 'install'],
+                        capture_output=True,
+                        text=True,
+                        timeout=300
+                    )
+                    if npm_install.returncode != 0:
+                        self.log(f"✗ npm install failed: {npm_install.stderr}", 'ERROR')
+                        raise Exception("npm install failed")
+                except (FileNotFoundError, subprocess.SubprocessError) as e:
+                    self.log(f"✗ npm not found or failed: {e}", 'ERROR')
+                    raise Exception("npm not found - please install Node.js")
             
             # Start web interface
             web_cmd = ['npm', 'run', 'dev']
             web_log = open(SCRIPT_DIR / 'web.log', 'w')
             
-            if self.is_windows:
-                self.processes['web'] = subprocess.Popen(
-                    web_cmd,
-                    stdout=web_log,
-                    stderr=subprocess.STDOUT,
-                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
-                )
-            else:
-                self.processes['web'] = subprocess.Popen(
-                    web_cmd,
-                    stdout=web_log,
-                    stderr=subprocess.STDOUT,
-                    preexec_fn=os.setsid
-                )
+            try:
+                if self.is_windows:
+                    self.processes['web'] = subprocess.Popen(
+                        web_cmd,
+                        stdout=web_log,
+                        stderr=subprocess.STDOUT,
+                        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
+                    )
+                else:
+                    self.processes['web'] = subprocess.Popen(
+                        web_cmd,
+                        stdout=web_log,
+                        stderr=subprocess.STDOUT,
+                        preexec_fn=os.setsid
+                    )
+            except (FileNotFoundError, subprocess.SubprocessError) as e:
+                self.log(f"✗ Failed to start web interface: {e}", 'ERROR')
+                raise Exception("npm not found - please install Node.js")
             
             # Wait for web to be ready
             time.sleep(8)
