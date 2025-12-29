@@ -6,6 +6,20 @@ Sallie is not just another AI chatbot. She's a complete cognitive partner with e
 
 ---
 
+## 🚀 Quick Start
+
+**Want to get started in 5 minutes?** Check out **[START_HERE.md](START_HERE.md)** for the fastest way to launch Sallie!
+
+```bash
+# One command to start everything:
+./start-sallie.sh      # Linux/Mac
+start-sallie.bat       # Windows
+```
+
+Then open http://localhost:3000 in your browser! 🎉
+
+---
+
 ## 📋 Table of Contents
 
 - [What Makes Sallie Unique](#what-makes-sallie-unique)
