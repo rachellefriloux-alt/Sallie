@@ -70,12 +70,16 @@ def print_info(text):
 def run_command(cmd, cwd=None, timeout=600, show_output=False):
     """Run a command and return success status."""
     try:
+        # On Windows, use shell=True for npm and other batch commands
+        use_shell = platform.system() == 'Windows' and isinstance(cmd, list) and len(cmd) > 0 and cmd[0] in ['npm', 'docker-compose']
+        
         if show_output:
             result = subprocess.run(
                 cmd,
                 cwd=cwd,
                 timeout=timeout,
-                check=False
+                check=False,
+                shell=use_shell
             )
             return result.returncode == 0, "", ""
         else:
@@ -85,7 +89,8 @@ def run_command(cmd, cwd=None, timeout=600, show_output=False):
                 capture_output=True,
                 text=True,
                 timeout=timeout,
-                check=False
+                check=False,
+                shell=use_shell
             )
             return result.returncode == 0, result.stdout, result.stderr
     except subprocess.TimeoutExpired:

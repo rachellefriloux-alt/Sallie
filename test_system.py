@@ -99,11 +99,13 @@ def test_web_build():
     
     # Test if next can run
     try:
+        is_windows = sys.platform.startswith('win')
         result = subprocess.run(
             ['npm', 'run', 'dev', '--', '--help'],
             capture_output=True,
             text=True,
-            timeout=10
+            timeout=10,
+            shell=is_windows  # Use shell=True on Windows for npm
         )
         print_success("Next.js is configured correctly")
         return True
