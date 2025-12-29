@@ -146,6 +146,11 @@ Sallie can do **anything** a human or AI can do:
 
 Choose the installation method that works best for you. **You need to install the backend first**, then choose one or more client apps.
 
+**📘 Platform-Specific Guides:**
+- **Windows 11 Users**: See [WINDOWS_SETUP.md](WINDOWS_SETUP.md) for detailed Windows 11 instructions
+- **Quick Start**: See [QUICK_START.md](QUICK_START.md) for all platforms
+- **Troubleshooting**: Run `python health-check.py` to diagnose issues
+
 ---
 
 ## 📦 Backend Installation (Required First Step)
@@ -169,17 +174,18 @@ cd Sallie
 
 **Windows:**
 ```batch
-scripts\install_windows.bat
+INSTALL.bat
 ```
+Or see [WINDOWS_SETUP.md](WINDOWS_SETUP.md) for manual installation.
 
 **macOS/Linux:**
 ```bash
-chmod +x scripts/install.sh
-./scripts/install.sh
+chmod +x INSTALL.sh
+./INSTALL.sh
 ```
 
 This installs:
-- Python packages (FastAPI, Ollama client, Qdrant, etc.)
+- Python packages (FastAPI, Ollama client, Qdrant, GUI libraries, etc.)
 - Node.js packages for web interface
 - System dependencies
 
