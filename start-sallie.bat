@@ -4,12 +4,14 @@ setlocal EnableDelayedExpansion
 REM Sallie - Simple Unified Startup Script for Windows
 REM This script starts all necessary services to run Sallie
 
+set "SALLIE_VERSION=5.4.2"
+
 TITLE Sallie - AI Cognitive Partner
 COLOR 0B
 
 echo ========================================================
 echo      SALLIE - Your AI Cognitive Partner
-echo                Version 5.4.2
+echo                Version %SALLIE_VERSION%
 echo ========================================================
 echo.
 
