@@ -40,10 +40,13 @@ export default function Home() {
         }
         // For any other case (503, error, completed), show dashboard
         setChecking(false);
-      } catch (err) {
+      } catch (error) {
         // On connection error, show dashboard with connection warning
         // This allows the UI to load even if backend is temporarily down
-        console.warn('Backend connection check failed:', err.message);
+        console.warn(
+          'Backend connection check failed:',
+          error instanceof Error ? error.message : String(error)
+        );
         if (mounted) {
           setChecking(false);
         }
