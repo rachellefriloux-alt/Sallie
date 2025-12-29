@@ -79,8 +79,10 @@ if exist "%SCRIPT_DIR%venv\Scripts\activate.bat" (
     echo   - Using system Python
 )
 
-REM Start backend in background
-start "Sallie Backend" /MIN cmd /k "python -m uvicorn core.main:app --host 0.0.0.0 --port 8000 > ..\backend.log 2>&1"
+REM Start backend in background (bind to localhost for security)
+REM To allow LAN access, set environment variable: set SALLIE_BACKEND_HOST=0.0.0.0
+if not defined SALLIE_BACKEND_HOST set SALLIE_BACKEND_HOST=127.0.0.1
+start "Sallie Backend" /MIN cmd /k "python -m uvicorn core.main:app --host %SALLIE_BACKEND_HOST% --port 8000 > ..\backend.log 2>&1"
 timeout /t 3 /nobreak >nul
 
 REM Check if backend is running

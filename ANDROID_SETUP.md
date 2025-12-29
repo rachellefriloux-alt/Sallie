@@ -1,5 +1,18 @@
 # Android App Connection Setup
 
+## ⚠️ Security Notice
+
+**By default, Sallie binds to localhost (127.0.0.1) for security.** This prevents network access and keeps your data private.
+
+To connect from Android, you must:
+1. **Explicitly enable LAN access** by setting `SALLIE_BACKEND_HOST=0.0.0.0`
+2. **Open firewall port 8000** (only do this on trusted networks)
+3. **Understand the risk**: Any device on your network can access your files and system capabilities
+
+**Only enable LAN access on trusted home/private networks. Never on public WiFi.**
+
+---
+
 ## Quick Start
 
 ### Find Your Computer's IP Address
@@ -42,7 +55,27 @@
 - Phone and computer must be on the same WiFi
 - Check WiFi name on both devices
 
-**2. Check Firewall**
+**2. Configure Backend for LAN Access**
+
+⚠️ **SECURITY WARNING**: By default, Sallie binds to localhost (127.0.0.1) for security. Exposing the API to your network allows any device on the network to access your files and system capabilities. Only enable LAN access on trusted networks.
+
+To enable LAN access, set the backend host before starting:
+
+**Windows:**
+```batch
+set SALLIE_BACKEND_HOST=0.0.0.0
+start-sallie.bat
+```
+
+**Mac/Linux:**
+```bash
+export SALLIE_BACKEND_HOST=0.0.0.0
+./start-sallie.sh
+```
+
+**3. Configure Firewall (Only After Enabling LAN Access)**
+
+⚠️ **SECURITY NOTE**: Only open firewall port 8000 if you've explicitly enabled LAN access above and trust all devices on your network.
 
 **Windows:**
 ```batch
@@ -60,7 +93,7 @@ netsh advfirewall firewall add rule name="Sallie Backend" dir=in action=allow pr
 sudo ufw allow 8000/tcp
 ```
 
-**3. Test Connection from Phone Browser**
+**4. Test Connection from Phone Browser**
 1. Open Chrome on your phone
 2. Go to: `http://YOUR_IP:8000/health`
 3. Should see: `{"status":"healthy"}`
@@ -73,10 +106,15 @@ curl http://localhost:8000/health
 ```
 Should return: `{"status":"healthy"}`
 
-If not, start backend:
+If not, start backend with LAN access enabled:
 ```bash
-./start-sallie.sh   # Linux/Mac
-start-sallie.bat    # Windows
+# Mac/Linux
+export SALLIE_BACKEND_HOST=0.0.0.0
+./start-sallie.sh
+
+# Windows
+set SALLIE_BACKEND_HOST=0.0.0.0
+start-sallie.bat
 ```
 
 #### "Timeout" or "No Response"

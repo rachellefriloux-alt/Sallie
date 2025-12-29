@@ -127,6 +127,7 @@ fi
 
 # Start backend in background
 cd progeny_root
+# Default to localhost for security. Set SALLIE_BACKEND_HOST=0.0.0.0 to allow LAN access
 BACKEND_HOST="${SALLIE_BACKEND_HOST:-127.0.0.1}"
 nohup python -m uvicorn core.main:app --host "$BACKEND_HOST" --port 8000 > "$SCRIPT_DIR/backend.log" 2>&1 &
 BACKEND_PID=$!

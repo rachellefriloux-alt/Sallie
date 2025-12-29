@@ -4,6 +4,7 @@
 
 const { app, BrowserWindow, Tray, Menu, nativeImage, dialog } = require('electron');
 const path = require('path');
+const http = require('http');
 
 let mainWindow;
 let tray;
@@ -64,7 +65,26 @@ function createWindow() {
     if (errorCode !== -3) { // -3 is ABORTED, which is normal for redirects
       mainWindow.loadFile(path.join(__dirname, 'public', 'index.html')).catch(() => {
         // Show error page if fallback also fails
-        mainWindow.loadURL('data:text/html,<h1>Connection Error</h1><p>Cannot connect to Sallie backend.</p><p>Please start the backend server first.</p>');
+        const errorHtml = `
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <title>Connection Error</title>
+            <style>
+              body { font-family: system-ui, sans-serif; padding: 40px; text-align: center; }
+              h1 { color: #e74c3c; }
+            </style>
+          </head>
+          <body>
+            <h1>Connection Error</h1>
+            <p>Cannot connect to Sallie backend.</p>
+            <p>Please start the backend server first.</p>
+          </body>
+          </html>
+        `;
+        const errorDataUrl = 'data:text/html;charset=utf-8,' + encodeURIComponent(errorHtml);
+        mainWindow.loadURL(errorDataUrl);
       });
     }
   });
@@ -93,10 +113,30 @@ function createTray() {
       // Fallback to main icon if tray icon doesn't exist
       icon = nativeImage.createFromPath(path.join(__dirname, 'assets', 'icon.png'));
     }
+    // If still empty, create a visible colored square using buffer
+    if (icon.isEmpty()) {
+      const size = 16;
+      const buffer = Buffer.alloc(size * size * 4);
+      for (let i = 0; i < buffer.length; i += 4) {
+        buffer[i] = 147;     // R (purple #9333ea)
+        buffer[i + 1] = 51;  // G
+        buffer[i + 2] = 234; // B
+        buffer[i + 3] = 255; // A (fully opaque)
+      }
+      icon = nativeImage.createFromBuffer(buffer, { width: size, height: size });
+    }
   } catch (err) {
     console.error('Failed to load tray icon:', err);
-    // Create a simple colored icon as fallback
-    icon = nativeImage.createEmpty();
+    // Create a simple 16x16 purple square as fallback
+    const size = 16;
+    const buffer = Buffer.alloc(size * size * 4);
+    for (let i = 0; i < buffer.length; i += 4) {
+      buffer[i] = 147;     // R (purple)
+      buffer[i + 1] = 51;  // G
+      buffer[i + 2] = 234; // B
+      buffer[i + 3] = 255; // A (fully opaque)
+    }
+    icon = nativeImage.createFromBuffer(buffer, { width: size, height: size });
   }
   
   tray = new Tray(icon);
@@ -116,7 +156,6 @@ function createTray() {
     {
       label: 'Check Connection',
       click: async () => {
-        const http = require('http');
         const checkHealth = () => {
           return new Promise((resolve) => {
             http.get('http://localhost:8000/health', (res) => {
