@@ -58,7 +58,7 @@ export default function Home() {
     return () => {
       mounted = false;
     };
-  }, [router]);
+  }, []);
 
   if (checking || redirecting) {
     return (
