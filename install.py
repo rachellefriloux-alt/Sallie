@@ -139,11 +139,28 @@ def install_python_dependencies():
     
     if success:
         print_success("Python dependencies installed")
-        return True
     else:
         print_error("Failed to install Python dependencies")
         print_error(f"Error: {stderr}")
         return False
+    
+    # Install zeroconf for auto-discovery
+    print()
+    print_info("Installing zeroconf for auto-discovery...")
+    print_info("This enables automatic device discovery on your local network!")
+    
+    cmd = [sys.executable, '-m', 'pip', 'install', 'zeroconf']
+    success, stdout, stderr = run_command(cmd, timeout=120)
+    
+    if success:
+        print_success("Zeroconf installed - auto-discovery enabled!")
+        print_info("Your devices will automatically find each other - no manual IPs needed!")
+    else:
+        print_warning("Zeroconf installation failed")
+        print_info("Auto-discovery will not work, but Sallie will still run")
+        print_info("You can install it later with: pip install zeroconf")
+    
+    return True
 
 def install_web_dependencies():
     """Install web interface dependencies."""
