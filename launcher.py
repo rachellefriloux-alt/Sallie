@@ -249,6 +249,22 @@ class SallieLauncher:
             self.log("Starting Sallie Services...", 'INFO')
             self.log("=" * 50, 'INFO')
             
+            # Start auto-discovery FIRST
+            self.log("[0/3] Starting auto-discovery...", 'INFO')
+            try:
+                sys.path.insert(0, str(SCRIPT_DIR / 'progeny_root'))
+                from core.discovery import get_discovery
+                
+                discovery = get_discovery()
+                discovery.start_broadcast()
+                discovery.start_discovery()
+                
+                self.log("✓ Auto-discovery started - devices will find each other automatically!", 'SUCCESS')
+                self.log("  No manual IP addresses needed!", 'INFO')
+            except Exception as e:
+                self.log(f"⚠ Auto-discovery failed: {e}", 'WARNING')
+                self.log("  Install zeroconf: pip install zeroconf", 'INFO')
+            
             self.log("[1/3] Starting Docker services...", 'INFO')
             self.update_status('Docker', 'starting', 'orange')
             

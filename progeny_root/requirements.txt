@@ -30,6 +30,9 @@ soundfile>=0.12.1  # Audio file reading/writing
 # torch>=2.0.0
 # sentence-transformers>=2.2.2
 
+# Network & Discovery
+zeroconf>=0.131.0  # Auto-discovery of devices on LAN (mDNS/Bonjour)
+
 # System Tray / Desktop
 plyer>=2.1.0
 pystray>=0.19.5
