@@ -31,12 +31,34 @@ cleanup() {
     echo -e "${YELLOW}Shutting down Sallie...${NC}"
     
     if [ ! -z "$BACKEND_PID" ]; then
-        kill $BACKEND_PID 2>/dev/null || true
+        # Try graceful shutdown first
+        if kill "$BACKEND_PID" 2>/dev/null; then
+            TIMEOUT=5
+            while kill -0 "$BACKEND_PID" 2>/dev/null && [ "$TIMEOUT" -gt 0 ]; do
+                sleep 1
+                TIMEOUT=$((TIMEOUT - 1))
+            done
+            # If still running after timeout, force kill
+            if kill -0 "$BACKEND_PID" 2>/dev/null; then
+                kill -9 "$BACKEND_PID" 2>/dev/null || true
+            fi
+        fi
         echo "✓ Backend stopped"
     fi
     
     if [ ! -z "$WEB_PID" ]; then
-        kill $WEB_PID 2>/dev/null || true
+        # Try graceful shutdown first
+        if kill "$WEB_PID" 2>/dev/null; then
+            TIMEOUT=5
+            while kill -0 "$WEB_PID" 2>/dev/null && [ "$TIMEOUT" -gt 0 ]; do
+                sleep 1
+                TIMEOUT=$((TIMEOUT - 1))
+            done
+            # If still running after timeout, force kill
+            if kill -0 "$WEB_PID" 2>/dev/null; then
+                kill -9 "$WEB_PID" 2>/dev/null || true
+            fi
+        fi
         echo "✓ Web app stopped"
     fi
     
