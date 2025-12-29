@@ -35,7 +35,7 @@ echo -e "\n${BLUE}[2/8]${NC} Checking Docker containers..."
 OLLAMA_RUNNING=$(docker ps --filter "name=progeny-brain" --format "{{.Names}}" 2>/dev/null)
 QDRANT_RUNNING=$(docker ps --filter "name=progeny-memory" --format "{{.Names}}" 2>/dev/null)
 
-if [ ! -z "$OLLAMA_RUNNING" ]; then
+if [ -n "$OLLAMA_RUNNING" ]; then
     echo -e "${GREEN}✓ Ollama container is running${NC}"
 else
     echo -e "${YELLOW}⚠ Ollama container is not running${NC}"
@@ -43,7 +43,7 @@ else
     ISSUES_FOUND=$((ISSUES_FOUND + 1))
 fi
 
-if [ ! -z "$QDRANT_RUNNING" ]; then
+if [ -n "$QDRANT_RUNNING" ]; then
     echo -e "${GREEN}✓ Qdrant container is running${NC}"
 else
     echo -e "${YELLOW}⚠ Qdrant container is not running${NC}"

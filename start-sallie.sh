@@ -84,9 +84,14 @@ echo -e "${GREEN}✓ Docker is running${NC}"
 echo ""
 echo -e "${BLUE}[2/5]${NC} Starting backend services (Ollama + Qdrant)..."
 cd progeny_root
-docker-compose up -d 2> >(cat >&2) | grep -v "Warning: No resource found"
 
-if [ $? -eq 0 ]; then
+# Temporarily disable exit on error for docker-compose command
+set +e
+docker-compose up -d 2>&1 | grep -v "Warning: No resource found" || true
+COMPOSE_EXIT=$?
+set -e
+
+if [ $COMPOSE_EXIT -eq 0 ]; then
     echo -e "${GREEN}✓ Services started${NC}"
 else
     echo -e "${YELLOW}⚠ Services may already be running${NC}"

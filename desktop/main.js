@@ -60,11 +60,14 @@ function createWindow() {
   }
 
   // Handle navigation errors
+  let errorPageLoaded = false;
   mainWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription) => {
     console.error('Failed to load:', errorCode, errorDescription);
-    if (errorCode !== -3) { // -3 is ABORTED, which is normal for redirects
+    // Prevent infinite loop - don't retry if we're already showing error page
+    if (errorCode !== -3 && !errorPageLoaded) { // -3 is ABORTED, which is normal for redirects
       mainWindow.loadFile(path.join(__dirname, 'public', 'index.html')).catch(() => {
         // Show error page if fallback also fails
+        errorPageLoaded = true; // Prevent loop
         const errorHtml = `
           <!doctype html>
           <html lang="en">

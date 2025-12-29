@@ -107,7 +107,7 @@ if not exist "node_modules\" (
 )
 
 REM Start Next.js
-start "Sallie Web" /MIN cmd /k "npm run dev > ..\web.log 2>&1"
+start "Sallie Web" /MIN cmd /c "npm run dev > ..\web.log 2>&1"
 timeout /t 5 /nobreak >nul
 
 cd ..

@@ -12,9 +12,9 @@ NC='\033[0m'
 
 echo -e "${BLUE}Starting Sallie Desktop App...${NC}\n"
 
-# Get script directory
+# Get script directory (this script is already in desktop/)
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "$SCRIPT_DIR/desktop"
+cd "$SCRIPT_DIR"
 
 # Check if node_modules exists
 if [ ! -d "node_modules" ]; then
