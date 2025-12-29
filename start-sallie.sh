@@ -13,11 +13,14 @@ BLUE='\033[0;34m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
+# Version
+VERSION="5.4.2"
+
 # Banner
 echo -e "${CYAN}"
 echo "════════════════════════════════════════════════"
 echo "     🌟 SALLIE - Your AI Cognitive Partner 🌟"
-echo "                Version 5.4.2"
+echo "                Version ${VERSION}"
 echo "════════════════════════════════════════════════"
 echo -e "${NC}"
 
