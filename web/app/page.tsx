@@ -9,62 +9,65 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 export default function Home() {
   const router = useRouter();
   const [checking, setChecking] = useState(true);
-  const [needsConvergence, setNeedsConvergence] = useState(false);
+  const [redirecting, setRedirecting] = useState(false);
 
   useEffect(() => {
-    checkConvergenceStatus();
-  }, []);
-
-  const checkConvergenceStatus = async () => {
-    try {
-      // Check if heritage/core.json exists (indicates convergence completed)
-      const response = await fetch(`${API_BASE}/convergence/status`);
-      
-      if (response.status === 503) {
-        // System not ready, show dashboard anyway
-        setChecking(false);
-        return;
-      }
-      
-      if (response.ok) {
-        const data = await response.json();
-        if (data.completed) {
-          // Convergence completed, show dashboard
-          setNeedsConvergence(false);
-        } else {
-          // Convergence not completed, redirect to onboarding
-          setNeedsConvergence(true);
-          router.push('/convergence');
+    // Only check once on mount
+    let mounted = true;
+    
+    const checkConvergenceStatus = async () => {
+      try {
+        // Give the backend a moment to respond
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+        
+        const response = await fetch(`${API_BASE}/convergence/status`, {
+          signal: controller.signal,
+        });
+        
+        clearTimeout(timeoutId);
+        
+        if (!mounted) return;
+        
+        if (response.ok) {
+          const data = await response.json();
+          if (!data.completed) {
+            // Only redirect if convergence is definitely not completed
+            setRedirecting(true);
+            router.push('/convergence');
+            return;
+          }
         }
-      } else {
-        // Assume needs convergence if status check fails
-        setNeedsConvergence(true);
-        router.push('/convergence');
+        // For any other case (503, error, completed), show dashboard
+        setChecking(false);
+      } catch (err) {
+        // On connection error, show dashboard with connection warning
+        // This allows the UI to load even if backend is temporarily down
+        console.warn('Backend connection check failed:', err.message);
+        if (mounted) {
+          setChecking(false);
+        }
       }
-    } catch (err) {
-      console.error('Failed to check convergence status:', err);
-      // On error, check if heritage exists by trying to access it
-      // For now, assume needs convergence
-      setNeedsConvergence(true);
-      router.push('/convergence');
-    } finally {
-      setChecking(false);
-    }
-  };
+    };
 
-  if (checking) {
+    checkConvergenceStatus();
+    
+    return () => {
+      mounted = false;
+    };
+  }, [router]);
+
+  if (checking || redirecting) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-900">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-violet-400 mx-auto mb-4"></div>
-          <p className="text-gray-400">Checking system status...</p>
+          <p className="text-gray-400">
+            {redirecting ? 'Redirecting to setup...' : 'Loading Sallie...'}
+          </p>
         </div>
       </div>
     );
-  }
-
-  if (needsConvergence) {
-    return null; // Router will handle redirect
   }
 
   return <Dashboard />;
