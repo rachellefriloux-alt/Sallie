@@ -30,6 +30,10 @@ try:
     PYSTRAY_AVAILABLE = True
 except ImportError:
     PYSTRAY_AVAILABLE = False
+    # Create dummy classes for type hints
+    Image = None
+    ImageDraw = None
+    pystray = None
     logger.warning("pystray not found. System tray disabled.")
 
 
@@ -254,8 +258,10 @@ class GhostSystem:
             logger.error(f"[Ghost] Failed to create tray icon: {e}")
             return None
     
-    def _create_pulse_icon(self, pulse: Dict[str, Any]) -> Image.Image:
+    def _create_pulse_icon(self, pulse: Dict[str, Any]) -> Optional[Any]:
         """Create icon image based on pulse state."""
+        if not PYSTRAY_AVAILABLE:
+            return None
         # Create a simple colored circle
         image = Image.new("RGB", (64, 64), color="black")
         draw = ImageDraw.Draw(image)

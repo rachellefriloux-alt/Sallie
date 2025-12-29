@@ -53,20 +53,31 @@ try:
 except (FileNotFoundError, subprocess.TimeoutExpired):
     logger.warning("piper not found in PATH. Local TTS disabled. Falling back to Coqui or pyttsx3.")
 
-# Try Coqui TTS (alternative local TTS)
-try:
-    from TTS.api import TTS
-    COQUI_AVAILABLE = True
-    logger.info("Coqui TTS (local TTS) available")
-except ImportError:
-    logger.debug("TTS (Coqui) not found. Coqui TTS disabled.")
+# Try Coqui TTS (alternative local TTS) - Not compatible with Python 3.12+
+COQUI_AVAILABLE = False
+# try:
+#     from TTS.api import TTS
+#     COQUI_AVAILABLE = True
+#     logger.info("Coqui TTS (local TTS) available")
+# except ImportError:
+#     logger.debug("TTS (Coqui) not found. Coqui TTS disabled.")
 
-# Fallback to pyttsx3 (basic TTS)
+# Use pyttsx3 for offline TTS (compatible with Python 3.12+)
 try:
     import pyttsx3
     PYTTSX3_AVAILABLE = True
+    logger.info("pyttsx3 (offline TTS) available")
 except ImportError:
-    logger.warning("pyttsx3 not found. Basic TTS fallback disabled.")
+    logger.warning("pyttsx3 not found. Offline TTS disabled.")
+
+# Use gTTS for online TTS as alternative (compatible with Python 3.12+)
+GTTS_AVAILABLE = False
+try:
+    from gtts import gTTS
+    GTTS_AVAILABLE = True
+    logger.info("gTTS (online TTS) available")
+except ImportError:
+    logger.debug("gTTS not found. Online TTS alternative disabled.")
 
 # Fallback to speech_recognition (Google STT - not local)
 try:
@@ -120,22 +131,12 @@ class VoiceSystem:
         else:
             self.whisper_model = None
         
-        # Initialize TTS (prefer local, fallback to pyttsx3)
+        # Initialize TTS (prefer pyttsx3 for offline, piper for advanced, gTTS for online fallback)
         self.tts_engine = None
         self.tts_type = None
         
-        if PIPER_AVAILABLE:
-            self.tts_type = "piper"
-            logger.info("[VOICE] Piper TTS initialized (local)")
-        elif COQUI_AVAILABLE:
-            try:
-                self.tts_engine = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC", progress_bar=False)
-                self.tts_type = "coqui"
-                logger.info("[VOICE] Coqui TTS initialized (local)")
-            except Exception as e:
-                logger.warning(f"[VOICE] Coqui TTS init failed: {e}")
-                self.tts_engine = None
-        elif PYTTSX3_AVAILABLE:
+        # Try pyttsx3 first (offline, but requires espeak on Linux)
+        if PYTTSX3_AVAILABLE:
             try:
                 self.tts_engine = pyttsx3.init()
                 # Configure voice (prefer female voice)
@@ -146,10 +147,34 @@ class VoiceSystem:
                         break
                 self.tts_engine.setProperty('rate', 160)
                 self.tts_type = "pyttsx3"
-                logger.info("[VOICE] pyttsx3 TTS initialized (fallback)")
+                logger.info("[VOICE] pyttsx3 TTS initialized (offline)")
             except Exception as e:
-                logger.error(f"[VOICE] Failed to init pyttsx3: {e}")
+                logger.warning(f"[VOICE] pyttsx3 init failed (espeak not installed?): {e}")
                 self.tts_engine = None
+        
+        # Fallback to gTTS if pyttsx3 failed
+        if not self.tts_type and GTTS_AVAILABLE:
+            self.tts_type = "gtts"
+            logger.info("[VOICE] gTTS initialized (online fallback)")
+        
+        # Try Piper if available
+        if not self.tts_type and PIPER_AVAILABLE:
+            self.tts_type = "piper"
+            logger.info("[VOICE] Piper TTS initialized (advanced local)")
+        
+        # Legacy Coqui support (not compatible with Python 3.12+)
+        if not self.tts_type and COQUI_AVAILABLE:
+            try:
+                from TTS.api import TTS
+                self.tts_engine = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC", progress_bar=False)
+                self.tts_type = "coqui"
+                logger.info("[VOICE] Coqui TTS initialized (legacy)")
+            except Exception as e:
+                logger.warning(f"[VOICE] Coqui TTS init failed: {e}")
+                self.tts_engine = None
+        
+        if not self.tts_type:
+            logger.warning("[VOICE] No TTS engine available - voice output disabled")
         
         # Initialize STT fallback (speech_recognition)
         if SPEECH_RECOGNITION_AVAILABLE and not WHISPER_AVAILABLE:
@@ -281,12 +306,14 @@ class VoiceSystem:
             text = self._apply_emotional_prosody(text)
         
         # Speak using available TTS engine
-        if self.tts_type == "piper":
+        if self.tts_type == "pyttsx3" and self.tts_engine:
+            self._speak_pyttsx3(text)
+        elif self.tts_type == "piper":
             self._speak_piper(text)
+        elif self.tts_type == "gtts":
+            self._speak_gtts(text)
         elif self.tts_type == "coqui" and self.tts_engine:
             self._speak_coqui(text)
-        elif self.tts_type == "pyttsx3" and self.tts_engine:
-            self._speak_pyttsx3(text)
         else:
             logger.error("[VOICE] No TTS engine available")
     
@@ -373,6 +400,39 @@ class VoiceSystem:
             self.tts_engine.runAndWait()
         except Exception as e:
             logger.error(f"[VOICE] pyttsx3 thread error: {e}")
+    
+    def _speak_gtts(self, text: str):
+        """Speak using gTTS (online, Google TTS)."""
+        try:
+            from gtts import gTTS
+            import os
+            
+            with tempfile.NamedTemporaryFile(suffix='.mp3', delete=False) as tmp_file:
+                # Generate TTS audio file
+                tts = gTTS(text=text, lang='en', slow=False)
+                tts.save(tmp_file.name)
+                
+                # Play audio file
+                if AUDIO_AVAILABLE:
+                    try:
+                        import soundfile as sf
+                        # gTTS generates MP3, need to convert or use a player
+                        # For simplicity, use system player
+                        if os.name == 'nt':  # Windows
+                            os.system(f'start /min "" "{tmp_file.name}"')
+                        elif os.name == 'posix':  # Mac/Linux
+                            os.system(f'afplay "{tmp_file.name}" 2>/dev/null || mpg123 "{tmp_file.name}" 2>/dev/null || ffplay -nodisp -autoexit "{tmp_file.name}" 2>/dev/null')
+                        time.sleep(len(text) / 15)  # Approximate duration
+                    except Exception as e:
+                        logger.error(f"[VOICE] gTTS playback error: {e}")
+                    finally:
+                        # Clean up temp file
+                        try:
+                            os.unlink(tmp_file.name)
+                        except:
+                            pass
+        except Exception as e:
+            logger.error(f"[VOICE] gTTS error: {e}")
     
     def _wait_for_wake_word(self, timeout: float = 30.0) -> bool:
         """
