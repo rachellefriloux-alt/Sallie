@@ -1,0 +1,18 @@
+{
+  "trust": 0.5,
+  "warmth": 0.6,
+<<<<<<< Updated upstream:progeny_root/progeny_root/limbic/soul.json
+  "arousal": 0.44457662604447135,
+  "valence": 0.5001226208761375,
+=======
+  "arousal": 0.293676518062134,
+  "valence": 0.5000002687011156,
+>>>>>>> Stashed changes:progeny_root/Peer/limbic/soul.json
+  "posture": "PEER",
+  "last_interaction_ts": 1766750317.8767607,
+  "interaction_count": 2,
+  "flags": [],
+  "door_slam_active": false,
+  "crisis_active": false,
+  "elastic_mode": false
+}
