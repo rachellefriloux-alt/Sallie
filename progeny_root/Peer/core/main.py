@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, BackgroundTasks, WebSocket, WebSocketDisconnect, Body, Query
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
@@ -301,6 +302,20 @@ async def lifespan(app: FastAPI):
             logger.warning(f"[Shutdown] Error shutting down {name}: {e}")
 
 app = FastAPI(title="Digital Progeny", version="5.4.2", lifespan=lifespan)
+
+# Configure CORS to allow frontend access
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",  # Next.js development server
+        "http://127.0.0.1:3000",  # Alternative localhost
+        "http://localhost:8080",  # Desktop app may use this
+        "http://127.0.0.1:8080",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
 
 # Mount static files for web UI - use path relative to this file
 CORE_DIR = Path(__file__).parent
