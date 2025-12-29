@@ -12,6 +12,7 @@ pip-delete-this-directory.txt
 dist/
 build/
 *.egg-info/
+*.spec
 .next/
 out/
 *.tsbuildinfo
