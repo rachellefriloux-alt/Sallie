@@ -69,7 +69,7 @@ echo.
 
 REM Start backend API
 echo [4/5] Starting backend API...
-cd progeny_root
+cd progeny_root\Peer
 
 REM Check if virtual environment exists
 if exist "%SCRIPT_DIR%venv\Scripts\activate.bat" (
