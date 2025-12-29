@@ -226,9 +226,9 @@ def create_config_files():
     
     if not env_file.exists() and env_example.exists():
         print_info("Creating .env file from template...")
-        with open(env_example, 'r') as src:
+        with open(env_example, 'r', encoding='utf-8') as src:
             content = src.read()
-        with open(env_file, 'w') as dst:
+        with open(env_file, 'w', encoding='utf-8') as dst:
             dst.write(content)
         print_success(".env file created")
     
@@ -270,7 +270,7 @@ def create_config_files():
         }
         
         config_file.parent.mkdir(parents=True, exist_ok=True)
-        with open(config_file, 'w') as f:
+        with open(config_file, 'w', encoding='utf-8') as f:
             json.dump(default_config, f, indent=2)
         print_success("config.json created")
     
