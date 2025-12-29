@@ -388,7 +388,7 @@ class SallieLauncher:
                         stdout=web_log,
                         stderr=subprocess.STDOUT,
                         creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
-                        shell=True  # Use shell=True on Windows for npm
+                        shell=self.is_windows  # Use shell=True on Windows for npm
                     )
                 else:
                     self.processes['web'] = subprocess.Popen(
