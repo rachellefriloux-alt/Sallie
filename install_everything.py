@@ -280,7 +280,7 @@ def step6_create_config():
         }
         
         peer_config.parent.mkdir(parents=True, exist_ok=True)
-        with open(peer_config, 'w') as f:
+        with open(peer_config, 'w', encoding='utf-8') as f:
             json.dump(default_config, f, indent=2)
         print_success("Peer config created ✓")
     else:
@@ -291,9 +291,9 @@ def step6_create_config():
     if not companion_config.exists():
         print_info("Creating Companion config.json...")
         companion_config.parent.mkdir(parents=True, exist_ok=True)
-        with open(peer_config, 'r') as src:
+        with open(peer_config, 'r', encoding='utf-8') as src:
             config = json.load(src)
-        with open(companion_config, 'w') as dst:
+        with open(companion_config, 'w', encoding='utf-8') as dst:
             json.dump(config, dst, indent=2)
         print_success("Companion config created ✓")
     else:
@@ -320,7 +320,7 @@ def step7_test_installation():
     main_file = SCRIPT_DIR / 'progeny_root' / 'Peer' / 'core' / 'main.py'
     if main_file.exists():
         try:
-            with open(main_file) as f:
+            with open(main_file, encoding='utf-8') as f:
                 compile(f.read(), 'main.py', 'exec')
             print_success("Backend syntax is valid ✓")
         except SyntaxError as e:
@@ -332,7 +332,7 @@ def step7_test_installation():
     launcher_file = SCRIPT_DIR / 'launcher.py'
     if launcher_file.exists():
         try:
-            with open(launcher_file) as f:
+            with open(launcher_file, encoding='utf-8') as f:
                 compile(f.read(), 'launcher.py', 'exec')
             print_success("Launcher syntax is valid ✓")
         except SyntaxError as e:
