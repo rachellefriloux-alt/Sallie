@@ -9,7 +9,7 @@ Implements:
 import logging
 import time
 import json
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, TYPE_CHECKING
 from pathlib import Path
 from datetime import datetime
 
@@ -28,9 +28,16 @@ try:
     import pystray
     from PIL import Image, ImageDraw
     PYSTRAY_AVAILABLE = True
-except ImportError:
+except (ImportError, ValueError, Exception) as e:
     PYSTRAY_AVAILABLE = False
-    logger.warning("pystray not found. System tray disabled.")
+    # Create dummy types for type hints
+    if TYPE_CHECKING:
+        from PIL import Image, ImageDraw
+    else:
+        Image = None
+        ImageDraw = None
+        pystray = None
+    logger.warning(f"pystray not available ({type(e).__name__}). System tray disabled.")
 
 
 class GhostSystem:
@@ -254,8 +261,11 @@ class GhostSystem:
             logger.error(f"[Ghost] Failed to create tray icon: {e}")
             return None
     
-    def _create_pulse_icon(self, pulse: Dict[str, Any]) -> Image.Image:
+    def _create_pulse_icon(self, pulse: Dict[str, Any]) -> Optional[Any]:
         """Create icon image based on pulse state."""
+        if not PYSTRAY_AVAILABLE:
+            return None
+        
         # Create a simple colored circle
         image = Image.new("RGB", (64, 64), color="black")
         draw = ImageDraw.Draw(image)
