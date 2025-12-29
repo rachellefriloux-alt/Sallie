@@ -4,15 +4,66 @@
 
 const { app, BrowserWindow, Tray, Menu, nativeImage, dialog } = require('electron');
 const path = require('path');
+const { spawn } = require('child_process');
 const http = require('http');
 
 let mainWindow;
 let tray;
+let backendProcess;
+
+const isDev = process.env.NODE_ENV === 'development' || process.argv.includes('--dev');
+
+function startBackend() {
+  if (isDev) {
+    console.log('In dev mode, skipping backend spawn (assume running manually)');
+    return;
+  }
+
+  // In production, the backend executable is in resources/sallie-backend/sallie-backend.exe
+  // Note: On macOS/Linux the extension might be different or absent.
+  const executableName = process.platform === 'win32' ? 'sallie-backend.exe' : 'sallie-backend';
+  const backendPath = path.join(process.resourcesPath, 'sallie-backend', executableName);
+  
+  console.log('Starting backend from:', backendPath);
+
+  try {
+    backendProcess = spawn(backendPath, [], {
+      cwd: path.join(process.resourcesPath, 'sallie-backend'),
+      env: { ...process.env, SALLIE_PORT: '8000' },
+      stdio: 'pipe' // Capture output
+    });
+
+    backendProcess.stdout.on('data', (data) => {
+      console.log(`Backend: ${data}`);
+    });
+
+    backendProcess.stderr.on('data', (data) => {
+      console.error(`Backend Error: ${data}`);
+    });
+
+    backendProcess.on('close', (code) => {
+      console.log(`Backend process exited with code ${code}`);
+      if (code !== 0 && !app.isQuitting) {
+        // Don't show error box on exit, only if it crashes early
+        console.error(`Backend exited with code ${code}`);
+      }
+    });
+    
+    backendProcess.on('error', (err) => {
+      console.error('Failed to start backend:', err);
+      dialog.showErrorBox('Startup Error', `Failed to start Sallie backend:\n${err.message}`);
+    });
+    
+  } catch (err) {
+    console.error('Exception starting backend:', err);
+  }
+}
 
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
+    backgroundColor: '#2e1065', // Deep Indigo to match Gemini/INFJ theme
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -27,68 +78,30 @@ function createWindow() {
     mainWindow.show();
   });
 
-  // Load the web UI (could be local React app or remote)
-  const isDev = process.env.NODE_ENV === 'development' || process.argv.includes('--dev');
-  
   if (isDev) {
     // Development: connect to local dev server
     mainWindow.loadURL('http://localhost:3000').catch((err) => {
       console.error('Failed to load dev server:', err);
-      dialog.showErrorBox(
-        'Connection Error',
-        'Could not connect to development server at http://localhost:3000\n\n' +
-        'Make sure the web dev server is running:\n' +
-        'cd web && npm run dev'
-      );
+      mainWindow.loadFile(path.join(__dirname, 'public', 'index.html'));
     });
     mainWindow.webContents.openDevTools();
   } else {
-    // Production: try web server first, fallback to local file
-    mainWindow.loadURL('http://localhost:3000').catch(() => {
-      // Fallback to local HTML file
-      mainWindow.loadFile(path.join(__dirname, 'public', 'index.html')).catch((err) => {
-        console.error('Failed to load UI:', err);
-        dialog.showErrorBox(
-          'Startup Error',
-          'Could not load Sallie interface.\n\n' +
-          'Please ensure:\n' +
-          '1. Backend is running (./start-sallie.sh)\n' +
-          '2. Web app is accessible at http://localhost:3000'
-        );
-      });
+    // Production: Load the static export
+    // We expect the 'out' folder from Next.js to be copied to 'app_ui' in the app bundle
+    const indexPath = path.join(__dirname, 'app_ui', 'index.html');
+    
+    mainWindow.loadFile(indexPath).catch((err) => {
+      console.error('Failed to load UI:', err);
+      // Fallback to the simple launcher if the full app isn't found
+      mainWindow.loadFile(path.join(__dirname, 'public', 'index.html'));
     });
   }
 
   // Handle navigation errors
-  let errorPageLoaded = false;
   mainWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription) => {
     console.error('Failed to load:', errorCode, errorDescription);
-    // Prevent infinite loop - don't retry if we're already showing error page
-    if (errorCode !== -3 && !errorPageLoaded) { // -3 is ABORTED, which is normal for redirects
-      mainWindow.loadFile(path.join(__dirname, 'public', 'index.html')).catch(() => {
-        // Show error page if fallback also fails
-        errorPageLoaded = true; // Prevent loop
-        const errorHtml = `
-          <!doctype html>
-          <html lang="en">
-          <head>
-            <meta charset="utf-8">
-            <title>Connection Error</title>
-            <style>
-              body { font-family: system-ui, sans-serif; padding: 40px; text-align: center; }
-              h1 { color: #e74c3c; }
-            </style>
-          </head>
-          <body>
-            <h1>Connection Error</h1>
-            <p>Cannot connect to Sallie backend.</p>
-            <p>Please start the backend server first.</p>
-          </body>
-          </html>
-        `;
-        const errorDataUrl = 'data:text/html;charset=utf-8,' + encodeURIComponent(errorHtml);
-        mainWindow.loadURL(errorDataUrl);
-      });
+    if (errorCode !== -3) {
+      mainWindow.loadFile(path.join(__dirname, 'public', 'index.html'));
     }
   });
 
@@ -106,40 +119,16 @@ function createWindow() {
 }
 
 function createTray() {
-  // Create system tray icon
   const iconPath = path.join(__dirname, 'assets', 'tray-icon.png');
   let icon;
   
   try {
     icon = nativeImage.createFromPath(iconPath);
     if (icon.isEmpty()) {
-      // Fallback to main icon if tray icon doesn't exist
       icon = nativeImage.createFromPath(path.join(__dirname, 'assets', 'icon.png'));
-    }
-    // If still empty, create a visible colored square using buffer
-    if (icon.isEmpty()) {
-      const size = 16;
-      const buffer = Buffer.alloc(size * size * 4);
-      for (let i = 0; i < buffer.length; i += 4) {
-        buffer[i] = 147;     // R (purple #9333ea)
-        buffer[i + 1] = 51;  // G
-        buffer[i + 2] = 234; // B
-        buffer[i + 3] = 255; // A (fully opaque)
-      }
-      icon = nativeImage.createFromBuffer(buffer, { width: size, height: size });
     }
   } catch (err) {
     console.error('Failed to load tray icon:', err);
-    // Create a simple 16x16 purple square as fallback
-    const size = 16;
-    const buffer = Buffer.alloc(size * size * 4);
-    for (let i = 0; i < buffer.length; i += 4) {
-      buffer[i] = 147;     // R (purple)
-      buffer[i + 1] = 51;  // G
-      buffer[i + 2] = 234; // B
-      buffer[i + 3] = 255; // A (fully opaque)
-    }
-    icon = nativeImage.createFromBuffer(buffer, { width: size, height: size });
   }
   
   tray = new Tray(icon);
@@ -154,36 +143,6 @@ function createTray() {
         } else {
           createWindow();
         }
-      },
-    },
-    {
-      label: 'Check Connection',
-      click: async () => {
-        const checkHealth = () => {
-          return new Promise((resolve) => {
-            http.get('http://localhost:8000/health', (res) => {
-              resolve(res.statusCode === 200);
-            }).on('error', () => {
-              resolve(false);
-            });
-          });
-        };
-        
-        const isHealthy = await checkHealth();
-        dialog.showMessageBox({
-          type: isHealthy ? 'info' : 'warning',
-          title: 'Connection Status',
-          message: isHealthy 
-            ? '✓ Connected to backend\nStatus: Healthy' 
-            : '✗ Cannot connect to backend\nPlease start the backend server',
-        });
-      },
-    },
-    { type: 'separator' },
-    {
-      label: 'Open Backend URL',
-      click: () => {
-        require('electron').shell.openExternal('http://localhost:8000/docs');
       },
     },
     { type: 'separator' },
@@ -223,6 +182,7 @@ function createTray() {
 }
 
 app.whenReady().then(() => {
+  startBackend();
   createWindow();
   createTray();
   
@@ -238,11 +198,14 @@ app.whenReady().then(() => {
 
 app.on('window-all-closed', () => {
   // Keep app running in system tray
-  // Don't quit on macOS or Windows
 });
 
 app.on('before-quit', () => {
   app.isQuitting = true;
+  if (backendProcess) {
+    console.log('Killing backend process...');
+    backendProcess.kill();
+  }
   if (mainWindow) {
     mainWindow.removeAllListeners('close');
     mainWindow.close();

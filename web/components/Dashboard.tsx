@@ -7,7 +7,7 @@ import { ConnectionStatus } from './ConnectionStatus';
 import { KeyboardShortcutsPanel } from './KeyboardShortcutsPanel';
 import { useWebSocket } from '@/hooks/useWebSocket';
 import { useLimbicStore } from '@/store/useLimbicStore';
-import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
+import { useKeyboardShortcuts, defaultShortcuts } from '@/hooks/useKeyboardShortcuts';
 
 export function Dashboard() {
   const [messages, setMessages] = useState<Array<{

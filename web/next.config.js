@@ -1,8 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  images: {
+    unoptimized: true,
+  },
   reactStrictMode: true,
   swcMinify: true,
-  // Proxy API requests to backend
+  // Proxy API requests to backend (Only works in dev mode, ignored in export)
   async rewrites() {
     return [
       {

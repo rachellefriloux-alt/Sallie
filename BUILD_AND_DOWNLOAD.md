@@ -53,6 +53,7 @@ chmod +x scripts/build_all.sh
 ### 🌐 Web App
 
 **Development Mode** (localhost):
+
 ```bash
 cd web
 npm install
@@ -61,6 +62,7 @@ npm run dev
 ```
 
 **Production Build** (deploy to server):
+
 ```bash
 cd web
 npm install
@@ -70,6 +72,7 @@ npm run start
 ```
 
 **Deploy to Vercel/Netlify**:
+
 ```bash
 cd web
 # Vercel
@@ -82,6 +85,7 @@ netlify deploy --prod --dir=.next
 ### 💻 Desktop App
 
 **Windows**:
+
 ```bash
 # Build installer
 cd desktop
@@ -93,6 +97,7 @@ npm run build:win
 ```
 
 **macOS**:
+
 ```bash
 # Build DMG
 cd desktop
@@ -104,6 +109,7 @@ npm run build:mac
 ```
 
 **Linux**:
+
 ```bash
 # Build AppImage
 cd desktop
@@ -118,6 +124,7 @@ npm run build:linux
 ### 📱 Android App
 
 **Development Mode** (USB debugging):
+
 ```bash
 cd mobile
 npm install
@@ -129,6 +136,7 @@ npm run android
 ```
 
 **Production APK** (sideload):
+
 ```bash
 cd mobile
 npm install
@@ -142,6 +150,7 @@ cd android
 ```
 
 **Production AAB** (Google Play):
+
 ```bash
 cd mobile
 npm install
@@ -159,13 +168,15 @@ cd android
 ## File Locations After Build
 
 ### Web App
-```
+
+```text
 web/.next/             # Next.js build output
 web/out/              # Static export (if using export)
 ```
 
 ### Desktop App
-```
+
+```text
 desktop/dist/
 ├── Sallie-Setup-5.4.2.exe          # Windows installer
 ├── Sallie-5.4.2.dmg                # macOS installer
@@ -176,7 +187,8 @@ desktop/dist/
 ```
 
 ### Android App
-```
+
+```text
 mobile/android/app/build/outputs/
 ├── apk/release/app-release.apk     # Android APK
 └── bundle/release/app-release.aab  # Google Play Bundle
@@ -187,24 +199,28 @@ mobile/android/app/build/outputs/
 ## System Requirements
 
 ### Backend Server
+
 - **CPU**: 4+ cores (8+ recommended)
 - **RAM**: 16 GB minimum (32 GB recommended)
 - **Storage**: 50 GB minimum (100 GB recommended)
 - **OS**: Windows 10+, Ubuntu 20.04+, macOS 12+
 
 ### Web App (Browser)
+
 - **Browser**: Chrome 100+, Firefox 100+, Safari 15+, Edge 100+
 - **RAM**: 4 GB minimum
 - **Internet**: Local network only (backend required)
 
-### Desktop App
+### Desktop App Requirements
+
 - **Windows**: Windows 10 version 1809+
 - **macOS**: macOS 12 Monterey or later
 - **Linux**: Ubuntu 20.04+, Fedora 35+, or equivalent
 - **RAM**: 4 GB minimum (8 GB recommended)
 - **Storage**: 2 GB for app + data
 
-### Android App
+### Android App Requirements
+
 - **Android**: 8.0 (API 26) or higher
 - **RAM**: 2 GB minimum (4 GB recommended)
 - **Storage**: 500 MB for app + data
@@ -235,12 +251,14 @@ curl http://localhost:8000/health
 ### 2. Configure Client Apps
 
 All apps will prompt for backend URL on first launch:
+
 - **Local network**: `http://192.168.1.X:8000` (replace X with server IP)
 - **Same machine**: `http://localhost:8000`
 
 ### 3. Complete Convergence
 
 On first launch, you'll complete the **Great Convergence**:
+
 - 14 deep questions about your psychology
 - 30-60 minutes to complete
 - Creates your Heritage DNA
@@ -252,26 +270,30 @@ On first launch, you'll complete the **Great Convergence**:
 
 Before sharing Sallie with others:
 
-### Backend
+### Backend Checklist
+
 - [ ] Configure `.env` with proper URLs
 - [ ] Start Docker services
 - [ ] Start backend API
 - [ ] Test health endpoint
 
-### Web App
+### Web App Checklist
+
 - [ ] Build production version
 - [ ] Test on target browsers
 - [ ] Verify backend connection
 - [ ] Check responsive layouts
 
-### Desktop App
+### Desktop App Checklist
+
 - [ ] Build for all target platforms
 - [ ] Code sign (Windows/macOS)
 - [ ] Test installation process
 - [ ] Verify auto-updater (if enabled)
 - [ ] Create README with backend URL instructions
 
-### Android App
+### Android App Checklist
+
 - [ ] Build release APK/AAB
 - [ ] Test on physical devices
 - [ ] Verify backend connection over WiFi
@@ -279,6 +301,7 @@ Before sharing Sallie with others:
 - [ ] Prepare screenshots for store listing
 
 ### Documentation
+
 - [ ] Include backend setup instructions
 - [ ] Provide network configuration guide
 - [ ] Document firewall rules (port 8000)
@@ -294,6 +317,7 @@ Before sharing Sallie with others:
 To access Sallie from other devices on your network:
 
 1. **Find server IP**:
+
 ```bash
 # Windows
 ipconfig
@@ -304,7 +328,8 @@ ifconfig
 ip addr show
 ```
 
-2. **Configure firewall**:
+1. **Configure firewall**:
+
 ```bash
 # Windows
 netsh advfirewall firewall add rule name="Sallie Backend" dir=in action=allow protocol=TCP localport=8000
@@ -317,7 +342,8 @@ sudo ufw allow 8000/tcp
 # Add rule for port 8000
 ```
 
-3. **Update client configuration**:
+1. **Update client configuration**:
+
 - Open app settings
 - Enter server IP: `http://192.168.1.X:8000`
 - Test connection
@@ -337,24 +363,28 @@ For remote access (not recommended for privacy):
 ## Troubleshooting
 
 ### "Cannot connect to backend"
+
 - Verify backend is running: `curl http://localhost:8000/health`
 - Check firewall allows port 8000
 - Ensure client has correct backend URL
 - Test with browser: open `http://SERVER_IP:8000/docs`
 
-### "Docker services not starting"
+### Docker Services Not Starting
+
 - Ensure Docker Desktop is running
 - Check port conflicts (11434, 6333)
 - View logs: `docker-compose logs`
 - Restart: `docker-compose down && docker-compose up -d`
 
 ### "Build fails"
+
 - Clear caches: `npm cache clean --force`
 - Delete node_modules: `rm -rf node_modules`
 - Reinstall: `npm install`
 - Check Node.js version: `node --version` (must be 18+)
 
 ### "Android app won't install"
+
 - Enable "Unknown sources" in Android settings
 - Uninstall old version first
 - Check available storage (need 500+ MB)

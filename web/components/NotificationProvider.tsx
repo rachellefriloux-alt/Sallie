@@ -49,10 +49,11 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
 
     setNotifications((prev) => [...prev, newNotification]);
 
-    if (newNotification.duration > 0) {
+    const duration = newNotification.duration ?? 0;
+    if (duration > 0) {
       setTimeout(() => {
         hideNotification(id);
-      }, newNotification.duration);
+      }, duration);
     }
   }, []);
 

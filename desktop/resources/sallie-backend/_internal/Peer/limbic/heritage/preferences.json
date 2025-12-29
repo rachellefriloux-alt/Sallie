@@ -1,0 +1,11 @@
+{
+  "version": "0.1-genesis",
+  "voice_config": {
+    "formality": 0.6,
+    "humor": "dry"
+  },
+  "no_go_list": [
+    "politics",
+    "celebrity_gossip"
+  ]
+}

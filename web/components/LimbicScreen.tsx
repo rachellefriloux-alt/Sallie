@@ -226,8 +226,9 @@ export function LimbicScreen() {
                         fill="#ef4444"
                         className="cursor-pointer hover:r-6"
                         onClick={() => setSelectedEvent(event)}
-                        title={event.event}
-                      />
+                      >
+                        <title>{event.event ?? ''}</title>
+                      </circle>
                     );
                   })}
                 </svg>

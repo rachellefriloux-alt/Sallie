@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -17,9 +17,33 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
+// Gemini/INFJ Theme
+const SallieTheme = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    primary: '#a78bfa', // Light Violet
+    background: '#2e1065', // Deep Indigo
+    card: '#1e1b4b', // Darker Indigo (Tabs/Header)
+    text: '#f8fafc', // Slate 50
+    border: '#4c1d95', // Lighter Indigo
+    notification: '#f472b6', // Pink
+  },
+};
+
 function ChatStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: SallieTheme.colors.card,
+        },
+        headerTintColor: SallieTheme.colors.text,
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    >
       <Stack.Screen 
         name="ChatMain" 
         component={ChatScreen}
@@ -37,18 +61,21 @@ export function AppNavigator() {
   // Mobile: Use Tab navigation for quick access
   if (isTablet) {
     return (
-      <NavigationContainer>
+      <NavigationContainer theme={SallieTheme}>
         <Drawer.Navigator
           screenOptions={{
             headerShown: true,
             drawerType: 'permanent', // Always visible on tablets
             drawerStyle: {
               width: 280,
+              backgroundColor: SallieTheme.colors.card,
             },
             headerStyle: {
-              backgroundColor: '#2a2a2a',
+              backgroundColor: SallieTheme.colors.card,
             },
-            headerTintColor: '#fff',
+            headerTintColor: SallieTheme.colors.text,
+            drawerActiveTintColor: SallieTheme.colors.primary,
+            drawerInactiveTintColor: '#94a3b8',
           }}
         >
           <Drawer.Screen 
@@ -78,15 +105,15 @@ export function AppNavigator() {
   
   // Mobile: Tab navigation
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={SallieTheme}>
       <Tab.Navigator
         screenOptions={{
           headerShown: false,
-          tabBarActiveTintColor: '#6366f1',
-          tabBarInactiveTintColor: '#6b7280',
+          tabBarActiveTintColor: SallieTheme.colors.primary,
+          tabBarInactiveTintColor: '#94a3b8',
           tabBarStyle: {
-            backgroundColor: '#2a2a2a',
-            borderTopColor: '#333',
+            backgroundColor: SallieTheme.colors.card,
+            borderTopColor: SallieTheme.colors.border,
           },
         }}
       >

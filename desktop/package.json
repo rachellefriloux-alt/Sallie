@@ -23,11 +23,19 @@
       "output": "dist",
       "buildResources": "assets"
     },
+    "extraResources": [
+      {
+        "from": "resources/sallie-backend",
+        "to": "sallie-backend",
+        "filter": ["**/*"]
+      }
+    ],
     "files": [
       "main.js",
       "preload.js",
       "package.json",
-      "assets/**/*"
+      "assets/**/*",
+      "app_ui/**/*"
     ],
     "win": {
       "target": [

@@ -47,24 +47,24 @@ export function SallieAvatar({
 
   // Color mapping based on limbic state
   const getTrustColor = (trust: number) => {
-    const colors = designTokens.colors.trust;
-    if (trust > 0.8) return colors[500];
-    if (trust > 0.6) return colors[600];
-    return colors[700];
+    const colors = designTokens.colors.limbic.trust;
+    if (trust > 0.8) return colors.high;
+    if (trust > 0.6) return colors.medium;
+    return colors.low;
   };
 
   const getWarmthColor = (warmth: number) => {
-    const colors = designTokens.colors.warmth;
-    if (warmth > 0.7) return colors[400];
-    if (warmth > 0.5) return colors[500];
-    return colors[600];
+    const colors = designTokens.colors.limbic.warmth;
+    if (warmth > 0.7) return colors.warm;
+    if (warmth > 0.5) return colors.neutral;
+    return colors.cold;
   };
 
   const getArousalColor = (arousal: number) => {
-    const colors = designTokens.colors.arousal;
-    if (arousal > 0.7) return colors[400];
-    if (arousal > 0.5) return colors[500];
-    return colors[600];
+    const colors = designTokens.colors.limbic.arousal;
+    if (arousal > 0.7) return colors.energized;
+    if (arousal > 0.5) return colors.balanced;
+    return colors.calm;
   };
 
   // Breathing animation

@@ -180,8 +180,10 @@ export function ConvergenceFlow() {
       return;
     }
 
+    const submittedAnswer = answer;
+
     // Add creator's answer to conversation
-    addMessage('creator', answer);
+    addMessage('creator', submittedAnswer);
     setAnswer('');
     setProcessingAnswer(true);
     setError(null);
