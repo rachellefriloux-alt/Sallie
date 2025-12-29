@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Sidebar } from './Sidebar';
 import { ChatArea } from './ChatArea';
+import { ConnectionStatus } from './ConnectionStatus';
+import { KeyboardShortcutsPanel } from './KeyboardShortcutsPanel';
 import { useWebSocket } from '@/hooks/useWebSocket';
 import { useLimbicStore } from '@/store/useLimbicStore';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
@@ -108,6 +110,11 @@ export function Dashboard() {
       <Sidebar limbicState={limbicState} isConnected={isConnected} />
       
       <main id="main-content" className="flex-1 flex flex-col" role="main">
+        {/* Header with Connection Status */}
+        <div className="flex items-center justify-end p-4 border-b border-gray-800">
+          <ConnectionStatus />
+        </div>
+        
         <ChatArea
           messages={messages}
           onSend={handleSend}
@@ -115,6 +122,9 @@ export function Dashboard() {
           isTyping={isTyping}
         />
       </main>
+      
+      {/* Keyboard Shortcuts Panel */}
+      <KeyboardShortcutsPanel />
     </div>
   );
 }

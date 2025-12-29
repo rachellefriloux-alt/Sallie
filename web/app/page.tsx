@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Dashboard } from '@/components/Dashboard';
+import { FirstRunWizard } from '@/components/FirstRunWizard';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
@@ -10,10 +11,14 @@ export default function Home() {
   const router = useRouter();
   const [checking, setChecking] = useState(true);
   const [redirecting, setRedirecting] = useState(false);
+  const [showFirstRun, setShowFirstRun] = useState(false);
 
   useEffect(() => {
     // Only check once on mount
     let mounted = true;
+    
+    // Check if first run flag exists in localStorage
+    const hasCompletedFirstRun = localStorage.getItem('sallie_first_run_completed');
     
     const checkConvergenceStatus = async () => {
       try {
@@ -38,16 +43,24 @@ export default function Home() {
             return;
           }
         }
+        
+        // Show first run wizard if not completed before
+        if (!hasCompletedFirstRun) {
+          setShowFirstRun(true);
+        }
+        
         // For any other case (503, error, completed), show dashboard
         setChecking(false);
       } catch (error) {
-        // On connection error, show dashboard with connection warning
-        // This allows the UI to load even if backend is temporarily down
+        // On connection error, show first run wizard to help user troubleshoot
         console.warn(
           'Backend connection check failed:',
           error instanceof Error ? error.message : String(error)
         );
         if (mounted) {
+          if (!hasCompletedFirstRun) {
+            setShowFirstRun(true);
+          }
           setChecking(false);
         }
       }
@@ -60,6 +73,11 @@ export default function Home() {
     };
   }, []);
 
+  const handleFirstRunComplete = () => {
+    localStorage.setItem('sallie_first_run_completed', 'true');
+    setShowFirstRun(false);
+  };
+
   if (checking || redirecting) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-900">
@@ -71,6 +89,10 @@ export default function Home() {
         </div>
       </div>
     );
+  }
+
+  if (showFirstRun) {
+    return <FirstRunWizard onComplete={handleFirstRunComplete} />;
   }
 
   return <Dashboard />;

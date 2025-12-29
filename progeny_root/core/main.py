@@ -384,11 +384,39 @@ async def status():
 @app.get("/health")
 async def health_check():
     """Comprehensive health check endpoint."""
+    import requests
+    
     health_status = {
         "status": "healthy",
         "timestamp": time.time(),
-        "systems": {}
+        "systems": {},
+        "services": {}
     }
+    
+    # Check external services
+    # Check Ollama
+    try:
+        ollama_url = app_config.get("ollama", {}).get("base_url", "http://localhost:11434")
+        response = requests.get(f"{ollama_url}/api/tags", timeout=2)
+        if response.status_code == 200:
+            health_status["services"]["ollama"] = "healthy"
+        else:
+            health_status["services"]["ollama"] = "degraded"
+    except Exception as e:
+        health_status["services"]["ollama"] = "unhealthy"
+        logger.debug(f"Ollama health check failed: {e}")
+    
+    # Check Qdrant
+    try:
+        qdrant_url = app_config.get("qdrant", {}).get("url", "http://localhost:6333")
+        response = requests.get(f"{qdrant_url}/collections", timeout=2)
+        if response.status_code == 200:
+            health_status["services"]["qdrant"] = "healthy"
+        else:
+            health_status["services"]["qdrant"] = "degraded"
+    except Exception as e:
+        health_status["services"]["qdrant"] = "unhealthy"
+        logger.debug(f"Qdrant health check failed: {e}")
     
     # Check each system's health
     for name, system in systems.items():
@@ -425,6 +453,12 @@ async def health_check():
     # Check for any errors
     if any(s.get("status") == "error" for s in health_status["systems"].values()):
         health_status["status"] = "unhealthy"
+    
+    # If external services are down, mark as degraded
+    if health_status["services"].get("ollama") == "unhealthy" or \
+       health_status["services"].get("qdrant") == "unhealthy":
+        if health_status["status"] == "healthy":
+            health_status["status"] = "degraded"
     
     return health_status
 
