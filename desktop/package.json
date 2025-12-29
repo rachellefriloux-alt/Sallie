@@ -119,11 +119,11 @@
     }
   },
   "dependencies": {
-    "electron": "^28.0.0",
     "electron-store": "^8.1.0",
     "axios": "^1.6.2"
   },
   "devDependencies": {
+    "electron": "^28.0.0",
     "electron-builder": "^24.9.1",
     "eslint": "^8.55.0"
   }
