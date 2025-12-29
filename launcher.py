@@ -310,7 +310,7 @@ class SallieLauncher:
             self.log("[2/3] Starting backend API...", 'INFO')
             self.update_status('Backend API', 'starting', 'orange')
             
-            os.chdir(SCRIPT_DIR / 'progeny_root')
+            os.chdir(SCRIPT_DIR / 'progeny_root' / 'Peer')
             
             # Start backend
             backend_cmd = [
