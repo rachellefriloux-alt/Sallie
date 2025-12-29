@@ -8,7 +8,21 @@ Sallie is not just another AI chatbot. She's a complete cognitive partner with e
 
 ## 🚀 Quick Start
 
-**Want to get started in 5 minutes?** Check out **[START_HERE.md](START_HERE.md)** for the fastest way to launch Sallie!
+### Choose Your Experience:
+
+#### 🖥️ **Desktop App** (Recommended - Native Experience)
+**Want the best experience?** Check out **[START_HERE_DESKTOP.md](START_HERE_DESKTOP.md)** for the desktop app!
+
+```bash
+# Start backend, then launch desktop app:
+./start-sallie.sh && cd desktop && npm start      # Linux/Mac
+start-sallie.bat & cd desktop & npm start         # Windows
+```
+
+Features: System tray, native notifications, keyboard shortcuts, offline mode!
+
+#### 🌐 **Web App** (Browser-Based)
+**Prefer using a browser?** Check out **[START_HERE.md](START_HERE.md)** for web access!
 
 ```bash
 # One command to start everything:
