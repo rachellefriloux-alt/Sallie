@@ -9,7 +9,7 @@ Implements:
 import logging
 import time
 import json
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, TYPE_CHECKING
 from pathlib import Path
 from datetime import datetime
 
@@ -28,13 +28,16 @@ try:
     import pystray
     from PIL import Image, ImageDraw
     PYSTRAY_AVAILABLE = True
-except ImportError:
+except (ImportError, ValueError, Exception) as e:
     PYSTRAY_AVAILABLE = False
-    # Create dummy classes for type hints
-    Image = None
-    ImageDraw = None
-    pystray = None
-    logger.warning("pystray not found. System tray disabled.")
+    # Create dummy types for type hints
+    if TYPE_CHECKING:
+        from PIL import Image, ImageDraw
+    else:
+        Image = None
+        ImageDraw = None
+        pystray = None
+    logger.warning(f"pystray not available ({type(e).__name__}). System tray disabled.")
 
 
 class GhostSystem:
