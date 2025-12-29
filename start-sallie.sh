@@ -127,7 +127,8 @@ fi
 
 # Start backend in background
 cd progeny_root
-nohup python -m uvicorn core.main:app --host 0.0.0.0 --port 8000 > "$SCRIPT_DIR/backend.log" 2>&1 &
+BACKEND_HOST="${SALLIE_BACKEND_HOST:-127.0.0.1}"
+nohup python -m uvicorn core.main:app --host "$BACKEND_HOST" --port 8000 > "$SCRIPT_DIR/backend.log" 2>&1 &
 BACKEND_PID=$!
 
 echo "  • Backend PID: $BACKEND_PID"
