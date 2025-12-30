@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "last_consolidation": 1767071365.591814,
-  "total_memories": 292,
+  "last_consolidation": 1767072797.6706278,
+  "total_memories": 328,
   "consolidation_history": [
     {
       "timestamp": 1767070013.6758027,
@@ -512,6 +512,114 @@
       "datetime": "2025-12-29T23:09:25.591814",
       "memories_processed": 20,
       "merged": 6,
+      "archived": 0,
+      "similarity_threshold": 0.95,
+      "age_days": 30
+    },
+    {
+      "timestamp": 1767072775.610852,
+      "datetime": "2025-12-29T23:32:55.610852",
+      "memories_processed": 16,
+      "merged": 2,
+      "archived": 0,
+      "similarity_threshold": 0.95,
+      "age_days": 30
+    },
+    {
+      "timestamp": 1767072778.5823827,
+      "datetime": "2025-12-29T23:32:58.582382",
+      "memories_processed": 17,
+      "merged": 3,
+      "archived": 0,
+      "similarity_threshold": 0.95,
+      "age_days": 30
+    },
+    {
+      "timestamp": 1767072780.3730438,
+      "datetime": "2025-12-29T23:33:00.373043",
+      "memories_processed": 17,
+      "merged": 3,
+      "archived": 0,
+      "similarity_threshold": 0.95,
+      "age_days": 30
+    },
+    {
+      "timestamp": 1767072782.13692,
+      "datetime": "2025-12-29T23:33:02.136920",
+      "memories_processed": 17,
+      "merged": 3,
+      "archived": 0,
+      "similarity_threshold": 0.95,
+      "age_days": 30
+    },
+    {
+      "timestamp": 1767072783.79249,
+      "datetime": "2025-12-29T23:33:03.792490",
+      "memories_processed": 17,
+      "merged": 3,
+      "archived": 0,
+      "similarity_threshold": 0.95,
+      "age_days": 30
+    },
+    {
+      "timestamp": 1767072785.5882747,
+      "datetime": "2025-12-29T23:33:05.588274",
+      "memories_processed": 17,
+      "merged": 3,
+      "archived": 0,
+      "similarity_threshold": 0.95,
+      "age_days": 30
+    },
+    {
+      "timestamp": 1767072787.3690882,
+      "datetime": "2025-12-29T23:33:07.369088",
+      "memories_processed": 17,
+      "merged": 3,
+      "archived": 0,
+      "similarity_threshold": 0.95,
+      "age_days": 30
+    },
+    {
+      "timestamp": 1767072789.1844294,
+      "datetime": "2025-12-29T23:33:09.184429",
+      "memories_processed": 17,
+      "merged": 3,
+      "archived": 0,
+      "similarity_threshold": 0.95,
+      "age_days": 30
+    },
+    {
+      "timestamp": 1767072791.4894154,
+      "datetime": "2025-12-29T23:33:11.489415",
+      "memories_processed": 17,
+      "merged": 3,
+      "archived": 0,
+      "similarity_threshold": 0.95,
+      "age_days": 30
+    },
+    {
+      "timestamp": 1767072793.2500465,
+      "datetime": "2025-12-29T23:33:13.250046",
+      "memories_processed": 17,
+      "merged": 3,
+      "archived": 0,
+      "similarity_threshold": 0.95,
+      "age_days": 30
+    },
+    {
+      "timestamp": 1767072795.1280808,
+      "datetime": "2025-12-29T23:33:15.128081",
+      "memories_processed": 17,
+      "merged": 3,
+      "archived": 0,
+      "similarity_threshold": 0.95,
+      "age_days": 30
+    },
+    {
+      "timestamp": 1767072797.6706278,
+      "datetime": "2025-12-29T23:33:17.670627",
+      "memories_processed": 17,
+      "merged": 3,
       "archived": 0,
       "similarity_threshold": 0.95,
       "age_days": 30
