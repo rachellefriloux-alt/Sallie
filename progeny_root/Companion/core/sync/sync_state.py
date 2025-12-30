@@ -6,8 +6,15 @@ import logging
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from datetime import datetime
+from pydantic import BaseModel
 
 logger = logging.getLogger("sync.state")
+
+
+class SyncState(BaseModel):
+    device_id: str
+    last_sync: float
+    sync_enabled: bool = True
 
 
 class SyncStateManager:
@@ -26,6 +33,23 @@ class SyncStateManager:
         self.state_file = state_file
         self.state_file.parent.mkdir(parents=True, exist_ok=True)
         self.state = self._load_state()
+
+    def save_state(self, state: SyncState):
+        """Persist a SyncState instance."""
+        payload = state.model_dump()
+        self.state_file.write_text(json.dumps(payload, indent=2))
+
+    def load_state(self) -> SyncState:
+        """Load SyncState from disk; create default if missing."""
+        if self.state_file.exists():
+            try:
+                data = json.loads(self.state_file.read_text())
+                return SyncState(**data)
+            except Exception:
+                pass
+        default = SyncState(device_id="unknown", last_sync=0.0, sync_enabled=True)
+        self.save_state(default)
+        return default
     
     def _load_state(self) -> Dict[str, Any]:
         """Load sync state from file."""

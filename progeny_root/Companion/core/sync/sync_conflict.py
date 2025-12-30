@@ -116,3 +116,12 @@ class SyncConflictResolver:
         logger.info("[SyncConflict] Created manual merge structure")
         return merged
 
+
+# Convenience function expected by tests
+_resolver = SyncConflictResolver()
+
+
+def resolve_conflict(local_data: Dict[str, Any], remote_data: Dict[str, Any], strategy: str = "last_write_wins") -> Dict[str, Any]:
+    chosen = ConflictResolution(strategy) if isinstance(strategy, str) else strategy
+    return _resolver.resolve_conflict(local_data, remote_data, chosen)
+

@@ -18,12 +18,15 @@ from datetime import datetime
 logger = logging.getLogger("degradation")
 
 
-class SystemState(str, Enum):
-    """System health states from Section 18.1."""
+class SystemHealthState(str, Enum):
+    """System health states (single-soul)."""
     FULL = "FULL"
     AMNESIA = "AMNESIA"
     OFFLINE = "OFFLINE"
     DEAD = "DEAD"
+
+# Backward-compatible alias
+SystemState = SystemHealthState
 
 
 class DegradationSystem:
@@ -38,7 +41,7 @@ class DegradationSystem:
         """Initialize degradation system with service URLs."""
         self.ollama_url = ollama_url
         self.qdrant_url = qdrant_url
-        self.current_state = SystemState.FULL
+        self.current_state = SystemHealthState.FULL
         self.state_history: List[Dict[str, Any]] = []
         self.memory_write_queue: List[Dict[str, Any]] = []
         self.interaction_queue: List[Dict[str, Any]] = []
@@ -52,6 +55,15 @@ class DegradationSystem:
         self.failure_threshold = 3  # 3 consecutive failures to change state
         
         logger.info("[Degradation] Degradation system initialized")
+
+    @property
+    def _current_state(self) -> SystemHealthState:
+        """Compatibility shim for tests expecting `_current_state`."""
+        return self.current_state
+
+    @_current_state.setter
+    def _current_state(self, value: SystemHealthState):
+        self.current_state = value
     
     def check_health(self) -> Dict[str, Any]:
         """
@@ -64,11 +76,12 @@ class DegradationSystem:
         
         # Throttle health checks
         if current_time - self.last_health_check < self.health_check_interval:
-            return {
+            self.last_status = {
                 "state": self.current_state.value,
                 "status": self._get_status_dict(),
                 "last_check": self.last_health_check
             }
+            return self.current_state
         
         self.last_health_check = current_time
         
@@ -85,13 +98,13 @@ class DegradationSystem:
         previous_state = self.current_state
         
         if not disk_healthy:
-            self.current_state = SystemState.DEAD
+            self.current_state = SystemHealthState.DEAD
         elif not ollama_healthy:
-            self.current_state = SystemState.OFFLINE
+            self.current_state = SystemHealthState.OFFLINE
         elif not qdrant_healthy:
-            self.current_state = SystemState.AMNESIA
+            self.current_state = SystemHealthState.AMNESIA
         else:
-            self.current_state = SystemState.FULL
+            self.current_state = SystemHealthState.FULL
         
         # Log state transition
         if previous_state != self.current_state:
@@ -101,7 +114,7 @@ class DegradationSystem:
             if self._is_recovery(previous_state, self.current_state):
                 self._handle_recovery(previous_state, self.current_state)
         
-        return {
+        self.last_status = {
             "state": self.current_state.value,
             "status": {
                 "ollama": ollama_healthy,
@@ -110,6 +123,8 @@ class DegradationSystem:
             },
             "last_check": current_time
         }
+
+        return self.current_state
     
     def _check_ollama(self) -> bool:
         """Check if Ollama is accessible."""
@@ -153,9 +168,9 @@ class DegradationSystem:
         except Exception:
             return False
     
-    def _is_recovery(self, previous: SystemState, current: SystemState) -> bool:
+    def _is_recovery(self, previous: SystemHealthState, current: SystemHealthState) -> bool:
         """Check if this is a recovery transition."""
-        recovery_order = [SystemState.DEAD, SystemState.OFFLINE, SystemState.AMNESIA, SystemState.FULL]
+        recovery_order = [SystemHealthState.DEAD, SystemHealthState.OFFLINE, SystemHealthState.AMNESIA, SystemHealthState.FULL]
         try:
             prev_idx = recovery_order.index(previous)
             curr_idx = recovery_order.index(current)
@@ -163,16 +178,16 @@ class DegradationSystem:
         except ValueError:
             return False
     
-    def _handle_recovery(self, previous: SystemState, current: SystemState):
+    def _handle_recovery(self, previous: SystemHealthState, current: SystemHealthState):
         """Handle recovery from degraded state."""
         logger.info(f"[Degradation] Recovering from {previous.value} to {current.value}")
         
-        if previous == SystemState.AMNESIA and current == SystemState.FULL:
+        if previous == SystemHealthState.AMNESIA and current == SystemHealthState.FULL:
             # Amnesia Recovery: Process queued memory writes
             self._process_memory_queue()
             logger.info("[Degradation] Amnesia recovery: Processed queued memory writes")
         
-        elif previous == SystemState.OFFLINE and current in [SystemState.AMNESIA, SystemState.FULL]:
+        elif previous == SystemHealthState.OFFLINE and current in [SystemHealthState.AMNESIA, SystemHealthState.FULL]:
             # Offline Recovery: Process queued interactions
             self._process_interaction_queue()
             logger.info("[Degradation] Offline recovery: Processed queued interactions")
@@ -197,7 +212,7 @@ class DegradationSystem:
         # For now, just log and clear
         self.interaction_queue.clear()
     
-    def _log_state_transition(self, previous: SystemState, current: SystemState):
+    def _log_state_transition(self, previous: SystemHealthState, current: SystemHealthState):
         """Log state transition."""
         transition = {
             "timestamp": time.time(),
@@ -214,7 +229,7 @@ class DegradationSystem:
         
         logger.warning(f"[Degradation] State transition: {previous.value} → {current.value}")
     
-    def _get_transition_reason(self, previous: SystemState, current: SystemState) -> str:
+    def _get_transition_reason(self, previous: SystemHealthState, current: SystemHealthState) -> str:
         """Get reason for state transition."""
         if current == SystemState.AMNESIA:
             return "Qdrant connection failed or timed out"
@@ -226,9 +241,40 @@ class DegradationSystem:
             return "All services recovered"
         return "Unknown"
     
-    def get_state(self) -> SystemState:
+    def get_state(self) -> SystemHealthState:
         """Get current system state."""
         return self.current_state
+
+    def get_behavior_modifications(self) -> Dict[str, Any]:
+        """Compatibility method expected by tests (simple capability map)."""
+        if self.current_state == SystemHealthState.FULL:
+            return {
+                "capabilities_retained": ["llm_processing", "memory_retrieval", "heritage_access"],
+                "capabilities_lost": [],
+                "behavior_modifications": [],
+                "response_prefix": None,
+            }
+        if self.current_state == SystemHealthState.AMNESIA:
+            return {
+                "capabilities_retained": ["llm_processing", "heritage_access"],
+                "capabilities_lost": ["memory_retrieval"],
+                "behavior_modifications": ["short_context"],
+                "response_prefix": "[AMNESIA]",
+            }
+        if self.current_state == SystemHealthState.OFFLINE:
+            return {
+                "capabilities_retained": ["memory_retrieval", "heritage_access"],
+                "capabilities_lost": ["llm_processing"],
+                "behavior_modifications": ["brief", "fallback"],
+                "response_prefix": "[OFFLINE]",
+            }
+        # DEAD or unknown
+        return {
+            "capabilities_retained": [],
+            "capabilities_lost": ["llm_processing", "memory_retrieval", "heritage_access"],
+            "behavior_modifications": ["shutdown"],
+            "response_prefix": "[DEAD]",
+        }
     
     def get_state_behavior(self) -> Dict[str, Any]:
         """

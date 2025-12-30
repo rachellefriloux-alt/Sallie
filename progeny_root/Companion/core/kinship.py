@@ -1,8 +1,12 @@
 """Multi-Context Kinship (Section 13).
 
+Single-soul mode: one limbic state shared across all kin, while allowing
+per-user behavior profiles (tone, boundaries, preferences) without forking
+the soul file. This keeps Sallie consistent yet adaptive.
+
 Enhanced with:
-- Multi-user context isolation
-- Separate limbic states per user
+- Multi-user context isolation (behavioral only; single soul)
+- Per-user context profiles (tone/permissions/preferences)
 - Authentication API
 - Context switching
 """
@@ -21,11 +25,9 @@ class KinshipSystem:
     """
     Kinship System - Section 13.
     
-    Manages multi-user contexts with isolation:
-    - Separate limbic states per user
-    - Separate memory partitions
-    - Shared heritage core (optional)
-    - Context switching
+    Manages multi-user contexts with isolation while maintaining a single
+    shared limbic state (soul). Behavior can vary per user through context
+    profiles, but the underlying emotional state is unified.
     """
     
     def __init__(self):
@@ -45,6 +47,11 @@ class KinshipSystem:
         # Context isolation (Section 13.3)
         self.context_states: Dict[str, Any] = {}
         self.memory_partitions: Dict[str, str] = {}
+
+        # Per-user behavioral profiles (tone, posture hints, guardrails)
+        self.context_profiles: Dict[str, Dict[str, Any]] = {
+            "creator": {"tone": "direct", "warmth_bias": 0.0, "posture": None}
+        }
         
         # Session management
         self.sessions: Dict[str, Dict[str, Any]] = {}
@@ -115,12 +122,12 @@ class KinshipSystem:
         self.active_context = user_id
         self.active_user = user_id
         
-        # Load user-specific limbic state if available
+        # Single-soul policy: always use the shared limbic state
         if limbic_system:
-            user_soul_file = Path(f"progeny_root/limbic/soul_{user_id}.json")
-            if user_soul_file.exists():
-                # In production, would load separate limbic state
-                logger.info(f"[Kinship] Loaded limbic state for {user_id}")
+            logger.info("[Kinship] Single-soul mode active; shared limbic state in use")
+            profile = self.get_context_profile(user_id)
+            if hasattr(limbic_system, "cache"):
+                limbic_system.cache.set("active_context_profile", profile)
         
         # Switch memory partition
         if memory_system and user_id in self.memory_partitions:
@@ -130,6 +137,14 @@ class KinshipSystem:
         
         logger.info(f"[Kinship] Context switched: {previous_context} -> {user_id}")
         return True
+
+    def set_context_profile(self, user_id: str, profile: Dict[str, Any]) -> None:
+        """Define or update a user's behavioral profile without forking the soul."""
+        self.context_profiles[user_id] = profile
+
+    def get_context_profile(self, user_id: str) -> Dict[str, Any]:
+        """Fetch a user's behavioral profile (tone, posture hints, guardrails)."""
+        return self.context_profiles.get(user_id, {"tone": "default", "posture": None})
     
     def enforce_boundaries(self, user_id: str, resource: str) -> bool:
         """

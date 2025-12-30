@@ -8,6 +8,7 @@ import json
 from typing import Dict, Any, Optional, List
 from pathlib import Path
 from enum import Enum
+from pydantic import BaseModel
 
 logger = logging.getLogger("api.push")
 
@@ -76,6 +77,28 @@ class PushNotificationService:
         self._save_tokens()
         logger.info(f"[PushNotifications] Registered {platform.value} token for device: {device_id}")
         return True
+
+
+# Pydantic model and convenience functions expected by tests
+class PushTokenUpdate(BaseModel):
+    device_id: str
+    token: str
+    platform: str
+
+
+_service = PushNotificationService()
+
+
+def update_push_token(payload: PushTokenUpdate) -> Dict[str, Any]:
+    """Register or update a device token via the service."""
+    platform = PushPlatform(payload.platform)
+    _service.register_device_token(payload.device_id, platform, payload.token)
+    return {"status": "success", "device_id": payload.device_id}
+
+
+def send_push_notification(device_id: str, title: str, message: str) -> Dict[str, Any]:
+    """Send a simple push notification using the service."""
+    return _service.send_notification(device_id=device_id, title=title, body=message)
     
     def unregister_device_token(self, device_id: str) -> bool:
         """Unregister a device token."""

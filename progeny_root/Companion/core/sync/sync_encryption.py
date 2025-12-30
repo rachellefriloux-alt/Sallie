@@ -127,3 +127,29 @@ class SyncEncryption:
         master_key = base64.b64decode(key_b64)
         return cls(master_key=master_key)
 
+
+# Convenience functional API expected by tests
+def generate_key() -> bytes:
+    """Generate a 32-byte key for encryption."""
+    return secrets.token_bytes(32)
+
+
+def derive_key(password: str, salt: bytes) -> bytes:
+    """Derive a key from password and salt using SHA-256."""
+    return hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, 100_000, dklen=32)
+
+
+def encrypt_data(data: bytes, key: bytes) -> bytes:
+    """Encrypt data with AES-GCM; returns nonce+ciphertext bytes."""
+    nonce = secrets.token_bytes(12)
+    aesgcm = AESGCM(key)
+    ciphertext = aesgcm.encrypt(nonce, data, None)
+    return nonce + ciphertext
+
+
+def decrypt_data(encrypted: bytes, key: bytes) -> bytes:
+    """Decrypt data produced by encrypt_data."""
+    nonce, ciphertext = encrypted[:12], encrypted[12:]
+    aesgcm = AESGCM(key)
+    return aesgcm.decrypt(nonce, ciphertext, None)
+

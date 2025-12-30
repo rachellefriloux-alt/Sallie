@@ -7,6 +7,7 @@ import platform
 from typing import Dict, Any, List, Optional
 from pathlib import Path
 from datetime import datetime
+from pydantic import BaseModel
 
 logger = logging.getLogger("api.device")
 
@@ -83,6 +84,34 @@ class DeviceManager:
         
         logger.info(f"[DeviceManager] Registered device: {device_id} ({platform})")
         return device_info
+
+
+# Pydantic model and helper functions expected by tests
+class DeviceRegistration(BaseModel):
+    device_id: str
+    platform: str
+    name: Optional[str] = None
+    version: Optional[str] = None
+
+
+_device_manager = DeviceManager()
+
+
+def register_device(payload: DeviceRegistration) -> Dict[str, Any]:
+    """Register a device via the global manager."""
+    info = _device_manager.register_device(
+        device_id=payload.device_id,
+        platform=payload.platform,
+        version=payload.version or "unknown",
+        capabilities=[],
+        metadata={"name": payload.name} if payload.name else {},
+    )
+    return {"status": "success", "device_id": info["device_id"]}
+
+
+def get_device_status(device_id: str) -> Optional[Dict[str, Any]]:
+    """Fetch device status from the global manager."""
+    return _device_manager.get_device(device_id)
     
     def update_device_status(self, device_id: str, status: str = "online"):
         """Update device status."""
