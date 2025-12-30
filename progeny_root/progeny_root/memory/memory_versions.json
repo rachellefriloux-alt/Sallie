@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "last_consolidation": 1767070027.2658222,
+  "total_memories": 36,
+  "consolidation_history": [
+    {
+      "timestamp": 1767070013.6758027,
+      "datetime": "2025-12-29T22:46:53.675802",
+      "memories_processed": 2,
+      "merged": 0,
+      "archived": 0,
+      "similarity_threshold": 0.95,
+      "age_days": 30
+    },
+    {
+      "timestamp": 1767070027.2658222,
+      "datetime": "2025-12-29T22:47:07.265822",
+      "memories_processed": 2,
+      "merged": 0,
+      "archived": 0,
+      "similarity_threshold": 0.95,
+      "age_days": 30
+    }
+  ]
+}

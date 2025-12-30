@@ -27,12 +27,28 @@
     }
   },
   "surface_expression": {
-    "appearance": {},
-    "interests": [],
-    "style": {},
+    "appearance": {
+      "avatar": {
+        "type": "gradient",
+        "primary_color": "#8b5cf6",
+        "secondary_color": "#a78bfa",
+        "accent_color": "#22d3ee",
+        "style": "modern",
+        "animation": "breathe",
+        "version": 2
+      },
+      "convergence_established": true
+    },
+    "interests": [
+      "This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11."
+    ],
+    "style": {
+      "communication_style": "warm",
+      "established_via": "convergence"
+    },
     "preferences": {}
   },
   "created_ts": 1766991655.701699,
-  "last_modified_ts": 1766991655.7016995,
-  "evolution_count": 0
+  "last_modified_ts": 1767070019.171634,
+  "evolution_count": 5
 }

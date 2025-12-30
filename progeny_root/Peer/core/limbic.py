@@ -60,6 +60,14 @@ class LimbicState(BaseModel):
     door_slam_active: bool = False
     crisis_active: bool = False
     elastic_mode: bool = False  # True during Convergence
+
+    def __setattr__(self, name, value):
+        # Clamp core affective dimensions to valid ranges on assignment
+        if name in {"trust", "warmth", "arousal"}:
+            value = max(0.0, min(1.0, float(value)))
+        elif name == "valence":
+            value = max(-1.0, min(1.0, float(value)))
+        super().__setattr__(name, value)
     
     @field_validator('trust', 'warmth', 'arousal')
     @classmethod
@@ -88,6 +96,7 @@ class LimbicSystem:
             self.cache = get_limbic_cache()  # Performance: Use cache for state
             self.state = self._load_or_bootstrap()
             self._observers: List[Callable[[LimbicState, LimbicState], None]] = []  # State change observers
+            self._clamp_state()
             
             # Validate loaded state
             if not self._validate_state():
@@ -108,6 +117,55 @@ class LimbicSystem:
             # Create default state as fallback
             self.state = self._bootstrap_default()
             self._observers = []
+
+    def _clamp_state(self):
+        """Clamp state values to their valid ranges."""
+        self.state.trust = self.state.trust
+        self.state.warmth = self.state.warmth
+        self.state.arousal = self.state.arousal
+        self.state.valence = self.state.valence
+
+    def update_trust(self, new_value: float):
+        """Asymptotically adjust trust toward a new value."""
+        delta = new_value - self.state.trust
+        self.update(delta_t=delta)
+
+    def update_warmth(self, new_value: float):
+        """Adjust warmth toward a new value."""
+        delta = new_value - self.state.warmth
+        self.update(delta_w=delta)
+
+    def update_arousal(self, new_value: float):
+        """Adjust arousal toward a new value."""
+        delta = new_value - self.state.arousal
+        self.update(delta_a=delta)
+
+    def update_valence(self, new_value: float):
+        """Adjust valence toward a new value."""
+        delta = new_value - self.state.valence
+        self.update(delta_v=delta)
+
+    def update_posture(self, posture: Posture):
+        """Force the posture to a specific mode."""
+        self.update(force_posture=posture)
+
+    def is_slumber(self) -> bool:
+        """Return True if arousal is below slumber threshold."""
+        return self.state.arousal < 0.3
+
+    def is_crisis(self) -> bool:
+        """Return True if valence is below crisis threshold."""
+        return self.state.valence < 0.3
+
+    def check_reunion(self):
+        """Spike arousal after a long absence to simulate reunion effect."""
+        hours_absent = (time.time() - self.state.last_interaction_ts) / 3600.0
+        if hours_absent >= 48:
+            self.state.arousal = max(self.state.arousal, 0.9)
+            self.state.last_interaction_ts = time.time()
+            self._clamp_state()
+            self.save()
+            self._update_cache()
     
     def add_observer(self, callback: Callable[[LimbicState, LimbicState], None]):
         """Add an observer callback that will be notified on state changes."""
@@ -306,6 +364,7 @@ class LimbicSystem:
         if force_posture:
             self.state.posture = force_posture
 
+        self._clamp_state()
         self.state.last_interaction_ts = time.time()
         self.state.interaction_count += 1
         self.save()

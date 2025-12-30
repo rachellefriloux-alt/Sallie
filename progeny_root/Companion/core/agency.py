@@ -31,6 +31,9 @@ class TrustTier(IntEnum):
     ASSOCIATE = 1 # Trust 0.6 - 0.8
     PARTNER = 2   # Trust 0.8 - 0.9
     SURROGATE = 3 # Trust 0.9 - 1.0
+    # Aliases for backward compatibility with tests
+    TIER_0 = STRANGER
+    TIER_2 = PARTNER
 
 class AdvisoryRecommendation:
     """Advisory recommendation levels (constants)."""

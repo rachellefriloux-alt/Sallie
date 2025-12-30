@@ -188,6 +188,29 @@ class MemorySystem:
             logger.error(f"[Memory] Error checking/creating collection: {e}", exc_info=True)
             raise
 
+    def store(
+        self,
+        text: str,
+        metadata: Optional[Dict[str, Any]] = None,
+        salience: float = 0.5,
+        timestamp: Optional[float] = None,
+        actor_id: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """Compatibility wrapper that stores a memory and returns a simple status payload."""
+        enriched_metadata = metadata.copy() if metadata else {}
+
+        # Preserve caller-provided salience/timestamp for ranking and freshness calculations
+        enriched_metadata.setdefault("salience", salience)
+        if timestamp is not None:
+            enriched_metadata["timestamp"] = timestamp
+
+        memory_id = self.add(text=text, metadata=enriched_metadata, actor_id=actor_id)
+
+        if memory_id:
+            return {"id": memory_id, "status": "success"}
+
+        return {"status": "failed"}
+
     def add(self, text: str, metadata: Optional[Dict[str, Any]] = None, version: Optional[int] = None, actor_id: Optional[str] = None):
         """
         Embeds and stores a memory record with enhanced metadata and versioning.

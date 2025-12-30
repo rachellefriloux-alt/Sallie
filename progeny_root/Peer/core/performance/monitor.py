@@ -87,26 +87,19 @@ class PerformanceMonitor:
         self.counters[name] += value
     
     def get_stats(self, metric_name: str) -> Dict[str, float]:
-        """
-        Get statistics for a metric.
-        
-        Args:
-            metric_name: Name of metric
-            
-        Returns:
-            Dict with min, max, mean, median, p95, p99
-        """
+        """Get statistics for a metric, returning defaults when absent."""
         if metric_name not in self.metrics or not self.metrics[metric_name]:
-            return {}
-        
+            return {"count": 0, "min": 0.0, "max": 0.0, "mean": 0.0, "median": 0.0, "p95": 0.0, "p99": 0.0, "latest": 0.0}
+
         values = sorted(self.metrics[metric_name])
         n = len(values)
-        
+        mean = round(sum(values) / n, 3)
+
         return {
             "count": n,
             "min": values[0],
             "max": values[-1],
-            "mean": sum(values) / n,
+            "mean": mean,
             "median": values[n // 2],
             "p95": values[int(n * 0.95)] if n > 0 else 0,
             "p99": values[int(n * 0.99)] if n > 0 else 0,

@@ -78,6 +78,91 @@ class PushNotificationService:
         logger.info(f"[PushNotifications] Registered {platform.value} token for device: {device_id}")
         return True
 
+    def unregister_device_token(self, device_id: str) -> bool:
+        """Unregister a device token."""
+        if device_id in self.device_tokens:
+            del self.device_tokens[device_id]
+            self._save_tokens()
+            logger.info(f"[PushNotifications] Unregistered token for device: {device_id}")
+            return True
+        return False
+
+    def send_notification(
+        self,
+        device_id: str,
+        title: str,
+        body: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Send push notification to a device (stubbed for tests/logging)."""
+        if device_id not in self.device_tokens:
+            return {"status": "error", "error": "Device not registered"}
+
+        device_info = self.device_tokens[device_id]
+        if not device_info.get("enabled", True):
+            return {"status": "error", "error": "Notifications disabled for device"}
+
+        platform = device_info["platform"]
+
+        logger.info(f"[PushNotifications] Sending {platform} notification to {device_id}: {title}")
+        self._store_notification(device_id, title, body, data)
+
+        return {
+            "status": "success",
+            "device_id": device_id,
+            "platform": platform,
+            "sent_at": time.time()
+        }
+
+    def send_proactive_engagement(
+        self,
+        device_id: str,
+        message: str,
+        seed_type: str = "insight"
+    ) -> Dict[str, Any]:
+        """Send proactive engagement (Shoulder Tap) notification."""
+        return self.send_notification(
+            device_id=device_id,
+            title="Sallie",
+            body=message,
+            data={"type": "shoulder_tap", "seed_type": seed_type}
+        )
+
+    def _store_notification(self, device_id: str, title: str, body: str, data: Optional[Dict[str, Any]]):
+        """Store notification for future delivery (when push service is configured)."""
+        notifications_file = Path("progeny_root/core/api/pending_notifications.json")
+
+        if notifications_file.exists():
+            try:
+                with open(notifications_file, "r", encoding="utf-8") as f:
+                    notifications = json.load(f)
+            except Exception:
+                notifications = []
+        else:
+            notifications = []
+
+        notifications.append({
+            "device_id": device_id,
+            "title": title,
+            "body": body,
+            "data": data or {},
+            "created_at": time.time(),
+            "delivered": False
+        })
+
+        try:
+            with open(notifications_file, "w", encoding="utf-8") as f:
+                json.dump(notifications, f, indent=2)
+        except Exception as e:
+            logger.error(f"[PushNotifications] Failed to store notification: {e}")
+
+    def list_registered_devices(self) -> List[Dict[str, Any]]:
+        """List all registered devices with push tokens."""
+        return [
+            {"device_id": dev_id, **info}
+            for dev_id, info in self.device_tokens.items()
+        ]
+
 
 # Pydantic model and convenience functions expected by tests
 class PushTokenUpdate(BaseModel):
@@ -99,117 +184,6 @@ def update_push_token(payload: PushTokenUpdate) -> Dict[str, Any]:
 def send_push_notification(device_id: str, title: str, message: str) -> Dict[str, Any]:
     """Send a simple push notification using the service."""
     return _service.send_notification(device_id=device_id, title=title, body=message)
-    
-    def unregister_device_token(self, device_id: str) -> bool:
-        """Unregister a device token."""
-        if device_id in self.device_tokens:
-            del self.device_tokens[device_id]
-            self._save_tokens()
-            logger.info(f"[PushNotifications] Unregistered token for device: {device_id}")
-            return True
-        return False
-    
-    def send_notification(
-        self,
-        device_id: str,
-        title: str,
-        body: str,
-        data: Optional[Dict[str, Any]] = None
-    ) -> Dict[str, Any]:
-        """
-        Send push notification to a device.
-        
-        Args:
-            device_id: Target device ID
-            title: Notification title
-            body: Notification body
-            data: Optional data payload
-            
-        Returns:
-            Result dict with status
-        """
-        if device_id not in self.device_tokens:
-            return {"status": "error", "error": "Device not registered"}
-        
-        device_info = self.device_tokens[device_id]
-        if not device_info.get("enabled", True):
-            return {"status": "error", "error": "Notifications disabled for device"}
-        
-        platform = device_info["platform"]
-        token = device_info["token"]
-        
-        # In production, this would send via FCM/APNs
-        # For now, log and return success
-        logger.info(f"[PushNotifications] Sending {platform} notification to {device_id}: {title}")
-        
-        # Store notification for future delivery
-        self._store_notification(device_id, title, body, data)
-        
-        return {
-            "status": "success",
-            "device_id": device_id,
-            "platform": platform,
-            "sent_at": time.time()
-        }
-    
-    def send_proactive_engagement(
-        self,
-        device_id: str,
-        message: str,
-        seed_type: str = "insight"
-    ) -> Dict[str, Any]:
-        """
-        Send proactive engagement (Shoulder Tap) notification.
-        
-        Args:
-            device_id: Target device ID
-            message: Shoulder Tap message
-            seed_type: Type of seed (insight, workload_offer, pattern_observation, etc.)
-            
-        Returns:
-            Result dict
-        """
-        return self.send_notification(
-            device_id=device_id,
-            title="Sallie",
-            body=message,
-            data={"type": "shoulder_tap", "seed_type": seed_type}
-        )
-    
-    def _store_notification(self, device_id: str, title: str, body: str, data: Optional[Dict[str, Any]]):
-        """Store notification for future delivery (when push service is configured)."""
-        notifications_file = Path("progeny_root/core/api/pending_notifications.json")
-        
-        if notifications_file.exists():
-            try:
-                with open(notifications_file, "r", encoding="utf-8") as f:
-                    notifications = json.load(f)
-            except Exception:
-                notifications = []
-        else:
-            notifications = []
-        
-        notifications.append({
-            "device_id": device_id,
-            "title": title,
-            "body": body,
-            "data": data or {},
-            "created_at": time.time(),
-            "delivered": False
-        })
-        
-        try:
-            with open(notifications_file, "w", encoding="utf-8") as f:
-                json.dump(notifications, f, indent=2)
-        except Exception as e:
-            logger.error(f"[PushNotifications] Failed to store notification: {e}")
-    
-    def list_registered_devices(self) -> List[Dict[str, Any]]:
-        """List all registered devices with push tokens."""
-        return [
-            {"device_id": dev_id, **info}
-            for dev_id, info in self.device_tokens.items()
-        ]
 
 
 # Import time for timestamps

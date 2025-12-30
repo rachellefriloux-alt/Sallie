@@ -1,0 +1,15 @@
+{
+  "trust": 0.69151,
+  "warmth": 0.9747546306797383,
+  "arousal": 0.8200000000000001,
+  "valence": 0.21126805504000012,
+  "posture": "EXPERT",
+  "last_interaction_ts": 1767070030.121,
+  "interaction_count": 91,
+  "flags": [
+    "imprinted"
+  ],
+  "door_slam_active": false,
+  "crisis_active": false,
+  "elastic_mode": true
+}

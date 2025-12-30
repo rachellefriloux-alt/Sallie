@@ -85,6 +85,28 @@ class DeviceManager:
         logger.info(f"[DeviceManager] Registered device: {device_id} ({platform})")
         return device_info
 
+    def update_device_status(self, device_id: str, status: str = "online"):
+        """Update device status and last_seen timestamp."""
+        if device_id in self.devices:
+            self.devices[device_id]["status"] = status
+            self.devices[device_id]["last_seen"] = time.time()
+            self._save_devices()
+            return True
+        return False
+
+    def get_device(self, device_id: str) -> Optional[Dict[str, Any]]:
+        """Get device information."""
+        return self.devices.get(device_id)
+
+    def list_devices(self) -> List[Dict[str, Any]]:
+        """List all registered devices."""
+        return list(self.devices.values())
+
+    def get_device_capabilities(self, device_id: str) -> List[str]:
+        """Get capabilities for a device."""
+        device = self.devices.get(device_id)
+        return device.get("capabilities", []) if device else []
+
 
 # Pydantic model and helper functions expected by tests
 class DeviceRegistration(BaseModel):
@@ -112,24 +134,4 @@ def register_device(payload: DeviceRegistration) -> Dict[str, Any]:
 def get_device_status(device_id: str) -> Optional[Dict[str, Any]]:
     """Fetch device status from the global manager."""
     return _device_manager.get_device(device_id)
-    
-    def update_device_status(self, device_id: str, status: str = "online"):
-        """Update device status."""
-        if device_id in self.devices:
-            self.devices[device_id]["status"] = status
-            self.devices[device_id]["last_seen"] = time.time()
-            self._save_devices()
-    
-    def get_device(self, device_id: str) -> Optional[Dict[str, Any]]:
-        """Get device information."""
-        return self.devices.get(device_id)
-    
-    def list_devices(self) -> List[Dict[str, Any]]:
-        """List all registered devices."""
-        return list(self.devices.values())
-    
-    def get_device_capabilities(self, device_id: str) -> List[str]:
-        """Get capabilities for a device."""
-        device = self.devices.get(device_id)
-        return device.get("capabilities", []) if device else []
 

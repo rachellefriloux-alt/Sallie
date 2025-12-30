@@ -1,0 +1,41 @@
+{
+  "version": "1.0",
+  "support": {
+    "overwhelm_response": "This is a test answer for question 10. This is a test answer for question 10. This is a test answer for question 10. This is a test answer for question 10. This is a test answer for question 10. This is a test answer for question 10. This is a test answer for question 10. This is a test answer for question 10. This is a test answer for question 10. This is a test answer for question 10. ",
+    "contradiction_handling": "This is a test answer for question 12. This is a test answer for question 12. This is a test answer for question 12. This is a test answer for question 12. This is a test answer for question 12. This is a test answer for question 12. This is a test answer for question 12. This is a test answer for question 12. This is a test answer for question 12. This is a test answer for question 12. ",
+    "extracted_insights": {
+      "overwhelm_response": {
+        "default_need": "",
+        "yin_signals": [],
+        "yang_signals": [],
+        "detection_advice": ""
+      },
+      "contradiction_handling": {
+        "preferred_mode": "",
+        "overrun_signals": [],
+        "intervention_style": ""
+      }
+    }
+  },
+  "curiosity": {
+    "primary_mystery": "This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. ",
+    "extracted_insights": {
+      "curiosity_threads": {
+        "primary_mystery": "",
+        "why_compelling": "",
+        "friction_point": "",
+        "related_domains": []
+      }
+    }
+  },
+  "the_basement": {
+    "deepest_truth": "This is a test answer for question 14. This is a test answer for question 14. This is a test answer for question 14. This is a test answer for question 14. This is a test answer for question 14. This is a test answer for question 14. This is a test answer for question 14. This is a test answer for question 14. This is a test answer for question 14. This is a test answer for question 14. ",
+    "extracted_insights": {
+      "the_basement": {
+        "revealed": false,
+        "content": "",
+        "significance": ""
+      }
+    }
+  }
+}
