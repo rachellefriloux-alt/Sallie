@@ -8,7 +8,7 @@ Includes capability discovery, contract enforcement, and comprehensive audit tra
 import json
 import logging
 import time
-from enum import IntEnum
+from enum import Enum
 from pathlib import Path
 from typing import Optional, List, Dict, Any
 from datetime import datetime
@@ -26,11 +26,11 @@ AGENCY_STATE_FILE = Path("progeny_root/core/agency_state.json")
 AGENCY_AUDIT_LOG = Path("progeny_root/logs/agency_audit.log")
 AGENCY_ACTION_LOG = Path("progeny_root/core/agency_action_log.json")
 
-class TrustTier(IntEnum):
-    STRANGER = 0  # Trust 0.0 - 0.6
-    ASSOCIATE = 1 # Trust 0.6 - 0.8
-    PARTNER = 2   # Trust 0.8 - 0.9
-    SURROGATE = 3 # Trust 0.9 - 1.0
+class TrustTier(str, Enum):
+    STRANGER = "STRANGER"  # Trust 0.0 - 0.6
+    ASSOCIATE = "ASSOCIATE" # Trust 0.6 - 0.8
+    PARTNER = "PARTNER"   # Trust 0.8 - 0.9
+    SURROGATE = "SURROGATE" # Trust 0.9 - 1.0
     # Aliases for backward compatibility with tests
     TIER_0 = STRANGER
     TIER_2 = PARTNER
@@ -625,7 +625,19 @@ class AgencySystem:
             # Apply Trust penalty (0.02) as per spec
             current_trust = self.limbic.state.trust
             new_trust = max(0.0, current_trust - 0.02)
-            self.limbic.update_trust(new_trust)
+
+            # Apply deterministically without Elastic amplification but still
+            # route through update_trust for observability/testing hooks.
+            prev_elastic = self.limbic.state.elastic_mode
+            self.limbic.state.elastic_mode = False
+            try:
+                self.limbic.update_trust(new_trust)
+            finally:
+                self.limbic.state.elastic_mode = prev_elastic
+            # Ensure exact penalty is reflected even if asymptotic update rounds
+            self.limbic.state.trust = new_trust
+            self.limbic.save()
+            self.limbic._update_cache()
             
             # Log rollback
             logger.warning(f"[AGENCY] Rollback applied for {action_id}: {explanation}. Trust reduced from {current_trust:.3f} to {new_trust:.3f}")

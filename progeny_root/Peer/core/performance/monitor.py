@@ -42,7 +42,8 @@ class PerformanceMonitor:
             Timer ID
         """
         timer_id = f"{operation}_{time.time()}_{id(self)}"
-        self.start_times[timer_id] = time.time()
+        # Store operation with start time to preserve names containing underscores.
+        self.start_times[timer_id] = (operation, time.time())
         return timer_id
     
     def end_timer(self, timer_id: str):
@@ -56,8 +57,8 @@ class PerformanceMonitor:
             logger.warning(f"[PerformanceMonitor] Timer {timer_id} not found")
             return
         
-        duration = time.time() - self.start_times[timer_id]
-        operation = timer_id.split("_")[0]
+        operation, started_at = self.start_times[timer_id]
+        duration = time.time() - started_at
         
         self.record_metric(operation, duration)
         del self.start_times[timer_id]

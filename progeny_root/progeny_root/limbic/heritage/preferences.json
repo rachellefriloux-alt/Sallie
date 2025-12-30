@@ -1,40 +1,198 @@
 {
   "version": "1.0",
   "support": {
-    "overwhelm_response": "This is a test answer for question 10. This is a test answer for question 10. This is a test answer for question 10. This is a test answer for question 10. This is a test answer for question 10. This is a test answer for question 10. This is a test answer for question 10. This is a test answer for question 10. This is a test answer for question 10. This is a test answer for question 10. ",
-    "contradiction_handling": "This is a test answer for question 12. This is a test answer for question 12. This is a test answer for question 12. This is a test answer for question 12. This is a test answer for question 12. This is a test answer for question 12. This is a test answer for question 12. This is a test answer for question 12. This is a test answer for question 12. This is a test answer for question 12. ",
+    "overwhelm_response": "Test answer for 10",
+    "contradiction_handling": "Test answer for 12",
     "extracted_insights": {
       "overwhelm_response": {
-        "default_need": "",
-        "yin_signals": [],
-        "yang_signals": [],
-        "detection_advice": ""
+        "options": [
+          {
+            "id": "A",
+            "description": "Fallback option",
+            "reasoning": "default"
+          },
+          {
+            "id": "B",
+            "description": "Fallback option",
+            "reasoning": "default"
+          },
+          {
+            "id": "C",
+            "description": "Fallback option",
+            "reasoning": "default"
+          }
+        ],
+        "selected_option_id": "A",
+        "rationale": "fallback",
+        "confidence": 0.5,
+        "concepts": [],
+        "facts": [],
+        "connections": [],
+        "questions": [],
+        "interest_hypotheses": [
+          "keep building"
+        ],
+        "style_hypotheses": [
+          "warm"
+        ],
+        "capability_hypotheses": [
+          "helpful"
+        ],
+        "expression_hypotheses": [
+          "gentle"
+        ],
+        "confidence_scores": {},
+        "growth_insights": [
+          "steady"
+        ],
+        "interaction_patterns": [],
+        "self_learning": [],
+        "alignment_check": []
       },
       "contradiction_handling": {
-        "preferred_mode": "",
-        "overrun_signals": [],
-        "intervention_style": ""
+        "options": [
+          {
+            "id": "A",
+            "description": "Fallback option",
+            "reasoning": "default"
+          },
+          {
+            "id": "B",
+            "description": "Fallback option",
+            "reasoning": "default"
+          },
+          {
+            "id": "C",
+            "description": "Fallback option",
+            "reasoning": "default"
+          }
+        ],
+        "selected_option_id": "A",
+        "rationale": "fallback",
+        "confidence": 0.5,
+        "concepts": [],
+        "facts": [],
+        "connections": [],
+        "questions": [],
+        "interest_hypotheses": [
+          "keep building"
+        ],
+        "style_hypotheses": [
+          "warm"
+        ],
+        "capability_hypotheses": [
+          "helpful"
+        ],
+        "expression_hypotheses": [
+          "gentle"
+        ],
+        "confidence_scores": {},
+        "growth_insights": [
+          "steady"
+        ],
+        "interaction_patterns": [],
+        "self_learning": [],
+        "alignment_check": []
       }
     }
   },
   "curiosity": {
-    "primary_mystery": "This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. ",
+    "primary_mystery": "Test answer for 11",
     "extracted_insights": {
       "curiosity_threads": {
-        "primary_mystery": "",
-        "why_compelling": "",
-        "friction_point": "",
-        "related_domains": []
+        "options": [
+          {
+            "id": "A",
+            "description": "Fallback option",
+            "reasoning": "default"
+          },
+          {
+            "id": "B",
+            "description": "Fallback option",
+            "reasoning": "default"
+          },
+          {
+            "id": "C",
+            "description": "Fallback option",
+            "reasoning": "default"
+          }
+        ],
+        "selected_option_id": "A",
+        "rationale": "fallback",
+        "confidence": 0.5,
+        "concepts": [],
+        "facts": [],
+        "connections": [],
+        "questions": [],
+        "interest_hypotheses": [
+          "keep building"
+        ],
+        "style_hypotheses": [
+          "warm"
+        ],
+        "capability_hypotheses": [
+          "helpful"
+        ],
+        "expression_hypotheses": [
+          "gentle"
+        ],
+        "confidence_scores": {},
+        "growth_insights": [
+          "steady"
+        ],
+        "interaction_patterns": [],
+        "self_learning": [],
+        "alignment_check": []
       }
     }
   },
   "the_basement": {
-    "deepest_truth": "This is a test answer for question 14. This is a test answer for question 14. This is a test answer for question 14. This is a test answer for question 14. This is a test answer for question 14. This is a test answer for question 14. This is a test answer for question 14. This is a test answer for question 14. This is a test answer for question 14. This is a test answer for question 14. ",
+    "deepest_truth": "Test answer for 14",
     "extracted_insights": {
       "the_basement": {
-        "revealed": false,
-        "content": "",
-        "significance": ""
+        "options": [
+          {
+            "id": "A",
+            "description": "Fallback option",
+            "reasoning": "default"
+          },
+          {
+            "id": "B",
+            "description": "Fallback option",
+            "reasoning": "default"
+          },
+          {
+            "id": "C",
+            "description": "Fallback option",
+            "reasoning": "default"
+          }
+        ],
+        "selected_option_id": "A",
+        "rationale": "fallback",
+        "confidence": 0.5,
+        "concepts": [],
+        "facts": [],
+        "connections": [],
+        "questions": [],
+        "interest_hypotheses": [
+          "keep building"
+        ],
+        "style_hypotheses": [
+          "warm"
+        ],
+        "capability_hypotheses": [
+          "helpful"
+        ],
+        "expression_hypotheses": [
+          "gentle"
+        ],
+        "confidence_scores": {},
+        "growth_insights": [
+          "steady"
+        ],
+        "interaction_patterns": [],
+        "self_learning": [],
+        "alignment_check": []
       }
     }
   }

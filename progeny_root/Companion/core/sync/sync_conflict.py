@@ -42,8 +42,8 @@ class SyncConflictResolver:
             True if conflict detected
         """
         # Check if both have same key but different values
-        local_ts = local_data.get("last_modified_ts", 0)
-        remote_ts = remote_data.get("last_modified_ts", 0)
+        local_ts = local_data.get("last_modified_ts", local_data.get("timestamp", 0))
+        remote_ts = remote_data.get("last_modified_ts", remote_data.get("timestamp", 0))
         
         # Conflict if both modified and timestamps are close (within 1 hour)
         if abs(local_ts - remote_ts) < 3600 and local_ts > 0 and remote_ts > 0:
@@ -92,8 +92,8 @@ class SyncConflictResolver:
     
     def _last_write_wins(self, local_data: Dict[str, Any], remote_data: Dict[str, Any]) -> Dict[str, Any]:
         """Last-write-wins resolution."""
-        local_ts = local_data.get("last_modified_ts", 0)
-        remote_ts = remote_data.get("last_modified_ts", 0)
+        local_ts = local_data.get("last_modified_ts", local_data.get("timestamp", 0))
+        remote_ts = remote_data.get("last_modified_ts", remote_data.get("timestamp", 0))
         
         if remote_ts > local_ts:
             logger.info(f"[SyncConflict] Remote wins (remote: {remote_ts}, local: {local_ts})")

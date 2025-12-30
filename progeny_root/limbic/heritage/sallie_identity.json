@@ -27,20 +27,12 @@
     }
   },
   "surface_expression": {
-    "appearance": {
-      "avatar": "Test answer for 15",
-      "convergence_established": true
-    },
-    "interests": [
-      "Test answer for 11"
-    ],
-    "style": {
-      "communication_style": "warm",
-      "established_via": "convergence"
-    },
+    "appearance": {},
+    "interests": [],
+    "style": {},
     "preferences": {}
   },
-  "created_ts": 1766991655.701699,
-  "last_modified_ts": 1767071365.1383,
-  "evolution_count": 1
+  "created_ts": 1767071599.4146657,
+  "last_modified_ts": 1767071599.4146657,
+  "evolution_count": 0
 }

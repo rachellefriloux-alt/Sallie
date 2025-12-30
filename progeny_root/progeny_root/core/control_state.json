@@ -90,9 +90,449 @@
         "creator_has_control": false,
         "state_locked": false
       }
+    },
+    {
+      "timestamp": 1767070352.794407,
+      "datetime": "2025-12-29T22:52:32.794406",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 4
+    },
+    {
+      "timestamp": 1767070352.7999365,
+      "datetime": "2025-12-29T22:52:32.799936",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070353.274956,
+      "datetime": "2025-12-29T22:52:33.274956",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 5
+    },
+    {
+      "timestamp": 1767070353.2791228,
+      "datetime": "2025-12-29T22:52:33.279123",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070369.831991,
+      "datetime": "2025-12-29T22:52:49.831991",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 6
+    },
+    {
+      "timestamp": 1767070369.8415704,
+      "datetime": "2025-12-29T22:52:49.841570",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070370.329789,
+      "datetime": "2025-12-29T22:52:50.329788",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 7
+    },
+    {
+      "timestamp": 1767070370.3363538,
+      "datetime": "2025-12-29T22:52:50.336353",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070472.6359754,
+      "datetime": "2025-12-29T22:54:32.635975",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 8
+    },
+    {
+      "timestamp": 1767070472.6397452,
+      "datetime": "2025-12-29T22:54:32.639745",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070473.0945544,
+      "datetime": "2025-12-29T22:54:33.094554",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 9
+    },
+    {
+      "timestamp": 1767070473.0945544,
+      "datetime": "2025-12-29T22:54:33.094554",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070486.6991105,
+      "datetime": "2025-12-29T22:54:46.699110",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 10
+    },
+    {
+      "timestamp": 1767070486.7011385,
+      "datetime": "2025-12-29T22:54:46.701138",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070487.196578,
+      "datetime": "2025-12-29T22:54:47.196578",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 11
+    },
+    {
+      "timestamp": 1767070487.2016428,
+      "datetime": "2025-12-29T22:54:47.201642",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070899.664838,
+      "datetime": "2025-12-29T23:01:39.664838",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 12
+    },
+    {
+      "timestamp": 1767070899.6698782,
+      "datetime": "2025-12-29T23:01:39.669878",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070900.991027,
+      "datetime": "2025-12-29T23:01:40.991027",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 13
+    },
+    {
+      "timestamp": 1767070900.9980357,
+      "datetime": "2025-12-29T23:01:40.998035",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070917.3149428,
+      "datetime": "2025-12-29T23:01:57.314942",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 14
+    },
+    {
+      "timestamp": 1767070917.3149428,
+      "datetime": "2025-12-29T23:01:57.314942",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070918.627367,
+      "datetime": "2025-12-29T23:01:58.627367",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 15
+    },
+    {
+      "timestamp": 1767070918.6308289,
+      "datetime": "2025-12-29T23:01:58.630828",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071144.0090363,
+      "datetime": "2025-12-29T23:05:44.009036",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 16
+    },
+    {
+      "timestamp": 1767071144.015715,
+      "datetime": "2025-12-29T23:05:44.015714",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071145.1988604,
+      "datetime": "2025-12-29T23:05:45.198860",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 17
+    },
+    {
+      "timestamp": 1767071145.213519,
+      "datetime": "2025-12-29T23:05:45.213519",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071166.4516625,
+      "datetime": "2025-12-29T23:06:06.451662",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 18
+    },
+    {
+      "timestamp": 1767071166.4536808,
+      "datetime": "2025-12-29T23:06:06.453680",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071167.5456843,
+      "datetime": "2025-12-29T23:06:07.545684",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 19
+    },
+    {
+      "timestamp": 1767071167.5598857,
+      "datetime": "2025-12-29T23:06:07.559885",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071337.629637,
+      "datetime": "2025-12-29T23:08:57.629637",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 20
+    },
+    {
+      "timestamp": 1767071337.6338284,
+      "datetime": "2025-12-29T23:08:57.633828",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071338.779595,
+      "datetime": "2025-12-29T23:08:58.779595",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 21
+    },
+    {
+      "timestamp": 1767071338.783857,
+      "datetime": "2025-12-29T23:08:58.783857",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071359.9972067,
+      "datetime": "2025-12-29T23:09:19.997206",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 22
+    },
+    {
+      "timestamp": 1767071360.0022073,
+      "datetime": "2025-12-29T23:09:20.002207",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071361.2044308,
+      "datetime": "2025-12-29T23:09:21.204430",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "recovery_procedure_id": 23
+    },
+    {
+      "timestamp": 1767071361.2110603,
+      "datetime": "2025-12-29T23:09:21.211060",
+      "action": "resume_after_emergency_stop",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      }
     }
   ],
-  "last_control_ts": 1767070024.8847091,
+  "last_control_ts": 1767071361.2110603,
   "control_reason": "Test emergency",
   "recovery_procedures": [
     {
@@ -154,6 +594,306 @@
       "completed": true,
       "resumed_at": 1767070024.8847091,
       "resumed_datetime": "2025-12-29T22:47:04.884709"
+    },
+    {
+      "timestamp": 1767070352.794407,
+      "datetime": "2025-12-29T22:52:32.794406",
+      "reason": "Test",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767070352.7999365,
+      "resumed_datetime": "2025-12-29T22:52:32.799936"
+    },
+    {
+      "timestamp": 1767070353.274956,
+      "datetime": "2025-12-29T22:52:33.274956",
+      "reason": "Test emergency",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767070353.2791228,
+      "resumed_datetime": "2025-12-29T22:52:33.279123"
+    },
+    {
+      "timestamp": 1767070369.831991,
+      "datetime": "2025-12-29T22:52:49.831991",
+      "reason": "Test",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767070369.8415704,
+      "resumed_datetime": "2025-12-29T22:52:49.841570"
+    },
+    {
+      "timestamp": 1767070370.329789,
+      "datetime": "2025-12-29T22:52:50.329788",
+      "reason": "Test emergency",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767070370.3363538,
+      "resumed_datetime": "2025-12-29T22:52:50.336353"
+    },
+    {
+      "timestamp": 1767070472.6359754,
+      "datetime": "2025-12-29T22:54:32.635975",
+      "reason": "Test",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767070472.6397452,
+      "resumed_datetime": "2025-12-29T22:54:32.639745"
+    },
+    {
+      "timestamp": 1767070473.0945544,
+      "datetime": "2025-12-29T22:54:33.094554",
+      "reason": "Test emergency",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767070473.0945544,
+      "resumed_datetime": "2025-12-29T22:54:33.094554"
+    },
+    {
+      "timestamp": 1767070486.6991105,
+      "datetime": "2025-12-29T22:54:46.699110",
+      "reason": "Test",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767070486.7011385,
+      "resumed_datetime": "2025-12-29T22:54:46.701138"
+    },
+    {
+      "timestamp": 1767070487.196578,
+      "datetime": "2025-12-29T22:54:47.196578",
+      "reason": "Test emergency",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767070487.2016428,
+      "resumed_datetime": "2025-12-29T22:54:47.201642"
+    },
+    {
+      "timestamp": 1767070899.664838,
+      "datetime": "2025-12-29T23:01:39.664838",
+      "reason": "Test",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767070899.6698782,
+      "resumed_datetime": "2025-12-29T23:01:39.669878"
+    },
+    {
+      "timestamp": 1767070900.991027,
+      "datetime": "2025-12-29T23:01:40.991027",
+      "reason": "Test emergency",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767070900.9980357,
+      "resumed_datetime": "2025-12-29T23:01:40.998035"
+    },
+    {
+      "timestamp": 1767070917.3149428,
+      "datetime": "2025-12-29T23:01:57.314942",
+      "reason": "Test",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767070917.3149428,
+      "resumed_datetime": "2025-12-29T23:01:57.314942"
+    },
+    {
+      "timestamp": 1767070918.627367,
+      "datetime": "2025-12-29T23:01:58.627367",
+      "reason": "Test emergency",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767070918.6308289,
+      "resumed_datetime": "2025-12-29T23:01:58.630828"
+    },
+    {
+      "timestamp": 1767071144.0090363,
+      "datetime": "2025-12-29T23:05:44.009036",
+      "reason": "Test",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767071144.015715,
+      "resumed_datetime": "2025-12-29T23:05:44.015714"
+    },
+    {
+      "timestamp": 1767071145.1988604,
+      "datetime": "2025-12-29T23:05:45.198860",
+      "reason": "Test emergency",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767071145.213519,
+      "resumed_datetime": "2025-12-29T23:05:45.213519"
+    },
+    {
+      "timestamp": 1767071166.4516625,
+      "datetime": "2025-12-29T23:06:06.451662",
+      "reason": "Test",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767071166.4536808,
+      "resumed_datetime": "2025-12-29T23:06:06.453680"
+    },
+    {
+      "timestamp": 1767071167.5456843,
+      "datetime": "2025-12-29T23:06:07.545684",
+      "reason": "Test emergency",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767071167.5598857,
+      "resumed_datetime": "2025-12-29T23:06:07.559885"
+    },
+    {
+      "timestamp": 1767071337.629637,
+      "datetime": "2025-12-29T23:08:57.629637",
+      "reason": "Test",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767071337.6338284,
+      "resumed_datetime": "2025-12-29T23:08:57.633828"
+    },
+    {
+      "timestamp": 1767071338.779595,
+      "datetime": "2025-12-29T23:08:58.779595",
+      "reason": "Test emergency",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767071338.783857,
+      "resumed_datetime": "2025-12-29T23:08:58.783857"
+    },
+    {
+      "timestamp": 1767071359.9972067,
+      "datetime": "2025-12-29T23:09:19.997206",
+      "reason": "Test",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767071360.0022073,
+      "resumed_datetime": "2025-12-29T23:09:20.002207"
+    },
+    {
+      "timestamp": 1767071361.2044308,
+      "datetime": "2025-12-29T23:09:21.204430",
+      "reason": "Test emergency",
+      "steps": [
+        "1. Verify all autonomous actions are halted",
+        "2. Review system state and logs",
+        "3. Determine cause of emergency stop",
+        "4. Resolve issue or wait for Creator intervention",
+        "5. Use resume_after_emergency_stop() when ready"
+      ],
+      "completed": true,
+      "resumed_at": 1767071361.2110603,
+      "resumed_datetime": "2025-12-29T23:09:21.211060"
     }
   ],
   "audit_trail": [
@@ -272,6 +1012,646 @@
     {
       "timestamp": 1767070024.8847091,
       "datetime": "2025-12-29T22:47:04.884709",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070352.794407,
+      "datetime": "2025-12-29T22:52:32.794406",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070352.7999365,
+      "datetime": "2025-12-29T22:52:32.799936",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070353.274956,
+      "datetime": "2025-12-29T22:52:33.274956",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070353.2791228,
+      "datetime": "2025-12-29T22:52:33.279123",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070369.831991,
+      "datetime": "2025-12-29T22:52:49.831991",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070369.8415704,
+      "datetime": "2025-12-29T22:52:49.841570",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070370.329789,
+      "datetime": "2025-12-29T22:52:50.329788",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070370.3363538,
+      "datetime": "2025-12-29T22:52:50.336353",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070472.6359754,
+      "datetime": "2025-12-29T22:54:32.635975",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070472.6397452,
+      "datetime": "2025-12-29T22:54:32.639745",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070473.0945544,
+      "datetime": "2025-12-29T22:54:33.094554",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070473.0945544,
+      "datetime": "2025-12-29T22:54:33.094554",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070486.6991105,
+      "datetime": "2025-12-29T22:54:46.699110",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070486.7011385,
+      "datetime": "2025-12-29T22:54:46.701138",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070487.196578,
+      "datetime": "2025-12-29T22:54:47.196578",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070487.2016428,
+      "datetime": "2025-12-29T22:54:47.201642",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070899.664838,
+      "datetime": "2025-12-29T23:01:39.664838",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070899.6698782,
+      "datetime": "2025-12-29T23:01:39.669878",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070900.991027,
+      "datetime": "2025-12-29T23:01:40.991027",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070900.9980357,
+      "datetime": "2025-12-29T23:01:40.998035",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070917.3149428,
+      "datetime": "2025-12-29T23:01:57.314942",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070917.3149428,
+      "datetime": "2025-12-29T23:01:57.314942",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070918.627367,
+      "datetime": "2025-12-29T23:01:58.627367",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767070918.6308289,
+      "datetime": "2025-12-29T23:01:58.630828",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071144.0090363,
+      "datetime": "2025-12-29T23:05:44.009036",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071144.015715,
+      "datetime": "2025-12-29T23:05:44.015714",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071145.1988604,
+      "datetime": "2025-12-29T23:05:45.198860",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071145.213519,
+      "datetime": "2025-12-29T23:05:45.213519",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071166.4516625,
+      "datetime": "2025-12-29T23:06:06.451662",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071166.4536808,
+      "datetime": "2025-12-29T23:06:06.453680",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071167.5456843,
+      "datetime": "2025-12-29T23:06:07.545684",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071167.5598857,
+      "datetime": "2025-12-29T23:06:07.559885",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071337.629637,
+      "datetime": "2025-12-29T23:08:57.629637",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071337.6338284,
+      "datetime": "2025-12-29T23:08:57.633828",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071338.779595,
+      "datetime": "2025-12-29T23:08:58.779595",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071338.783857,
+      "datetime": "2025-12-29T23:08:58.783857",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071359.9972067,
+      "datetime": "2025-12-29T23:09:19.997206",
+      "action": "emergency_stop",
+      "reason": "Test",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071360.0022073,
+      "datetime": "2025-12-29T23:09:20.002207",
+      "action": "resume_after_emergency_stop",
+      "reason": "Operations resumed",
+      "previous_state": {
+        "emergency_stop_active": true,
+        "creator_has_control": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071361.2044308,
+      "datetime": "2025-12-29T23:09:21.204430",
+      "action": "emergency_stop",
+      "reason": "Test emergency",
+      "previous_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": false,
+        "state_locked": false
+      },
+      "current_state": {
+        "creator_has_control": false,
+        "emergency_stop_active": true,
+        "state_locked": false
+      }
+    },
+    {
+      "timestamp": 1767071361.2110603,
+      "datetime": "2025-12-29T23:09:21.211060",
       "action": "resume_after_emergency_stop",
       "reason": "Operations resumed",
       "previous_state": {

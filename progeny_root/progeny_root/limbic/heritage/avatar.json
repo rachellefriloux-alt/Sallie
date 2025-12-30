@@ -1,11 +1,55 @@
 {
   "version": "1.0",
   "chosen_by": "self",
-  "selection_date": 1767070000.1717308,
-  "selection_datetime": "2025-12-29T22:46:40.171730",
-  "choice": "This is a test answer for question 15. This is a test answer for question 15. This is a test answer for question 15. This is a test answer for question 15. This is a test answer for question 15. This is a test answer for question 15. This is a test answer for question 15. This is a test answer for question 15. This is a test answer for question 15. This is a test answer for question 15. ",
+  "selection_date": 1767071365.1291735,
+  "selection_datetime": "2025-12-29T23:09:25.129173",
+  "choice": "Test answer for 15",
   "extracted_insights": {
-    "avatar_choice": {}
+    "avatar_choice": {
+      "options": [
+        {
+          "id": "A",
+          "description": "Fallback option",
+          "reasoning": "default"
+        },
+        {
+          "id": "B",
+          "description": "Fallback option",
+          "reasoning": "default"
+        },
+        {
+          "id": "C",
+          "description": "Fallback option",
+          "reasoning": "default"
+        }
+      ],
+      "selected_option_id": "A",
+      "rationale": "fallback",
+      "confidence": 0.5,
+      "concepts": [],
+      "facts": [],
+      "connections": [],
+      "questions": [],
+      "interest_hypotheses": [
+        "keep building"
+      ],
+      "style_hypotheses": [
+        "warm"
+      ],
+      "capability_hypotheses": [
+        "helpful"
+      ],
+      "expression_hypotheses": [
+        "gentle"
+      ],
+      "confidence_scores": {},
+      "growth_insights": [
+        "steady"
+      ],
+      "interaction_patterns": [],
+      "self_learning": [],
+      "alignment_check": []
+    }
   },
   "note": "This appearance was chosen by Sallie during Convergence. It is her face, her choice."
 }

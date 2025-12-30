@@ -1,108 +1,20 @@
 [
   {
-    "timestamp": 1767069996.209743,
-    "datetime": "2025-12-29T22:46:36.209743",
+    "timestamp": 1767071365.1383,
+    "datetime": "2025-12-29T23:09:25.138299",
     "evolution_count": 1,
     "changes": {
       "appearance": {
-        "avatar": {
-          "type": "gradient",
-          "primary_color": "#f59e0b",
-          "secondary_color": "#fbbf24",
-          "accent_color": "#ef4444",
-          "style": "vibrant",
-          "animation": "pulse",
-          "version": 2
-        }
-      },
-      "interests": null,
-      "style": null,
-      "preferences": null
-    },
-    "identity_version": "1.0"
-  },
-  {
-    "timestamp": 1767069996.2605793,
-    "datetime": "2025-12-29T22:46:36.260579",
-    "evolution_count": 2,
-    "changes": {
-      "appearance": {
-        "avatar": {
-          "type": "gradient",
-          "primary_color": "#8b5cf6",
-          "secondary_color": "#a78bfa",
-          "accent_color": "#22d3ee",
-          "style": "modern",
-          "animation": "breathe",
-          "version": 2
-        }
-      },
-      "interests": null,
-      "style": null,
-      "preferences": null
-    },
-    "identity_version": "1.0"
-  },
-  {
-    "timestamp": 1767070000.2080698,
-    "datetime": "2025-12-29T22:46:40.208069",
-    "evolution_count": 3,
-    "changes": {
-      "appearance": {
-        "avatar": "This is a test answer for question 15. This is a test answer for question 15. This is a test answer for question 15. This is a test answer for question 15. This is a test answer for question 15. This is a test answer for question 15. This is a test answer for question 15. This is a test answer for question 15. This is a test answer for question 15. This is a test answer for question 15. ",
+        "avatar": "Test answer for 15",
         "convergence_established": true
       },
       "interests": [
-        "This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. This is a test answer for question 11. "
+        "Test answer for 11"
       ],
       "style": {
         "communication_style": "warm",
         "established_via": "convergence"
       },
-      "preferences": null
-    },
-    "identity_version": "1.0"
-  },
-  {
-    "timestamp": 1767070019.119267,
-    "datetime": "2025-12-29T22:46:59.119267",
-    "evolution_count": 4,
-    "changes": {
-      "appearance": {
-        "avatar": {
-          "type": "gradient",
-          "primary_color": "#f59e0b",
-          "secondary_color": "#fbbf24",
-          "accent_color": "#ef4444",
-          "style": "vibrant",
-          "animation": "pulse",
-          "version": 2
-        }
-      },
-      "interests": null,
-      "style": null,
-      "preferences": null
-    },
-    "identity_version": "1.0"
-  },
-  {
-    "timestamp": 1767070019.1858475,
-    "datetime": "2025-12-29T22:46:59.185847",
-    "evolution_count": 5,
-    "changes": {
-      "appearance": {
-        "avatar": {
-          "type": "gradient",
-          "primary_color": "#8b5cf6",
-          "secondary_color": "#a78bfa",
-          "accent_color": "#22d3ee",
-          "style": "modern",
-          "animation": "breathe",
-          "version": 2
-        }
-      },
-      "interests": null,
-      "style": null,
       "preferences": null
     },
     "identity_version": "1.0"

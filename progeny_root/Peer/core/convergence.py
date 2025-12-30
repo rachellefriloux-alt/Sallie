@@ -170,7 +170,10 @@ class ConvergenceSystem:
                     data = json.load(f)
                     # Validate structure
                     if "current_index" in data and "answers" in data:
-                        return data
+                        if data.get("completed") or data.get("current_index", 0) >= len(QUESTIONS):
+                            logger.info("[Convergence] Resetting completed/stale session")
+                        else:
+                            return data
                     else:
                         logger.warning("[Convergence] Invalid session structure, resetting")
             except json.JSONDecodeError as e:
@@ -206,8 +209,13 @@ class ConvergenceSystem:
         """Enters Elastic Mode for high limbic volatility."""
         logger.info("[Convergence] Starting session. Entering Elastic Mode.")
         self.limbic.state.elastic_mode = True
-        self.session_state["started_at"] = time.time()
-        self.session_state["version"] = CONVERGENCE_VERSION
+        self.session_state = {
+            "current_index": 0,
+            "answers": {},
+            "completed": False,
+            "started_at": time.time(),
+            "version": CONVERGENCE_VERSION,
+        }
         self.limbic.save()
         self._save_session()
 
@@ -306,7 +314,11 @@ Output only the Mirror Test question, nothing else."""
             text = "[No answer provided]"
         
         # Extract structured insights from answer
-        extracted = self._extract_insights(question, text)
+        try:
+            extracted = self._extract_insights(question, text)
+        except Exception as e:
+            logger.warning(f"[Convergence] Extraction error for {question.extraction_key}: {e}")
+            extracted = get_default_extraction(question.id) if question.id <= 14 else {}
         
         # Store raw answer and extracted insights
         self.session_state["answers"][question.extraction_key] = {
