@@ -27,4 +27,14 @@
         <Setter Property="Margin" Value="0 4"/>
     </Style>
 
+    <!-- Accent button style used in ChatPage send button -->
+    <Style x:Key="AccentButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="10 6"/>
+        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="0 4"/>
+    </Style>
+
 </ResourceDictionary>

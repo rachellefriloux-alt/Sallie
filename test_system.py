@@ -119,10 +119,11 @@ def test_docker():
     
     try:
         # Check if Docker is running
+        # Some environments spin up Docker slowly; allow more time before declaring failure.
         result = subprocess.run(
             ['docker', 'info'],
             capture_output=True,
-            timeout=5
+            timeout=15
         )
         if result.returncode == 0:
             print_success("Docker is running")
@@ -151,7 +152,8 @@ def test_launcher():
         print_success("launcher.py found")
         # Test if it's valid Python
         try:
-            with open(launcher, 'r') as f:
+            # Use UTF-8 so emoji and other non-ASCII characters don't break the read
+            with open(launcher, 'r', encoding='utf-8') as f:
                 compile(f.read(), 'launcher.py', 'exec')
             print_success("launcher.py syntax is valid")
             return True

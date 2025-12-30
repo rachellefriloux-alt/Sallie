@@ -1,0 +1,35 @@
+name: build-winui
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore
+        working-directory: SallieStudioApp
+        run: dotnet restore
+
+      - name: Build Release (out-of-proc XAML)
+        working-directory: SallieStudioApp
+        env:
+          DOTNET_ROLL_FORWARD: LatestFeature
+        run: dotnet msbuild SallieStudioApp.csproj -p:Configuration=Release
+
+      - name: Build Release (in-proc XAML)
+        working-directory: SallieStudioApp
+        env:
+          DOTNET_ROLL_FORWARD: LatestFeature
+        run: dotnet msbuild SallieStudioApp.csproj -p:Configuration=Release -p:UseXamlCompilerExecutable=false
