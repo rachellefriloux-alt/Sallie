@@ -181,10 +181,33 @@ class ExtensionsSystem:
                 if module in code_lower:
                     issues.append(f"Uses protected module/function: {module}")
             
-            # Check for protected path access
-            for path in PROTECTED_PATHS:
-                if path in code or path.replace("/", "\\") in code:
-                    issues.append(f"Attempts to access protected path: {path}")
+            # Check for protected path access using proper path canonicalization
+            for protected_path in PROTECTED_PATHS:
+                # Check various path access patterns
+                path_patterns = [
+                    protected_path,
+                    protected_path.replace("/", "\\"),
+                    f"../{protected_path}",
+                    f"..\\{protected_path}",
+                    protected_path.replace("/", "%2F"),  # URL encoded
+                    protected_path.replace("/", "%2f"),
+                ]
+                for pattern in path_patterns:
+                    if pattern in code:
+                        issues.append(f"Attempts to access protected path: {protected_path}")
+                        break
+            
+            # Check for path traversal patterns
+            path_traversal_patterns = [
+                "../",
+                "..\\",
+                "%2e%2e%2f",  # URL encoded ../
+                "%2e%2e/",
+                "..%2f",
+            ]
+            for pattern in path_traversal_patterns:
+                if pattern in code_lower:
+                    issues.append(f"Path traversal pattern detected: {pattern}")
             
             # Check for dangerous patterns
             dangerous_patterns = [
@@ -192,7 +215,15 @@ class ExtensionsSystem:
                 ("shutil.rmtree", "Bulk deletion pattern"),
                 ("format(", "Potential format string attack"),
                 ("pickle.loads", "Potential deserialization attack"),
+                ("pickle.load", "Potential deserialization attack"),
+                ("marshal.loads", "Potential deserialization attack"),
+                ("marshal.load", "Potential deserialization attack"),
+                ("dill.loads", "Potential deserialization attack"),
+                ("dill.load", "Potential deserialization attack"),
+                ("yaml.load", "Unsafe YAML load (use safe_load)"),
+                ("yaml.unsafe_load", "Unsafe YAML load"),
                 ("socket.socket", "Network socket creation"),
+                ("ctypes", "C-type access (potential memory manipulation)"),
             ]
             
             for pattern, description in dangerous_patterns:
