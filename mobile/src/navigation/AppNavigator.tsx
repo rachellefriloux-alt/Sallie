@@ -12,6 +12,12 @@ import { ChatScreen } from '../screens/ChatScreen';
 import { SettingsScreen } from '../screens/SettingsScreen';
 import { SyncScreen } from '../screens/SyncScreen';
 import { LimbicScreen } from '../screens/LimbicScreen';
+import { HeritageScreen } from '../screens/HeritageScreen';
+import { ThoughtsScreen } from '../screens/ThoughtsScreen';
+import { HypothesesScreen } from '../screens/HypothesesScreen';
+import { ProjectsScreen } from '../screens/ProjectsScreen';
+import { ConvergenceScreen } from '../screens/ConvergenceScreen';
+import { ControlScreen } from '../screens/ControlScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -89,6 +95,36 @@ export function AppNavigator() {
             options={{ title: 'Emotional State' }}
           />
           <Drawer.Screen 
+            name="Heritage" 
+            component={HeritageScreen}
+            options={{ title: 'Heritage' }}
+          />
+          <Drawer.Screen 
+            name="Thoughts" 
+            component={ThoughtsScreen}
+            options={{ title: 'Thoughts Log' }}
+          />
+          <Drawer.Screen 
+            name="Hypotheses" 
+            component={HypothesesScreen}
+            options={{ title: 'Hypotheses' }}
+          />
+          <Drawer.Screen 
+            name="Projects" 
+            component={ProjectsScreen}
+            options={{ title: 'Projects & Building' }}
+          />
+          <Drawer.Screen 
+            name="Convergence" 
+            component={ConvergenceScreen}
+            options={{ title: 'Convergence' }}
+          />
+          <Drawer.Screen 
+            name="Control" 
+            component={ControlScreen}
+            options={{ title: 'Control Panel' }}
+          />
+          <Drawer.Screen 
             name="Sync" 
             component={SyncScreen}
             options={{ title: 'Sync Status' }}
@@ -126,6 +162,26 @@ export function AppNavigator() {
           name="Limbic" 
           component={LimbicScreen}
           options={{ title: 'State' }}
+        />
+        <Tab.Screen 
+          name="Heritage" 
+          component={HeritageScreen}
+          options={{ title: 'Heritage' }}
+        />
+        <Tab.Screen 
+          name="Thoughts" 
+          component={ThoughtsScreen}
+          options={{ title: 'Thoughts' }}
+        />
+        <Tab.Screen 
+          name="Hypotheses" 
+          component={HypothesesScreen}
+          options={{ title: 'Hypotheses' }}
+        />
+        <Tab.Screen 
+          name="Projects" 
+          component={ProjectsScreen}
+          options={{ title: 'Projects' }}
         />
         <Tab.Screen 
           name="Sync" 

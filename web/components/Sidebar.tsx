@@ -27,6 +27,9 @@ export function Sidebar({ limbicState, isConnected }: SidebarProps) {
     { href: '/heritage', label: 'Heritage', icon: '📜' },
     { href: '/thoughts', label: 'Thoughts Log', icon: '💭' },
     { href: '/hypotheses', label: 'Hypotheses', icon: '🔬' },
+    { href: '/projects', label: 'Projects', icon: '🛠️' },
+    { href: '/convergence', label: 'Convergence', icon: '🌀' },
+    { href: '/control', label: 'Control Panel', icon: '🎛️' },
     { href: '/settings', label: 'Settings', icon: '⚙️' },
   ];
 

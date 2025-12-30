@@ -1612,6 +1612,134 @@ async def post_interaction_tasks(user_text: str, response_text: str):
         systems["sync"].sync_conversation(conversation_data)
 
 
+# Extensions Endpoints
+@app.get("/extensions")
+async def list_extensions(status: Optional[str] = None, category: Optional[str] = None):
+    """List all extensions, optionally filtered by status or category."""
+    from .extensions import get_extensions_system, ExtensionStatus, ExtensionCategory
+    ext_system = get_extensions_system()
+    
+    status_enum = ExtensionStatus(status) if status else None
+    category_enum = ExtensionCategory(category) if category else None
+    
+    extensions = ext_system.list_extensions(status=status_enum, category=category_enum)
+    return {
+        "extensions": [e.model_dump() for e in extensions],
+        "count": len(extensions)
+    }
+
+@app.get("/extensions/{extension_id}")
+async def get_extension(extension_id: str):
+    """Get a specific extension by ID."""
+    from .extensions import get_extensions_system
+    ext_system = get_extensions_system()
+    
+    extension = ext_system.get_extension(extension_id)
+    if not extension:
+        raise HTTPException(status_code=404, detail="Extension not found")
+    
+    return extension.model_dump()
+
+@app.post("/extensions/propose")
+async def propose_extension(request: Dict[str, Any]):
+    """Propose a new extension for Sallie."""
+    from .extensions import get_extensions_system, ExtensionCategory
+    ext_system = get_extensions_system()
+    
+    name = request.get("name")
+    description = request.get("description")
+    category = request.get("category", "tool")
+    code = request.get("code")
+    config = request.get("config")
+    dependencies = request.get("dependencies")
+    permissions_required = request.get("permissions_required")
+    auto_approve = request.get("auto_approve_if_safe", False)
+    
+    if not name or not description:
+        raise HTTPException(status_code=400, detail="name and description are required")
+    
+    try:
+        category_enum = ExtensionCategory(category.lower())
+    except ValueError:
+        category_enum = ExtensionCategory.OTHER
+    
+    result = ext_system.propose_extension(
+        name=name,
+        description=description,
+        category=category_enum,
+        code=code,
+        config=config,
+        dependencies=dependencies,
+        permissions_required=permissions_required,
+        auto_approve_if_safe=auto_approve
+    )
+    
+    return result
+
+@app.post("/extensions/{extension_id}/approve")
+async def approve_extension(extension_id: str):
+    """Approve a pending extension (Creator only)."""
+    from .extensions import get_extensions_system
+    ext_system = get_extensions_system()
+    
+    return ext_system.approve_extension(extension_id, approved_by="creator")
+
+@app.post("/extensions/{extension_id}/reject")
+async def reject_extension(extension_id: str, request: Dict[str, Any] = Body(default={})):
+    """Reject a pending extension (Creator only)."""
+    from .extensions import get_extensions_system
+    ext_system = get_extensions_system()
+    
+    reason = request.get("reason", "")
+    return ext_system.reject_extension(extension_id, reason)
+
+@app.post("/extensions/{extension_id}/activate")
+async def activate_extension(extension_id: str):
+    """Activate an approved extension."""
+    from .extensions import get_extensions_system
+    ext_system = get_extensions_system()
+    
+    return ext_system.activate_extension(extension_id)
+
+@app.post("/extensions/{extension_id}/disable")
+async def disable_extension(extension_id: str, request: Dict[str, Any] = Body(default={})):
+    """Disable an active extension."""
+    from .extensions import get_extensions_system
+    ext_system = get_extensions_system()
+    
+    reason = request.get("reason", "")
+    return ext_system.disable_extension(extension_id, reason)
+
+@app.delete("/extensions/{extension_id}")
+async def remove_extension(extension_id: str, request: Dict[str, Any] = Body(default={})):
+    """Remove an extension completely (Creator only)."""
+    from .extensions import get_extensions_system
+    ext_system = get_extensions_system()
+    
+    reason = request.get("reason", "")
+    return ext_system.remove_extension(extension_id, reason)
+
+@app.get("/extensions/pending")
+async def get_pending_extensions():
+    """Get extensions pending Creator approval."""
+    from .extensions import get_extensions_system
+    ext_system = get_extensions_system()
+    
+    pending = ext_system.get_pending_extensions()
+    return {
+        "extensions": [e.model_dump() for e in pending],
+        "count": len(pending)
+    }
+
+@app.get("/extensions/summary")
+async def get_extensions_summary():
+    """Get summary of all extensions."""
+    from .extensions import get_extensions_system
+    ext_system = get_extensions_system()
+    
+    return ext_system.get_summary()
+
+
 if __name__ == '__main__':
     import uvicorn
     uvicorn.run(app, host='0.0.0.0', port=8000)

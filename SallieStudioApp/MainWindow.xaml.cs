@@ -20,7 +20,19 @@ namespace SallieStudioApp
         public MainWindow()
         {
             this.InitializeComponent();
+            
+            // Navigate all frames to their respective pages
+            ChatFrame.Navigate(typeof(ChatPage));
+            LimbicFrame.Navigate(typeof(LimbicPage));
+            HeritageFrame.Navigate(typeof(HeritagePage));
+            ThoughtsFrame.Navigate(typeof(ThoughtsPage));
+            HypothesesFrame.Navigate(typeof(HypothesesPage));
+            ConvergenceFrame.Navigate(typeof(ConvergencePage));
+            ControlFrame.Navigate(typeof(ControlPage));
+            SyncFrame.Navigate(typeof(SyncPage));
+            ProjectsFrame.Navigate(typeof(ProjectsPage));
             SettingsFrame.Navigate(typeof(SettingsPage));
+            
             LoadConfig();
             LoadPlugins();
             StartCloudSyncLoop();
