@@ -6,9 +6,7 @@ This guide is for anyone building, extending, or debugging Sallie Studio.
 
 ## 1. Developer Console
 
-Open:
-
-**Developer Console**
+Open: **Developer Console**
 
 You can run:
 

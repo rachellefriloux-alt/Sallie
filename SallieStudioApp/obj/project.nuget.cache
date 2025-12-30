@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "wKHRA/zHSaM=",
+  "success": true,
+  "projectFilePath": "C:\\Sallie\\SallieStudioApp\\SallieStudioApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\chell\\.nuget\\packages\\microsoft.windows.sdk.buildtools\\10.0.22621.756\\microsoft.windows.sdk.buildtools.10.0.22621.756.nupkg.sha512",
+    "C:\\Users\\chell\\.nuget\\packages\\microsoft.windowsappsdk\\1.4.231115000\\microsoft.windowsappsdk.1.4.231115000.nupkg.sha512",
+    "C:\\Users\\chell\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.57\\microsoft.windows.sdk.net.ref.10.0.19041.57.nupkg.sha512"
+  ],
+  "logs": []
+}

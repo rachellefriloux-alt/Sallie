@@ -8,7 +8,7 @@ Plugins let you extend Sallie Studio without modifying the core app.
 
 Each plugin lives in:
 
-Extensions/<plugin-id>/
+Extensions/&lt;plugin-id&gt;/
 
 Example:
 

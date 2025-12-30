@@ -20,26 +20,33 @@ Sallie Studio is built on:
 ## 2. Core Components
 
 ### Desktop App
+
 UI, dashboard, settings, plugins, tray mode.
 
 ### Script Layer
+
 All operational logic lives in PowerShell scripts.
 
 ### Backend
+
 FastAPI/Uvicorn service.
 
 ### Docker
+
 Memory agent, brain agent, and any future agents.
 
 ### Frontend
+
 Optional web UI.
 
 ### Config
+
 Stored in:
 
 config/studio.json
 
 ### Logs
+
 Stored in:
 
 logs/

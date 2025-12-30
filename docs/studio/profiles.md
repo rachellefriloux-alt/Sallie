@@ -7,14 +7,17 @@ Profiles let you switch entire environments with one click.
 ## Available Profiles
 
 ### Dev
+
 Your local machine.
 Ports: 8000 / 8010
 
 ### QA
+
 Your test environment.
 Ports: 8200 / 8210
 
 ### Demo
+
 Read-only mode for presentations.
 Ports: 8500 / 8510
 
@@ -36,7 +39,7 @@ Ports: 8500 / 8510
 
 Go to:
 
-**Settings → Active Profile**
+### Settings → Active Profile
 
 Choose:
 

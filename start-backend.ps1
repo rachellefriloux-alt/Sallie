@@ -19,9 +19,9 @@ function Stop-PortProcess {
     foreach ($pid in $pids) {
         try {
             Stop-Process -Id $pid -Force -ErrorAction Stop
-            Write-Host "Stopped process $pid using port $Port" -ForegroundColor Yellow
+            Write-Host ("Stopped process {0} using port {1}" -f $pid, $Port) -ForegroundColor Yellow
         } catch {
-            Write-Warning "Could not stop process $pid on port $Port: $_"
+            Write-Warning ("Could not stop process {0} on port {1}: {2}" -f $pid, $Port, $_)
         }
     }
 }

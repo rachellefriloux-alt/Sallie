@@ -19,9 +19,7 @@ If this is your first time, the Setup Wizard will guide you through:
 
 ## 2. Start Everything
 
-Click:
-
-**Start All**
+Click: **Start All**
 
 This launches:
 
@@ -36,9 +34,7 @@ You’ll see live status updates on the Dashboard.
 
 ## 3. Check Health
 
-Click:
-
-**Health Check**
+Click: **Health Check**
 
 You’ll get a full diagnostic across:
 
@@ -52,9 +48,7 @@ You’ll get a full diagnostic across:
 
 ## 4. Use the Developer Console
 
-Open:
-
-**Developer Console**
+Open: **Developer Console**
 
 You can run:
 
