@@ -8,8 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Title="Sallie Studio"
-    Height="720"
-    Width="1200">
+    Height="800"
+    Width="1400">
 
     <Grid Background="{StaticResource WindowBackground}" RowSpacing="8">
         <Grid.RowDefinitions>
@@ -21,16 +21,64 @@
             <Button Content="Developer Console" Click="OpenConsole_Click"/>
         </StackPanel>
 
-        <muxc:TabView x:Name="MainTabs" Grid.Row="1">
-            <muxc:TabViewItem Header="Dashboard">
+        <muxc:TabView x:Name="MainTabs" Grid.Row="1" IsAddTabButtonVisible="False">
+            <!-- Chat - Main interaction with Sallie -->
+            <muxc:TabViewItem Header="💬 Chat">
+                <Frame x:Name="ChatFrame"/>
+            </muxc:TabViewItem>
+
+            <!-- Limbic State - Emotional state visualization -->
+            <muxc:TabViewItem Header="🧠 Limbic">
+                <Frame x:Name="LimbicFrame"/>
+            </muxc:TabViewItem>
+
+            <!-- Heritage - Identity DNA browser -->
+            <muxc:TabViewItem Header="📜 Heritage">
+                <Frame x:Name="HeritageFrame"/>
+            </muxc:TabViewItem>
+
+            <!-- Thoughts Log - Internal monologue -->
+            <muxc:TabViewItem Header="💭 Thoughts">
+                <Frame x:Name="ThoughtsFrame"/>
+            </muxc:TabViewItem>
+
+            <!-- Hypotheses - Dream cycle discoveries -->
+            <muxc:TabViewItem Header="🔬 Hypotheses">
+                <Frame x:Name="HypothesesFrame"/>
+            </muxc:TabViewItem>
+
+            <!-- Convergence - Onboarding flow -->
+            <muxc:TabViewItem Header="🌀 Convergence">
+                <Frame x:Name="ConvergenceFrame"/>
+            </muxc:TabViewItem>
+
+            <!-- Control Panel - Creator control mechanisms -->
+            <muxc:TabViewItem Header="🎛️ Control">
+                <Frame x:Name="ControlFrame"/>
+            </muxc:TabViewItem>
+
+            <!-- Sync - Cross-device synchronization -->
+            <muxc:TabViewItem Header="🔄 Sync">
+                <Frame x:Name="SyncFrame"/>
+            </muxc:TabViewItem>
+
+            <!-- Projects - Building together -->
+            <muxc:TabViewItem Header="🛠️ Projects">
+                <Frame x:Name="ProjectsFrame"/>
+            </muxc:TabViewItem>
+
+            <!-- Dashboard - System status -->
+            <muxc:TabViewItem Header="📊 Dashboard">
                 <local:Dashboard/>
             </muxc:TabViewItem>
 
-            <muxc:TabViewItem Header="Settings">
+            <!-- Settings -->
+            <muxc:TabViewItem Header="⚙️ Settings">
                 <Frame x:Name="SettingsFrame"/>
             </muxc:TabViewItem>
 
-            <muxc:TabViewItem Header="Plugins">
+            <!-- Plugins -->
+            <muxc:TabViewItem Header="🧩 Plugins">
                 <Grid RowSpacing="12">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -61,7 +109,8 @@
                 </Grid>
             </muxc:TabViewItem>
 
-            <muxc:TabViewItem Header="Console">
+            <!-- Console -->
+            <muxc:TabViewItem Header="🖥️ Console">
                 <local:DeveloperConsole/>
             </muxc:TabViewItem>
         </muxc:TabView>

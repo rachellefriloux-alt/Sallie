@@ -15,6 +15,9 @@ import { LimbicScreen } from '../screens/LimbicScreen';
 import { HeritageScreen } from '../screens/HeritageScreen';
 import { ThoughtsScreen } from '../screens/ThoughtsScreen';
 import { HypothesesScreen } from '../screens/HypothesesScreen';
+import { ProjectsScreen } from '../screens/ProjectsScreen';
+import { ConvergenceScreen } from '../screens/ConvergenceScreen';
+import { ControlScreen } from '../screens/ControlScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -107,6 +110,21 @@ export function AppNavigator() {
             options={{ title: 'Hypotheses' }}
           />
           <Drawer.Screen 
+            name="Projects" 
+            component={ProjectsScreen}
+            options={{ title: 'Projects & Building' }}
+          />
+          <Drawer.Screen 
+            name="Convergence" 
+            component={ConvergenceScreen}
+            options={{ title: 'Convergence' }}
+          />
+          <Drawer.Screen 
+            name="Control" 
+            component={ControlScreen}
+            options={{ title: 'Control Panel' }}
+          />
+          <Drawer.Screen 
             name="Sync" 
             component={SyncScreen}
             options={{ title: 'Sync Status' }}
@@ -159,6 +177,11 @@ export function AppNavigator() {
           name="Hypotheses" 
           component={HypothesesScreen}
           options={{ title: 'Hypotheses' }}
+        />
+        <Tab.Screen 
+          name="Projects" 
+          component={ProjectsScreen}
+          options={{ title: 'Projects' }}
         />
         <Tab.Screen 
           name="Sync" 
