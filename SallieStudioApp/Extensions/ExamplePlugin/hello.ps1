@@ -1,0 +1,1 @@
+Write-Output "Hello from the Example Plugin!"

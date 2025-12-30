@@ -4,5 +4,9 @@
     "git.enableCommitSigning": true,
     "git.enableSmartCommit": true,
     "git.autofetch": true,
-    "terminal.integrated.shellIntegration.enabled": true
+    "terminal.integrated.shellIntegration.enabled": true,
+    "editor.smoothScrolling": false,
+    "workbench.list.smoothScrolling": false,
+    "editor.mouseWheelScrollSensitivity": 1,
+    "editor.fastScrollSensitivity": 5
 }

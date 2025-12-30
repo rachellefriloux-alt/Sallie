@@ -1,0 +1,30 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <!-- Core Colors -->
+    <Color x:Key="SallieViolet">#7A5CFF</Color>
+    <Color x:Key="SalliePink">#FFB6D5</Color>
+    <Color x:Key="DeepSpace">#0F0F15</Color>
+    <Color x:Key="MidnightSlate">#181820</Color>
+    <Color x:Key="SoftGray">#D0D0D0</Color>
+    <Color x:Key="WarmWhite">#F7F7F7</Color>
+
+    <!-- Brushes -->
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource SallieViolet}"/>
+    <SolidColorBrush x:Key="AccentBrushSecondary" Color="{StaticResource SalliePink}"/>
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource DeepSpace}"/>
+    <SolidColorBrush x:Key="PanelBrush" Color="{StaticResource MidnightSlate}"/>
+    <SolidColorBrush x:Key="TextBrush" Color="{StaticResource SoftGray}"/>
+    <SolidColorBrush x:Key="TextBrushLight" Color="{StaticResource WarmWhite}"/>
+
+    <!-- Button Style -->
+    <Style TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="10 6"/>
+        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="0 4"/>
+    </Style>
+
+</ResourceDictionary>

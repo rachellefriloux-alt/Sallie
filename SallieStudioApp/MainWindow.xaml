@@ -1,0 +1,69 @@
+<Window
+    x:Class="SallieStudioApp.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SallieStudioApp"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Sallie Studio"
+    Height="720"
+    Width="1200">
+
+    <Grid Background="{StaticResource WindowBackground}" RowSpacing="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,12,0" Spacing="8">
+            <Button Content="Developer Console" Click="OpenConsole_Click"/>
+        </StackPanel>
+
+        <muxc:TabView x:Name="MainTabs" Grid.Row="1">
+            <muxc:TabViewItem Header="Dashboard">
+                <local:Dashboard/>
+            </muxc:TabViewItem>
+
+            <muxc:TabViewItem Header="Settings">
+                <Frame x:Name="SettingsFrame"/>
+            </muxc:TabViewItem>
+
+            <muxc:TabViewItem Header="Plugins">
+                <Grid RowSpacing="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="220"/>
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer Grid.Row="0">
+                        <StackPanel x:Name="PluginPanel" Spacing="10"/>
+                    </ScrollViewer>
+
+                    <Border Grid.Row="1"
+                            Background="{StaticResource CardBackground}"
+                            Padding="10"
+                            CornerRadius="6">
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="Plugin Log"
+                                       FontSize="14"
+                                       Foreground="{StaticResource TextPrimary}"/>
+                            <ScrollViewer x:Name="LogScroll"
+                                          VerticalScrollBarVisibility="Auto"
+                                          Height="160">
+                                <TextBlock x:Name="LogBox"
+                                           TextWrapping="Wrap"
+                                           Foreground="{StaticResource TextSecondary}"/>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </muxc:TabViewItem>
+
+            <muxc:TabViewItem Header="Console">
+                <local:DeveloperConsole/>
+            </muxc:TabViewItem>
+        </muxc:TabView>
+    </Grid>
+</Window>

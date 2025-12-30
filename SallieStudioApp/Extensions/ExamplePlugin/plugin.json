@@ -1,0 +1,22 @@
+{
+  "name": "Example Plugin",
+  "id": "com.sallie.example",
+  "version": "1.0.0",
+  "author": "Sallie Team",
+  "description": "Adds example functionality to Sallie Studio.",
+  "entrypoint": "plugin.dll",
+  "icon": "plugin-icon.png",
+  "commands": [
+    {
+      "name": "Say Hello",
+      "type": "script",
+      "script": "hello.ps1"
+    }
+  ],
+  "ui": {
+    "panel": "ExamplePanel.xaml"
+  },
+  "settings": {
+    "enabled": true
+  }
+}
