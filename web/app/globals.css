@@ -77,6 +77,29 @@
   }
 }
 
+/* Voice recording pulse animation */
+@keyframes pulse-recording {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 10px rgba(139, 92, 246, 0);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
 .animate-fade-in {
   animation: fade-in 0.5s ease-out;
 }
@@ -88,6 +111,26 @@
 
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-pulse-recording {
+  animation: pulse-recording 1.5s ease-in-out infinite;
+}
+
+.animate-ripple {
+  animation: ripple 0.6s ease-out;
+}
+
+/* Voice button specific styles */
+.voice-button-listening {
+  @apply relative;
+}
+
+.voice-button-listening::before {
+  content: '';
+  @apply absolute inset-0 rounded-xl;
+  animation: ripple 1.5s ease-out infinite;
+  background: rgba(139, 92, 246, 0.3);
 }
 
 @layer base {

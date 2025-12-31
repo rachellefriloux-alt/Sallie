@@ -7,6 +7,7 @@ import { ConnectionStatus } from './ConnectionStatus';
 import { KeyboardShortcutsPanel } from './KeyboardShortcutsPanel';
 import { useWebSocket } from '@/hooks/useWebSocket';
 import { useLimbicStore } from '@/store/useLimbicStore';
+import { useSettingsStore } from '@/store/useSettingsStore';
 import { useKeyboardShortcuts, defaultShortcuts } from '@/hooks/useKeyboardShortcuts';
 
 export function Dashboard() {
@@ -22,6 +23,7 @@ export function Dashboard() {
   
   const { connect, send, isConnected } = useWebSocket();
   const { state: limbicState, updateState } = useLimbicStore();
+  const { settings } = useSettingsStore();
   
   // Keyboard shortcuts
   useKeyboardShortcuts(defaultShortcuts);
@@ -120,6 +122,7 @@ export function Dashboard() {
           onSend={handleSend}
           isConnected={isConnected}
           isTyping={isTyping}
+          voiceLanguage={settings.voiceLanguage}
         />
       </main>
       

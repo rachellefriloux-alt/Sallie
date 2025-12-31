@@ -1,13 +1,15 @@
 'use client';
 
-import { useState, KeyboardEvent } from 'react';
+import { useState, KeyboardEvent, useCallback } from 'react';
+import { VoiceMicrophoneButton } from './VoiceMicrophoneButton';
 
 interface ChatInputProps {
   onSend: (text: string) => void;
   disabled?: boolean;
+  voiceLanguage?: string;
 }
 
-export function ChatInput({ onSend, disabled }: ChatInputProps) {
+export function ChatInput({ onSend, disabled, voiceLanguage = 'en-US' }: ChatInputProps) {
   const [input, setInput] = useState('');
 
   const handleSend = () => {
@@ -22,6 +24,15 @@ export function ChatInput({ onSend, disabled }: ChatInputProps) {
       handleSend();
     }
   };
+
+  // Handle voice transcript - append to existing input
+  const handleVoiceTranscript = useCallback((transcript: string) => {
+    setInput((prev) => {
+      // If there's existing text, add a space before the transcript
+      const separator = prev.trim() ? ' ' : '';
+      return prev + separator + transcript;
+    });
+  }, []);
 
   return (
     <div className="flex gap-3 items-end">
@@ -45,9 +56,16 @@ export function ChatInput({ onSend, disabled }: ChatInputProps) {
           aria-describedby="input-help"
         />
         <span id="input-help" className="sr-only">
-          Press Enter to send, Shift+Enter for new line
+          Press Enter to send, Shift+Enter for new line, Ctrl+Shift+V for voice input
         </span>
       </div>
+      
+      {/* Voice Input Button */}
+      <VoiceMicrophoneButton
+        onTranscript={handleVoiceTranscript}
+        disabled={disabled}
+        language={voiceLanguage}
+      />
       
       <button
         onClick={handleSend}
@@ -65,4 +83,3 @@ export function ChatInput({ onSend, disabled }: ChatInputProps) {
     </div>
   );
 }
-
