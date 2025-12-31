@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SallieStudioApp
@@ -21,6 +22,7 @@ namespace SallieStudioApp
         private StudioConfigRoot _configRoot = new();
         private NativeBridge? _bridge;
         private bool _isPluginsPanelVisible = false;
+        private CancellationTokenSource? _cloudSyncCts;
         private const string WEB_APP_URL = "http://localhost:3000";
 
         public MainWindow()
@@ -124,10 +126,13 @@ namespace SallieStudioApp
             }
         }
 
-        private void CoreWebView2_WebMessageReceived(CoreWebView2 sender, CoreWebView2WebMessageReceivedEventArgs args)
+        private async void CoreWebView2_WebMessageReceived(CoreWebView2 sender, CoreWebView2WebMessageReceivedEventArgs args)
         {
             var message = args.WebMessageAsJson;
-            _bridge?.HandleWebMessage(message);
+            if (_bridge != null)
+            {
+                await _bridge.HandleWebMessage(message);
+            }
         }
 
         private async void InjectBridgeScript()
@@ -193,11 +198,27 @@ namespace SallieStudioApp
         private static Windows.UI.Color ParseColor(string hex)
         {
             hex = hex.TrimStart('#');
-            return Windows.UI.Color.FromArgb(
-                255,
-                Convert.ToByte(hex.Substring(0, 2), 16),
-                Convert.ToByte(hex.Substring(2, 2), 16),
-                Convert.ToByte(hex.Substring(4, 2), 16));
+            
+            // Validate hex string length
+            if (hex.Length != 6)
+            {
+                // Return a default color (gray) if invalid
+                return Windows.UI.Color.FromArgb(255, 128, 128, 128);
+            }
+
+            try
+            {
+                return Windows.UI.Color.FromArgb(
+                    255,
+                    Convert.ToByte(hex.Substring(0, 2), 16),
+                    Convert.ToByte(hex.Substring(2, 2), 16),
+                    Convert.ToByte(hex.Substring(4, 2), 16));
+            }
+            catch
+            {
+                // Return a default color (gray) if parsing fails
+                return Windows.UI.Color.FromArgb(255, 128, 128, 128);
+            }
         }
 
         public void UpdateSyncStatus(string status)
@@ -450,26 +471,48 @@ namespace SallieStudioApp
 
         private async void StartCloudSyncLoop()
         {
-            while (true)
+            _cloudSyncCts = new CancellationTokenSource();
+            
+            try
             {
-                try
+                while (!_cloudSyncCts.Token.IsCancellationRequested)
                 {
-                    if (_configRoot.Cloud.Enabled && !string.IsNullOrWhiteSpace(_configRoot.Cloud.EncryptionKey))
+                    try
                     {
-                        UpdateSyncStatus("Syncing...");
-                        var manager = new CloudSyncManager(_configRoot.Cloud);
-                        await manager.SyncAllAsync().ConfigureAwait(false);
-                        UpdateSyncStatus("Idle");
+                        if (_configRoot.Cloud.Enabled && !string.IsNullOrWhiteSpace(_configRoot.Cloud.EncryptionKey))
+                        {
+                            UpdateSyncStatus("Syncing...");
+                            var manager = new CloudSyncManager(_configRoot.Cloud);
+                            await manager.SyncAllAsync().ConfigureAwait(false);
+                            UpdateSyncStatus("Idle");
+                        }
                     }
-                }
-                catch
-                {
-                    UpdateSyncStatus("Error");
-                }
+                    catch (OperationCanceledException)
+                    {
+                        // Expected when cancellation is requested
+                        break;
+                    }
+                    catch
+                    {
+                        UpdateSyncStatus("Error");
+                    }
 
-                var delayMinutes = _configRoot.Cloud.SyncIntervalMinutes > 0 ? _configRoot.Cloud.SyncIntervalMinutes : 30;
-                await Task.Delay(TimeSpan.FromMinutes(delayMinutes)).ConfigureAwait(false);
+                    var delayMinutes = _configRoot.Cloud.SyncIntervalMinutes > 0 ? _configRoot.Cloud.SyncIntervalMinutes : 30;
+                    await Task.Delay(TimeSpan.FromMinutes(delayMinutes), _cloudSyncCts.Token).ConfigureAwait(false);
+                }
             }
+            catch (OperationCanceledException)
+            {
+                // Expected when cancellation is requested
+                UpdateSyncStatus("Stopped");
+            }
+        }
+
+        public void StopCloudSyncLoop()
+        {
+            _cloudSyncCts?.Cancel();
+            _cloudSyncCts?.Dispose();
+            _cloudSyncCts = null;
         }
 
         #endregion

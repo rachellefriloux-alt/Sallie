@@ -22,6 +22,7 @@ namespace SallieStudioApp.Bridge
         private readonly CoreWebView2 _webView;
         private readonly StudioConfigRoot _config;
         private readonly JsonSerializerOptions _jsonOptions;
+        private readonly object _configLock = new object();
 
         public NativeBridge(MainWindow mainWindow, CoreWebView2 webView, StudioConfigRoot config)
         {
@@ -45,7 +46,7 @@ namespace SallieStudioApp.Bridge
         /// <summary>
         /// Handle incoming messages from the web app via postMessage
         /// </summary>
-        public async void HandleWebMessage(string messageJson)
+        public async Task HandleWebMessage(string messageJson)
         {
             try
             {
@@ -57,8 +58,10 @@ namespace SallieStudioApp.Bridge
                     "getVersion" => HandleGetVersion(),
                     "notification" => HandleNotification(message),
                     "cloudSync" => await HandleCloudSync(),
+                    "getCloudSyncStatus" => HandleGetCloudSyncStatus(),
                     "getPlugins" => HandleGetPlugins(),
                     "executePlugin" => await HandleExecutePlugin(message),
+                    "togglePlugin" => HandleTogglePlugin(message),
                     "runScript" => await HandleRunScript(message),
                     "getSetting" => HandleGetSetting(message),
                     "setSetting" => HandleSetSetting(message),
@@ -171,6 +174,29 @@ namespace SallieStudioApp.Bridge
             }
         }
 
+        private BridgeResponse HandleGetCloudSyncStatus()
+        {
+            try
+            {
+                lock (_configLock)
+                {
+                    var status = new
+                    {
+                        enabled = _config.Cloud.Enabled,
+                        provider = _config.Cloud.Provider,
+                        lastSync = DateTime.Now.ToString("o"), // Placeholder - would need actual tracking
+                        syncInterval = _config.Cloud.SyncIntervalMinutes
+                    };
+
+                    return new BridgeResponse { Success = true, Data = status };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new BridgeResponse { Success = false, Error = ex.Message };
+            }
+        }
+
         private BridgeResponse HandleGetPlugins()
         {
             try
@@ -190,6 +216,37 @@ namespace SallieStudioApp.Bridge
                     Success = true,
                     Data = pluginDtos
                 };
+            }
+            catch (Exception ex)
+            {
+                return new BridgeResponse { Success = false, Error = ex.Message };
+            }
+        }
+
+        private BridgeResponse HandleTogglePlugin(BridgeMessage message)
+        {
+            try
+            {
+                var pluginId = message.PluginId;
+                if (string.IsNullOrWhiteSpace(pluginId))
+                {
+                    return new BridgeResponse { Success = false, Error = "Plugin ID required" };
+                }
+
+                var plugins = _mainWindow.GetPlugins();
+                var plugin = plugins.FirstOrDefault(p => p.Id == pluginId);
+
+                if (plugin == null)
+                {
+                    return new BridgeResponse { Success = false, Error = $"Plugin not found: {pluginId}" };
+                }
+
+                // Toggle the plugin enabled state
+                var newState = !plugin.Enabled;
+                PluginLoader.SetPluginEnabled(plugin, newState);
+                _mainWindow.AppendLog($"[Bridge] Plugin {plugin.Name} {(newState ? "enabled" : "disabled")}");
+
+                return new BridgeResponse { Success = true, Data = new { enabled = newState } };
             }
             catch (Exception ex)
             {
@@ -273,33 +330,42 @@ namespace SallieStudioApp.Bridge
                     return new BridgeResponse { Success = false, Error = "Setting key required" };
                 }
 
-                // Get setting from config
-                object? value = key switch
+                lock (_configLock)
                 {
-                    "cloud.enabled" => _config.Cloud.Enabled,
-                    "cloud.provider" => _config.Cloud.Provider,
-                    "cloud.syncInterval" => _config.Cloud.SyncIntervalMinutes,
-                    "activeProfile" => _config.ActiveProfile,
-                    _ => null
-                };
-
-                if (value == null)
-                {
-                    // Try to get from active profile
-                    if (_config.Profiles.TryGetValue(_config.ActiveProfile, out var profile))
+                    // Get setting from config
+                    object? value = key switch
                     {
-                        value = key switch
-                        {
-                            "silentMode" => profile.SilentMode,
-                            "darkMode" => profile.DarkMode,
-                            "startMinimized" => profile.StartMinimized,
-                            "autoStart" => profile.AutoStart,
-                            _ => null
-                        };
-                    }
-                }
+                        "cloud.enabled" => _config.Cloud.Enabled,
+                        "cloud.provider" => _config.Cloud.Provider,
+                        "cloud.syncInterval" => _config.Cloud.SyncIntervalMinutes,
+                        "activeProfile" => _config.ActiveProfile,
+                        _ => null
+                    };
 
-                return new BridgeResponse { Success = true, Data = value };
+                    if (value == null)
+                    {
+                        // Try to get from active profile
+                        if (_config.Profiles.TryGetValue(_config.ActiveProfile, out var profile))
+                        {
+                            value = key switch
+                            {
+                                "silentMode" => profile.SilentMode,
+                                "darkMode" => profile.DarkMode,
+                                "startMinimized" => profile.StartMinimized,
+                                "autoStart" => profile.AutoStart,
+                                _ => null
+                            };
+                        }
+                    }
+
+                    // Return error if setting key is not recognized
+                    if (value == null)
+                    {
+                        return new BridgeResponse { Success = false, Error = $"Unknown setting key: {key}" };
+                    }
+
+                    return new BridgeResponse { Success = true, Data = value };
+                }
             }
             catch (Exception ex)
             {
@@ -319,50 +385,68 @@ namespace SallieStudioApp.Bridge
                     return new BridgeResponse { Success = false, Error = "Setting key required" };
                 }
 
-                // Set setting in config
-                switch (key)
+                lock (_configLock)
                 {
-                    case "cloud.enabled":
-                        _config.Cloud.Enabled = Convert.ToBoolean(value);
-                        break;
-                    case "cloud.provider":
-                        _config.Cloud.Provider = value?.ToString() ?? "local";
-                        break;
-                    case "cloud.syncInterval":
-                        _config.Cloud.SyncIntervalMinutes = Convert.ToInt32(value);
-                        break;
-                    default:
-                        // Try to set in active profile
-                        if (_config.Profiles.TryGetValue(_config.ActiveProfile, out var profile))
-                        {
-                            switch (key)
+                    bool settingHandled = false;
+
+                    // Set setting in config
+                    switch (key)
+                    {
+                        case "cloud.enabled":
+                            _config.Cloud.Enabled = Convert.ToBoolean(value);
+                            settingHandled = true;
+                            break;
+                        case "cloud.provider":
+                            _config.Cloud.Provider = value?.ToString() ?? "local";
+                            settingHandled = true;
+                            break;
+                        case "cloud.syncInterval":
+                            _config.Cloud.SyncIntervalMinutes = Convert.ToInt32(value);
+                            settingHandled = true;
+                            break;
+                        default:
+                            // Try to set in active profile
+                            if (_config.Profiles.TryGetValue(_config.ActiveProfile, out var profile))
                             {
-                                case "silentMode":
-                                    profile.SilentMode = Convert.ToBoolean(value);
-                                    break;
-                                case "darkMode":
-                                    profile.DarkMode = Convert.ToBoolean(value);
-                                    break;
-                                case "startMinimized":
-                                    profile.StartMinimized = Convert.ToBoolean(value);
-                                    break;
-                                case "autoStart":
-                                    profile.AutoStart = Convert.ToBoolean(value);
-                                    if (profile.AutoStart)
-                                        AutoStart.Enable();
-                                    else
-                                        AutoStart.Disable();
-                                    break;
+                                switch (key)
+                                {
+                                    case "silentMode":
+                                        profile.SilentMode = Convert.ToBoolean(value);
+                                        settingHandled = true;
+                                        break;
+                                    case "darkMode":
+                                        profile.DarkMode = Convert.ToBoolean(value);
+                                        settingHandled = true;
+                                        break;
+                                    case "startMinimized":
+                                        profile.StartMinimized = Convert.ToBoolean(value);
+                                        settingHandled = true;
+                                        break;
+                                    case "autoStart":
+                                        profile.AutoStart = Convert.ToBoolean(value);
+                                        if (profile.AutoStart)
+                                            AutoStart.Enable();
+                                        else
+                                            AutoStart.Disable();
+                                        settingHandled = true;
+                                        break;
+                                }
                             }
-                        }
-                        break;
+                            break;
+                    }
+
+                    // Return error if setting key is not recognized
+                    if (!settingHandled)
+                    {
+                        return new BridgeResponse { Success = false, Error = $"Unknown setting key: {key}" };
+                    }
+
+                    // Save config
+                    SaveConfig();
+                    _mainWindow.AppendLog($"[Bridge] Setting updated: {key}");
+
+                    return new BridgeResponse { Success = true };
                 }
-
-                // Save config
-                SaveConfig();
-                _mainWindow.AppendLog($"[Bridge] Setting updated: {key}");
-
-                return new BridgeResponse { Success = true };
             }
             catch (Exception ex)
             {
