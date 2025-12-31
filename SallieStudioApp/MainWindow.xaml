@@ -11,108 +11,194 @@
     Height="800"
     Width="1400">
 
-    <Grid Background="{StaticResource WindowBackground}" RowSpacing="8">
+    <Grid Background="{StaticResource WindowBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,12,0" Spacing="8">
-            <Button Content="Developer Console" Click="OpenConsole_Click"/>
-        </StackPanel>
+        <!-- Top Toolbar -->
+        <Border Grid.Row="0" Grid.ColumnSpan="2"
+                Background="{StaticResource CardBackground}"
+                Padding="12,8">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
-        <muxc:TabView x:Name="MainTabs" Grid.Row="1" IsAddTabButtonVisible="False">
-            <!-- Chat - Main interaction with Sallie -->
-            <muxc:TabViewItem Header="💬 Chat">
-                <Frame x:Name="ChatFrame"/>
-            </muxc:TabViewItem>
-
-            <!-- Limbic State - Emotional state visualization -->
-            <muxc:TabViewItem Header="🧠 Limbic">
-                <Frame x:Name="LimbicFrame"/>
-            </muxc:TabViewItem>
-
-            <!-- Heritage - Identity DNA browser -->
-            <muxc:TabViewItem Header="📜 Heritage">
-                <Frame x:Name="HeritageFrame"/>
-            </muxc:TabViewItem>
-
-            <!-- Thoughts Log - Internal monologue -->
-            <muxc:TabViewItem Header="💭 Thoughts">
-                <Frame x:Name="ThoughtsFrame"/>
-            </muxc:TabViewItem>
-
-            <!-- Hypotheses - Dream cycle discoveries -->
-            <muxc:TabViewItem Header="🔬 Hypotheses">
-                <Frame x:Name="HypothesesFrame"/>
-            </muxc:TabViewItem>
-
-            <!-- Convergence - Onboarding flow -->
-            <muxc:TabViewItem Header="🌀 Convergence">
-                <Frame x:Name="ConvergenceFrame"/>
-            </muxc:TabViewItem>
-
-            <!-- Control Panel - Creator control mechanisms -->
-            <muxc:TabViewItem Header="🎛️ Control">
-                <Frame x:Name="ControlFrame"/>
-            </muxc:TabViewItem>
-
-            <!-- Sync - Cross-device synchronization -->
-            <muxc:TabViewItem Header="🔄 Sync">
-                <Frame x:Name="SyncFrame"/>
-            </muxc:TabViewItem>
-
-            <!-- Projects - Building together -->
-            <muxc:TabViewItem Header="🛠️ Projects">
-                <Frame x:Name="ProjectsFrame"/>
-            </muxc:TabViewItem>
-
-            <!-- Dashboard - System status -->
-            <muxc:TabViewItem Header="📊 Dashboard">
-                <local:Dashboard/>
-            </muxc:TabViewItem>
-
-            <!-- Settings -->
-            <muxc:TabViewItem Header="⚙️ Settings">
-                <Frame x:Name="SettingsFrame"/>
-            </muxc:TabViewItem>
-
-            <!-- Plugins -->
-            <muxc:TabViewItem Header="🧩 Plugins">
-                <Grid RowSpacing="12">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="220"/>
-                    </Grid.RowDefinitions>
-
-                    <ScrollViewer Grid.Row="0">
-                        <StackPanel x:Name="PluginPanel" Spacing="10"/>
-                    </ScrollViewer>
-
-                    <Border Grid.Row="1"
-                            Background="{StaticResource CardBackground}"
-                            Padding="10"
-                            CornerRadius="6">
-                        <StackPanel Spacing="8">
-                            <TextBlock Text="Plugin Log"
-                                       FontSize="14"
-                                       Foreground="{StaticResource TextPrimary}"/>
-                            <ScrollViewer x:Name="LogScroll"
-                                          VerticalScrollBarVisibility="Auto"
-                                          Height="160">
-                                <TextBlock x:Name="LogBox"
-                                           TextWrapping="Wrap"
-                                           Foreground="{StaticResource TextSecondary}"/>
-                            </ScrollViewer>
+                <!-- Left: Sallie's Home Title and Connection Status -->
+                <StackPanel Orientation="Horizontal" Spacing="16" VerticalAlignment="Center">
+                    <TextBlock Text="💜 Sallie's Home"
+                               FontSize="18"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimary}"/>
+                    <Border x:Name="ConnectionPill"
+                            CornerRadius="12"
+                            Padding="10,4"
+                            Background="#333">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <Ellipse x:Name="ConnectionDot" Width="8" Height="8" Fill="#888"/>
+                            <TextBlock x:Name="ConnectionText"
+                                       Text="Connecting..."
+                                       FontSize="12"
+                                       Foreground="White"/>
                         </StackPanel>
                     </Border>
-                </Grid>
-            </muxc:TabViewItem>
+                </StackPanel>
 
-            <!-- Console -->
-            <muxc:TabViewItem Header="🖥️ Console">
-                <local:DeveloperConsole/>
-            </muxc:TabViewItem>
-        </muxc:TabView>
+                <!-- Right: Action Buttons -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                    <Button x:Name="RefreshBtn" Content="🔄 Refresh" Click="Refresh_Click" ToolTipService.ToolTip="Refresh web app"/>
+                    <Button x:Name="PluginsBtn" Content="🧩 Plugins" Click="TogglePlugins_Click" ToolTipService.ToolTip="Toggle plugins panel"/>
+                    <Button Content="🖥️ Console" Click="OpenConsole_Click" ToolTipService.ToolTip="Open developer console"/>
+                    <Button x:Name="SettingsBtn" Content="⚙️" Click="OpenNativeSettings_Click" ToolTipService.ToolTip="Native settings"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main Content: WebView2 -->
+        <Grid Grid.Row="1" Grid.Column="0">
+            <!-- WebView2 for web app -->
+            <WebView2 x:Name="WebView"
+                      Source="http://localhost:3000"
+                      DefaultBackgroundColor="Transparent"/>
+
+            <!-- Loading Overlay -->
+            <Border x:Name="LoadingOverlay"
+                    Background="{StaticResource WindowBackground}"
+                    Visibility="Visible">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="16">
+                    <ProgressRing IsActive="True" Width="48" Height="48"/>
+                    <TextBlock Text="Loading Sallie..."
+                               FontSize="16"
+                               Foreground="{StaticResource TextSecondary}"/>
+                    <TextBlock x:Name="LoadingStatus"
+                               Text="Connecting to web app..."
+                               FontSize="12"
+                               Foreground="{StaticResource TextSecondary}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Error Overlay -->
+            <Border x:Name="ErrorOverlay"
+                    Background="{StaticResource WindowBackground}"
+                    Visibility="Collapsed">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="16" MaxWidth="400">
+                    <TextBlock Text="⚠️" FontSize="48" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Connection Error"
+                               FontSize="20"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimary}"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="ErrorMessage"
+                               Text="Unable to connect to the web app."
+                               FontSize="14"
+                               Foreground="{StaticResource TextSecondary}"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12">
+                        <Button Content="Retry" Click="Retry_Click" Style="{StaticResource AccentButtonStyle}"/>
+                        <Button Content="Open Setup Wizard" Click="OpenSetupWizard_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Plugins Panel (Collapsible) -->
+        <Border x:Name="PluginsPanel"
+                Grid.Row="1"
+                Grid.Column="1"
+                Background="{StaticResource CardBackground}"
+                Width="280"
+                Visibility="Collapsed"
+                Padding="12">
+            <Grid RowSpacing="12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="160"/>
+                </Grid.RowDefinitions>
+
+                <!-- Plugins Header -->
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBlock Text="🧩 Plugins"
+                               FontSize="16"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimary}"/>
+                    <Button Content="✕" Click="TogglePlugins_Click" 
+                            Background="Transparent" 
+                            HorizontalAlignment="Right"/>
+                </StackPanel>
+
+                <!-- Plugin List -->
+                <ScrollViewer Grid.Row="1">
+                    <StackPanel x:Name="PluginPanel" Spacing="8"/>
+                </ScrollViewer>
+
+                <!-- Plugin Log -->
+                <Border Grid.Row="2"
+                        Background="{StaticResource WindowBackground}"
+                        CornerRadius="6"
+                        Padding="8">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="Plugin Log"
+                                   FontSize="12"
+                                   Foreground="{StaticResource TextSecondary}"/>
+                        <ScrollViewer x:Name="LogScroll"
+                                      VerticalScrollBarVisibility="Auto"
+                                      Height="120">
+                            <TextBlock x:Name="LogBox"
+                                       TextWrapping="Wrap"
+                                       FontSize="11"
+                                       Foreground="{StaticResource TextSecondary}"/>
+                        </ScrollViewer>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- Status Bar -->
+        <Border Grid.Row="2" Grid.ColumnSpan="2"
+                Background="{StaticResource CardBackground}"
+                Padding="12,6">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Left: Quick Actions -->
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <Button Content="▶️ Start All" Click="StartAll_Click" FontSize="12" Padding="8,4"/>
+                    <Button Content="⏹️ Stop All" Click="StopAll_Click" FontSize="12" Padding="8,4"/>
+                    <Button Content="🩺 Health Check" Click="HealthCheck_Click" FontSize="12" Padding="8,4"/>
+                </StackPanel>
+
+                <!-- Center: Sync Status -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" Margin="20,0">
+                    <TextBlock x:Name="SyncStatus"
+                               Text="☁️ Sync: Idle"
+                               FontSize="12"
+                               Foreground="{StaticResource TextSecondary}"
+                               VerticalAlignment="Center"/>
+                    <Button Content="🔄" Click="TriggerSync_Click" FontSize="10" Padding="4,2" ToolTipService.ToolTip="Sync now"/>
+                </StackPanel>
+
+                <!-- Right: Version Info -->
+                <TextBlock Grid.Column="2"
+                           x:Name="VersionText"
+                           Text="v1.0.0"
+                           FontSize="12"
+                           Foreground="{StaticResource TextSecondary}"
+                           VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>
