@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sallie Studio - My Inner World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Crimson+Text:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Core Identity Colors */
+            --peacock-teal: #008080;
+            --peacock-blue: #1e3a8a;
+            --peacock-shimmer: linear-gradient(135deg, #008080, #1e3a8a, #6b46c1, #008080);
+            --leopard-warm: #d4a574;
+            --leopard-gold: #b8860b;
+            --leopard-spot: #3d2914;
+            --gemini-gold: #ffd700;
+            --gemini-silver: #c0c0c0;
+            --infj-purple: #6b46c1;
+            --infj-deep: #4c1d95;
+            --louisiana-moss: #556b2f;
+            --louisiana-bayou: #2d4a3e;
+            --velvet-black: #1a1a2e;
+            --cream-white: #faf6f2;
+            
+            /* Emotional Spectrum */
+            --emotion-joy: #ffd700;
+            --emotion-peace: #87ceeb;
+            --emotion-fire: #ff6b35;
+            --emotion-depth: #6b46c1;
+            --emotion-earth: #8b7355;
+            --emotion-storm: #4a5568;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Crimson Text', serif;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(107, 70, 193, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(0, 128, 128, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, var(--velvet-black) 0%, #16213e 50%, var(--louisiana-bayou) 100%);
+            color: var(--cream-white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        .page-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 2rem;
+            background: rgba(26, 26, 46, 0.9);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .nav-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--peacock-shimmer);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .nav-tab {
+            padding: 0.5rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            color: var(--cream-white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+        
+        .nav-tab:hover, .nav-tab.active {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: var(--gemini-gold);
+        }
+        
+        /* Main Container */
+        .mapping-container {
+            padding: 100px 2rem 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--gemini-gold), var(--leopard-gold), var(--peacock-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Mapping Grid */
+        .mapping-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        /* Mapping Cards */
+        .mapping-card {
+            background: 
+                linear-gradient(135deg, 
+                    rgba(255, 255, 255, 0.08) 0%,
+                    rgba(212, 165, 116, 0.05) 50%, 
+                    rgba(255, 255, 255, 0.03) 100%);
+            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mapping-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--peacock-shimmer);
+        }
+        
+        .mapping-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 215, 0, 0.4);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(255, 215, 0, 0.1);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--peacock-shimmer);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--gemini-gold);
+        }
+        
+        .card-description {
+            font-size: 0.95rem;
+            opacity: 0.7;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Emotional State Tracker */
+        .emotion-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+        
+        .emotion-btn {
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--cream-white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        
+        .emotion-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .emotion-btn.joy { border-color: var(--emotion-joy); }
+        .emotion-btn.joy:hover { background: rgba(255, 215, 0, 0.2); }
+        .emotion-btn.peace { border-color: var(--emotion-peace); }
+        .emotion-btn.peace:hover { background: rgba(135, 206, 235, 0.2); }
+        .emotion-btn.fire { border-color: var(--emotion-fire); }
+        .emotion-btn.fire:hover { background: rgba(255, 107, 53, 0.2); }
+        .emotion-btn.depth { border-color: var(--emotion-depth); }
+        .emotion-btn.depth:hover { background: rgba(107, 70, 193, 0.2); }
+        .emotion-btn.earth { border-color: var(--emotion-earth); }
+        .emotion-btn.earth:hover { background: rgba(139, 115, 85, 0.2); }
+        .emotion-btn.storm { border-color: var(--emotion-storm); }
+        .emotion-btn.storm:hover { background: rgba(74, 85, 104, 0.2); }
+        
+        /* Energy Level Slider */
+        .energy-container {
+            margin-top: 1rem;
+        }
+        
+        .energy-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+        
+        .energy-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--emotion-peace), var(--gemini-gold), var(--emotion-fire));
+            -webkit-appearance: none;
+            appearance: none;
+            cursor: pointer;
+        }
+        
+        .energy-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--cream-white);
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            cursor: pointer;
+        }
+        
+        /* Thought Stream */
+        .thought-input-container {
+            margin-bottom: 1rem;
+        }
+        
+        .thought-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 12px;
+            color: var(--cream-white);
+            font-family: 'Crimson Text', serif;
+            font-size: 1rem;
+            resize: none;
+            min-height: 80px;
+        }
+        
+        .thought-input:focus {
+            outline: none;
+            border-color: var(--gemini-gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+        }
+        
+        .thought-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .thought-tag {
+            padding: 0.4rem 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .thought-tag:hover, .thought-tag.selected {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: var(--gemini-gold);
+        }
+        
+        /* Role Identity Map */
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+        
+        .role-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .role-item:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+        
+        .role-item.active {
+            background: rgba(255, 215, 0, 0.15);
+            border-color: var(--gemini-gold);
+        }
+        
+        .role-icon {
+            width: 35px;
+            height: 35px;
+            background: var(--peacock-shimmer);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        
+        .role-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* Pattern Recognition */
+        .pattern-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .pattern-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+        }
+        
+        .pattern-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--gemini-gold);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .pattern-indicator.warning { background: var(--emotion-fire); box-shadow: 0 0 10px rgba(255, 107, 53, 0.5); }
+        .pattern-indicator.positive { background: var(--peacock-teal); box-shadow: 0 0 10px rgba(0, 128, 128, 0.5); }
+        .pattern-indicator.neutral { background: var(--emotion-earth); box-shadow: 0 0 10px rgba(139, 115, 85, 0.5); }
+        
+        .pattern-text {
+            flex: 1;
+            font-size: 0.9rem;
+        }
+        
+        .pattern-time {
+            font-size: 0.8rem;
+            opacity: 0.5;
+        }
+        
+        /* Energy Cycle Visualization */
+        .cycle-visual {
+            height: 120px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .cycle-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                rgba(135, 206, 235, 0.3) 0%, 
+                rgba(255, 215, 0, 0.3) 25%, 
+                rgba(255, 107, 53, 0.3) 50%, 
+                rgba(107, 70, 193, 0.3) 75%, 
+                rgba(135, 206, 235, 0.3) 100%);
+            clip-path: polygon(
+                0% 80%, 5% 60%, 10% 40%, 15% 50%, 20% 30%, 25% 45%, 
+                30% 60%, 35% 40%, 40% 55%, 45% 35%, 50% 50%, 55% 70%,
+                60% 50%, 65% 40%, 70% 60%, 75% 45%, 80% 55%, 85% 40%,
+                90% 60%, 95% 50%, 100% 70%, 100% 100%, 0% 100%
+            );
+            animation: cycleFlow 20s linear infinite;
+        }
+        
+        @keyframes cycleFlow {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .cycle-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+        
+        /* Growth Journey */
+        .journey-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .journey-timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--gemini-gold), var(--peacock-teal), var(--infj-purple));
+        }
+        
+        .journey-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .journey-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background: var(--gemini-gold);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .journey-date {
+            font-size: 0.8rem;
+            color: var(--gemini-gold);
+            margin-bottom: 0.25rem;
+        }
+        
+        .journey-text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        /* Relationship Web Preview */
+        .relationship-preview {
+            height: 150px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .relationship-node {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--peacock-shimmer);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .relationship-node.center {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: var(--gemini-gold);
+            color: var(--velvet-black);
+            font-weight: bold;
+        }
+        
+        .relationship-node.n1 { top: 20%; left: 30%; }
+        .relationship-node.n2 { top: 25%; left: 70%; }
+        .relationship-node.n3 { top: 70%; left: 25%; }
+        .relationship-node.n4 { top: 65%; left: 75%; }
+        
+        .relationship-line {
+            position: absolute;
+            background: rgba(255, 215, 0, 0.3);
+            height: 2px;
+            transform-origin: left center;
+        }
+        
+        /* Quick Action Button */
+        .action-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--peacock-teal), var(--infj-purple));
+            border: none;
+            border-radius: 12px;
+            color: var(--cream-white);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(107, 70, 193, 0.4);
+        }
+        
+        /* Full Width Section */
+        .full-width-section {
+            background: 
+                linear-gradient(135deg, 
+                    rgba(255, 255, 255, 0.05) 0%,
+                    rgba(107, 70, 193, 0.1) 50%, 
+                    rgba(255, 255, 255, 0.03) 100%);
+            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gemini-gold);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mapping-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .nav-tabs {
+                display: none;
+            }
+            
+            .role-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="page-nav">
+        <div class="nav-title">My Inner World</div>
+        <div class="nav-tabs">
+            <button class="nav-tab active">Overview</button>
+            <button class="nav-tab">Emotions</button>
+            <button class="nav-tab">Patterns</button>
+            <button class="nav-tab">Growth</button>
+            <button class="nav-tab">Relationships</button>
+        </div>
+    </nav>
+    
+    <!-- Main Container -->
+    <div class="mapping-container">
+        <!-- Page Header -->
+        <header class="page-header">
+            <h1 class="page-title">Mapping My Inner World</h1>
+            <p class="page-subtitle">
+                This is your sacred space — where Sallie learns who you truly are. 
+                Your emotions, patterns, roles, and growth journey all come together here.
+            </p>
+        </header>
+        
+        <!-- Mapping Grid -->
+        <div class="mapping-grid">
+            <!-- Emotional State Tracker -->
+            <div class="mapping-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h2 class="card-title">How Are You Feeling?</h2>
+                </div>
+                <p class="card-description">Check in with yourself. Sallie uses this to adapt her responses and support you better.</p>
+                
+                <div class="emotion-grid">
+                    <button class="emotion-btn joy">✨ Joyful</button>
+                    <button class="emotion-btn peace">🌊 Peaceful</button>
+                    <button class="emotion-btn fire">🔥 Fired Up</button>
+                    <button class="emotion-btn depth">🌙 Reflective</button>
+                    <button class="emotion-btn earth">🌿 Grounded</button>
+                    <button class="emotion-btn storm">⚡ Stormy</button>
+                </div>
+                
+                <div class="energy-container">
+                    <div class="energy-label">
+                        <span>Low Energy</span>
+                        <span>High Energy</span>
+                    </div>
+                    <input type="range" class="energy-slider" min="0" max="100" value="50">
+                </div>
+            </div>
+            
+            <!-- Thought Stream -->
+            <div class="mapping-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h2 class="card-title">Thought Stream</h2>
+                </div>
+                <p class="card-description">Capture what's on your mind. Tag it so Sallie can organize and connect your thoughts.</p>
+                
+                <div class="thought-input-container">
+                    <textarea class="thought-input" placeholder="What's flowing through your mind right now?"></textarea>
+                </div>
+                
+                <div class="thought-tags">
+                    <span class="thought-tag">💼 Business</span>
+                    <span class="thought-tag">👨‍👩‍👧 Family</span>
+                    <span class="thought-tag">⚖️ Advocacy</span>
+                    <span class="thought-tag">🎨 Creative</span>
+                    <span class="thought-tag">🧘 Personal</span>
+                    <span class="thought-tag">💡 Idea</span>
+                    <span class="thought-tag">⚠️ Worry</span>
+                    <span class="thought-tag">🙏 Gratitude</span>
+                </div>
+                
+                <button class="action-btn">
+                    <i class="fas fa-plus"></i> Capture This Thought
+                </button>
+            </div>
+            
+            <!-- Role Identity Map -->
+            <div class="mapping-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-masks-theater"></i>
+                    </div>
+                    <h2 class="card-title">Which Role Are You In?</h2>
+                </div>
+                <p class="card-description">You are many things at once. Tell Sallie which role needs support right now.</p>
+                
+                <div class="role-grid">
+                    <div class="role-item active">
+                        <div class="role-icon"><i class="fas fa-briefcase"></i></div>
+                        <span class="role-name">Founder</span>
+                    </div>
+                    <div class="role-item">
+                        <div class="role-icon"><i class="fas fa-balance-scale"></i></div>
+                        <span class="role-name">Advocate</span>
+                    </div>
+                    <div class="role-item">
+                        <div class="role-icon"><i class="fas fa-heart"></i></div>
+                        <span class="role-name">Mother</span>
+                    </div>
+                    <div class="role-item">
+                        <div class="role-icon"><i class="fas fa-palette"></i></div>
+                        <span class="role-name">Designer</span>
+                    </div>
+                    <div class="role-item">
+                        <div class="role-icon"><i class="fas fa-chess"></i></div>
+                        <span class="role-name">Strategist</span>
+                    </div>
+                    <div class="role-item">
+                        <div class="role-icon"><i class="fas fa-pray"></i></div>
+                        <span class="role-name">Spiritual</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pattern Recognition -->
+            <div class="mapping-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h2 class="card-title">Patterns Sallie Sees</h2>
+                </div>
+                <p class="card-description">Based on your interactions, here's what Sallie has noticed about you.</p>
+                
+                <div class="pattern-list">
+                    <div class="pattern-item">
+                        <div class="pattern-indicator positive"></div>
+                        <span class="pattern-text">You're most creative in the morning hours</span>
+                        <span class="pattern-time">Observed 3 weeks</span>
+                    </div>
+                    <div class="pattern-item">
+                        <div class="pattern-indicator warning"></div>
+                        <span class="pattern-text">Energy dips after long meetings</span>
+                        <span class="pattern-time">Observed 2 weeks</span>
+                    </div>
+                    <div class="pattern-item">
+                        <div class="pattern-indicator neutral"></div>
+                        <span class="pattern-text">Advocacy work energizes your fire</span>
+                        <span class="pattern-time">Observed 1 month</span>
+                    </div>
+                    <div class="pattern-item">
+                        <div class="pattern-indicator positive"></div>
+                        <span class="pattern-text">Family time restores your peace</span>
+                        <span class="pattern-time">Observed 2 months</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Energy Cycles -->
+            <div class="mapping-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-wave-square"></i>
+                    </div>
+                    <h2 class="card-title">Energy Cycles</h2>
+                </div>
+                <p class="card-description">Your bipolar rhythm visualization. Understanding your cycles helps Sallie support you better.</p>
+                
+                <div class="cycle-visual">
+                    <div class="cycle-wave"></div>
+                </div>
+                
+                <div class="cycle-labels">
+                    <span>2 weeks ago</span>
+                    <span>1 week ago</span>
+                    <span>Today</span>
+                </div>
+            </div>
+            
+            <!-- Growth Journey -->
+            <div class="mapping-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h2 class="card-title">Growth Journey</h2>
+                </div>
+                <p class="card-description">Milestones and progress toward becoming the fullest version of yourself.</p>
+                
+                <div class="journey-timeline">
+                    <div class="journey-item">
+                        <div class="journey-date">Today</div>
+                        <div class="journey-text">Started mapping your inner world with Sallie</div>
+                    </div>
+                    <div class="journey-item">
+                        <div class="journey-date">Last Week</div>
+                        <div class="journey-text">Completed 5 deep focus sessions without interruption</div>
+                    </div>
+                    <div class="journey-item">
+                        <div class="journey-date">2 Weeks Ago</div>
+                        <div class="journey-text">Recognized and managed a trigger situation independently</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Relationship Web Section -->
+        <div class="full-width-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-project-diagram"></i> Relationship Web
+                </h2>
+                <button class="nav-tab">Expand View</button>
+            </div>
+            
+            <div class="relationship-preview">
+                <div class="relationship-node center">ME</div>
+                <div class="relationship-node n1"><i class="fas fa-user"></i></div>
+                <div class="relationship-node n2"><i class="fas fa-users"></i></div>
+                <div class="relationship-node n3"><i class="fas fa-briefcase"></i></div>
+                <div class="relationship-node n4"><i class="fas fa-heart"></i></div>
+            </div>
+            
+            <p class="card-description" style="margin-top: 1rem; text-align: center;">
+                Click to explore the connections between people, projects, and goals in your life.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Emotion Button Selection
+        const emotionBtns = document.querySelectorAll('.emotion-btn');
+        emotionBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                emotionBtns.forEach(b => b.style.background = '');
+                this.style.background = 'rgba(255, 215, 0, 0.3)';
+                this.style.borderColor = '#ffd700';
+            });
+        });
+        
+        // Role Selection
+        const roleItems = document.querySelectorAll('.role-item');
+        roleItems.forEach(item => {
+            item.addEventListener('click', function() {
+                roleItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Thought Tags
+        const thoughtTags = document.querySelectorAll('.thought-tag');
+        thoughtTags.forEach(tag => {
+            tag.addEventListener('click', function() {
+                this.classList.toggle('selected');
+            });
+        });
+        
+        // Nav Tabs
+        const navTabs = document.querySelectorAll('.nav-tab');
+        navTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                navTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
