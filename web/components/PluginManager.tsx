@@ -15,6 +15,7 @@ export function PluginManager() {
     refreshPlugins 
   } = useNativeBridge();
   const [executing, setExecuting] = useState<string | null>(null);
+  const [executionResult, setExecutionResult] = useState<{ pluginId: string; success: boolean; message: string } | null>(null);
 
   if (!isDesktop) {
     return (
@@ -34,13 +35,20 @@ export function PluginManager() {
 
   const handleExecute = async (pluginId: string, commandName: string) => {
     setExecuting(`${pluginId}-${commandName}`);
+    setExecutionResult(null);
     try {
       const result = await executePlugin(pluginId, commandName);
       if (result) {
-        console.log('Plugin execution result:', result);
+        setExecutionResult({ pluginId, success: true, message: 'Command executed successfully' });
+      } else {
+        setExecutionResult({ pluginId, success: false, message: 'Command execution failed' });
       }
+    } catch (err) {
+      setExecutionResult({ pluginId, success: false, message: `Error: ${err}` });
     } finally {
       setExecuting(null);
+      // Clear result after 3 seconds
+      setTimeout(() => setExecutionResult(null), 3000);
     }
   };
 
@@ -60,6 +68,16 @@ export function PluginManager() {
       {error && (
         <div className="mb-4 p-3 bg-red-900/30 border border-red-700 rounded text-red-300 text-sm">
           {error}
+        </div>
+      )}
+
+      {executionResult && (
+        <div className={`mb-4 p-3 rounded text-sm ${
+          executionResult.success 
+            ? 'bg-green-900/30 border border-green-700 text-green-300'
+            : 'bg-red-900/30 border border-red-700 text-red-300'
+        }`}>
+          {executionResult.message}
         </div>
       )}
 

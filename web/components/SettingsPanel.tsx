@@ -33,6 +33,8 @@ export function SettingsPanel() {
     openai: '',
   });
   const [saving, setSaving] = useState(false);
+  // Desktop settings state - in a production implementation, these would be
+  // persisted via the native bridge API (setSetting/getSetting)
   const [desktopSettings, setDesktopSettings] = useState({
     enableSystemTray: true,
     minimizeToTray: true,

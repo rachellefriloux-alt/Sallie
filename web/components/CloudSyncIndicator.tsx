@@ -10,17 +10,24 @@ import {
 } from '@heroicons/react/24/outline';
 
 function formatRelativeTime(dateString: string): string {
-  const date = new Date(dateString);
-  const now = new Date();
-  const diffMs = now.getTime() - date.getTime();
-  const diffMins = Math.floor(diffMs / 60000);
-  const diffHours = Math.floor(diffMs / 3600000);
-  const diffDays = Math.floor(diffMs / 86400000);
+  try {
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      return 'unknown';
+    }
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
 
-  if (diffMins < 1) return 'just now';
-  if (diffMins < 60) return `${diffMins}m ago`;
-  if (diffHours < 24) return `${diffHours}h ago`;
-  return `${diffDays}d ago`;
+    if (diffMins < 1) return 'just now';
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    return `${diffDays}d ago`;
+  } catch {
+    return 'unknown';
+  }
 }
 
 export function CloudSyncIndicator() {
@@ -65,8 +72,13 @@ export function CloudSyncIndicator() {
 
   const handleSync = async () => {
     if (cloudSyncStatus.status === 'syncing') return;
-    await triggerSync();
-    await refreshSyncStatus();
+    try {
+      await triggerSync();
+      await refreshSyncStatus();
+    } catch (error) {
+      console.error('Sync error:', error);
+      // Error state is already handled by the hook
+    }
   };
 
   return (
