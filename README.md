@@ -8,21 +8,10 @@ Sallie is not just another AI chatbot. She's a complete cognitive partner with e
 
 ## 🚀 Quick Start
 
-### Choose Your Experience:
-
-#### 🖥️ **Desktop App** (Recommended - Native Experience)
-**Want the best experience?** Check out **[START_HERE_DESKTOP.md](START_HERE_DESKTOP.md)** for the desktop app!
-
-```bash
-# Start backend, then launch desktop app:
-./start-sallie.sh && cd desktop && npm start      # Linux/Mac
-start-sallie.bat & cd desktop & npm start         # Windows
-```
-
-Features: System tray, native notifications, keyboard shortcuts, offline mode!
+### Get Started with Sallie:
 
 #### 🌐 **Web App** (Browser-Based)
-**Prefer using a browser?** Check out **[START_HERE.md](START_HERE.md)** for web access!
+**The easiest way to experience Sallie!** Check out **[START_HERE.md](START_HERE.md)** for web access!
 
 ```bash
 # One command to start everything:
@@ -31,6 +20,8 @@ start-sallie.bat       # Windows
 ```
 
 Then open http://localhost:3000 in your browser! 🎉
+
+Features: Settings management, plugin control, cloud sync (when running with native bridge support)!
 
 ---
 
@@ -41,8 +32,7 @@ Then open http://localhost:3000 in your browser! 🎉
 - [System Requirements](#system-requirements)
 - [Installation Options](#installation-options)
   - [Option 1: Web App (Easiest - Works in Browser)](#option-1-web-app-easiest)
-  - [Option 2: Desktop App (Windows/Mac/Linux)](#option-2-desktop-app)
-  - [Option 3: Android App (Phone/Tablet)](#option-3-android-app)
+  - [Option 2: Android App (Phone/Tablet)](#option-2-android-app)
 - [First-Time Setup](#first-time-setup)
 - [Meeting Sallie for the First Time](#meeting-sallie-for-the-first-time)
 - [What Sallie Can Do](#what-sallie-can-do)
@@ -103,8 +93,7 @@ Sallie can do **anything** a human or AI can do:
 | **Philosophical Depth** | ✅ 100% | Existential engagement, ethical reasoning, meta-cognition |
 | **Project Management** | ✅ 100% | Autonomous goal tracking, timeline estimation, progress visualization |
 | **Peer Network** | ✅ 100% | P2P encrypted communication with other Sallie instances |
-| **Web App** | ✅ 100% | Works in any browser, PWA support |
-| **Desktop App** | ✅ 100% | Native installers for Windows/macOS/Linux |
+| **Web App** | ✅ 100% | Works in any browser, PWA support, desktop features integration |
 | **Android App** | ✅ 100% | APK ready for phones and tablets |
 | **Documentation** | ✅ 85+ files | Comprehensive guides for everything |
 | **Test Coverage** | ✅ 94% | Production-quality reliability |
@@ -113,7 +102,7 @@ Sallie can do **anything** a human or AI can do:
 
 ## 💻 System Requirements
 
-### Minimum Requirements (Backend)
+### Minimum Requirements
 
 - **OS**: Windows 10+, macOS 10.15+, or Linux (Ubuntu 20.04+)
 - **CPU**: 4 cores (8+ recommended)
@@ -122,12 +111,6 @@ Sallie can do **anything** a human or AI can do:
 - **Python**: 3.11 or higher
 - **Node.js**: 18 or higher
 - **Docker**: Docker Desktop (optional but recommended)
-
-### For Desktop App
-
-- **Windows**: Windows 10 64-bit or higher
-- **macOS**: macOS 10.15 (Catalina) or higher
-- **Linux**: Ubuntu 20.04+, Debian 11+, or equivalent
 
 ### For Android App
 
@@ -289,131 +272,7 @@ npm run dev
 
 ---
 
-## Option 2: Desktop App
-
-### Windows Installation
-
-1. **Build the installer:**
-```batch
-cd desktop
-npm install
-npm run build:win
-```
-
-2. **Locate the installer:**
-- File: `desktop\dist\Sallie-Setup-5.4.2.exe`
-- Size: ~100 MB
-
-3. **Install:**
-- Double-click `Sallie-Setup-5.4.2.exe`
-- Follow installation wizard
-- Choose install location (default: `C:\Program Files\Sallie`)
-- Create desktop shortcut: ✅ Yes
-- Create Start Menu entry: ✅ Yes
-
-4. **Launch:**
-- From Start Menu: Search "Sallie" → Click
-- From Desktop: Double-click Sallie icon
-- From System Tray: Right-click tray icon → Open
-
-### macOS Installation
-
-1. **Build the DMG:**
-```bash
-cd desktop
-npm install
-npm run build:mac
-```
-
-2. **Locate the DMG:**
-- File: `desktop/dist/Sallie-5.4.2-arm64.dmg` (M1/M2/M3)
-- File: `desktop/dist/Sallie-5.4.2-x64.dmg` (Intel)
-- Size: ~120 MB
-
-3. **Install:**
-- Double-click the DMG file
-- Drag Sallie icon to Applications folder
-- Eject the DMG
-- Open Applications folder
-- Right-click Sallie → Open (first time only, due to Gatekeeper)
-- Click "Open" in security dialog
-
-4. **Launch:**
-- From Applications folder: Double-click Sallie
-- From Spotlight: Press Cmd+Space, type "Sallie"
-- From Dock: Add to Dock for quick access
-
-### Linux Installation
-
-1. **Build the AppImage:**
-```bash
-cd desktop
-npm install
-npm run build:linux
-```
-
-2. **Locate the AppImage:**
-- File: `desktop/dist/Sallie-5.4.2-x86_64.AppImage`
-- Size: ~110 MB
-
-3. **Make executable:**
-```bash
-chmod +x desktop/dist/Sallie-5.4.2-x86_64.AppImage
-```
-
-4. **Run:**
-```bash
-./desktop/dist/Sallie-5.4.2-x86_64.AppImage
-```
-
-5. **Optional: Install system-wide:**
-```bash
-# Copy to applications
-sudo cp desktop/dist/Sallie-5.4.2-x86_64.AppImage /opt/sallie.appimage
-
-# Create desktop entry
-cat > ~/.local/share/applications/sallie.desktop << EOF
-[Desktop Entry]
-Name=Sallie
-Exec=/opt/sallie.appimage
-Icon=sallie
-Type=Application
-Categories=Utility;
-EOF
-```
-
-### Desktop App Features
-
-- ✅ Native window (feels like desktop app)
-- ✅ System tray integration
-- ✅ Auto-launch on startup (optional)
-- ✅ Native notifications
-- ✅ Offline mode
-- ✅ Multi-window support
-- ✅ Keyboard shortcuts
-
-### First Launch Setup
-
-1. **Backend URL Configuration:**
-   - On first launch, you'll be asked for backend URL
-   - Enter: `http://localhost:8000`
-   - Click "Test Connection"
-   - If successful, click "Save"
-
-2. **Complete Great Convergence:**
-   - 14 deep questions about who you are
-   - Takes 30-60 minutes
-   - Be honest and thoughtful
-   - This creates your Heritage DNA
-
-3. **Start Using:**
-   - Desktop app is now connected
-   - Chat, create, explore
-   - Minimize to system tray when not in use
-
----
-
-## Option 3: Android App
+## Option 2: Android App
 
 ### Build the APK
 
@@ -713,17 +572,6 @@ Sallie: "Found 2 nearby: Alex's Sallie and Sam's Sallie. Both opted into
 3. Pull models: `ollama pull deepseek-v3`
 4. Check disk space (models need ~12 GB)
 
-### Desktop App Won't Connect
-
-**Problem**: Desktop app shows "Connection failed"
-
-**Solutions:**
-1. Verify backend is running: http://localhost:8000/health
-2. Check backend URL in app settings
-3. Try `http://127.0.0.1:8000` instead of `localhost`
-4. Check firewall isn't blocking connections
-5. Restart both backend and desktop app
-
 ### Android App Can't Find Backend
 
 **Problem**: Android app can't connect to backend
@@ -910,10 +758,6 @@ Built with love using:
 │  Web App:                                               │
 │    cd web && npm run dev                                │
 │    Open: http://localhost:3000                          │
-├─────────────────────────────────────────────────────────┤
-│  Desktop App:                                           │
-│    cd desktop && npm run build:win/mac/linux            │
-│    Install generated file in dist/                      │
 ├─────────────────────────────────────────────────────────┤
 │  Android App:                                           │
 │    cd mobile/android && ./gradlew assembleRelease       │
