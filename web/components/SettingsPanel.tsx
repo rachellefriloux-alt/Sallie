@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import { useSettingsStore } from '@/store/useSettingsStore';
+import { useNativeBridge } from '@/hooks/useNativeBridge';
+import { PluginManager } from './PluginManager';
+import { CloudSyncIndicator } from './CloudSyncIndicator';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
@@ -24,11 +27,18 @@ const VOICE_LANGUAGES = [
 
 export function SettingsPanel() {
   const { settings, updateSettings } = useSettingsStore();
+  const { isDesktop, version, isConnected } = useNativeBridge();
   const [apiKeys, setApiKeys] = useState({
     gemini: '',
     openai: '',
   });
   const [saving, setSaving] = useState(false);
+  const [desktopSettings, setDesktopSettings] = useState({
+    enableSystemTray: true,
+    minimizeToTray: true,
+    startOnLogin: false,
+    enableNativeNotifications: true,
+  });
 
   const handleSave = async () => {
     setSaving(true);
@@ -159,6 +169,68 @@ export function SettingsPanel() {
             </div>
           </div>
         </div>
+
+        {/* Desktop Settings - Only shown in desktop app */}
+        {isDesktop && (
+          <div className="bg-gray-800 rounded-lg p-6">
+            <h2 className="text-xl font-semibold mb-4">Desktop Settings</h2>
+            <p className="text-sm text-gray-400 mb-4">
+              Running Sallie Desktop v{version || 'Unknown'} {isConnected ? '(Connected)' : '(Disconnected)'}
+            </p>
+            <div className="space-y-4">
+              <label className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  checked={desktopSettings.enableSystemTray}
+                  onChange={(e) => setDesktopSettings({ ...desktopSettings, enableSystemTray: e.target.checked })}
+                  className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-violet-600 focus:ring-violet-500"
+                />
+                <span className="text-gray-300">Enable system tray icon</span>
+              </label>
+              <label className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  checked={desktopSettings.minimizeToTray}
+                  onChange={(e) => setDesktopSettings({ ...desktopSettings, minimizeToTray: e.target.checked })}
+                  className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-violet-600 focus:ring-violet-500"
+                  disabled={!desktopSettings.enableSystemTray}
+                />
+                <span className={desktopSettings.enableSystemTray ? 'text-gray-300' : 'text-gray-500'}>
+                  Minimize to system tray
+                </span>
+              </label>
+              <label className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  checked={desktopSettings.startOnLogin}
+                  onChange={(e) => setDesktopSettings({ ...desktopSettings, startOnLogin: e.target.checked })}
+                  className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-violet-600 focus:ring-violet-500"
+                />
+                <span className="text-gray-300">Start on system login</span>
+              </label>
+              <label className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  checked={desktopSettings.enableNativeNotifications}
+                  onChange={(e) => setDesktopSettings({ ...desktopSettings, enableNativeNotifications: e.target.checked })}
+                  className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-violet-600 focus:ring-violet-500"
+                />
+                <span className="text-gray-300">Enable native desktop notifications</span>
+              </label>
+            </div>
+          </div>
+        )}
+
+        {/* Plugin Management - Only shown in desktop app */}
+        {isDesktop && <PluginManager />}
+
+        {/* Cloud Sync Status - Only shown in desktop app */}
+        {isDesktop && (
+          <div className="bg-gray-800 rounded-lg p-6">
+            <h2 className="text-xl font-semibold mb-4">Cloud Sync</h2>
+            <CloudSyncIndicator />
+          </div>
+        )}
 
         {/* Actions */}
         <div className="flex gap-4">
