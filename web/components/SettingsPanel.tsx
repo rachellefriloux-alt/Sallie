@@ -1,15 +1,29 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useSettingsStore } from '@/store/useSettingsStore';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
+// Available voice input languages
+const VOICE_LANGUAGES = [
+  { code: 'en-US', label: 'English (US)' },
+  { code: 'en-GB', label: 'English (UK)' },
+  { code: 'en-AU', label: 'English (Australia)' },
+  { code: 'es-ES', label: 'Spanish (Spain)' },
+  { code: 'es-MX', label: 'Spanish (Mexico)' },
+  { code: 'fr-FR', label: 'French' },
+  { code: 'de-DE', label: 'German' },
+  { code: 'it-IT', label: 'Italian' },
+  { code: 'pt-BR', label: 'Portuguese (Brazil)' },
+  { code: 'ja-JP', label: 'Japanese' },
+  { code: 'ko-KR', label: 'Korean' },
+  { code: 'zh-CN', label: 'Chinese (Simplified)' },
+  { code: 'zh-TW', label: 'Chinese (Traditional)' },
+];
+
 export function SettingsPanel() {
-  const [settings, setSettings] = useState({
-    posture: 'PEER',
-    notifications: true,
-    theme: 'dark',
-  });
+  const { settings, updateSettings } = useSettingsStore();
   const [apiKeys, setApiKeys] = useState({
     gemini: '',
     openai: '',
@@ -53,7 +67,7 @@ export function SettingsPanel() {
           <h2 className="text-xl font-semibold mb-4">Posture Mode</h2>
           <select
             value={settings.posture}
-            onChange={(e) => setSettings({ ...settings, posture: e.target.value })}
+            onChange={(e) => updateSettings({ posture: e.target.value })}
             className="w-full px-4 py-2 bg-gray-700 text-gray-100 rounded-lg border border-gray-600 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 focus:outline-none"
           >
             <option value="COMPANION">Companion - Grounding, warm presence</option>
@@ -70,11 +84,49 @@ export function SettingsPanel() {
             <input
               type="checkbox"
               checked={settings.notifications}
-              onChange={(e) => setSettings({ ...settings, notifications: e.target.checked })}
+              onChange={(e) => updateSettings({ notifications: e.target.checked })}
               className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-violet-600 focus:ring-violet-500"
             />
             <span className="text-gray-300">Enable notifications</span>
           </label>
+        </div>
+
+        {/* Voice Input Settings */}
+        <div className="bg-gray-800 rounded-lg p-6">
+          <h2 className="text-xl font-semibold mb-4">Voice Input</h2>
+          <p className="text-sm text-gray-400 mb-4">
+            Configure speech recognition settings. Voice input requires Chrome, Edge, or Safari.
+          </p>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">
+                Speech Recognition Language
+              </label>
+              <select
+                value={settings.voiceLanguage}
+                onChange={(e) => updateSettings({ voiceLanguage: e.target.value })}
+                className="w-full px-4 py-2 bg-gray-700 text-gray-100 rounded-lg border border-gray-600 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 focus:outline-none"
+              >
+                {VOICE_LANGUAGES.map((lang) => (
+                  <option key={lang.code} value={lang.code}>
+                    {lang.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <label className="flex items-center gap-3">
+              <input
+                type="checkbox"
+                checked={settings.voiceAutoSend}
+                onChange={(e) => updateSettings({ voiceAutoSend: e.target.checked })}
+                className="w-5 h-5 rounded border-gray-600 bg-gray-700 text-violet-600 focus:ring-violet-500"
+              />
+              <span className="text-gray-300">Auto-send after voice input</span>
+            </label>
+            <p className="text-xs text-gray-500">
+              Keyboard shortcut: Ctrl+Shift+V (or Cmd+Shift+V on Mac) to toggle voice input
+            </p>
+          </div>
         </div>
 
         {/* API Keys */}

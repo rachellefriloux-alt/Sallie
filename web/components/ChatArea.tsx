@@ -19,9 +19,10 @@ interface ChatAreaProps {
   onSend: (text: string) => void;
   isConnected: boolean;
   isTyping?: boolean;
+  voiceLanguage?: string;
 }
 
-export function ChatArea({ messages, onSend, isConnected, isTyping = false }: ChatAreaProps) {
+export function ChatArea({ messages, onSend, isConnected, isTyping = false, voiceLanguage = 'en-US' }: ChatAreaProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearch, setShowSearch] = useState(false);
@@ -150,7 +151,7 @@ export function ChatArea({ messages, onSend, isConnected, isTyping = false }: Ch
       </div>
 
       <div className="border-t border-gray-800 p-4">
-        <ChatInput onSend={onSend} disabled={!isConnected} />
+        <ChatInput onSend={onSend} disabled={!isConnected} voiceLanguage={voiceLanguage} />
       </div>
     </div>
   );
