@@ -33,8 +33,9 @@ export function SettingsPanel() {
     openai: '',
   });
   const [saving, setSaving] = useState(false);
-  // Desktop settings state - in a production implementation, these would be
-  // persisted via the native bridge API (setSetting/getSetting)
+  // Desktop settings - Currently stored in component state only.
+  // TODO: Implement persistence via native bridge API using setSetting/getSetting
+  // when the backend is ready to support these specific setting keys.
   const [desktopSettings, setDesktopSettings] = useState({
     enableSystemTray: true,
     minimizeToTray: true,

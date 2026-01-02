@@ -76,8 +76,8 @@ export function CloudSyncIndicator() {
       await triggerSync();
       await refreshSyncStatus();
     } catch (error) {
+      // Errors are tracked and displayed via the hook's error state
       console.error('Sync error:', error);
-      // Error state is already handled by the hook
     }
   };
 

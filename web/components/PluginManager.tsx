@@ -44,7 +44,7 @@ export function PluginManager() {
         setExecutionResult({ pluginId, success: false, message: 'Command execution failed' });
       }
     } catch (err) {
-      setExecutionResult({ pluginId, success: false, message: `Error: ${err}` });
+      setExecutionResult({ pluginId, success: false, message: 'Command execution error' });
     } finally {
       setExecuting(null);
       // Clear result after 3 seconds
