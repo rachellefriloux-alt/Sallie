@@ -86,7 +86,7 @@ if "%FIRST_RUN%"=="true" (
     
     REM Install Web dependencies
     echo.
-    echo [3/6] Installing Web app dependencies...
+    echo [3/5] Installing Web app dependencies...
     cd web
     npm install --silent
     if errorlevel 1 (
@@ -96,21 +96,9 @@ if "%FIRST_RUN%"=="true" (
     )
     cd ..
     
-    REM Install Desktop dependencies
-    echo.
-    echo [4/6] Installing Desktop app dependencies...
-    cd desktop
-    npm install --silent
-    if errorlevel 1 (
-        echo Desktop installation failed, continuing...
-    ) else (
-        echo ✓ Desktop packages installed
-    )
-    cd ..
-    
     REM Install Mobile dependencies
     echo.
-    echo [5/6] Installing Mobile app dependencies...
+    echo [4/5] Installing Mobile app dependencies...
     cd mobile
     npm install --silent
     if errorlevel 1 (
@@ -122,7 +110,7 @@ if "%FIRST_RUN%"=="true" (
     
     REM Pull Docker images
     echo.
-    echo [6/6] Downloading Docker images...
+    echo [5/5] Downloading Docker images...
     echo This may take 5-10 minutes depending on your connection...
     cd progeny_root
     docker-compose pull
@@ -199,13 +187,10 @@ echo ═════════════════════════
 echo.
 echo Access Options:
 echo.
-echo   1. WEB APP (Recommended for first time)
+echo   1. WEB APP
 echo      Open: http://localhost:3000
 echo.
-echo   2. DESKTOP APP
-echo      Run: cd desktop ^&^& npm start
-echo.
-echo   3. MOBILE APP
+echo   2. MOBILE APP
 echo      • Build: cd mobile ^&^& npm run android
 echo      • Connect to: http://YOUR_IP:8000
 echo.

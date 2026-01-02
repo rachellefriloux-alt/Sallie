@@ -125,7 +125,7 @@ if [ "$FIRST_RUN" = true ]; then
     
     # Install Web dependencies
     echo ""
-    echo -e "${YELLOW}[3/6] Installing Web app dependencies...${NC}"
+    echo -e "${YELLOW}[3/5] Installing Web app dependencies...${NC}"
     cd web
     if install_with_progress "Web packages" "npm install --silent"; then
         cd ..
@@ -134,20 +134,9 @@ if [ "$FIRST_RUN" = true ]; then
         cd ..
     fi
     
-    # Install Desktop dependencies
-    echo ""
-    echo -e "${YELLOW}[4/6] Installing Desktop app dependencies...${NC}"
-    cd desktop
-    if install_with_progress "Desktop packages" "npm install --silent"; then
-        cd ..
-    else
-        echo -e "${YELLOW}Desktop installation failed, continuing...${NC}"
-        cd ..
-    fi
-    
     # Install Mobile dependencies (optional)
     echo ""
-    echo -e "${YELLOW}[5/6] Installing Mobile app dependencies...${NC}"
+    echo -e "${YELLOW}[4/5] Installing Mobile app dependencies...${NC}"
     cd mobile
     if install_with_progress "Mobile packages" "npm install --silent"; then
         cd ..
@@ -158,7 +147,7 @@ if [ "$FIRST_RUN" = true ]; then
     
     # Pull Docker images
     echo ""
-    echo -e "${YELLOW}[6/6] Downloading Docker images...${NC}"
+    echo -e "${YELLOW}[5/5] Downloading Docker images...${NC}"
     echo "This may take 5-10 minutes depending on your connection..."
     cd progeny_root
     docker-compose pull
@@ -255,13 +244,10 @@ echo -e "${CYAN}═════════════════════�
 echo ""
 echo -e "${CYAN}Access Options:${NC}"
 echo ""
-echo -e "  ${GREEN}1. WEB APP${NC} (Recommended for first time)"
+echo -e "  ${GREEN}1. WEB APP${NC}"
 echo -e "     Open: ${CYAN}http://localhost:3000${NC}"
 echo ""
-echo -e "  ${GREEN}2. DESKTOP APP${NC}"
-echo -e "     Run: ${CYAN}cd desktop && npm start${NC}"
-echo ""
-echo -e "  ${GREEN}3. MOBILE APP${NC}"
+echo -e "  ${GREEN}2. MOBILE APP${NC}"
 echo -e "     • Build: ${CYAN}cd mobile && npm run android${NC}"
 echo -e "     • Connect to: ${CYAN}http://YOUR_IP:8000${NC}"
 echo ""
