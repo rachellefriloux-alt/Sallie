@@ -1,0 +1,19 @@
+============================================================
+Traceback (most recent call last):
+Digital Progeny - Dependency Check
+============================================================
+
+Platform: Windows 10.0.26220
+Architecture: AMD64
+
+Required Commands:
+------------------------------------------------------------
+  File "C:\Sallie\progeny_root\scripts\check_dependencies.py", line 205, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "C:\Sallie\progeny_root\scripts\check_dependencies.py", line 121, in main
+    print(f"{status} Python: {py_version} {'(>= 3.11 required)' if not py_ok else ''}")
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 0: character maps to <undefined>

@@ -1,0 +1,116 @@
+﻿<Page
+    x:Class="SallieStudioApp.ChatPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{StaticResource WindowBackground}">
+
+    <Grid Padding="20" RowSpacing="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header with Limbic State -->
+        <Grid ColumnSpacing="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <TextBlock Text="Chat with Sallie"
+                           FontSize="28"
+                           Foreground="{StaticResource TextPrimary}"/>
+                <TextBlock x:ConnectionId='16' x:Name="PostureText"
+                           Text="Mode: PEER"
+                           FontSize="14"
+                           Foreground="{StaticResource TextSecondary}"/>
+            </StackPanel>
+
+            <!-- Connection Status -->
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                <Border x:ConnectionId='14' x:Name="ConnectionPill"
+                        CornerRadius="12"
+                        Padding="10 4"
+                        Background="#333">
+                    <TextBlock x:ConnectionId='15' x:Name="ConnectionText"
+                               Text="Disconnected"
+                               Foreground="White"/>
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <!-- Chat Messages -->
+        <Border Grid.Row="1"
+                Background="{StaticResource CardBackground}"
+                CornerRadius="6"
+                Padding="10">
+            <ScrollViewer x:ConnectionId='12' x:Name="ChatScroll" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:ConnectionId='13' x:Name="MessagesPanel" Spacing="10"/>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Input Area -->
+        <Grid Grid.Row="2" ColumnSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:ConnectionId='10' x:Name="MessageInput"
+                     PlaceholderText="Type a message..."
+                                                   
+                     AcceptsReturn="False"
+                     TextWrapping="NoWrap"/>
+
+            <Button x:ConnectionId='11' Grid.Column="1"
+                    Content="Send"
+                                      
+                    Style="{StaticResource AccentButtonStyle}"/>
+        </Grid>
+
+        <!-- Limbic Gauges Sidebar -->
+        <Border Grid.Row="1"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Background="{StaticResource CardBackground}"
+                CornerRadius="6"
+                Padding="12"
+                Margin="0,0,0,0"
+                Width="180">
+            <StackPanel Spacing="12">
+                <TextBlock Text="Limbic State"
+                           FontSize="14"
+                           FontWeight="SemiBold"
+                           Foreground="{StaticResource TextPrimary}"/>
+
+                <StackPanel>
+                    <TextBlock Text="Trust" FontSize="12" Foreground="{StaticResource TextSecondary}"/>
+                    <ProgressBar x:ConnectionId='8' x:Name="TrustBar" Height="6" Value="50"/>
+                    <TextBlock x:ConnectionId='9' x:Name="TrustText" Text="0.50" FontSize="10" Foreground="{StaticResource TextSecondary}"/>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock Text="Warmth" FontSize="12" Foreground="{StaticResource TextSecondary}"/>
+                    <ProgressBar x:ConnectionId='6' x:Name="WarmthBar" Height="6" Value="60"/>
+                    <TextBlock x:ConnectionId='7' x:Name="WarmthText" Text="0.60" FontSize="10" Foreground="{StaticResource TextSecondary}"/>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock Text="Energy" FontSize="12" Foreground="{StaticResource TextSecondary}"/>
+                    <ProgressBar x:ConnectionId='4' x:Name="ArousalBar" Height="6" Value="70"/>
+                    <TextBlock x:ConnectionId='5' x:Name="ArousalText" Text="0.70" FontSize="10" Foreground="{StaticResource TextSecondary}"/>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock Text="Mood" FontSize="12" Foreground="{StaticResource TextSecondary}"/>
+                    <ProgressBar x:ConnectionId='2' x:Name="ValenceBar" Height="6" Value="60"/>
+                    <TextBlock x:ConnectionId='3' x:Name="ValenceText" Text="0.60" FontSize="10" Foreground="{StaticResource TextSecondary}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Page>
+

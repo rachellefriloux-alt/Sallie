@@ -18,6 +18,13 @@ import { HypothesesScreen } from '../screens/HypothesesScreen';
 import { ProjectsScreen } from '../screens/ProjectsScreen';
 import { ConvergenceScreen } from '../screens/ConvergenceScreen';
 import { ControlScreen } from '../screens/ControlScreen';
+import { AvatarScreen } from '../screens/AvatarScreen';
+import { ConsciousnessScreen } from '../screens/ConsciousnessScreen';
+import { UserThoughtPage } from '../screens/UserThoughtPage';
+import { SallieThoughtPage } from '../screens/SallieThoughtPage';
+import { AlignmentPage } from '../screens/AlignmentPage';
+import { ResourceAccessPage } from '../screens/ResourceAccessPage';
+import { ServiceConnectionsPage } from '../screens/ServiceConnectionsPage';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -130,6 +137,16 @@ export function AppNavigator() {
             options={{ title: 'Sync Status' }}
           />
           <Drawer.Screen 
+            name="Avatar" 
+            component={AvatarScreen}
+            options={{ title: 'Avatar Workshop' }}
+          />
+          <Drawer.Screen 
+            name="Consciousness" 
+            component={ConsciousnessScreen}
+            options={{ title: 'Consciousness' }}
+          />
+          <Drawer.Screen 
             name="Settings" 
             component={SettingsScreen}
             options={{ title: 'Settings' }}
@@ -187,6 +204,31 @@ export function AppNavigator() {
           name="Sync" 
           component={SyncScreen}
           options={{ title: 'Sync' }}
+        />
+        <Tab.Screen 
+          name="User Thoughts" 
+          component={UserThoughtPage}
+          options={{ title: 'Your Mind' }}
+        />
+        <Tab.Screen 
+          name="Sallie Thoughts" 
+          component={SallieThoughtPage}
+          options={{ title: 'Sallie Mind' }}
+        />
+        <Tab.Screen 
+          name="Resource Access" 
+          component={ResourceAccessPage}
+          options={{ title: 'Resources' }}
+        />
+        <Tab.Screen 
+          name="Services" 
+          component={ServiceConnectionsPage}
+          options={{ title: 'Services' }}
+        />
+        <Tab.Screen 
+          name="Alignment" 
+          component={AlignmentPage}
+          options={{ title: 'Alignment' }}
         />
         <Tab.Screen 
           name="Settings" 

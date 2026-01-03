@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "dgSpecHash": "gr+rscDU8VE=",
+  "success": true,
+  "projectFilePath": "C:\\Sallie\\SallieStudioApp\\SallieStudioApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\chell\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\chell\\.nuget\\packages\\microsoft.windows.sdk.buildtools\\10.0.22621.756\\microsoft.windows.sdk.buildtools.10.0.22621.756.nupkg.sha512",
+    "C:\\Users\\chell\\.nuget\\packages\\microsoft.windowsappsdk\\1.6.240531000-experimental1\\microsoft.windowsappsdk.1.6.240531000-experimental1.nupkg.sha512",
+    "C:\\Users\\chell\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
+    "C:\\Users\\chell\\.nuget\\packages\\system.security.accesscontrol\\6.0.0\\system.security.accesscontrol.6.0.0.nupkg.sha512",
+    "C:\\Users\\chell\\.nuget\\packages\\system.security.permissions\\6.0.0\\system.security.permissions.6.0.0.nupkg.sha512",
+    "C:\\Users\\chell\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
+    "C:\\Users\\chell\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.56\\microsoft.windows.sdk.net.ref.10.0.19041.56.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "SallieStudioApp depends on Microsoft.WindowsAppSDK (>= 1.6.0-preview1) but Microsoft.WindowsAppSDK 1.6.0-preview1 was not found. An approximate best match of Microsoft.WindowsAppSDK 1.6.240531000-experimental1 was resolved.",
+      "libraryId": "Microsoft.WindowsAppSDK",
+      "targetGraphs": [
+        "net8.0-windows10.0.19041"
+      ]
+    }
+  ]
+}

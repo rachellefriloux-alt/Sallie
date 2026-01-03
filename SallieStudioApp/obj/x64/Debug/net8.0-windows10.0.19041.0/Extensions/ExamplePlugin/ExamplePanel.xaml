@@ -1,0 +1,22 @@
+﻿<UserControl
+	x:Class="SallieStudioApp.Extensions.ExamplePlugin.ExamplePanel"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Background="{StaticResource CardBackground}">
+
+	<StackPanel Spacing="12" Padding="16">
+		<TextBlock Text="Example Plugin"
+				   FontSize="20"
+				   FontWeight="SemiBold"
+				   Foreground="{StaticResource TextPrimary}"/>
+
+		<TextBlock Text="This panel is a placeholder for plugin UI."
+				   TextWrapping="Wrap"
+				   Foreground="{StaticResource TextSecondary}"/>
+
+		<Button Content="Action"
+				HorizontalAlignment="Left"/>
+	</StackPanel>
+
+</UserControl>
+

@@ -1,0 +1,43 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="using:Windows.UI">
+
+    <!-- Core Colors -->
+    <ui:Color x:Key="SallieViolet">#FF7A5CFF</ui:Color>
+    <ui:Color x:Key="SalliePink">#FFFFB6D5</ui:Color>
+    <ui:Color x:Key="DeepSpace">#FF0F0F15</ui:Color>
+    <ui:Color x:Key="MidnightSlate">#FF181820</ui:Color>
+    <ui:Color x:Key="SoftGray">#FFD0D0D0</ui:Color>
+    <ui:Color x:Key="WarmWhite">#FFF7F7F7</ui:Color>
+
+    <!-- Brushes -->
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource SallieViolet}"/>
+    <SolidColorBrush x:Key="AccentBrushSecondary" Color="{StaticResource SalliePink}"/>
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource DeepSpace}"/>
+    <SolidColorBrush x:Key="PanelBrush" Color="{StaticResource MidnightSlate}"/>
+    <SolidColorBrush x:Key="TextBrush" Color="{StaticResource SoftGray}"/>
+    <SolidColorBrush x:Key="TextBrushLight" Color="{StaticResource WarmWhite}"/>
+
+    <!-- Button Style -->
+    <Style TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="10 6"/>
+        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="0 4"/>
+    </Style>
+
+    <!-- Accent button style used in ChatPage send button -->
+    <Style x:Key="AccentButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="10 6"/>
+        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="0 4"/>
+    </Style>
+
+</ResourceDictionary>
+

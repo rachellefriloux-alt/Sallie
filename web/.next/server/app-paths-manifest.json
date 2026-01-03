@@ -1,0 +1,12 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/heritage/page": "app/heritage/page.js",
+  "/hypotheses/page": "app/hypotheses/page.js",
+  "/convergence/page": "app/convergence/page.js",
+  "/settings/page": "app/settings/page.js",
+  "/control/page": "app/control/page.js",
+  "/projects/page": "app/projects/page.js",
+  "/limbic/page": "app/limbic/page.js",
+  "/thoughts/page": "app/thoughts/page.js",
+  "/page": "app/page.js"
+}

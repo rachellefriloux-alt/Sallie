@@ -1,0 +1,3070 @@
+Requirement already satisfied: fastapi>=0.109.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from -r progeny_root/requirements.txt (line 1)) (0.121.2)
+Requirement already satisfied: uvicorn>=0.27.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from -r progeny_root/requirements.txt (line 2)) (0.38.0)
+Requirement already satisfied: qdrant-client>=1.7.1 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from -r progeny_root/requirements.txt (line 3)) (1.15.1)
+Requirement already satisfied: numpy>=1.26.3 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from -r progeny_root/requirements.txt (line 5)) (2.3.4)
+Requirement already satisfied: python-multipart>=0.0.6 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from -r progeny_root/requirements.txt (line 6)) (0.0.20)
+Collecting python-jose>=3.3.0 (from python-jose[cryptography]>=3.3.0->-r progeny_root/requirements.txt (line 7))
+  Using cached python_jose-3.5.0-py2.py3-none-any.whl.metadata (5.5 kB)
+Collecting watchdog>=3.0.0 (from -r progeny_root/requirements.txt (line 8))
+  Using cached watchdog-6.0.0-py3-none-win_amd64.whl.metadata (44 kB)
+Requirement already satisfied: requests>=2.31.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from -r progeny_root/requirements.txt (line 9)) (2.32.5)
+Requirement already satisfied: pydantic>=2.5.3 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from -r progeny_root/requirements.txt (line 10)) (2.12.4)
+Requirement already satisfied: pytest>=8.0.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from -r progeny_root/requirements.txt (line 11)) (9.0.1)
+Collecting openai-whisper>=20231117 (from -r progeny_root/requirements.txt (line 12))
+  Using cached openai_whisper-20250625-py3-none-any.whl
+Collecting TTS>=0.22.0 (from -r progeny_root/requirements.txt (line 13))
+  Using cached TTS-0.22.0.tar.gz (1.7 MB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting sounddevice>=0.4.6 (from -r progeny_root/requirements.txt (line 14))
+  Using cached sounddevice-0.5.3-py3-none-win_amd64.whl.metadata (1.6 kB)
+Collecting soundfile>=0.12.1 (from -r progeny_root/requirements.txt (line 15))
+  Using cached soundfile-0.13.1-py2.py3-none-win_amd64.whl.metadata (16 kB)
+Requirement already satisfied: torch>=2.0.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from -r progeny_root/requirements.txt (line 16)) (2.9.1)
+Requirement already satisfied: scipy>=1.11.4 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from -r progeny_root/requirements.txt (line 17)) (1.16.3)
+Collecting psutil>=5.9.8 (from -r progeny_root/requirements.txt (line 18))
+  Using cached psutil-7.2.0-cp37-abi3-win_amd64.whl.metadata (23 kB)
+Collecting PyNaCl>=1.5.0 (from -r progeny_root/requirements.txt (line 19))
+  Using cached pynacl-1.6.1-cp38-abi3-win_amd64.whl.metadata (10 kB)
+Collecting black>=24.1.1 (from -r progeny_root/requirements.txt (line 21))
+  Using cached black-25.12.0-cp311-cp311-win_amd64.whl.metadata (86 kB)
+Collecting ruff>=0.1.14 (from -r progeny_root/requirements.txt (line 22))
+  Using cached ruff-0.14.10-py3-none-win_amd64.whl.metadata (26 kB)
+Collecting mypy>=1.8.0 (from -r progeny_root/requirements.txt (line 23))
+  Using cached mypy-1.19.1-cp311-cp311-win_amd64.whl.metadata (2.3 kB)
+Collecting plyer>=2.1.0 (from -r progeny_root/requirements.txt (line 26))
+  Using cached plyer-2.1.0-py2.py3-none-any.whl.metadata (61 kB)
+Collecting pystray>=0.19.5 (from -r progeny_root/requirements.txt (line 27))
+  Using cached pystray-0.19.5-py2.py3-none-any.whl.metadata (9.4 kB)
+Requirement already satisfied: Pillow>=10.2.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from -r progeny_root/requirements.txt (line 28)) (12.0.0)
+Requirement already satisfied: starlette<0.50.0,>=0.40.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from fastapi>=0.109.0->-r progeny_root/requirements.txt (line 1)) (0.49.3)
+Requirement already satisfied: typing-extensions>=4.8.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from fastapi>=0.109.0->-r progeny_root/requirements.txt (line 1)) (4.15.0)
+Requirement already satisfied: annotated-doc>=0.0.2 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from fastapi>=0.109.0->-r progeny_root/requirements.txt (line 1)) (0.0.4)
+Requirement already satisfied: annotated-types>=0.6.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from pydantic>=2.5.3->-r progeny_root/requirements.txt (line 10)) (0.7.0)
+Requirement already satisfied: pydantic-core==2.41.5 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from pydantic>=2.5.3->-r progeny_root/requirements.txt (line 10)) (2.41.5)
+Requirement already satisfied: typing-inspection>=0.4.2 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from pydantic>=2.5.3->-r progeny_root/requirements.txt (line 10)) (0.4.2)
+Requirement already satisfied: anyio<5,>=3.6.2 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from starlette<0.50.0,>=0.40.0->fastapi>=0.109.0->-r progeny_root/requirements.txt (line 1)) (4.11.0)
+Requirement already satisfied: idna>=2.8 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from anyio<5,>=3.6.2->starlette<0.50.0,>=0.40.0->fastapi>=0.109.0->-r progeny_root/requirements.txt (line 1)) (3.11)
+Requirement already satisfied: sniffio>=1.1 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from anyio<5,>=3.6.2->starlette<0.50.0,>=0.40.0->fastapi>=0.109.0->-r progeny_root/requirements.txt (line 1)) (1.3.1)
+Requirement already satisfied: click>=7.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from uvicorn>=0.27.0->-r progeny_root/requirements.txt (line 2)) (8.3.0)
+Requirement already satisfied: h11>=0.8 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from uvicorn>=0.27.0->-r progeny_root/requirements.txt (line 2)) (0.16.0)
+Requirement already satisfied: grpcio>=1.41.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from qdrant-client>=1.7.1->-r progeny_root/requirements.txt (line 3)) (1.76.0)
+Requirement already satisfied: httpx>=0.20.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from httpx[http2]>=0.20.0->qdrant-client>=1.7.1->-r progeny_root/requirements.txt (line 3)) (0.28.1)
+Requirement already satisfied: portalocker<4.0,>=2.7.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from qdrant-client>=1.7.1->-r progeny_root/requirements.txt (line 3)) (3.2.0)
+Requirement already satisfied: protobuf>=3.20.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from qdrant-client>=1.7.1->-r progeny_root/requirements.txt (line 3)) (6.33.1)
+Requirement already satisfied: urllib3<3,>=1.26.14 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from qdrant-client>=1.7.1->-r progeny_root/requirements.txt (line 3)) (2.5.0)
+Requirement already satisfied: pywin32>=226 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from portalocker<4.0,>=2.7.0->qdrant-client>=1.7.1->-r progeny_root/requirements.txt (line 3)) (311)
+Collecting ecdsa!=0.15 (from python-jose>=3.3.0->python-jose[cryptography]>=3.3.0->-r progeny_root/requirements.txt (line 7))
+  Using cached ecdsa-0.19.1-py2.py3-none-any.whl.metadata (29 kB)
+Collecting rsa!=4.1.1,!=4.4,<5.0,>=4.0 (from python-jose>=3.3.0->python-jose[cryptography]>=3.3.0->-r progeny_root/requirements.txt (line 7))
+  Using cached rsa-4.9.1-py3-none-any.whl.metadata (5.6 kB)
+Collecting pyasn1>=0.5.0 (from python-jose>=3.3.0->python-jose[cryptography]>=3.3.0->-r progeny_root/requirements.txt (line 7))
+  Using cached pyasn1-0.6.1-py3-none-any.whl.metadata (8.4 kB)
+Requirement already satisfied: charset_normalizer<4,>=2 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from requests>=2.31.0->-r progeny_root/requirements.txt (line 9)) (3.4.4)
+Requirement already satisfied: certifi>=2017.4.17 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from requests>=2.31.0->-r progeny_root/requirements.txt (line 9)) (2025.11.12)
+Requirement already satisfied: colorama>=0.4 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from pytest>=8.0.0->-r progeny_root/requirements.txt (line 11)) (0.4.6)
+Requirement already satisfied: iniconfig>=1.0.1 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from pytest>=8.0.0->-r progeny_root/requirements.txt (line 11)) (2.3.0)
+Requirement already satisfied: packaging>=22 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from pytest>=8.0.0->-r progeny_root/requirements.txt (line 11)) (25.0)
+Requirement already satisfied: pluggy<2,>=1.5 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from pytest>=8.0.0->-r progeny_root/requirements.txt (line 11)) (1.6.0)
+Requirement already satisfied: pygments>=2.7.2 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from pytest>=8.0.0->-r progeny_root/requirements.txt (line 11)) (2.19.2)
+Collecting more-itertools (from openai-whisper>=20231117->-r progeny_root/requirements.txt (line 12))
+  Using cached more_itertools-10.8.0-py3-none-any.whl.metadata (39 kB)
+Collecting numba (from openai-whisper>=20231117->-r progeny_root/requirements.txt (line 12))
+  Using cached numba-0.63.1-cp311-cp311-win_amd64.whl.metadata (2.8 kB)
+Collecting tiktoken (from openai-whisper>=20231117->-r progeny_root/requirements.txt (line 12))
+  Using cached tiktoken-0.12.0-cp311-cp311-win_amd64.whl.metadata (6.9 kB)
+Requirement already satisfied: tqdm in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from openai-whisper>=20231117->-r progeny_root/requirements.txt (line 12)) (4.67.1)
+Collecting cython>=0.29.30 (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached cython-3.2.3-cp311-cp311-win_amd64.whl.metadata (4.6 kB)
+Collecting torchaudio (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached torchaudio-2.9.1-cp311-cp311-win_amd64.whl.metadata (6.9 kB)
+Collecting librosa>=0.10.0 (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached librosa-0.11.0-py3-none-any.whl.metadata (8.7 kB)
+Requirement already satisfied: scikit-learn>=1.3.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13)) (1.7.2)
+Collecting inflect>=5.6.0 (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached inflect-7.5.0-py3-none-any.whl.metadata (24 kB)
+Collecting anyascii>=0.3.0 (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached anyascii-0.3.3-py3-none-any.whl.metadata (1.6 kB)
+Requirement already satisfied: pyyaml>=6.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13)) (6.0.3)
+Requirement already satisfied: fsspec>=2023.6.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13)) (2025.10.0)
+Collecting aiohttp>=3.8.1 (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached aiohttp-3.13.2-cp311-cp311-win_amd64.whl.metadata (8.4 kB)
+Collecting flask>=2.0.1 (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached flask-3.1.2-py3-none-any.whl.metadata (3.2 kB)
+Collecting pysbd>=0.3.4 (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached pysbd-0.3.4-py3-none-any.whl.metadata (6.1 kB)
+Collecting umap-learn>=0.5.1 (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached umap_learn-0.5.9.post2-py3-none-any.whl.metadata (25 kB)
+Collecting pandas<2.0,>=1.4 (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached pandas-1.5.3-cp311-cp311-win_amd64.whl.metadata (12 kB)
+Collecting matplotlib>=3.7.0 (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached matplotlib-3.10.8-cp311-cp311-win_amd64.whl.metadata (52 kB)
+Collecting trainer>=0.0.32 (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached trainer-0.0.36-py3-none-any.whl.metadata (8.1 kB)
+Collecting coqpit>=0.0.16 (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached coqpit-0.0.17-py3-none-any.whl.metadata (11 kB)
+Collecting jieba (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached jieba-0.42.1-py3-none-any.whl
+Collecting pypinyin (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached pypinyin-0.55.0-py2.py3-none-any.whl.metadata (12 kB)
+Collecting hangul_romanize (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached hangul_romanize-0.1.0-py3-none-any.whl.metadata (1.2 kB)
+Collecting gruut==2.2.3 (from gruut[de,es,fr]==2.2.3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached gruut-2.2.3-py3-none-any.whl
+Collecting jamo (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached jamo-0.4.1-py3-none-any.whl.metadata (2.3 kB)
+Collecting nltk (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached nltk-3.9.2-py3-none-any.whl.metadata (3.2 kB)
+Collecting g2pkk>=0.1.1 (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached g2pkk-0.1.2-py3-none-any.whl.metadata (2.0 kB)
+Collecting bangla (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached bangla-0.0.5-py3-none-any.whl.metadata (4.7 kB)
+Collecting bnnumerizer (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached bnnumerizer-0.0.2-py3-none-any.whl
+Collecting bnunicodenormalizer (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached bnunicodenormalizer-0.1.7-py3-none-any.whl.metadata (22 kB)
+Collecting einops>=0.6.0 (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached einops-0.8.1-py3-none-any.whl.metadata (13 kB)
+Requirement already satisfied: transformers>=4.33.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13)) (4.57.1)
+Collecting encodec>=0.1.1 (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached encodec-0.1.1-py3-none-any.whl
+Collecting unidecode>=1.3.2 (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached Unidecode-1.4.0-py3-none-any.whl.metadata (13 kB)
+Collecting num2words (from TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached num2words-0.5.14-py3-none-any.whl.metadata (13 kB)
+Collecting spacy>=3 (from spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached spacy-3.8.11-cp311-cp311-win_amd64.whl.metadata (28 kB)
+Collecting Babel<3.0.0,>=2.8.0 (from gruut==2.2.3->gruut[de,es,fr]==2.2.3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached babel-2.17.0-py3-none-any.whl.metadata (2.0 kB)
+Collecting dateparser~=1.1.0 (from gruut==2.2.3->gruut[de,es,fr]==2.2.3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached dateparser-1.1.8-py2.py3-none-any.whl.metadata (27 kB)
+Collecting gruut-ipa<1.0,>=0.12.0 (from gruut==2.2.3->gruut[de,es,fr]==2.2.3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached gruut_ipa-0.13.0-py3-none-any.whl
+Collecting gruut_lang_en~=2.0.0 (from gruut==2.2.3->gruut[de,es,fr]==2.2.3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached gruut_lang_en-2.0.1-py3-none-any.whl
+Collecting jsonlines~=1.2.0 (from gruut==2.2.3->gruut[de,es,fr]==2.2.3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached jsonlines-1.2.0-py2.py3-none-any.whl.metadata (1.3 kB)
+Collecting networkx<3.0.0,>=2.5.0 (from gruut==2.2.3->gruut[de,es,fr]==2.2.3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached networkx-2.8.8-py3-none-any.whl.metadata (5.1 kB)
+Collecting numpy>=1.26.3 (from -r progeny_root/requirements.txt (line 5))
+  Using cached numpy-1.26.4-cp311-cp311-win_amd64.whl.metadata (61 kB)
+Collecting python-crfsuite~=0.9.7 (from gruut==2.2.3->gruut[de,es,fr]==2.2.3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached python_crfsuite-0.9.12-cp311-cp311-win_amd64.whl.metadata (4.4 kB)
+Collecting gruut_lang_de~=2.0.0 (from gruut[de,es,fr]==2.2.3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached gruut_lang_de-2.0.1-py3-none-any.whl
+Collecting gruut_lang_es~=2.0.0 (from gruut[de,es,fr]==2.2.3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached gruut_lang_es-2.0.1-py3-none-any.whl
+Collecting gruut_lang_fr~=2.0.0 (from gruut[de,es,fr]==2.2.3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached gruut_lang_fr-2.0.2-py3-none-any.whl
+Collecting python-dateutil (from dateparser~=1.1.0->gruut==2.2.3->gruut[de,es,fr]==2.2.3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting pytz (from dateparser~=1.1.0->gruut==2.2.3->gruut[de,es,fr]==2.2.3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+Requirement already satisfied: regex!=2019.02.19,!=2021.8.27 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from dateparser~=1.1.0->gruut==2.2.3->gruut[de,es,fr]==2.2.3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13)) (2025.11.3)
+Collecting tzlocal (from dateparser~=1.1.0->gruut==2.2.3->gruut[de,es,fr]==2.2.3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached tzlocal-5.3.1-py3-none-any.whl.metadata (7.6 kB)
+Collecting six (from jsonlines~=1.2.0->gruut==2.2.3->gruut[de,es,fr]==2.2.3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting docopt>=0.6.2 (from num2words->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached docopt-0.6.2-py2.py3-none-any.whl
+Collecting CFFI>=1.0 (from sounddevice>=0.4.6->-r progeny_root/requirements.txt (line 14))
+  Using cached cffi-2.0.0-cp311-cp311-win_amd64.whl.metadata (2.6 kB)
+Requirement already satisfied: filelock in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from torch>=2.0.0->-r progeny_root/requirements.txt (line 16)) (3.20.0)
+Requirement already satisfied: sympy>=1.13.3 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from torch>=2.0.0->-r progeny_root/requirements.txt (line 16)) (1.14.0)
+Requirement already satisfied: jinja2 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from torch>=2.0.0->-r progeny_root/requirements.txt (line 16)) (3.1.6)
+Collecting mypy-extensions>=0.4.3 (from black>=24.1.1->-r progeny_root/requirements.txt (line 21))
+  Using cached mypy_extensions-1.1.0-py3-none-any.whl.metadata (1.1 kB)
+Collecting pathspec>=0.9.0 (from black>=24.1.1->-r progeny_root/requirements.txt (line 21))
+  Using cached pathspec-0.12.1-py3-none-any.whl.metadata (21 kB)
+Collecting platformdirs>=2 (from black>=24.1.1->-r progeny_root/requirements.txt (line 21))
+  Using cached platformdirs-4.5.1-py3-none-any.whl.metadata (12 kB)
+Collecting pytokens>=0.3.0 (from black>=24.1.1->-r progeny_root/requirements.txt (line 21))
+  Using cached pytokens-0.3.0-py3-none-any.whl.metadata (2.0 kB)
+Collecting librt>=0.6.2 (from mypy>=1.8.0->-r progeny_root/requirements.txt (line 23))
+  Using cached librt-0.7.5-cp311-cp311-win_amd64.whl.metadata (1.4 kB)
+Collecting aiohappyeyeballs>=2.5.0 (from aiohttp>=3.8.1->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached aiohappyeyeballs-2.6.1-py3-none-any.whl.metadata (5.9 kB)
+Collecting aiosignal>=1.4.0 (from aiohttp>=3.8.1->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached aiosignal-1.4.0-py3-none-any.whl.metadata (3.7 kB)
+Collecting attrs>=17.3.0 (from aiohttp>=3.8.1->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached attrs-25.4.0-py3-none-any.whl.metadata (10 kB)
+Collecting frozenlist>=1.1.1 (from aiohttp>=3.8.1->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached frozenlist-1.8.0-cp311-cp311-win_amd64.whl.metadata (21 kB)
+Collecting multidict<7.0,>=4.5 (from aiohttp>=3.8.1->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached multidict-6.7.0-cp311-cp311-win_amd64.whl.metadata (5.5 kB)
+Collecting propcache>=0.2.0 (from aiohttp>=3.8.1->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached propcache-0.4.1-cp311-cp311-win_amd64.whl.metadata (14 kB)
+Collecting yarl<2.0,>=1.17.0 (from aiohttp>=3.8.1->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached yarl-1.22.0-cp311-cp311-win_amd64.whl.metadata (77 kB)
+Collecting pycparser (from CFFI>=1.0->sounddevice>=0.4.6->-r progeny_root/requirements.txt (line 14))
+  Using cached pycparser-2.23-py3-none-any.whl.metadata (993 bytes)
+Collecting blinker>=1.9.0 (from flask>=2.0.1->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+Collecting itsdangerous>=2.2.0 (from flask>=2.0.1->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+Requirement already satisfied: markupsafe>=2.1.1 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from flask>=2.0.1->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13)) (3.0.3)
+Collecting werkzeug>=3.1.0 (from flask>=2.0.1->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached werkzeug-3.1.4-py3-none-any.whl.metadata (4.0 kB)
+Requirement already satisfied: httpcore==1.* in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from httpx>=0.20.0->httpx[http2]>=0.20.0->qdrant-client>=1.7.1->-r progeny_root/requirements.txt (line 3)) (1.0.9)
+Requirement already satisfied: h2<5,>=3 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from httpx[http2]>=0.20.0->qdrant-client>=1.7.1->-r progeny_root/requirements.txt (line 3)) (4.3.0)
+Requirement already satisfied: hyperframe<7,>=6.1 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from h2<5,>=3->httpx[http2]>=0.20.0->qdrant-client>=1.7.1->-r progeny_root/requirements.txt (line 3)) (6.1.0)
+Requirement already satisfied: hpack<5,>=4.1 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from h2<5,>=3->httpx[http2]>=0.20.0->qdrant-client>=1.7.1->-r progeny_root/requirements.txt (line 3)) (4.1.0)
+Collecting typeguard>=4.0.1 (from inflect>=5.6.0->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached typeguard-4.4.4-py3-none-any.whl.metadata (3.3 kB)
+Collecting audioread>=2.1.9 (from librosa>=0.10.0->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached audioread-3.1.0-py3-none-any.whl.metadata (9.0 kB)
+Requirement already satisfied: joblib>=1.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from librosa>=0.10.0->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13)) (1.5.2)
+Collecting decorator>=4.3.0 (from librosa>=0.10.0->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached decorator-5.2.1-py3-none-any.whl.metadata (3.9 kB)
+Collecting pooch>=1.1 (from librosa>=0.10.0->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached pooch-1.8.2-py3-none-any.whl.metadata (10 kB)
+Collecting soxr>=0.3.2 (from librosa>=0.10.0->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached soxr-1.0.0-cp311-cp311-win_amd64.whl.metadata (5.6 kB)
+Collecting lazy_loader>=0.1 (from librosa>=0.10.0->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached lazy_loader-0.4-py3-none-any.whl.metadata (7.6 kB)
+Collecting msgpack>=1.0 (from librosa>=0.10.0->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached msgpack-1.1.2-cp311-cp311-win_amd64.whl.metadata (8.4 kB)
+Collecting contourpy>=1.0.1 (from matplotlib>=3.7.0->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached contourpy-1.3.3-cp311-cp311-win_amd64.whl.metadata (5.5 kB)
+Collecting cycler>=0.10 (from matplotlib>=3.7.0->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools>=4.22.0 (from matplotlib>=3.7.0->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached fonttools-4.61.1-cp311-cp311-win_amd64.whl.metadata (116 kB)
+Collecting kiwisolver>=1.3.1 (from matplotlib>=3.7.0->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached kiwisolver-1.4.9-cp311-cp311-win_amd64.whl.metadata (6.4 kB)
+Collecting pyparsing>=3 (from matplotlib>=3.7.0->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached pyparsing-3.3.1-py3-none-any.whl.metadata (5.6 kB)
+Collecting llvmlite<0.47,>=0.46.0dev0 (from numba->openai-whisper>=20231117->-r progeny_root/requirements.txt (line 12))
+  Using cached llvmlite-0.46.0-cp311-cp311-win_amd64.whl.metadata (4.9 kB)
+Collecting cryptography>=3.4.0 (from python-jose[cryptography]>=3.3.0->-r progeny_root/requirements.txt (line 7))
+  Using cached cryptography-46.0.3-cp311-abi3-win_amd64.whl.metadata (5.7 kB)
+Requirement already satisfied: threadpoolctl>=3.1.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from scikit-learn>=1.3.0->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13)) (3.6.0)
+Collecting spacy-legacy<3.1.0,>=3.0.11 (from spacy>=3->spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached spacy_legacy-3.0.12-py2.py3-none-any.whl.metadata (2.8 kB)
+Collecting spacy-loggers<2.0.0,>=1.0.0 (from spacy>=3->spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached spacy_loggers-1.0.5-py3-none-any.whl.metadata (23 kB)
+Collecting murmurhash<1.1.0,>=0.28.0 (from spacy>=3->spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached murmurhash-1.0.15-cp311-cp311-win_amd64.whl.metadata (2.3 kB)
+Collecting cymem<2.1.0,>=2.0.2 (from spacy>=3->spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached cymem-2.0.13-cp311-cp311-win_amd64.whl.metadata (9.9 kB)
+Collecting preshed<3.1.0,>=3.0.2 (from spacy>=3->spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached preshed-3.0.12-cp311-cp311-win_amd64.whl.metadata (2.6 kB)
+Collecting thinc<8.4.0,>=8.3.4 (from spacy>=3->spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached thinc-8.3.10-cp311-cp311-win_amd64.whl.metadata (15 kB)
+Collecting wasabi<1.2.0,>=0.9.1 (from spacy>=3->spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached wasabi-1.1.3-py3-none-any.whl.metadata (28 kB)
+Collecting srsly<3.0.0,>=2.4.3 (from spacy>=3->spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached srsly-2.5.2-cp311-cp311-win_amd64.whl.metadata (20 kB)
+Collecting catalogue<2.1.0,>=2.0.6 (from spacy>=3->spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached catalogue-2.0.10-py3-none-any.whl.metadata (14 kB)
+Collecting weasel<0.5.0,>=0.4.2 (from spacy>=3->spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached weasel-0.4.3-py3-none-any.whl.metadata (4.6 kB)
+Collecting typer-slim<1.0.0,>=0.3.0 (from spacy>=3->spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached typer_slim-0.21.0-py3-none-any.whl.metadata (16 kB)
+Requirement already satisfied: setuptools in c:\program files\windowsapps\pythonsoftwarefoundation.python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\lib\site-packages (from spacy>=3->spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13)) (65.5.0)
+Collecting blis<1.4.0,>=1.3.0 (from thinc<8.4.0,>=8.3.4->spacy>=3->spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached blis-1.3.3-cp311-cp311-win_amd64.whl.metadata (7.7 kB)
+Collecting confection<1.0.0,>=0.0.1 (from thinc<8.4.0,>=8.3.4->spacy>=3->spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached confection-0.1.5-py3-none-any.whl.metadata (19 kB)
+Collecting cloudpathlib<1.0.0,>=0.7.0 (from weasel<0.5.0,>=0.4.2->spacy>=3->spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached cloudpathlib-0.23.0-py3-none-any.whl.metadata (16 kB)
+Collecting smart-open<8.0.0,>=5.2.1 (from weasel<0.5.0,>=0.4.2->spacy>=3->spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached smart_open-7.5.0-py3-none-any.whl.metadata (24 kB)
+Collecting wrapt (from smart-open<8.0.0,>=5.2.1->weasel<0.5.0,>=0.4.2->spacy>=3->spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached wrapt-2.0.1-cp311-cp311-win_amd64.whl.metadata (9.2 kB)
+Collecting sudachipy!=0.6.1,>=0.5.2 (from spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached SudachiPy-0.6.10-cp311-cp311-win_amd64.whl.metadata (13 kB)
+Collecting sudachidict_core>=20211220 (from spacy[ja]>=3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached sudachidict_core-20251022-py3-none-any.whl.metadata (2.7 kB)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from sympy>=1.13.3->torch>=2.0.0->-r progeny_root/requirements.txt (line 16)) (1.3.0)
+Collecting tensorboard (from trainer>=0.0.32->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached tensorboard-2.20.0-py3-none-any.whl.metadata (1.8 kB)
+Requirement already satisfied: huggingface-hub<1.0,>=0.34.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from transformers>=4.33.0->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13)) (0.36.0)
+Requirement already satisfied: tokenizers<=0.23.0,>=0.22.0 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from transformers>=4.33.0->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13)) (0.22.1)
+Requirement already satisfied: safetensors>=0.4.3 in c:\users\chell\appdata\local\packages\pythonsoftwarefoundation.python.3.11_qbz5n2kfra8p0\localcache\local-packages\python311\site-packages (from transformers>=4.33.0->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13)) (0.6.2)
+Collecting pynndescent>=0.5 (from umap-learn>=0.5.1->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached pynndescent-0.5.13-py3-none-any.whl.metadata (6.8 kB)
+Collecting absl-py>=0.4 (from tensorboard->trainer>=0.0.32->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached absl_py-2.3.1-py3-none-any.whl.metadata (3.3 kB)
+Collecting markdown>=2.6.8 (from tensorboard->trainer>=0.0.32->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached markdown-3.10-py3-none-any.whl.metadata (5.1 kB)
+Collecting tensorboard-data-server<0.8.0,>=0.7.0 (from tensorboard->trainer>=0.0.32->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached tensorboard_data_server-0.7.2-py3-none-any.whl.metadata (1.1 kB)
+Collecting tzdata (from tzlocal->dateparser~=1.1.0->gruut==2.2.3->gruut[de,es,fr]==2.2.3->TTS>=0.22.0->-r progeny_root/requirements.txt (line 13))
+  Using cached tzdata-2025.3-py2.py3-none-any.whl.metadata (1.4 kB)
+Using cached python_jose-3.5.0-py2.py3-none-any.whl (34 kB)
+Using cached rsa-4.9.1-py3-none-any.whl (34 kB)
+Using cached watchdog-6.0.0-py3-none-win_amd64.whl (79 kB)
+Using cached numpy-1.26.4-cp311-cp311-win_amd64.whl (15.8 MB)
+Using cached babel-2.17.0-py3-none-any.whl (10.2 MB)
+Using cached dateparser-1.1.8-py2.py3-none-any.whl (293 kB)
+Using cached jsonlines-1.2.0-py2.py3-none-any.whl (7.6 kB)
+Using cached networkx-2.8.8-py3-none-any.whl (2.0 MB)
+Using cached num2words-0.5.14-py3-none-any.whl (163 kB)
+Using cached pandas-1.5.3-cp311-cp311-win_amd64.whl (10.3 MB)
+Using cached python_crfsuite-0.9.12-cp311-cp311-win_amd64.whl (303 kB)
+Using cached sounddevice-0.5.3-py3-none-win_amd64.whl (364 kB)
+Using cached soundfile-0.13.1-py2.py3-none-win_amd64.whl (1.0 MB)
+Using cached psutil-7.2.0-cp37-abi3-win_amd64.whl (136 kB)
+Using cached pynacl-1.6.1-cp38-abi3-win_amd64.whl (238 kB)
+Using cached black-25.12.0-cp311-cp311-win_amd64.whl (1.4 MB)
+Using cached ruff-0.14.10-py3-none-win_amd64.whl (14.7 MB)
+Using cached mypy-1.19.1-cp311-cp311-win_amd64.whl (10.1 MB)
+Using cached plyer-2.1.0-py2.py3-none-any.whl (142 kB)
+Using cached pystray-0.19.5-py2.py3-none-any.whl (49 kB)
+Using cached aiohttp-3.13.2-cp311-cp311-win_amd64.whl (456 kB)
+Using cached multidict-6.7.0-cp311-cp311-win_amd64.whl (46 kB)
+Using cached yarl-1.22.0-cp311-cp311-win_amd64.whl (86 kB)
+Using cached aiohappyeyeballs-2.6.1-py3-none-any.whl (15 kB)
+Using cached aiosignal-1.4.0-py3-none-any.whl (7.5 kB)
+Using cached anyascii-0.3.3-py3-none-any.whl (345 kB)
+Using cached attrs-25.4.0-py3-none-any.whl (67 kB)
+Using cached cffi-2.0.0-cp311-cp311-win_amd64.whl (182 kB)
+Using cached coqpit-0.0.17-py3-none-any.whl (13 kB)
+Using cached cython-3.2.3-cp311-cp311-win_amd64.whl (2.8 MB)
+Using cached ecdsa-0.19.1-py2.py3-none-any.whl (150 kB)
+Using cached einops-0.8.1-py3-none-any.whl (64 kB)
+Using cached flask-3.1.2-py3-none-any.whl (103 kB)
+Using cached blinker-1.9.0-py3-none-any.whl (8.5 kB)
+Using cached frozenlist-1.8.0-cp311-cp311-win_amd64.whl (44 kB)
+Using cached g2pkk-0.1.2-py3-none-any.whl (25 kB)
+Using cached inflect-7.5.0-py3-none-any.whl (35 kB)
+Using cached itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+Using cached librosa-0.11.0-py3-none-any.whl (260 kB)
+Using cached audioread-3.1.0-py3-none-any.whl (23 kB)
+Using cached decorator-5.2.1-py3-none-any.whl (9.2 kB)
+Using cached lazy_loader-0.4-py3-none-any.whl (12 kB)
+Using cached librt-0.7.5-cp311-cp311-win_amd64.whl (49 kB)
+Using cached matplotlib-3.10.8-cp311-cp311-win_amd64.whl (8.1 MB)
+Using cached contourpy-1.3.3-cp311-cp311-win_amd64.whl (225 kB)
+Using cached cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Using cached fonttools-4.61.1-cp311-cp311-win_amd64.whl (2.3 MB)
+Using cached kiwisolver-1.4.9-cp311-cp311-win_amd64.whl (73 kB)
+Using cached more_itertools-10.8.0-py3-none-any.whl (69 kB)
+Using cached msgpack-1.1.2-cp311-cp311-win_amd64.whl (71 kB)
+Using cached mypy_extensions-1.1.0-py3-none-any.whl (5.0 kB)
+Using cached numba-0.63.1-cp311-cp311-win_amd64.whl (2.7 MB)
+Using cached llvmlite-0.46.0-cp311-cp311-win_amd64.whl (38.1 MB)
+Using cached pathspec-0.12.1-py3-none-any.whl (31 kB)
+Using cached platformdirs-4.5.1-py3-none-any.whl (18 kB)
+Using cached pooch-1.8.2-py3-none-any.whl (64 kB)
+Using cached propcache-0.4.1-cp311-cp311-win_amd64.whl (41 kB)
+Using cached pyasn1-0.6.1-py3-none-any.whl (83 kB)
+Using cached pyparsing-3.3.1-py3-none-any.whl (121 kB)
+Using cached pysbd-0.3.4-py3-none-any.whl (71 kB)
+Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Using cached cryptography-46.0.3-cp311-abi3-win_amd64.whl (3.5 MB)
+Using cached pytokens-0.3.0-py3-none-any.whl (12 kB)
+Using cached pytz-2025.2-py2.py3-none-any.whl (509 kB)
+Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+Using cached soxr-1.0.0-cp311-cp311-win_amd64.whl (173 kB)
+Using cached spacy-3.8.11-cp311-cp311-win_amd64.whl (15.3 MB)
+Using cached catalogue-2.0.10-py3-none-any.whl (17 kB)
+Using cached cymem-2.0.13-cp311-cp311-win_amd64.whl (40 kB)
+Using cached murmurhash-1.0.15-cp311-cp311-win_amd64.whl (25 kB)
+Using cached preshed-3.0.12-cp311-cp311-win_amd64.whl (117 kB)
+Using cached spacy_legacy-3.0.12-py2.py3-none-any.whl (29 kB)
+Using cached spacy_loggers-1.0.5-py3-none-any.whl (22 kB)
+Using cached srsly-2.5.2-cp311-cp311-win_amd64.whl (654 kB)
+Using cached thinc-8.3.10-cp311-cp311-win_amd64.whl (1.8 MB)
+Using cached blis-1.3.3-cp311-cp311-win_amd64.whl (6.2 MB)
+Using cached confection-0.1.5-py3-none-any.whl (35 kB)
+Using cached typer_slim-0.21.0-py3-none-any.whl (47 kB)
+Using cached wasabi-1.1.3-py3-none-any.whl (27 kB)
+Using cached weasel-0.4.3-py3-none-any.whl (50 kB)
+Using cached cloudpathlib-0.23.0-py3-none-any.whl (62 kB)
+Using cached smart_open-7.5.0-py3-none-any.whl (63 kB)
+Using cached sudachidict_core-20251022-py3-none-any.whl (72.2 MB)
+Using cached SudachiPy-0.6.10-cp311-cp311-win_amd64.whl (1.4 MB)
+Using cached trainer-0.0.36-py3-none-any.whl (51 kB)
+Using cached typeguard-4.4.4-py3-none-any.whl (34 kB)
+Using cached umap_learn-0.5.9.post2-py3-none-any.whl (90 kB)
+Using cached pynndescent-0.5.13-py3-none-any.whl (56 kB)
+Using cached Unidecode-1.4.0-py3-none-any.whl (235 kB)
+Using cached werkzeug-3.1.4-py3-none-any.whl (224 kB)
+Using cached bangla-0.0.5-py3-none-any.whl (5.1 kB)
+Using cached bnunicodenormalizer-0.1.7-py3-none-any.whl (23 kB)
+Using cached hangul_romanize-0.1.0-py3-none-any.whl (4.6 kB)
+Using cached jamo-0.4.1-py3-none-any.whl (9.5 kB)
+Using cached nltk-3.9.2-py3-none-any.whl (1.5 MB)
+Using cached pycparser-2.23-py3-none-any.whl (118 kB)
+Using cached pypinyin-0.55.0-py2.py3-none-any.whl (840 kB)
+Using cached tensorboard-2.20.0-py3-none-any.whl (5.5 MB)
+Using cached tensorboard_data_server-0.7.2-py3-none-any.whl (2.4 kB)
+Using cached absl_py-2.3.1-py3-none-any.whl (135 kB)
+Using cached markdown-3.10-py3-none-any.whl (107 kB)
+Using cached tiktoken-0.12.0-cp311-cp311-win_amd64.whl (879 kB)
+Using cached torchaudio-2.9.1-cp311-cp311-win_amd64.whl (664 kB)
+Using cached tzlocal-5.3.1-py3-none-any.whl (18 kB)
+Using cached tzdata-2025.3-py2.py3-none-any.whl (348 kB)
+Using cached wrapt-2.0.1-cp311-cp311-win_amd64.whl (60 kB)
+Building wheels for collected packages: TTS
+  Building wheel for TTS (pyproject.toml): started
+  Building wheel for TTS (pyproject.toml): finished with status 'error'
+  error: subprocess-exited-with-error
+  
+  Building wheel for TTS (pyproject.toml) did not run successfully.
+  exit code: 1
+  
+  [2647 lines of output]
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+  !!
+  
+          ********************************************************************************
+          Please consider removing the following classifiers in favor of a SPDX license expression:
+  
+          License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)
+  
+          See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+          ********************************************************************************
+  
+  !!
+    self._finalize_license_expression()
+  running bdist_wheel
+  running build
+  running build_py
+  creating temp_build\TTS
+  copying TTS\api.py -> temp_build\TTS
+  copying TTS\model.py -> temp_build\TTS
+  copying TTS\__init__.py -> temp_build\TTS
+  running egg_info
+  writing TTS.egg-info\PKG-INFO
+  writing dependency_links to TTS.egg-info\dependency_links.txt
+  writing entry points to TTS.egg-info\entry_points.txt
+  writing requirements to TTS.egg-info\requires.txt
+  writing top-level names to TTS.egg-info\top_level.txt
+  reading manifest file 'TTS.egg-info\SOURCES.txt'
+  reading manifest template 'MANIFEST.in'
+  warning: no previously-included files matching '*' found under directory 'tests'
+  no previously-included directories found matching 'tests*'
+  adding license file 'LICENSE.txt'
+  writing manifest file 'TTS.egg-info\SOURCES.txt'
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.utils.monotonic_align' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.utils.monotonic_align' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.utils.monotonic_align' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.utils.monotonic_align' to be distributed and are
+          already explicitly excluding 'TTS.tts.utils.monotonic_align' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.bin' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.bin' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.bin' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.bin' to be distributed and are
+          already explicitly excluding 'TTS.bin' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.config' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.config' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.config' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.config' to be distributed and are
+          already explicitly excluding 'TTS.config' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.demos.xtts_ft_demo' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.demos.xtts_ft_demo' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.demos.xtts_ft_demo' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.demos.xtts_ft_demo' to be distributed and are
+          already explicitly excluding 'TTS.demos.xtts_ft_demo' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.demos.xtts_ft_demo.utils' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.demos.xtts_ft_demo.utils' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.demos.xtts_ft_demo.utils' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.demos.xtts_ft_demo.utils' to be distributed and are
+          already explicitly excluding 'TTS.demos.xtts_ft_demo.utils' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.encoder' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.encoder' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.encoder' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.encoder' to be distributed and are
+          already explicitly excluding 'TTS.encoder' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.encoder.configs' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.encoder.configs' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.encoder.configs' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.encoder.configs' to be distributed and are
+          already explicitly excluding 'TTS.encoder.configs' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.encoder.models' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.encoder.models' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.encoder.models' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.encoder.models' to be distributed and are
+          already explicitly excluding 'TTS.encoder.models' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.encoder.utils' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.encoder.utils' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.encoder.utils' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.encoder.utils' to be distributed and are
+          already explicitly excluding 'TTS.encoder.utils' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.server' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.server' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.server' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.server' to be distributed and are
+          already explicitly excluding 'TTS.server' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.server.static' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.server.static' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.server.static' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.server.static' to be distributed and are
+          already explicitly excluding 'TTS.server.static' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.server.templates' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.server.templates' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.server.templates' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.server.templates' to be distributed and are
+          already explicitly excluding 'TTS.server.templates' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts' to be distributed and are
+          already explicitly excluding 'TTS.tts' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.configs' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.configs' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.configs' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.configs' to be distributed and are
+          already explicitly excluding 'TTS.tts.configs' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.datasets' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.datasets' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.datasets' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.datasets' to be distributed and are
+          already explicitly excluding 'TTS.tts.datasets' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.layers' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.layers' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.layers' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.layers' to be distributed and are
+          already explicitly excluding 'TTS.tts.layers' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.layers.align_tts' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.layers.align_tts' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.layers.align_tts' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.layers.align_tts' to be distributed and are
+          already explicitly excluding 'TTS.tts.layers.align_tts' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.layers.bark' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.layers.bark' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.layers.bark' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.layers.bark' to be distributed and are
+          already explicitly excluding 'TTS.tts.layers.bark' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.layers.bark.hubert' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.layers.bark.hubert' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.layers.bark.hubert' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.layers.bark.hubert' to be distributed and are
+          already explicitly excluding 'TTS.tts.layers.bark.hubert' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.layers.delightful_tts' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.layers.delightful_tts' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.layers.delightful_tts' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.layers.delightful_tts' to be distributed and are
+          already explicitly excluding 'TTS.tts.layers.delightful_tts' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.layers.feed_forward' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.layers.feed_forward' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.layers.feed_forward' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.layers.feed_forward' to be distributed and are
+          already explicitly excluding 'TTS.tts.layers.feed_forward' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.layers.generic' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.layers.generic' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.layers.generic' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.layers.generic' to be distributed and are
+          already explicitly excluding 'TTS.tts.layers.generic' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.layers.glow_tts' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.layers.glow_tts' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.layers.glow_tts' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.layers.glow_tts' to be distributed and are
+          already explicitly excluding 'TTS.tts.layers.glow_tts' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.layers.overflow' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.layers.overflow' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.layers.overflow' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.layers.overflow' to be distributed and are
+          already explicitly excluding 'TTS.tts.layers.overflow' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.layers.tacotron' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.layers.tacotron' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.layers.tacotron' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.layers.tacotron' to be distributed and are
+          already explicitly excluding 'TTS.tts.layers.tacotron' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.layers.tortoise' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.layers.tortoise' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.layers.tortoise' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.layers.tortoise' to be distributed and are
+          already explicitly excluding 'TTS.tts.layers.tortoise' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.layers.vits' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.layers.vits' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.layers.vits' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.layers.vits' to be distributed and are
+          already explicitly excluding 'TTS.tts.layers.vits' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.layers.xtts' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.layers.xtts' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.layers.xtts' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.layers.xtts' to be distributed and are
+          already explicitly excluding 'TTS.tts.layers.xtts' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.layers.xtts.trainer' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.layers.xtts.trainer' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.layers.xtts.trainer' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.layers.xtts.trainer' to be distributed and are
+          already explicitly excluding 'TTS.tts.layers.xtts.trainer' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.models' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.models' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.models' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.models' to be distributed and are
+          already explicitly excluding 'TTS.tts.models' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.utils' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.utils' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.utils' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.utils' to be distributed and are
+          already explicitly excluding 'TTS.tts.utils' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.utils.assets.tortoise' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.utils.assets.tortoise' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.utils.assets.tortoise' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.utils.assets.tortoise' to be distributed and are
+          already explicitly excluding 'TTS.tts.utils.assets.tortoise' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.utils.text' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.utils.text' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.utils.text' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.utils.text' to be distributed and are
+          already explicitly excluding 'TTS.tts.utils.text' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.utils.text.bangla' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.utils.text.bangla' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.utils.text.bangla' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.utils.text.bangla' to be distributed and are
+          already explicitly excluding 'TTS.tts.utils.text.bangla' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.utils.text.belarusian' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.utils.text.belarusian' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.utils.text.belarusian' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.utils.text.belarusian' to be distributed and are
+          already explicitly excluding 'TTS.tts.utils.text.belarusian' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.utils.text.chinese_mandarin' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.utils.text.chinese_mandarin' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.utils.text.chinese_mandarin' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.utils.text.chinese_mandarin' to be distributed and are
+          already explicitly excluding 'TTS.tts.utils.text.chinese_mandarin' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.utils.text.english' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.utils.text.english' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.utils.text.english' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.utils.text.english' to be distributed and are
+          already explicitly excluding 'TTS.tts.utils.text.english' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.utils.text.french' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.utils.text.french' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.utils.text.french' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.utils.text.french' to be distributed and are
+          already explicitly excluding 'TTS.tts.utils.text.french' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.utils.text.japanese' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.utils.text.japanese' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.utils.text.japanese' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.utils.text.japanese' to be distributed and are
+          already explicitly excluding 'TTS.tts.utils.text.japanese' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.utils.text.korean' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.utils.text.korean' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.utils.text.korean' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.utils.text.korean' to be distributed and are
+          already explicitly excluding 'TTS.tts.utils.text.korean' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.tts.utils.text.phonemizers' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.tts.utils.text.phonemizers' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.tts.utils.text.phonemizers' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.tts.utils.text.phonemizers' to be distributed and are
+          already explicitly excluding 'TTS.tts.utils.text.phonemizers' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.utils' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.utils' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.utils' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.utils' to be distributed and are
+          already explicitly excluding 'TTS.utils' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.utils.audio' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.utils.audio' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.utils.audio' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.utils.audio' to be distributed and are
+          already explicitly excluding 'TTS.utils.audio' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.vc.configs' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.vc.configs' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.vc.configs' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.vc.configs' to be distributed and are
+          already explicitly excluding 'TTS.vc.configs' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.vc.models' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.vc.models' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.vc.models' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.vc.models' to be distributed and are
+          already explicitly excluding 'TTS.vc.models' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.vc.modules' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.vc.modules' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.vc.modules' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.vc.modules' to be distributed and are
+          already explicitly excluding 'TTS.vc.modules' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.vc.modules.freevc' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.vc.modules.freevc' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.vc.modules.freevc' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.vc.modules.freevc' to be distributed and are
+          already explicitly excluding 'TTS.vc.modules.freevc' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.vc.modules.freevc.speaker_encoder' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.vc.modules.freevc.speaker_encoder' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.vc.modules.freevc.speaker_encoder' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.vc.modules.freevc.speaker_encoder' to be distributed and are
+          already explicitly excluding 'TTS.vc.modules.freevc.speaker_encoder' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.vc.modules.freevc.wavlm' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.vc.modules.freevc.wavlm' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.vc.modules.freevc.wavlm' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.vc.modules.freevc.wavlm' to be distributed and are
+          already explicitly excluding 'TTS.vc.modules.freevc.wavlm' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.vocoder' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.vocoder' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.vocoder' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.vocoder' to be distributed and are
+          already explicitly excluding 'TTS.vocoder' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.vocoder.configs' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.vocoder.configs' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.vocoder.configs' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.vocoder.configs' to be distributed and are
+          already explicitly excluding 'TTS.vocoder.configs' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.vocoder.datasets' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.vocoder.datasets' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.vocoder.datasets' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.vocoder.datasets' to be distributed and are
+          already explicitly excluding 'TTS.vocoder.datasets' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.vocoder.layers' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.vocoder.layers' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.vocoder.layers' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.vocoder.layers' to be distributed and are
+          already explicitly excluding 'TTS.vocoder.layers' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.vocoder.models' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.vocoder.models' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.vocoder.models' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.vocoder.models' to be distributed and are
+          already explicitly excluding 'TTS.vocoder.models' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  C:\Users\chell\AppData\Local\Temp\pip-build-env-ry17_wao\overlay\Lib\site-packages\setuptools\command\build_py.py:212: _Warning: Package 'TTS.vocoder.utils' is absent from the `packages` configuration.
+  !!
+  
+          ********************************************************************************
+          ############################
+          # Package would be ignored #
+          ############################
+          Python recognizes 'TTS.vocoder.utils' as an importable package[^1],
+          but it is absent from setuptools' `packages` configuration.
+  
+          This leads to an ambiguous overall configuration. If you want to distribute this
+          package, please make sure that 'TTS.vocoder.utils' is explicitly added
+          to the `packages` configuration field.
+  
+          Alternatively, you can also rely on setuptools' discovery methods
+          (for example by using `find_namespace_packages(...)`/`find_namespace:`
+          instead of `find_packages(...)`/`find:`).
+  
+          You can read more about "package discovery" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/package_discovery.html
+  
+          If you don't want 'TTS.vocoder.utils' to be distributed and are
+          already explicitly excluding 'TTS.vocoder.utils' via
+          `find_namespace_packages(...)/find_namespace` or `find_packages(...)/find`,
+          you can try to use `exclude_package_data`, or `include-package-data=False` in
+          combination with a more fine grained `package-data` configuration.
+  
+          You can read more about "package data files" on setuptools documentation page:
+  
+          - https://setuptools.pypa.io/en/latest/userguide/datafiles.html
+  
+  
+          [^1]: For Python, any directory (with suitable naming) can be imported,
+                even if it does not contain any `.py` files.
+                On the other hand, currently there is no concept of package data
+                directory, all directories are treated like packages.
+          ********************************************************************************
+  
+  !!
+    check.warn(importable)
+  copying TTS\.models.json -> temp_build\TTS
+  copying TTS\VERSION -> temp_build\TTS
+  creating temp_build\TTS\tts\utils\monotonic_align
+  copying TTS\tts\utils\monotonic_align\core.c -> temp_build\TTS\tts\utils\monotonic_align
+  creating temp_build\TTS\bin
+  copying TTS\bin\__init__.py -> temp_build\TTS\bin
+  copying TTS\bin\collect_env_info.py -> temp_build\TTS\bin
+  copying TTS\bin\compute_attention_masks.py -> temp_build\TTS\bin
+  copying TTS\bin\compute_embeddings.py -> temp_build\TTS\bin
+  copying TTS\bin\compute_statistics.py -> temp_build\TTS\bin
+  copying TTS\bin\eval_encoder.py -> temp_build\TTS\bin
+  copying TTS\bin\extract_tts_spectrograms.py -> temp_build\TTS\bin
+  copying TTS\bin\find_unique_chars.py -> temp_build\TTS\bin
+  copying TTS\bin\find_unique_phonemes.py -> temp_build\TTS\bin
+  copying TTS\bin\remove_silence_using_vad.py -> temp_build\TTS\bin
+  copying TTS\bin\resample.py -> temp_build\TTS\bin
+  copying TTS\bin\synthesize.py -> temp_build\TTS\bin
+  copying TTS\bin\train_encoder.py -> temp_build\TTS\bin
+  copying TTS\bin\train_tts.py -> temp_build\TTS\bin
+  copying TTS\bin\train_vocoder.py -> temp_build\TTS\bin
+  copying TTS\bin\tune_wavegrad.py -> temp_build\TTS\bin
+  creating temp_build\TTS\config
+  copying TTS\config\__init__.py -> temp_build\TTS\config
+  copying TTS\config\shared_configs.py -> temp_build\TTS\config
+  creating temp_build\TTS\demos\xtts_ft_demo
+  copying TTS\demos\xtts_ft_demo\xtts_demo.py -> temp_build\TTS\demos\xtts_ft_demo
+  creating temp_build\TTS\demos\xtts_ft_demo\utils
+  copying TTS\demos\xtts_ft_demo\utils\formatter.py -> temp_build\TTS\demos\xtts_ft_demo\utils
+  copying TTS\demos\xtts_ft_demo\utils\gpt_train.py -> temp_build\TTS\demos\xtts_ft_demo\utils
+  creating temp_build\TTS\encoder
+  copying TTS\encoder\README.md -> temp_build\TTS\encoder
+  copying TTS\encoder\__init__.py -> temp_build\TTS\encoder
+  copying TTS\encoder\dataset.py -> temp_build\TTS\encoder
+  copying TTS\encoder\losses.py -> temp_build\TTS\encoder
+  creating temp_build\TTS\encoder\configs
+  copying TTS\encoder\configs\base_encoder_config.py -> temp_build\TTS\encoder\configs
+  copying TTS\encoder\configs\emotion_encoder_config.py -> temp_build\TTS\encoder\configs
+  copying TTS\encoder\configs\speaker_encoder_config.py -> temp_build\TTS\encoder\configs
+  creating temp_build\TTS\encoder\models
+  copying TTS\encoder\models\base_encoder.py -> temp_build\TTS\encoder\models
+  copying TTS\encoder\models\lstm.py -> temp_build\TTS\encoder\models
+  copying TTS\encoder\models\resnet.py -> temp_build\TTS\encoder\models
+  creating temp_build\TTS\encoder\utils
+  copying TTS\encoder\utils\__init__.py -> temp_build\TTS\encoder\utils
+  copying TTS\encoder\utils\generic_utils.py -> temp_build\TTS\encoder\utils
+  copying TTS\encoder\utils\prepare_voxceleb.py -> temp_build\TTS\encoder\utils
+  copying TTS\encoder\utils\training.py -> temp_build\TTS\encoder\utils
+  copying TTS\encoder\utils\visual.py -> temp_build\TTS\encoder\utils
+  creating temp_build\TTS\server
+  copying TTS\server\README.md -> temp_build\TTS\server
+  copying TTS\server\__init__.py -> temp_build\TTS\server
+  copying TTS\server\conf.json -> temp_build\TTS\server
+  copying TTS\server\server.py -> temp_build\TTS\server
+  creating temp_build\TTS\server\static
+  copying TTS\server\static\coqui-log-green-TTS.png -> temp_build\TTS\server\static
+  creating temp_build\TTS\server\templates
+  copying TTS\server\templates\details.html -> temp_build\TTS\server\templates
+  copying TTS\server\templates\index.html -> temp_build\TTS\server\templates
+  copying TTS\tts\__init__.py -> temp_build\TTS\tts
+  creating temp_build\TTS\tts\configs
+  copying TTS\tts\configs\__init__.py -> temp_build\TTS\tts\configs
+  copying TTS\tts\configs\align_tts_config.py -> temp_build\TTS\tts\configs
+  copying TTS\tts\configs\bark_config.py -> temp_build\TTS\tts\configs
+  copying TTS\tts\configs\delightful_tts_config.py -> temp_build\TTS\tts\configs
+  copying TTS\tts\configs\fast_pitch_config.py -> temp_build\TTS\tts\configs
+  copying TTS\tts\configs\fast_speech_config.py -> temp_build\TTS\tts\configs
+  copying TTS\tts\configs\fastspeech2_config.py -> temp_build\TTS\tts\configs
+  copying TTS\tts\configs\glow_tts_config.py -> temp_build\TTS\tts\configs
+  copying TTS\tts\configs\neuralhmm_tts_config.py -> temp_build\TTS\tts\configs
+  copying TTS\tts\configs\overflow_config.py -> temp_build\TTS\tts\configs
+  copying TTS\tts\configs\shared_configs.py -> temp_build\TTS\tts\configs
+  copying TTS\tts\configs\speedy_speech_config.py -> temp_build\TTS\tts\configs
+  copying TTS\tts\configs\tacotron2_config.py -> temp_build\TTS\tts\configs
+  copying TTS\tts\configs\tacotron_config.py -> temp_build\TTS\tts\configs
+  copying TTS\tts\configs\tortoise_config.py -> temp_build\TTS\tts\configs
+  copying TTS\tts\configs\vits_config.py -> temp_build\TTS\tts\configs
+  copying TTS\tts\configs\xtts_config.py -> temp_build\TTS\tts\configs
+  creating temp_build\TTS\tts\datasets
+  copying TTS\tts\datasets\__init__.py -> temp_build\TTS\tts\datasets
+  copying TTS\tts\datasets\dataset.py -> temp_build\TTS\tts\datasets
+  copying TTS\tts\datasets\formatters.py -> temp_build\TTS\tts\datasets
+  creating temp_build\TTS\tts\layers
+  copying TTS\tts\layers\__init__.py -> temp_build\TTS\tts\layers
+  copying TTS\tts\layers\losses.py -> temp_build\TTS\tts\layers
+  creating temp_build\TTS\tts\layers\align_tts
+  copying TTS\tts\layers\align_tts\__init__.py -> temp_build\TTS\tts\layers\align_tts
+  copying TTS\tts\layers\align_tts\duration_predictor.py -> temp_build\TTS\tts\layers\align_tts
+  copying TTS\tts\layers\align_tts\mdn.py -> temp_build\TTS\tts\layers\align_tts
+  creating temp_build\TTS\tts\layers\bark
+  copying TTS\tts\layers\bark\__init__.py -> temp_build\TTS\tts\layers\bark
+  copying TTS\tts\layers\bark\inference_funcs.py -> temp_build\TTS\tts\layers\bark
+  copying TTS\tts\layers\bark\load_model.py -> temp_build\TTS\tts\layers\bark
+  copying TTS\tts\layers\bark\model.py -> temp_build\TTS\tts\layers\bark
+  copying TTS\tts\layers\bark\model_fine.py -> temp_build\TTS\tts\layers\bark
+  creating temp_build\TTS\tts\layers\bark\hubert
+  copying TTS\tts\layers\bark\hubert\__init__.py -> temp_build\TTS\tts\layers\bark\hubert
+  copying TTS\tts\layers\bark\hubert\hubert_manager.py -> temp_build\TTS\tts\layers\bark\hubert
+  copying TTS\tts\layers\bark\hubert\kmeans_hubert.py -> temp_build\TTS\tts\layers\bark\hubert
+  copying TTS\tts\layers\bark\hubert\tokenizer.py -> temp_build\TTS\tts\layers\bark\hubert
+  creating temp_build\TTS\tts\layers\delightful_tts
+  copying TTS\tts\layers\delightful_tts\__init__.py -> temp_build\TTS\tts\layers\delightful_tts
+  copying TTS\tts\layers\delightful_tts\acoustic_model.py -> temp_build\TTS\tts\layers\delightful_tts
+  copying TTS\tts\layers\delightful_tts\conformer.py -> temp_build\TTS\tts\layers\delightful_tts
+  copying TTS\tts\layers\delightful_tts\conv_layers.py -> temp_build\TTS\tts\layers\delightful_tts
+  copying TTS\tts\layers\delightful_tts\encoders.py -> temp_build\TTS\tts\layers\delightful_tts
+  copying TTS\tts\layers\delightful_tts\energy_adaptor.py -> temp_build\TTS\tts\layers\delightful_tts
+  copying TTS\tts\layers\delightful_tts\kernel_predictor.py -> temp_build\TTS\tts\layers\delightful_tts
+  copying TTS\tts\layers\delightful_tts\networks.py -> temp_build\TTS\tts\layers\delightful_tts
+  copying TTS\tts\layers\delightful_tts\phoneme_prosody_predictor.py -> temp_build\TTS\tts\layers\delightful_tts
+  copying TTS\tts\layers\delightful_tts\pitch_adaptor.py -> temp_build\TTS\tts\layers\delightful_tts
+  copying TTS\tts\layers\delightful_tts\variance_predictor.py -> temp_build\TTS\tts\layers\delightful_tts
+  creating temp_build\TTS\tts\layers\feed_forward
+  copying TTS\tts\layers\feed_forward\__init__.py -> temp_build\TTS\tts\layers\feed_forward
+  copying TTS\tts\layers\feed_forward\decoder.py -> temp_build\TTS\tts\layers\feed_forward
+  copying TTS\tts\layers\feed_forward\duration_predictor.py -> temp_build\TTS\tts\layers\feed_forward
+  copying TTS\tts\layers\feed_forward\encoder.py -> temp_build\TTS\tts\layers\feed_forward
+  creating temp_build\TTS\tts\layers\generic
+  copying TTS\tts\layers\generic\__init__.py -> temp_build\TTS\tts\layers\generic
+  copying TTS\tts\layers\generic\aligner.py -> temp_build\TTS\tts\layers\generic
+  copying TTS\tts\layers\generic\gated_conv.py -> temp_build\TTS\tts\layers\generic
+  copying TTS\tts\layers\generic\normalization.py -> temp_build\TTS\tts\layers\generic
+  copying TTS\tts\layers\generic\pos_encoding.py -> temp_build\TTS\tts\layers\generic
+  copying TTS\tts\layers\generic\res_conv_bn.py -> temp_build\TTS\tts\layers\generic
+  copying TTS\tts\layers\generic\time_depth_sep_conv.py -> temp_build\TTS\tts\layers\generic
+  copying TTS\tts\layers\generic\transformer.py -> temp_build\TTS\tts\layers\generic
+  copying TTS\tts\layers\generic\wavenet.py -> temp_build\TTS\tts\layers\generic
+  creating temp_build\TTS\tts\layers\glow_tts
+  copying TTS\tts\layers\glow_tts\__init__.py -> temp_build\TTS\tts\layers\glow_tts
+  copying TTS\tts\layers\glow_tts\decoder.py -> temp_build\TTS\tts\layers\glow_tts
+  copying TTS\tts\layers\glow_tts\duration_predictor.py -> temp_build\TTS\tts\layers\glow_tts
+  copying TTS\tts\layers\glow_tts\encoder.py -> temp_build\TTS\tts\layers\glow_tts
+  copying TTS\tts\layers\glow_tts\glow.py -> temp_build\TTS\tts\layers\glow_tts
+  copying TTS\tts\layers\glow_tts\transformer.py -> temp_build\TTS\tts\layers\glow_tts
+  creating temp_build\TTS\tts\layers\overflow
+  copying TTS\tts\layers\overflow\__init__.py -> temp_build\TTS\tts\layers\overflow
+  copying TTS\tts\layers\overflow\common_layers.py -> temp_build\TTS\tts\layers\overflow
+  copying TTS\tts\layers\overflow\decoder.py -> temp_build\TTS\tts\layers\overflow
+  copying TTS\tts\layers\overflow\neural_hmm.py -> temp_build\TTS\tts\layers\overflow
+  copying TTS\tts\layers\overflow\plotting_utils.py -> temp_build\TTS\tts\layers\overflow
+  creating temp_build\TTS\tts\layers\tacotron
+  copying TTS\tts\layers\tacotron\__init__.py -> temp_build\TTS\tts\layers\tacotron
+  copying TTS\tts\layers\tacotron\attentions.py -> temp_build\TTS\tts\layers\tacotron
+  copying TTS\tts\layers\tacotron\capacitron_layers.py -> temp_build\TTS\tts\layers\tacotron
+  copying TTS\tts\layers\tacotron\common_layers.py -> temp_build\TTS\tts\layers\tacotron
+  copying TTS\tts\layers\tacotron\gst_layers.py -> temp_build\TTS\tts\layers\tacotron
+  copying TTS\tts\layers\tacotron\tacotron.py -> temp_build\TTS\tts\layers\tacotron
+  copying TTS\tts\layers\tacotron\tacotron2.py -> temp_build\TTS\tts\layers\tacotron
+  creating temp_build\TTS\tts\layers\tortoise
+  copying TTS\tts\layers\tortoise\arch_utils.py -> temp_build\TTS\tts\layers\tortoise
+  copying TTS\tts\layers\tortoise\audio_utils.py -> temp_build\TTS\tts\layers\tortoise
+  copying TTS\tts\layers\tortoise\autoregressive.py -> temp_build\TTS\tts\layers\tortoise
+  copying TTS\tts\layers\tortoise\classifier.py -> temp_build\TTS\tts\layers\tortoise
+  copying TTS\tts\layers\tortoise\clvp.py -> temp_build\TTS\tts\layers\tortoise
+  copying TTS\tts\layers\tortoise\diffusion.py -> temp_build\TTS\tts\layers\tortoise
+  copying TTS\tts\layers\tortoise\diffusion_decoder.py -> temp_build\TTS\tts\layers\tortoise
+  copying TTS\tts\layers\tortoise\dpm_solver.py -> temp_build\TTS\tts\layers\tortoise
+  copying TTS\tts\layers\tortoise\random_latent_generator.py -> temp_build\TTS\tts\layers\tortoise
+  copying TTS\tts\layers\tortoise\tokenizer.py -> temp_build\TTS\tts\layers\tortoise
+  copying TTS\tts\layers\tortoise\transformer.py -> temp_build\TTS\tts\layers\tortoise
+  copying TTS\tts\layers\tortoise\utils.py -> temp_build\TTS\tts\layers\tortoise
+  copying TTS\tts\layers\tortoise\vocoder.py -> temp_build\TTS\tts\layers\tortoise
+  copying TTS\tts\layers\tortoise\wav2vec_alignment.py -> temp_build\TTS\tts\layers\tortoise
+  copying TTS\tts\layers\tortoise\xtransformers.py -> temp_build\TTS\tts\layers\tortoise
+  creating temp_build\TTS\tts\layers\vits
+  copying TTS\tts\layers\vits\discriminator.py -> temp_build\TTS\tts\layers\vits
+  copying TTS\tts\layers\vits\networks.py -> temp_build\TTS\tts\layers\vits
+  copying TTS\tts\layers\vits\stochastic_duration_predictor.py -> temp_build\TTS\tts\layers\vits
+  copying TTS\tts\layers\vits\transforms.py -> temp_build\TTS\tts\layers\vits
+  creating temp_build\TTS\tts\layers\xtts
+  copying TTS\tts\layers\xtts\dvae.py -> temp_build\TTS\tts\layers\xtts
+  copying TTS\tts\layers\xtts\gpt.py -> temp_build\TTS\tts\layers\xtts
+  copying TTS\tts\layers\xtts\gpt_inference.py -> temp_build\TTS\tts\layers\xtts
+  copying TTS\tts\layers\xtts\hifigan_decoder.py -> temp_build\TTS\tts\layers\xtts
+  copying TTS\tts\layers\xtts\latent_encoder.py -> temp_build\TTS\tts\layers\xtts
+  copying TTS\tts\layers\xtts\perceiver_encoder.py -> temp_build\TTS\tts\layers\xtts
+  copying TTS\tts\layers\xtts\stream_generator.py -> temp_build\TTS\tts\layers\xtts
+  copying TTS\tts\layers\xtts\tokenizer.py -> temp_build\TTS\tts\layers\xtts
+  copying TTS\tts\layers\xtts\xtts_manager.py -> temp_build\TTS\tts\layers\xtts
+  copying TTS\tts\layers\xtts\zh_num2words.py -> temp_build\TTS\tts\layers\xtts
+  creating temp_build\TTS\tts\layers\xtts\trainer
+  copying TTS\tts\layers\xtts\trainer\dataset.py -> temp_build\TTS\tts\layers\xtts\trainer
+  copying TTS\tts\layers\xtts\trainer\gpt_trainer.py -> temp_build\TTS\tts\layers\xtts\trainer
+  creating temp_build\TTS\tts\models
+  copying TTS\tts\models\__init__.py -> temp_build\TTS\tts\models
+  copying TTS\tts\models\align_tts.py -> temp_build\TTS\tts\models
+  copying TTS\tts\models\bark.py -> temp_build\TTS\tts\models
+  copying TTS\tts\models\base_tacotron.py -> temp_build\TTS\tts\models
+  copying TTS\tts\models\base_tts.py -> temp_build\TTS\tts\models
+  copying TTS\tts\models\delightful_tts.py -> temp_build\TTS\tts\models
+  copying TTS\tts\models\forward_tts.py -> temp_build\TTS\tts\models
+  copying TTS\tts\models\glow_tts.py -> temp_build\TTS\tts\models
+  copying TTS\tts\models\neuralhmm_tts.py -> temp_build\TTS\tts\models
+  copying TTS\tts\models\overflow.py -> temp_build\TTS\tts\models
+  copying TTS\tts\models\tacotron.py -> temp_build\TTS\tts\models
+  copying TTS\tts\models\tacotron2.py -> temp_build\TTS\tts\models
+  copying TTS\tts\models\tortoise.py -> temp_build\TTS\tts\models
+  copying TTS\tts\models\vits.py -> temp_build\TTS\tts\models
+  copying TTS\tts\models\xtts.py -> temp_build\TTS\tts\models
+  copying TTS\tts\utils\__init__.py -> temp_build\TTS\tts\utils
+  copying TTS\tts\utils\data.py -> temp_build\TTS\tts\utils
+  copying TTS\tts\utils\fairseq.py -> temp_build\TTS\tts\utils
+  copying TTS\tts\utils\helpers.py -> temp_build\TTS\tts\utils
+  copying TTS\tts\utils\languages.py -> temp_build\TTS\tts\utils
+  copying TTS\tts\utils\managers.py -> temp_build\TTS\tts\utils
+  copying TTS\tts\utils\measures.py -> temp_build\TTS\tts\utils
+  copying TTS\tts\utils\speakers.py -> temp_build\TTS\tts\utils
+  copying TTS\tts\utils\ssim.py -> temp_build\TTS\tts\utils
+  copying TTS\tts\utils\synthesis.py -> temp_build\TTS\tts\utils
+  copying TTS\tts\utils\visual.py -> temp_build\TTS\tts\utils
+  creating temp_build\TTS\tts\utils\assets\tortoise
+  copying TTS\tts\utils\assets\tortoise\tokenizer.json -> temp_build\TTS\tts\utils\assets\tortoise
+  copying TTS\tts\utils\monotonic_align\__init__.py -> temp_build\TTS\tts\utils\monotonic_align
+  copying TTS\tts\utils\monotonic_align\core.c -> temp_build\TTS\tts\utils\monotonic_align
+  copying TTS\tts\utils\monotonic_align\core.pyx -> temp_build\TTS\tts\utils\monotonic_align
+  copying TTS\tts\utils\monotonic_align\setup.py -> temp_build\TTS\tts\utils\monotonic_align
+  creating temp_build\TTS\tts\utils\text
+  copying TTS\tts\utils\text\__init__.py -> temp_build\TTS\tts\utils\text
+  copying TTS\tts\utils\text\characters.py -> temp_build\TTS\tts\utils\text
+  copying TTS\tts\utils\text\cleaners.py -> temp_build\TTS\tts\utils\text
+  copying TTS\tts\utils\text\cmudict.py -> temp_build\TTS\tts\utils\text
+  copying TTS\tts\utils\text\punctuation.py -> temp_build\TTS\tts\utils\text
+  copying TTS\tts\utils\text\tokenizer.py -> temp_build\TTS\tts\utils\text
+  creating temp_build\TTS\tts\utils\text\bangla
+  copying TTS\tts\utils\text\bangla\__init__.py -> temp_build\TTS\tts\utils\text\bangla
+  copying TTS\tts\utils\text\bangla\phonemizer.py -> temp_build\TTS\tts\utils\text\bangla
+  creating temp_build\TTS\tts\utils\text\belarusian
+  copying TTS\tts\utils\text\belarusian\__init__.py -> temp_build\TTS\tts\utils\text\belarusian
+  copying TTS\tts\utils\text\belarusian\phonemizer.py -> temp_build\TTS\tts\utils\text\belarusian
+  creating temp_build\TTS\tts\utils\text\chinese_mandarin
+  copying TTS\tts\utils\text\chinese_mandarin\__init__.py -> temp_build\TTS\tts\utils\text\chinese_mandarin
+  copying TTS\tts\utils\text\chinese_mandarin\numbers.py -> temp_build\TTS\tts\utils\text\chinese_mandarin
+  copying TTS\tts\utils\text\chinese_mandarin\phonemizer.py -> temp_build\TTS\tts\utils\text\chinese_mandarin
+  copying TTS\tts\utils\text\chinese_mandarin\pinyinToPhonemes.py -> temp_build\TTS\tts\utils\text\chinese_mandarin
+  creating temp_build\TTS\tts\utils\text\english
+  copying TTS\tts\utils\text\english\__init__.py -> temp_build\TTS\tts\utils\text\english
+  copying TTS\tts\utils\text\english\abbreviations.py -> temp_build\TTS\tts\utils\text\english
+  copying TTS\tts\utils\text\english\number_norm.py -> temp_build\TTS\tts\utils\text\english
+  copying TTS\tts\utils\text\english\time_norm.py -> temp_build\TTS\tts\utils\text\english
+  creating temp_build\TTS\tts\utils\text\french
+  copying TTS\tts\utils\text\french\__init__.py -> temp_build\TTS\tts\utils\text\french
+  copying TTS\tts\utils\text\french\abbreviations.py -> temp_build\TTS\tts\utils\text\french
+  creating temp_build\TTS\tts\utils\text\japanese
+  copying TTS\tts\utils\text\japanese\__init__.py -> temp_build\TTS\tts\utils\text\japanese
+  copying TTS\tts\utils\text\japanese\phonemizer.py -> temp_build\TTS\tts\utils\text\japanese
+  creating temp_build\TTS\tts\utils\text\korean
+  copying TTS\tts\utils\text\korean\__init__.py -> temp_build\TTS\tts\utils\text\korean
+  copying TTS\tts\utils\text\korean\ko_dictionary.py -> temp_build\TTS\tts\utils\text\korean
+  copying TTS\tts\utils\text\korean\korean.py -> temp_build\TTS\tts\utils\text\korean
+  copying TTS\tts\utils\text\korean\phonemizer.py -> temp_build\TTS\tts\utils\text\korean
+  creating temp_build\TTS\tts\utils\text\phonemizers
+  copying TTS\tts\utils\text\phonemizers\__init__.py -> temp_build\TTS\tts\utils\text\phonemizers
+  copying TTS\tts\utils\text\phonemizers\bangla_phonemizer.py -> temp_build\TTS\tts\utils\text\phonemizers
+  copying TTS\tts\utils\text\phonemizers\base.py -> temp_build\TTS\tts\utils\text\phonemizers
+  copying TTS\tts\utils\text\phonemizers\belarusian_phonemizer.py -> temp_build\TTS\tts\utils\text\phonemizers
+  copying TTS\tts\utils\text\phonemizers\espeak_wrapper.py -> temp_build\TTS\tts\utils\text\phonemizers
+  copying TTS\tts\utils\text\phonemizers\gruut_wrapper.py -> temp_build\TTS\tts\utils\text\phonemizers
+  copying TTS\tts\utils\text\phonemizers\ja_jp_phonemizer.py -> temp_build\TTS\tts\utils\text\phonemizers
+  copying TTS\tts\utils\text\phonemizers\ko_kr_phonemizer.py -> temp_build\TTS\tts\utils\text\phonemizers
+  copying TTS\tts\utils\text\phonemizers\multi_phonemizer.py -> temp_build\TTS\tts\utils\text\phonemizers
+  copying TTS\tts\utils\text\phonemizers\zh_cn_phonemizer.py -> temp_build\TTS\tts\utils\text\phonemizers
+  creating temp_build\TTS\utils
+  copying TTS\utils\__init__.py -> temp_build\TTS\utils
+  copying TTS\utils\callbacks.py -> temp_build\TTS\utils
+  copying TTS\utils\capacitron_optimizer.py -> temp_build\TTS\utils
+  copying TTS\utils\distribute.py -> temp_build\TTS\utils
+  copying TTS\utils\download.py -> temp_build\TTS\utils
+  copying TTS\utils\downloaders.py -> temp_build\TTS\utils
+  copying TTS\utils\generic_utils.py -> temp_build\TTS\utils
+  copying TTS\utils\io.py -> temp_build\TTS\utils
+  copying TTS\utils\manage.py -> temp_build\TTS\utils
+  copying TTS\utils\radam.py -> temp_build\TTS\utils
+  copying TTS\utils\samplers.py -> temp_build\TTS\utils
+  copying TTS\utils\synthesizer.py -> temp_build\TTS\utils
+  copying TTS\utils\training.py -> temp_build\TTS\utils
+  copying TTS\utils\vad.py -> temp_build\TTS\utils
+  creating temp_build\TTS\utils\audio
+  copying TTS\utils\audio\__init__.py -> temp_build\TTS\utils\audio
+  copying TTS\utils\audio\numpy_transforms.py -> temp_build\TTS\utils\audio
+  copying TTS\utils\audio\processor.py -> temp_build\TTS\utils\audio
+  copying TTS\utils\audio\torch_transforms.py -> temp_build\TTS\utils\audio
+  creating temp_build\TTS\vc\configs
+  copying TTS\vc\configs\__init__.py -> temp_build\TTS\vc\configs
+  copying TTS\vc\configs\freevc_config.py -> temp_build\TTS\vc\configs
+  copying TTS\vc\configs\shared_configs.py -> temp_build\TTS\vc\configs
+  creating temp_build\TTS\vc\models
+  copying TTS\vc\models\__init__.py -> temp_build\TTS\vc\models
+  copying TTS\vc\models\base_vc.py -> temp_build\TTS\vc\models
+  copying TTS\vc\models\freevc.py -> temp_build\TTS\vc\models
+  creating temp_build\TTS\vc\modules
+  copying TTS\vc\modules\__init__.py -> temp_build\TTS\vc\modules
+  creating temp_build\TTS\vc\modules\freevc
+  copying TTS\vc\modules\freevc\__init__.py -> temp_build\TTS\vc\modules\freevc
+  copying TTS\vc\modules\freevc\commons.py -> temp_build\TTS\vc\modules\freevc
+  copying TTS\vc\modules\freevc\mel_processing.py -> temp_build\TTS\vc\modules\freevc
+  copying TTS\vc\modules\freevc\modules.py -> temp_build\TTS\vc\modules\freevc
+  creating temp_build\TTS\vc\modules\freevc\speaker_encoder
+  copying TTS\vc\modules\freevc\speaker_encoder\__init__.py -> temp_build\TTS\vc\modules\freevc\speaker_encoder
+  copying TTS\vc\modules\freevc\speaker_encoder\audio.py -> temp_build\TTS\vc\modules\freevc\speaker_encoder
+  copying TTS\vc\modules\freevc\speaker_encoder\hparams.py -> temp_build\TTS\vc\modules\freevc\speaker_encoder
+  copying TTS\vc\modules\freevc\speaker_encoder\speaker_encoder.py -> temp_build\TTS\vc\modules\freevc\speaker_encoder
+  creating temp_build\TTS\vc\modules\freevc\wavlm
+  copying TTS\vc\modules\freevc\wavlm\__init__.py -> temp_build\TTS\vc\modules\freevc\wavlm
+  copying TTS\vc\modules\freevc\wavlm\config.json -> temp_build\TTS\vc\modules\freevc\wavlm
+  copying TTS\vc\modules\freevc\wavlm\modules.py -> temp_build\TTS\vc\modules\freevc\wavlm
+  copying TTS\vc\modules\freevc\wavlm\wavlm.py -> temp_build\TTS\vc\modules\freevc\wavlm
+  creating temp_build\TTS\vocoder
+  copying TTS\vocoder\README.md -> temp_build\TTS\vocoder
+  copying TTS\vocoder\__init__.py -> temp_build\TTS\vocoder
+  creating temp_build\TTS\vocoder\configs
+  copying TTS\vocoder\configs\__init__.py -> temp_build\TTS\vocoder\configs
+  copying TTS\vocoder\configs\fullband_melgan_config.py -> temp_build\TTS\vocoder\configs
+  copying TTS\vocoder\configs\hifigan_config.py -> temp_build\TTS\vocoder\configs
+  copying TTS\vocoder\configs\melgan_config.py -> temp_build\TTS\vocoder\configs
+  copying TTS\vocoder\configs\multiband_melgan_config.py -> temp_build\TTS\vocoder\configs
+  copying TTS\vocoder\configs\parallel_wavegan_config.py -> temp_build\TTS\vocoder\configs
+  copying TTS\vocoder\configs\shared_configs.py -> temp_build\TTS\vocoder\configs
+  copying TTS\vocoder\configs\univnet_config.py -> temp_build\TTS\vocoder\configs
+  copying TTS\vocoder\configs\wavegrad_config.py -> temp_build\TTS\vocoder\configs
+  copying TTS\vocoder\configs\wavernn_config.py -> temp_build\TTS\vocoder\configs
+  creating temp_build\TTS\vocoder\datasets
+  copying TTS\vocoder\datasets\__init__.py -> temp_build\TTS\vocoder\datasets
+  copying TTS\vocoder\datasets\gan_dataset.py -> temp_build\TTS\vocoder\datasets
+  copying TTS\vocoder\datasets\preprocess.py -> temp_build\TTS\vocoder\datasets
+  copying TTS\vocoder\datasets\wavegrad_dataset.py -> temp_build\TTS\vocoder\datasets
+  copying TTS\vocoder\datasets\wavernn_dataset.py -> temp_build\TTS\vocoder\datasets
+  creating temp_build\TTS\vocoder\layers
+  copying TTS\vocoder\layers\__init__.py -> temp_build\TTS\vocoder\layers
+  copying TTS\vocoder\layers\hifigan.py -> temp_build\TTS\vocoder\layers
+  copying TTS\vocoder\layers\losses.py -> temp_build\TTS\vocoder\layers
+  copying TTS\vocoder\layers\lvc_block.py -> temp_build\TTS\vocoder\layers
+  copying TTS\vocoder\layers\melgan.py -> temp_build\TTS\vocoder\layers
+  copying TTS\vocoder\layers\parallel_wavegan.py -> temp_build\TTS\vocoder\layers
+  copying TTS\vocoder\layers\pqmf.py -> temp_build\TTS\vocoder\layers
+  copying TTS\vocoder\layers\upsample.py -> temp_build\TTS\vocoder\layers
+  copying TTS\vocoder\layers\wavegrad.py -> temp_build\TTS\vocoder\layers
+  creating temp_build\TTS\vocoder\models
+  copying TTS\vocoder\models\__init__.py -> temp_build\TTS\vocoder\models
+  copying TTS\vocoder\models\base_vocoder.py -> temp_build\TTS\vocoder\models
+  copying TTS\vocoder\models\fullband_melgan_generator.py -> temp_build\TTS\vocoder\models
+  copying TTS\vocoder\models\gan.py -> temp_build\TTS\vocoder\models
+  copying TTS\vocoder\models\hifigan_discriminator.py -> temp_build\TTS\vocoder\models
+  copying TTS\vocoder\models\hifigan_generator.py -> temp_build\TTS\vocoder\models
+  copying TTS\vocoder\models\melgan_discriminator.py -> temp_build\TTS\vocoder\models
+  copying TTS\vocoder\models\melgan_generator.py -> temp_build\TTS\vocoder\models
+  copying TTS\vocoder\models\melgan_multiscale_discriminator.py -> temp_build\TTS\vocoder\models
+  copying TTS\vocoder\models\multiband_melgan_generator.py -> temp_build\TTS\vocoder\models
+  copying TTS\vocoder\models\parallel_wavegan_discriminator.py -> temp_build\TTS\vocoder\models
+  copying TTS\vocoder\models\parallel_wavegan_generator.py -> temp_build\TTS\vocoder\models
+  copying TTS\vocoder\models\random_window_discriminator.py -> temp_build\TTS\vocoder\models
+  copying TTS\vocoder\models\univnet_discriminator.py -> temp_build\TTS\vocoder\models
+  copying TTS\vocoder\models\univnet_generator.py -> temp_build\TTS\vocoder\models
+  copying TTS\vocoder\models\wavegrad.py -> temp_build\TTS\vocoder\models
+  copying TTS\vocoder\models\wavernn.py -> temp_build\TTS\vocoder\models
+  creating temp_build\TTS\vocoder\utils
+  copying TTS\vocoder\utils\__init__.py -> temp_build\TTS\vocoder\utils
+  copying TTS\vocoder\utils\distribution.py -> temp_build\TTS\vocoder\utils
+  copying TTS\vocoder\utils\generic_utils.py -> temp_build\TTS\vocoder\utils
+  running build_ext
+  building 'TTS.tts.utils.monotonic_align.core' extension
+  error: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
+  [end of output]
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+  ERROR: Failed building wheel for TTS
+Failed to build TTS
+error: failed-wheel-build-for-install
+
+Failed to build installable wheels for some pyproject.toml based projects
+
+TTS

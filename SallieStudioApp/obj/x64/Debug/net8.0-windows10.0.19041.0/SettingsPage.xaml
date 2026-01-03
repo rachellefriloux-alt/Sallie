@@ -1,0 +1,181 @@
+﻿<Page
+    x:Class="SallieStudioApp.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{StaticResource WindowBackground}">
+
+    <Grid Padding="20" RowSpacing="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Text="Settings"
+                   FontSize="28"
+                   Foreground="{StaticResource TextPrimary}"/>
+
+        <!-- Content -->
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Spacing="20">
+
+                <!-- Profile -->
+                <StackPanel>
+                    <TextBlock Text="Active Profile" 
+                               FontSize="16" 
+                               Foreground="{StaticResource TextPrimary}"/>
+                    <ComboBox x:ConnectionId='18' x:Name="ProfileSelector"
+                              Width="200"
+                                                                        >
+                        <ComboBoxItem Content="Dev"/>
+                        <ComboBoxItem Content="QA"/>
+                        <ComboBoxItem Content="Demo"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <!-- Theme -->
+                <StackPanel>
+                    <TextBlock Text="Theme"
+                               FontSize="16"
+                               Foreground="{StaticResource TextPrimary}"/>
+                    <ComboBox x:ConnectionId='17' x:Name="ThemeSelector"
+                              Width="200"
+                                                                      >
+                        <ComboBoxItem Content="Dark"/>
+                        <ComboBoxItem Content="Light"/>
+                        <ComboBoxItem Content="Sallie"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <!-- Repo Root -->
+                <StackPanel>
+                    <TextBlock Text="Repo Root"
+                               FontSize="16"
+                               Foreground="{StaticResource TextPrimary}"/>
+                    <TextBox x:ConnectionId='16' x:Name="RepoRootBox"
+                             Width="400"
+                                                                  />
+                </StackPanel>
+
+                <!-- Progeny Root -->
+                <StackPanel>
+                    <TextBlock Text="Progeny Root (relative)"
+                               FontSize="16"
+                               Foreground="{StaticResource TextPrimary}"/>
+                    <TextBox x:ConnectionId='15' x:Name="ProgenyRootBox"
+                             Width="400"
+                                                                     />
+                </StackPanel>
+
+                <!-- Ports -->
+                <StackPanel Orientation="Horizontal" Spacing="20">
+                    <StackPanel>
+                        <TextBlock Text="Preferred Port"
+                                   FontSize="16"
+                                   Foreground="{StaticResource TextPrimary}"/>
+                        <TextBox x:ConnectionId='14' x:Name="PreferredPortBox"
+                                 Width="120"
+                                                                           />
+                    </StackPanel>
+
+                    <StackPanel>
+                        <TextBlock Text="Fallback Port"
+                                   FontSize="16"
+                                   Foreground="{StaticResource TextPrimary}"/>
+                        <TextBox x:ConnectionId='13' x:Name="FallbackPortBox"
+                                 Width="120"
+                                                                          />
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Docker Compose -->
+                <StackPanel>
+                    <TextBlock Text="Docker Compose File"
+                               FontSize="16"
+                               Foreground="{StaticResource TextPrimary}"/>
+                    <TextBox x:ConnectionId='12' x:Name="DockerComposeBox"
+                             Width="400"
+                                                                       />
+                </StackPanel>
+
+                <!-- Logging -->
+                <StackPanel>
+                    <TextBlock Text="Logging"
+                               FontSize="16"
+                               Foreground="{StaticResource TextPrimary}"/>
+                    <CheckBox x:ConnectionId='11' x:Name="EnableLoggingBox"
+                              Content="Enable detailed logging"
+                              Foreground="{StaticResource TextPrimary}"
+                                                                
+                                                                  />
+                </StackPanel>
+
+                <!-- Watcher -->
+                <StackPanel>
+                    <TextBlock Text="Watcher"
+                               FontSize="16"
+                               Foreground="{StaticResource TextPrimary}"/>
+                    <CheckBox x:ConnectionId='10' x:Name="EnableWatcherBox"
+                              Content="Enable backend file watcher"
+                              Foreground="{StaticResource TextPrimary}"
+                                                                
+                                                                  />
+                </StackPanel>
+
+                <!-- Advanced -->
+                <StackPanel>
+                    <TextBlock Text="Advanced"
+                               FontSize="16"
+                               Foreground="{StaticResource TextPrimary}"/>
+                    <CheckBox x:ConnectionId='8' x:Name="ReadOnlyBox"
+                              Content="Enable read-only mode (Demo)"
+                              Foreground="{StaticResource TextPrimary}"
+                                                           
+                                                             />
+                    <CheckBox x:ConnectionId='9' x:Name="SilentModeBox"
+                              Content="Silent Mode (no notifications)"
+                              Foreground="{StaticResource TextPrimary}"
+                                                             
+                                                               />
+                </StackPanel>
+
+                <!-- Cloud Sync -->
+                <StackPanel>
+                    <TextBlock Text="Cloud Sync"
+                               FontSize="16"
+                               Foreground="{StaticResource TextPrimary}"/>
+
+                    <CheckBox x:ConnectionId='2' x:Name="CloudEnabledBox"
+                              Content="Enable Cloud Sync"
+                              Foreground="{StaticResource TextPrimary}"
+                                                               
+                                                                 />
+
+                    <TextBox x:ConnectionId='3' x:Name="CloudEndpointBox"
+                             Width="400"
+                             PlaceholderText="Cloud endpoint or folder path"
+                                                                       />
+
+                    <PasswordBox x:ConnectionId='4' x:Name="CloudKeyBox"
+                                 Width="400"
+                                 PlaceholderText="Encryption Key (Base64)"
+                                                                      />
+
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <TextBox x:ConnectionId='5' x:Name="CloudIntervalBox"
+                                 Width="120"
+                                 PlaceholderText="Sync interval (min)"
+                                                                           />
+                        <Button x:ConnectionId='6' Content="Sync Now"                      />
+                        <TextBlock x:ConnectionId='7' x:Name="CloudStatusText"
+                                   Foreground="{StaticResource TextSecondary}"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</Page>
+

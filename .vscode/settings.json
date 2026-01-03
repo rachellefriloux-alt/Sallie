@@ -8,5 +8,10 @@
     "editor.smoothScrolling": false,
     "workbench.list.smoothScrolling": false,
     "editor.mouseWheelScrollSensitivity": 1,
-    "editor.fastScrollSensitivity": 5
+    "editor.fastScrollSensitivity": 5,
+    "python.testing.pytestArgs": [
+        "SallieStudioApp"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }

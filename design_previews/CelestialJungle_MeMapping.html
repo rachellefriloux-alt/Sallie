@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sallie Studio - The Architect (Me Mapping)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Celestial Jungle Palette */
+            --deep-void: #050505;
+            --leopard-gold: #C69C6D;
+            --leopard-amber: #8B6914;
+            --leopard-tawny: #4A3728;
+            --leopard-black: #1A1408;
+            --peacock-teal-deep: #004953;
+            --peacock-teal-bright: #00A896;
+            --peacock-purple: #4A1942;
+            --peacock-iridescent: #2D5A4A;
+            --bayou-mist: #8B9BB4;
+            --emergency-edge: #9E2A2B;
+            --starlight: rgba(255, 255, 255, 0.8);
+            
+            /* Glass Materials */
+            --obsidian-glass: rgba(5, 5, 5, 0.7);
+            --obsidian-border: rgba(198, 156, 109, 0.3);
+            
+            /* Mode Colors */
+            --mode-advocacy: #00A896;
+            --mode-deepwork: #C69C6D;
+            --mode-nurture: #9B8BB4;
+            --mode-storm: #4A5568;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--deep-void);
+            color: var(--bayou-mist);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* ==================== CELESTIAL JUNGLE BACKGROUND ==================== */
+        
+        /* Layer 1: Leopard Fur Base */
+        .soul-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .leopard-fur {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 30%, var(--leopard-gold) 0%, transparent 30%),
+                radial-gradient(ellipse at 80% 20%, var(--leopard-amber) 0%, transparent 25%),
+                radial-gradient(ellipse at 60% 70%, var(--leopard-tawny) 0%, transparent 35%),
+                radial-gradient(ellipse at 30% 80%, var(--leopard-gold) 0%, transparent 20%),
+                radial-gradient(ellipse at 90% 60%, var(--leopard-amber) 0%, transparent 30%),
+                var(--deep-void);
+            filter: blur(60px);
+            animation: furBreathe 8s ease-in-out infinite;
+        }
+        
+        @keyframes furBreathe {
+            0%, 100% { 
+                opacity: 0.4; 
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.6; 
+                transform: scale(1.02);
+            }
+        }
+        
+        /* Leopard Spots Overlay */
+        .leopard-spots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(ellipse 8px 12px at 15% 25%, var(--leopard-black) 0%, transparent 100%),
+                radial-gradient(ellipse 10px 8px at 35% 15%, var(--leopard-black) 0%, transparent 100%),
+                radial-gradient(ellipse 6px 10px at 55% 35%, var(--leopard-black) 0%, transparent 100%),
+                radial-gradient(ellipse 12px 8px at 75% 20%, var(--leopard-black) 0%, transparent 100%),
+                radial-gradient(ellipse 8px 14px at 25% 55%, var(--leopard-black) 0%, transparent 100%),
+                radial-gradient(ellipse 10px 10px at 65% 65%, var(--leopard-black) 0%, transparent 100%),
+                radial-gradient(ellipse 7px 11px at 85% 45%, var(--leopard-black) 0%, transparent 100%),
+                radial-gradient(ellipse 9px 7px at 45% 85%, var(--leopard-black) 0%, transparent 100%),
+                radial-gradient(ellipse 11px 9px at 10% 75%, var(--leopard-black) 0%, transparent 100%),
+                radial-gradient(ellipse 8px 12px at 90% 80%, var(--leopard-black) 0%, transparent 100%);
+            opacity: 0.3;
+            filter: blur(2px);
+        }
+        
+        /* Layer 2: Celestial Shimmer */
+        .celestial-shimmer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 30% 20%, rgba(0, 168, 150, 0.15) 0%, transparent 40%),
+                radial-gradient(ellipse at 70% 60%, rgba(74, 25, 66, 0.2) 0%, transparent 45%),
+                radial-gradient(ellipse at 50% 80%, rgba(45, 90, 74, 0.15) 0%, transparent 35%);
+            animation: shimmerDrift 20s ease-in-out infinite;
+            mix-blend-mode: screen;
+        }
+        
+        @keyframes shimmerDrift {
+            0%, 100% { 
+                transform: translateX(0) translateY(0);
+                opacity: 0.6;
+            }
+            33% { 
+                transform: translateX(3%) translateY(-2%);
+                opacity: 0.8;
+            }
+            66% { 
+                transform: translateX(-2%) translateY(3%);
+                opacity: 0.5;
+            }
+        }
+        
+        /* Starlight Specks */
+        .starlight-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--starlight);
+            border-radius: 50%;
+            animation: starTwinkle 3s ease-in-out infinite;
+        }
+        
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+        
+        /* Rain on Glass Effect (Storm Mode) */
+        .rain-texture {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            background: 
+                linear-gradient(180deg, 
+                    transparent 0%, 
+                    rgba(139, 155, 180, 0.03) 50%, 
+                    transparent 100%);
+            animation: rainFall 0.5s linear infinite;
+            transition: opacity 1s ease;
+            pointer-events: none;
+        }
+        
+        .rain-texture.active {
+            opacity: 1;
+        }
+        
+        @keyframes rainFall {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 20px; }
+        }
+        
+        /* ==================== SMOKED OBSIDIAN GLASS ==================== */
+        
+        .obsidian-panel {
+            background: var(--obsidian-glass);
+            -webkit-backdrop-filter: blur(20px) saturate(1.2);
+            backdrop-filter: blur(20px) saturate(1.2);
+            border: 1px solid var(--obsidian-border);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .obsidian-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--leopard-gold), 
+                var(--peacock-teal-bright), 
+                var(--leopard-gold), 
+                transparent);
+            opacity: 0.6;
+        }
+        
+        /* ==================== TYPOGRAPHY ==================== */
+        
+        .header-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+        
+        .data-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 400;
+        }
+        
+        /* ==================== MAIN CONTAINER ==================== */
+        
+        .architect-container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        /* ==================== THE MIRROR (Top Layer) ==================== */
+        
+        .mirror-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+        
+        .mirror-portal {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .mirror-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid var(--leopard-gold);
+            animation: ringPulse 4s ease-in-out infinite;
+            transition: border-color 0.5s ease, box-shadow 0.5s ease;
+        }
+        
+        .mirror-ring.nurture {
+            border-color: var(--mode-nurture);
+            box-shadow: 0 0 30px rgba(155, 139, 180, 0.5);
+        }
+        
+        .mirror-ring.execute {
+            border-color: var(--leopard-gold);
+            box-shadow: 0 0 30px rgba(198, 156, 109, 0.5);
+        }
+        
+        @keyframes ringPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+        
+        .mirror-inner {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: 
+                radial-gradient(circle at 30% 30%, 
+                    rgba(198, 156, 109, 0.3) 0%, 
+                    var(--deep-void) 70%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mirror-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            filter: sepia(0.2) contrast(1.1);
+        }
+        
+        .mirror-placeholder {
+            font-size: 4rem;
+            color: var(--leopard-gold);
+            opacity: 0.5;
+        }
+        
+        /* AR Data Points */
+        .ar-data-points {
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            pointer-events: none;
+        }
+        
+        .ar-point {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.65rem;
+            color: var(--peacock-teal-bright);
+            animation: arFloat 3s ease-in-out infinite;
+        }
+        
+        .ar-point::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--peacock-teal-bright);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--peacock-teal-bright);
+        }
+        
+        .ar-point:nth-child(1) { top: 10%; left: -30%; animation-delay: 0s; }
+        .ar-point:nth-child(2) { top: 30%; right: -40%; animation-delay: 0.5s; }
+        .ar-point:nth-child(3) { bottom: 20%; left: -25%; animation-delay: 1s; }
+        .ar-point:nth-child(4) { bottom: 10%; right: -35%; animation-delay: 1.5s; }
+        
+        @keyframes arFloat {
+            0%, 100% { transform: translateY(0); opacity: 0.7; }
+            50% { transform: translateY(-5px); opacity: 1; }
+        }
+        
+        .current-read {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+        
+        .current-read-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--bayou-mist);
+            opacity: 0.6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .current-read-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--leopard-gold);
+        }
+        
+        /* ==================== THE MIND MAP (Center Layer) ==================== */
+        
+        .mindmap-section {
+            flex: 1;
+            padding: 1rem;
+        }
+        
+        .mindmap-container {
+            position: relative;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* Constellation Canvas */
+        .constellation-canvas {
+            width: 100%;
+            height: 250px;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .thought-star {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .thought-star:hover {
+            transform: scale(1.1);
+        }
+        
+        .star-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--obsidian-glass);
+            border: 1px solid var(--obsidian-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 0 20px rgba(198, 156, 109, 0.3);
+        }
+        
+        .star-label {
+            margin-top: 0.5rem;
+            font-size: 0.7rem;
+            color: var(--bayou-mist);
+            max-width: 80px;
+            text-align: center;
+        }
+        
+        .constellation-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                var(--peacock-teal-bright), 
+                var(--leopard-gold));
+            transform-origin: left center;
+            opacity: 0.4;
+        }
+        
+        /* Duality Toggle */
+        .duality-toggle {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .duality-track {
+            width: 200px;
+            height: 50px;
+            background: var(--obsidian-glass);
+            border: 1px solid var(--obsidian-border);
+            border-radius: 25px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+        }
+        
+        .duality-curve {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .duality-curve svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .duality-thumb {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--leopard-gold), var(--peacock-teal-bright));
+            border-radius: 50%;
+            cursor: pointer;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: left 0.3s ease;
+            box-shadow: 0 0 20px rgba(198, 156, 109, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .duality-thumb.intuition {
+            left: 20%;
+        }
+        
+        .duality-thumb.logic {
+            left: 80%;
+        }
+        
+        .duality-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 200px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .duality-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+        
+        .duality-label.active {
+            opacity: 1;
+            color: var(--leopard-gold);
+        }
+        
+        /* Voice Input */
+        .voice-input-container {
+            margin-top: 1.5rem;
+            width: 100%;
+        }
+        
+        .thought-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: var(--obsidian-glass);
+            border: 1px solid var(--obsidian-border);
+            border-radius: 30px;
+            color: var(--bayou-mist);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .thought-input:focus {
+            outline: none;
+            border-color: var(--leopard-gold);
+            box-shadow: 0 0 20px rgba(198, 156, 109, 0.3);
+        }
+        
+        .thought-input::placeholder {
+            color: var(--bayou-mist);
+            opacity: 0.4;
+        }
+        
+        /* ==================== THE ROOT SYSTEM (Bottom Layer) ==================== */
+        
+        .root-section {
+            padding: 1rem;
+            position: relative;
+        }
+        
+        .root-visual {
+            position: relative;
+            height: 120px;
+            overflow: hidden;
+        }
+        
+        .root-svg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .root-path {
+            fill: none;
+            stroke: var(--leopard-tawny);
+            stroke-width: 2;
+            opacity: 0.6;
+        }
+        
+        .root-data-nodes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        
+        .root-data {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            background: var(--obsidian-glass);
+            border: 1px solid var(--obsidian-border);
+            border-radius: 15px;
+            font-size: 0.7rem;
+        }
+        
+        .root-data-icon {
+            color: var(--leopard-gold);
+        }
+        
+        .root-data-value {
+            color: var(--peacock-teal-bright);
+            font-weight: 600;
+        }
+        
+        .root-data:nth-child(1) { bottom: 60%; left: 10%; }
+        .root-data:nth-child(2) { bottom: 40%; left: 50%; }
+        .root-data:nth-child(3) { bottom: 70%; right: 15%; }
+        
+        /* ==================== VENTING MODE OVERLAY ==================== */
+        
+        .venting-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--deep-void);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .venting-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .venting-icon {
+            width: 100px;
+            height: 100px;
+            border: 3px solid var(--leopard-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--leopard-gold);
+            animation: ventingPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes ventingPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(198, 156, 109, 0.5); }
+            50% { transform: scale(1.1); box-shadow: 0 0 0 20px rgba(198, 156, 109, 0); }
+        }
+        
+        .venting-text {
+            margin-top: 2rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--bayou-mist);
+        }
+        
+        .venting-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            color: var(--bayou-mist);
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+        
+        .venting-close:hover {
+            opacity: 1;
+        }
+        
+        /* ==================== MODE INDICATOR ==================== */
+        
+        .mode-indicator {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 100;
+        }
+        
+        .mode-btn {
+            padding: 0.5rem 1rem;
+            background: var(--obsidian-glass);
+            border: 1px solid var(--obsidian-border);
+            border-radius: 20px;
+            color: var(--bayou-mist);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .mode-btn:hover {
+            border-color: var(--leopard-gold);
+        }
+        
+        /* ==================== RESPONSIVE ==================== */
+        
+        @media (min-width: 768px) {
+            .architect-container {
+                max-width: 600px;
+            }
+            
+            .mirror-portal {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .mirror-inner {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .constellation-canvas {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Soul Layer Background -->
+    <div class="soul-layer">
+        <div class="leopard-fur"></div>
+        <div class="leopard-spots"></div>
+        <div class="celestial-shimmer"></div>
+        <div class="starlight-container" id="starlightContainer"></div>
+        <div class="rain-texture" id="rainTexture"></div>
+    </div>
+    
+    <!-- Mode Indicator -->
+    <div class="mode-indicator">
+        <button class="mode-btn" id="modeBtn">
+            <i class="fas fa-circle"></i> <span id="modeText">Deep Work</span>
+        </button>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="architect-container">
+        <!-- The Mirror (Top Layer) -->
+        <section class="mirror-section">
+            <div class="mirror-portal">
+                <div class="mirror-ring" id="mirrorRing"></div>
+                <div class="mirror-inner" id="mirrorInner">
+                    <video class="mirror-video" id="mirrorVideo" autoplay muted playsinline style="display: none;"></video>
+                    <div class="mirror-placeholder" id="mirrorPlaceholder">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                
+                <!-- AR Data Points -->
+                <div class="ar-data-points">
+                    <div class="ar-point">Focus: 87%</div>
+                    <div class="ar-point">Energy: High</div>
+                    <div class="ar-point">Stress: Low</div>
+                    <div class="ar-point">Mode: Execute</div>
+                </div>
+            </div>
+            
+            <div class="current-read">
+                <div class="current-read-label">Current Read</div>
+                <div class="current-read-value" id="currentRead">High Adrenaline / Founder Mode</div>
+            </div>
+        </section>
+        
+        <!-- The Mind Map (Center Layer) -->
+        <section class="mindmap-section">
+            <div class="mindmap-container obsidian-panel">
+                <!-- Constellation Canvas -->
+                <div class="constellation-canvas" id="constellationCanvas">
+                    <!-- Thought Stars will be generated here -->
+                    <div class="thought-star" style="top: 20%; left: 15%;">
+                        <div class="star-icon">⚖️</div>
+                        <div class="star-label">Court Case</div>
+                    </div>
+                    <div class="thought-star" style="top: 40%; left: 60%;">
+                        <div class="star-icon">❤️</div>
+                        <div class="star-label">Pick up kids</div>
+                    </div>
+                    <div class="thought-star" style="top: 70%; left: 35%;">
+                        <div class="star-icon">💼</div>
+                        <div class="star-label">Revenue Goal</div>
+                    </div>
+                    
+                    <!-- Connection Lines -->
+                    <svg class="constellation-lines" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none;">
+                        <line x1="20%" y1="25%" x2="65%" y2="45%" stroke="url(#lineGradient)" stroke-width="1" opacity="0.4"/>
+                        <line x1="65%" y1="45%" x2="40%" y2="75%" stroke="url(#lineGradient)" stroke-width="1" opacity="0.4"/>
+                        <defs>
+                            <linearGradient id="lineGradient">
+                                <stop offset="0%" stop-color="#00A896"/>
+                                <stop offset="100%" stop-color="#C69C6D"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                
+                <!-- Duality Toggle -->
+                <div class="duality-toggle">
+                    <div class="duality-track">
+                        <div class="duality-thumb" id="dualityThumb">
+                            <i class="fas fa-yin-yang" style="color: var(--deep-void);"></i>
+                        </div>
+                    </div>
+                    <div class="duality-labels">
+                        <div class="duality-label" id="labelIntuition">
+                            <i class="fas fa-water"></i>
+                            <span>Intuition</span>
+                        </div>
+                        <div class="duality-label active" id="labelLogic">
+                            <i class="fas fa-cube"></i>
+                            <span>Logic</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Voice/Text Input -->
+                <div class="voice-input-container">
+                    <input type="text" class="thought-input" placeholder="Speak or type your thoughts..." id="thoughtInput">
+                </div>
+            </div>
+        </section>
+        
+        <!-- The Root System (Bottom Layer) -->
+        <section class="root-section">
+            <div class="root-visual">
+                <svg class="root-svg" viewBox="0 0 400 120">
+                    <path class="root-path" d="M200,120 Q180,80 150,60 Q120,40 80,50" />
+                    <path class="root-path" d="M200,120 Q200,90 200,60 Q200,30 200,10" />
+                    <path class="root-path" d="M200,120 Q220,80 250,60 Q280,40 320,50" />
+                    <path class="root-path" d="M200,120 Q160,100 120,90 Q80,80 40,85" />
+                    <path class="root-path" d="M200,120 Q240,100 280,90 Q320,80 360,85" />
+                </svg>
+                
+                <div class="root-data-nodes">
+                    <div class="root-data">
+                        <i class="fas fa-dollar-sign root-data-icon"></i>
+                        <span class="root-data-value">$12.4K</span>
+                    </div>
+                    <div class="root-data">
+                        <i class="fas fa-heartbeat root-data-icon"></i>
+                        <span class="root-data-value">72 bpm</span>
+                    </div>
+                    <div class="root-data">
+                        <i class="fas fa-calendar root-data-icon"></i>
+                        <span class="root-data-value">5 events</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Venting Mode Overlay -->
+    <div class="venting-overlay" id="ventingOverlay">
+        <button class="venting-close" id="ventingClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="venting-icon">
+            <i class="fas fa-microphone"></i>
+        </div>
+        <div class="venting-text">Just talk. I'm listening.</div>
+    </div>
+    
+    <script>
+        // Generate Starlight Specks
+        function generateStars() {
+            const container = document.getElementById('starlightContainer');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (2 + Math.random() * 2) + 's';
+                container.appendChild(star);
+            }
+        }
+        
+        // Duality Toggle
+        const dualityThumb = document.getElementById('dualityThumb');
+        const labelIntuition = document.getElementById('labelIntuition');
+        const labelLogic = document.getElementById('labelLogic');
+        let isIntuition = false;
+        
+        dualityThumb.addEventListener('click', function() {
+            isIntuition = !isIntuition;
+            
+            if (isIntuition) {
+                dualityThumb.classList.add('intuition');
+                dualityThumb.classList.remove('logic');
+                labelIntuition.classList.add('active');
+                labelLogic.classList.remove('active');
+                document.body.style.filter = 'saturate(1.2) hue-rotate(10deg)';
+            } else {
+                dualityThumb.classList.remove('intuition');
+                dualityThumb.classList.add('logic');
+                labelLogic.classList.add('active');
+                labelIntuition.classList.remove('active');
+                document.body.style.filter = '';
+            }
+        });
+        
+        // Venting Mode (Long Press)
+        const thoughtInput = document.getElementById('thoughtInput');
+        const ventingOverlay = document.getElementById('ventingOverlay');
+        const ventingClose = document.getElementById('ventingClose');
+        let pressTimer;
+        
+        thoughtInput.addEventListener('mousedown', function() {
+            pressTimer = setTimeout(function() {
+                ventingOverlay.classList.add('active');
+            }, 1000);
+        });
+        
+        thoughtInput.addEventListener('mouseup', function() {
+            clearTimeout(pressTimer);
+        });
+        
+        thoughtInput.addEventListener('mouseleave', function() {
+            clearTimeout(pressTimer);
+        });
+        
+        ventingClose.addEventListener('click', function() {
+            ventingOverlay.classList.remove('active');
+        });
+        
+        // Mode Switching
+        const modeBtn = document.getElementById('modeBtn');
+        const modeText = document.getElementById('modeText');
+        const modes = ['Deep Work', 'Advocacy', 'Nurture', 'Storm'];
+        let currentModeIndex = 0;
+        
+        modeBtn.addEventListener('click', function() {
+            currentModeIndex = (currentModeIndex + 1) % modes.length;
+            modeText.textContent = modes[currentModeIndex];
+            
+            const rainTexture = document.getElementById('rainTexture');
+            const shimmer = document.querySelector('.celestial-shimmer');
+            
+            switch(modes[currentModeIndex]) {
+                case 'Advocacy':
+                    shimmer.style.background = `
+                        radial-gradient(ellipse at 30% 20%, rgba(0, 168, 150, 0.3) 0%, transparent 40%),
+                        radial-gradient(ellipse at 70% 60%, rgba(0, 73, 83, 0.3) 0%, transparent 45%)`;
+                    break;
+                case 'Deep Work':
+                    shimmer.style.background = `
+                        radial-gradient(ellipse at 30% 20%, rgba(198, 156, 109, 0.2) 0%, transparent 40%),
+                        radial-gradient(ellipse at 70% 60%, rgba(139, 105, 20, 0.2) 0%, transparent 45%)`;
+                    break;
+                case 'Storm':
+                    rainTexture.classList.add('active');
+                    shimmer.style.background = `
+                        radial-gradient(ellipse at 30% 20%, rgba(74, 85, 104, 0.3) 0%, transparent 40%),
+                        radial-gradient(ellipse at 70% 60%, rgba(158, 42, 43, 0.2) 0%, transparent 45%)`;
+                    break;
+                case 'Nurture':
+                    rainTexture.classList.remove('active');
+                    shimmer.style.background = `
+                        radial-gradient(ellipse at 30% 20%, rgba(155, 139, 180, 0.3) 0%, transparent 40%),
+                        radial-gradient(ellipse at 70% 60%, rgba(198, 156, 109, 0.2) 0%, transparent 45%)`;
+                    break;
+            }
+        });
+        
+        // Camera Access (if available)
+        async function initCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                const video = document.getElementById('mirrorVideo');
+                const placeholder = document.getElementById('mirrorPlaceholder');
+                video.srcObject = stream;
+                video.style.display = 'block';
+                placeholder.style.display = 'none';
+            } catch (err) {
+                console.log('Camera not available:', err);
+            }
+        }
+        
+        // Initialize
+        generateStars();
+        // Uncomment to enable camera: initCamera();
+        
+        // Add thought stars dynamically
+        const constellationCanvas = document.getElementById('constellationCanvas');
+        
+        thoughtInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && this.value.trim()) {
+                const star = document.createElement('div');
+                star.className = 'thought-star';
+                star.style.top = (20 + Math.random() * 60) + '%';
+                star.style.left = (10 + Math.random() * 80) + '%';
+                star.innerHTML = `
+                    <div class="star-icon">💭</div>
+                    <div class="star-label">${this.value.substring(0, 20)}...</div>
+                `;
+                constellationCanvas.appendChild(star);
+                this.value = '';
+            }
+        });
+    </script>
+</body>
+</html>

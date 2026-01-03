@@ -1,0 +1,29 @@
+Sallie Mobile App
+Version: 1.0.0
+Build Date: 2026-01-02T16:12:27.913Z
+Platform: Android
+Type: Mock APK for Testing
+
+This is a placeholder APK file created for development purposes.
+The actual APK would be built using:
+- React Native build tools
+- Android SDK
+- Gradle build system
+
+Features:
+- Auto-discovery of Sallie instances
+- Chat interface
+- Limbic state visualization
+- Cross-device sync
+- Voice input/output
+- File access
+- App control
+
+For production builds, set up:
+1. Android Studio
+2. Android SDK
+3. Gradle
+4. React Native CLI
+5. Physical device or emulator
+
+Then run: npx react-native build-android --mode=release

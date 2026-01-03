@@ -35,6 +35,12 @@ export function FirstRunWizard({ onComplete }: { onComplete: () => void }) {
       status: 'pending',
     },
     {
+      id: 'discovery',
+      title: 'Network Discovery',
+      description: 'Setting up auto-discovery for mobile devices...',
+      status: 'pending',
+    },
+    {
       id: 'convergence',
       title: 'Great Convergence',
       description: 'Setting up your personal heritage...',
@@ -81,6 +87,19 @@ export function FirstRunWizard({ onComplete }: { onComplete: () => void }) {
           updateStepStatus('qdrant', 'complete');
         } else {
           updateStepStatus('qdrant', 'error', 'Qdrant not responding. Memory features will be limited.');
+        }
+
+        // Check Discovery API
+        updateStepStatus('discovery', 'checking');
+        try {
+          const discoveryResponse = await fetch(`${API_BASE}/api/discover`);
+          if (discoveryResponse.ok) {
+            updateStepStatus('discovery', 'complete');
+          } else {
+            updateStepStatus('discovery', 'error', 'Discovery API not available. Mobile devices may need manual connection.');
+          }
+        } catch (error) {
+          updateStepStatus('discovery', 'error', 'Discovery API not available. Mobile devices may need manual connection.');
         }
 
         // Check convergence status

@@ -1,0 +1,1 @@
+C:\Sallie\SallieStudioApp\SallieStudioApp.csproj;x64
