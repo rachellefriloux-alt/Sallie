@@ -1,0 +1,15 @@
+{
+  "advisory_tiers": {
+    "current_tier": "Tier2",
+    "mode": "advisory",
+    "recommendations": {
+      "file_write": "advisory_restriction",
+      "code_exec": "advisory_restriction",
+      "shell_exec": "advisory_restriction"
+    }
+  },
+  "override_log": [],
+  "notifications_sent": [],
+  "last_override_ts": null
+}
+

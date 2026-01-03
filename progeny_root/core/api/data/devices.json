@@ -1,0 +1,12 @@
+{
+  "test_device": {
+    "device_id": "test_device",
+    "platform": "ios",
+    "version": "unknown",
+    "capabilities": [],
+    "metadata": {},
+    "registered_at": 1767071361.7232842,
+    "last_seen": 1767071361.7232842,
+    "status": "online"
+  }
+}

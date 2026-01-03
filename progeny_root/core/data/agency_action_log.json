@@ -1,0 +1,2284 @@
+[
+  {
+    "timestamp": 1767069992.9641364,
+    "action_id": "action_1",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "/test/path"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": {
+      "error": "File not found: /test/path"
+    },
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767069995.5301683,
+    "action_id": "action_2",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_1",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": "def456",
+    "rollback_applied": true,
+    "rollback_timestamp": 1767071346.8874755,
+    "rollback_explanation": "Test rollback"
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_2",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "xyz789",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": "def456",
+    "rollback_applied": true,
+    "rollback_timestamp": 1767069995.6032372,
+    "rollback_explanation": "Test rollback"
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_3",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": "def456",
+    "rollback_applied": true,
+    "rollback_timestamp": 1767071347.0183647,
+    "rollback_explanation": "Test rollback"
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_4",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_5",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false,
+    "rollback_offered": true,
+    "harm_detected": "Test harm detected"
+  },
+  {
+    "timestamp": 1767069995.861119,
+    "action_id": "action_3",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-0\\test_pre_action_commit_for_fil0\\test.txt",
+      "content": "test content"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Wrote 12 chars to C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-0\\test_pre_action_commit_for_fil0\\test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767069995.9019387,
+    "action_id": "action_4",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt",
+      "content": "test"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_restriction",
+    "override": true,
+    "result": "Wrote 4 chars to test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767069995.9423726,
+    "action_id": "action_5",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_001",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0,
+    "rollback_applied": true,
+    "rollback_hash": "def456",
+    "rollback_timestamp": 1767071347.4986107,
+    "rollback_explanation": "Test rollback"
+  },
+  {
+    "action_id": "test_action_002",
+    "commit_hash": null,
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767069996.0658588,
+    "action_id": "action_6",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_003",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0,
+    "rollback_applied": true,
+    "rollback_hash": "def456",
+    "rollback_timestamp": 1767071347.7543483,
+    "rollback_explanation": "Test rollback"
+  },
+  {
+    "timestamp": 1767070016.4800637,
+    "action_id": "action_7",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "/test/path"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": {
+      "error": "File not found: /test/path"
+    },
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070018.4418852,
+    "action_id": "action_8",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_1",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_2",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "xyz789",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": "def456",
+    "rollback_applied": true,
+    "rollback_timestamp": 1767070018.540543,
+    "rollback_explanation": "Test rollback"
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_3",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_4",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_5",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070018.7187026,
+    "action_id": "action_9",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-0\\test_pre_action_commit_for_fil1\\test.txt",
+      "content": "test content"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Wrote 12 chars to C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-0\\test_pre_action_commit_for_fil1\\test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070018.7695937,
+    "action_id": "action_10",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt",
+      "content": "test"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_restriction",
+    "override": true,
+    "result": "Wrote 4 chars to test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070018.8165781,
+    "action_id": "action_11",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_001",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "action_id": "test_action_002",
+    "commit_hash": null,
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767070018.963676,
+    "action_id": "action_12",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_003",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767070342.0436194,
+    "action_id": "action_13",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "/test/path"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": {
+      "error": "File not found: /test/path"
+    },
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070343.6526382,
+    "action_id": "action_14",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_1",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_2",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "xyz789",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": "def456",
+    "rollback_applied": true,
+    "rollback_timestamp": 1767070343.7266593,
+    "rollback_explanation": "Test rollback"
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_3",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_4",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_5",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070344.3708682,
+    "action_id": "action_15",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-1\\test_pre_action_commit_for_fil0\\test.txt",
+      "content": "test content"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Wrote 12 chars to C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-1\\test_pre_action_commit_for_fil0\\test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070344.4283454,
+    "action_id": "action_16",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt",
+      "content": "test"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_restriction",
+    "override": true,
+    "result": "Wrote 4 chars to test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070344.4877303,
+    "action_id": "action_17",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_001",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "action_id": "test_action_002",
+    "commit_hash": null,
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767070344.6591432,
+    "action_id": "action_18",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_003",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767070359.2493887,
+    "action_id": "action_19",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "/test/path"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": {
+      "error": "File not found: /test/path"
+    },
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070361.907409,
+    "action_id": "action_20",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_1",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_2",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "xyz789",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": "def456",
+    "rollback_applied": true,
+    "rollback_timestamp": 1767070362.0631573,
+    "rollback_explanation": "Test rollback"
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_3",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_4",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_5",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070362.410073,
+    "action_id": "action_21",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-1\\test_pre_action_commit_for_fil1\\test.txt",
+      "content": "test content"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Wrote 12 chars to C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-1\\test_pre_action_commit_for_fil1\\test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070362.4768763,
+    "action_id": "action_22",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt",
+      "content": "test"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_restriction",
+    "override": true,
+    "result": "Wrote 4 chars to test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070362.5537963,
+    "action_id": "action_23",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_001",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "action_id": "test_action_002",
+    "commit_hash": null,
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767070362.856491,
+    "action_id": "action_24",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_003",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767070463.3374093,
+    "action_id": "action_25",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "/test/path"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": {
+      "error": "File not found: /test/path"
+    },
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070465.1053276,
+    "action_id": "action_26",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_1",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_2",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "xyz789",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": "def456",
+    "rollback_applied": true,
+    "rollback_timestamp": 1767070465.186405,
+    "rollback_explanation": "Test rollback"
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_3",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_4",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_5",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070465.7574422,
+    "action_id": "action_27",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-2\\test_pre_action_commit_for_fil0\\test.txt",
+      "content": "test content"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Wrote 12 chars to C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-2\\test_pre_action_commit_for_fil0\\test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070465.8065288,
+    "action_id": "action_28",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt",
+      "content": "test"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_restriction",
+    "override": true,
+    "result": "Wrote 4 chars to test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070465.8567727,
+    "action_id": "action_29",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_001",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "action_id": "test_action_002",
+    "commit_hash": null,
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767070466.037597,
+    "action_id": "action_30",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_003",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767070478.5261405,
+    "action_id": "action_31",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "/test/path"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": {
+      "error": "File not found: /test/path"
+    },
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070480.144659,
+    "action_id": "action_32",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_1",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_2",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "xyz789",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": "def456",
+    "rollback_applied": true,
+    "rollback_timestamp": 1767070480.2826047,
+    "rollback_explanation": "Test rollback"
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_3",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_4",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_5",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070480.5762942,
+    "action_id": "action_33",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-2\\test_pre_action_commit_for_fil1\\test.txt",
+      "content": "test content"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Wrote 12 chars to C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-2\\test_pre_action_commit_for_fil1\\test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070480.633723,
+    "action_id": "action_34",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt",
+      "content": "test"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_restriction",
+    "override": true,
+    "result": "Wrote 4 chars to test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070480.6908314,
+    "action_id": "action_35",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_001",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "action_id": "test_action_002",
+    "commit_hash": null,
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767070480.8603141,
+    "action_id": "action_36",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_003",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767070874.3151896,
+    "action_id": "action_37",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "/test/path"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": {
+      "error": "File not found: /test/path"
+    },
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070876.5882492,
+    "action_id": "action_38",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_1",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_2",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "xyz789",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": "def456",
+    "rollback_applied": true,
+    "rollback_timestamp": 1767070877.0610712,
+    "rollback_explanation": "Test rollback"
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_3",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_4",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_5",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070878.0586479,
+    "action_id": "action_39",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-3\\test_pre_action_commit_for_fil0\\test.txt",
+      "content": "test content"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Wrote 12 chars to C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-3\\test_pre_action_commit_for_fil0\\test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070878.3275945,
+    "action_id": "action_40",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt",
+      "content": "test"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_restriction",
+    "override": true,
+    "result": "Wrote 4 chars to test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070878.5291722,
+    "action_id": "action_41",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_001",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "action_id": "test_action_002",
+    "commit_hash": null,
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767070879.2955892,
+    "action_id": "action_42",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_003",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767070907.2429411,
+    "action_id": "action_43",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "/test/path"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": {
+      "error": "File not found: /test/path"
+    },
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070909.1299179,
+    "action_id": "action_44",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_1",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_2",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "xyz789",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": "def456",
+    "rollback_applied": true,
+    "rollback_timestamp": 1767070909.3828504,
+    "rollback_explanation": "Test rollback"
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_3",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_4",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_5",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070909.7803576,
+    "action_id": "action_45",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-3\\test_pre_action_commit_for_fil1\\test.txt",
+      "content": "test content"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Wrote 12 chars to C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-3\\test_pre_action_commit_for_fil1\\test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070909.8636482,
+    "action_id": "action_46",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt",
+      "content": "test"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_restriction",
+    "override": true,
+    "result": "Wrote 4 chars to test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767070909.972724,
+    "action_id": "action_47",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_001",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "action_id": "test_action_002",
+    "commit_hash": null,
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767070910.2686057,
+    "action_id": "action_48",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_003",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767071125.8532503,
+    "action_id": "action_49",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "/test/path"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": {
+      "error": "File not found: /test/path"
+    },
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767071127.5942004,
+    "action_id": "action_50",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_1",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_2",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "xyz789",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": "def456",
+    "rollback_applied": true,
+    "rollback_timestamp": 1767071127.752725,
+    "rollback_explanation": "Test rollback"
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_3",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_4",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_5",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767071128.2823253,
+    "action_id": "action_51",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-4\\test_pre_action_commit_for_fil0\\test.txt",
+      "content": "test content"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Wrote 12 chars to C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-4\\test_pre_action_commit_for_fil0\\test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767071128.3573403,
+    "action_id": "action_52",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt",
+      "content": "test"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_restriction",
+    "override": true,
+    "result": "Wrote 4 chars to test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767071128.4372025,
+    "action_id": "action_53",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_001",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "action_id": "test_action_002",
+    "commit_hash": null,
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767071128.6978204,
+    "action_id": "action_54",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_003",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767071151.7578373,
+    "action_id": "action_55",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "/test/path"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": {
+      "error": "File not found: /test/path"
+    },
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767071153.4498715,
+    "action_id": "action_56",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_1",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_2",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "xyz789",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": "def456",
+    "rollback_applied": true,
+    "rollback_timestamp": 1767071153.5721354,
+    "rollback_explanation": "Test rollback"
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_3",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_4",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_5",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767071153.9214432,
+    "action_id": "action_57",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-4\\test_pre_action_commit_for_fil1\\test.txt",
+      "content": "test content"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Wrote 12 chars to C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-4\\test_pre_action_commit_for_fil1\\test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767071153.982194,
+    "action_id": "action_58",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt",
+      "content": "test"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_restriction",
+    "override": true,
+    "result": "Wrote 4 chars to test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767071154.0404904,
+    "action_id": "action_59",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_001",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "action_id": "test_action_002",
+    "commit_hash": null,
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767071154.2990677,
+    "action_id": "action_60",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_003",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767071319.1556962,
+    "action_id": "action_61",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "/test/path"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": {
+      "error": "File not found: /test/path"
+    },
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767071321.1180658,
+    "action_id": "action_62",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_1",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_2",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "xyz789",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": "def456",
+    "rollback_applied": true,
+    "rollback_timestamp": 1767071321.2767115,
+    "rollback_explanation": "Test rollback"
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_3",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_4",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_5",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767071321.6638162,
+    "action_id": "action_63",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-5\\test_pre_action_commit_for_fil0\\test.txt",
+      "content": "test content"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Wrote 12 chars to C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-5\\test_pre_action_commit_for_fil0\\test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767071321.7626936,
+    "action_id": "action_64",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt",
+      "content": "test"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_restriction",
+    "override": true,
+    "result": "Wrote 4 chars to test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767071321.8302429,
+    "action_id": "action_65",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_001",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "action_id": "test_action_002",
+    "commit_hash": null,
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767071322.097324,
+    "action_id": "action_66",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_003",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767071345.1040468,
+    "action_id": "action_67",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "/test/path"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": {
+      "error": "File not found: /test/path"
+    },
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767071346.8244185,
+    "action_id": "action_68",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_1",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_2",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "xyz789",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": "def456",
+    "rollback_applied": true,
+    "rollback_timestamp": 1767071346.9508834,
+    "rollback_explanation": "Test rollback"
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_3",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_4",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1234567890.0,
+    "action_id": "test_action_5",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Success",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767071347.2864437,
+    "action_id": "action_69",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-5\\test_pre_action_commit_for_fil1\\test.txt",
+      "content": "test content"
+    },
+    "commit_hash": "abc123",
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "Wrote 12 chars to C:\\Users\\chell\\AppData\\Local\\Temp\\pytest-of-chell\\pytest-5\\test_pre_action_commit_for_fil1\\test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767071347.3460407,
+    "action_id": "action_70",
+    "action_type": "write",
+    "tool_name": "write_file",
+    "args": {
+      "path": "test.txt",
+      "content": "test"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_restriction",
+    "override": true,
+    "result": "Wrote 4 chars to test.txt",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "timestamp": 1767071347.4166398,
+    "action_id": "action_71",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_001",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "action_id": "test_action_002",
+    "commit_hash": null,
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  },
+  {
+    "timestamp": 1767071347.694738,
+    "action_id": "action_72",
+    "action_type": "read",
+    "tool_name": "read_file",
+    "args": {
+      "path": "test.txt"
+    },
+    "commit_hash": null,
+    "advisory_recommendation": "advisory_allow",
+    "override": false,
+    "result": "test",
+    "rollback_hash": null,
+    "rollback_applied": false
+  },
+  {
+    "action_id": "test_action_003",
+    "commit_hash": "abc123",
+    "tool": "write_file",
+    "timestamp": 1234567890.0
+  }
+]

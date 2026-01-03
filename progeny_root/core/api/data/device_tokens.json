@@ -1,0 +1,8 @@
+{
+  "test_device": {
+    "platform": "android",
+    "token": "new_token",
+    "enabled": true,
+    "registered_at": 1767071361.6863408
+  }
+}

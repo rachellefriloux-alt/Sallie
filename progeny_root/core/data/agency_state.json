@@ -1,0 +1,445 @@
+{
+  "advisory_tiers": {
+    "current_tier": "Tier2",
+    "mode": "advisory"
+  },
+  "override_log": [
+    {
+      "timestamp": 1767069992.922878,
+      "datetime": "2025-12-29T22:46:32.922878",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Test override reason",
+      "target_path": "/test/path",
+      "trust_tier": "STRANGER",
+      "trust_level": 0.5,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767069995.8913534,
+      "datetime": "2025-12-29T22:46:35.891353",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency",
+      "target_path": "test.txt",
+      "trust_tier": "ASSOCIATE",
+      "trust_level": 0.7,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767070016.4478436,
+      "datetime": "2025-12-29T22:46:56.447843",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Test override reason",
+      "target_path": "/test/path",
+      "trust_tier": "ASSOCIATE",
+      "trust_level": 0.7828518042509446,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767070018.7554321,
+      "datetime": "2025-12-29T22:46:58.755432",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency",
+      "target_path": "test.txt",
+      "trust_tier": "ASSOCIATE",
+      "trust_level": 0.7,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767070341.9879124,
+      "datetime": "2025-12-29T22:52:21.987912",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Test override reason",
+      "target_path": "/test/path",
+      "trust_tier": "ASSOCIATE",
+      "trust_level": 0.69151,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767070344.4211304,
+      "datetime": "2025-12-29T22:52:24.421130",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency",
+      "target_path": "test.txt",
+      "trust_tier": "ASSOCIATE",
+      "trust_level": 0.7,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767070359.1584077,
+      "datetime": "2025-12-29T22:52:39.158407",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Test override reason",
+      "target_path": "/test/path",
+      "trust_tier": "ASSOCIATE",
+      "trust_level": 0.69151,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767070362.4620986,
+      "datetime": "2025-12-29T22:52:42.462098",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency",
+      "target_path": "test.txt",
+      "trust_tier": "ASSOCIATE",
+      "trust_level": 0.7,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767070463.2880917,
+      "datetime": "2025-12-29T22:54:23.288091",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Test override reason",
+      "target_path": "/test/path",
+      "trust_tier": "ASSOCIATE",
+      "trust_level": 0.69151,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767070465.7967432,
+      "datetime": "2025-12-29T22:54:25.796743",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency",
+      "target_path": "test.txt",
+      "trust_tier": "ASSOCIATE",
+      "trust_level": 0.7,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767070478.4847984,
+      "datetime": "2025-12-29T22:54:38.484798",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Test override reason",
+      "target_path": "/test/path",
+      "trust_tier": "ASSOCIATE",
+      "trust_level": 0.69151,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767070480.6213934,
+      "datetime": "2025-12-29T22:54:40.621393",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency",
+      "target_path": "test.txt",
+      "trust_tier": "ASSOCIATE",
+      "trust_level": 0.7,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767070874.2430208,
+      "datetime": "2025-12-29T23:01:14.243020",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Test override reason",
+      "target_path": "/test/path",
+      "trust_tier": "ASSOCIATE",
+      "trust_level": 0.69151,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767070878.312994,
+      "datetime": "2025-12-29T23:01:18.312994",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency",
+      "target_path": "test.txt",
+      "trust_tier": "ASSOCIATE",
+      "trust_level": 0.7,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767070907.179309,
+      "datetime": "2025-12-29T23:01:47.179308",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Test override reason",
+      "target_path": "/test/path",
+      "trust_tier": "SURROGATE",
+      "trust_level": 0.9644155481290417,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767070909.8445652,
+      "datetime": "2025-12-29T23:01:49.844565",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency",
+      "target_path": "test.txt",
+      "trust_tier": "ASSOCIATE",
+      "trust_level": 0.7,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767071125.7814937,
+      "datetime": "2025-12-29T23:05:25.781493",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Test override reason",
+      "target_path": "/test/path",
+      "trust_tier": "SURROGATE",
+      "trust_level": 0.9644155481290417,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767071128.3444667,
+      "datetime": "2025-12-29T23:05:28.344466",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency",
+      "target_path": "test.txt",
+      "trust_tier": "ASSOCIATE",
+      "trust_level": 0.7,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767071151.709522,
+      "datetime": "2025-12-29T23:05:51.709521",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Test override reason",
+      "target_path": "/test/path",
+      "trust_tier": "SURROGATE",
+      "trust_level": 0.9644160395279969,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767071153.9675903,
+      "datetime": "2025-12-29T23:05:53.967590",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency",
+      "target_path": "test.txt",
+      "trust_tier": "ASSOCIATE",
+      "trust_level": 0.7,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767071319.0841045,
+      "datetime": "2025-12-29T23:08:39.084104",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Test override reason",
+      "target_path": "/test/path",
+      "trust_tier": "SURROGATE",
+      "trust_level": 0.9644160395279969,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767071321.7462096,
+      "datetime": "2025-12-29T23:08:41.746209",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency",
+      "target_path": "test.txt",
+      "trust_tier": "ASSOCIATE",
+      "trust_level": 0.7,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767071345.0479002,
+      "datetime": "2025-12-29T23:09:05.047900",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Test override reason",
+      "target_path": "/test/path",
+      "trust_tier": "SURROGATE",
+      "trust_level": 0.9201252737633793,
+      "transparency": "full"
+    },
+    {
+      "timestamp": 1767071347.3370478,
+      "datetime": "2025-12-29T23:09:07.337047",
+      "action_type": "write",
+      "advisory_recommendation": "advisory_restriction",
+      "override_reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency",
+      "target_path": "test.txt",
+      "trust_tier": "ASSOCIATE",
+      "trust_level": 0.7,
+      "transparency": "full"
+    }
+  ],
+  "notifications_sent": [
+    {
+      "type": "trust_override",
+      "timestamp": 1767069992.922878,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Test override reason"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767069995.8913534,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767070016.4478436,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Test override reason"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767070018.7554321,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767070341.9879124,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Test override reason"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767070344.4211304,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767070359.1584077,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Test override reason"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767070362.4620986,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767070463.2880917,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Test override reason"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767070465.7967432,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767070478.4847984,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Test override reason"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767070480.6213934,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767070874.2430208,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Test override reason"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767070878.312994,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767070907.179309,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Test override reason"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767070909.8445652,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767071125.7814937,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Test override reason"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767071128.3444667,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767071151.709522,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Test override reason"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767071153.9675903,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767071319.0841045,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Test override reason"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767071321.7462096,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767071345.0479002,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Test override reason"
+    },
+    {
+      "type": "trust_override",
+      "timestamp": 1767071347.3370478,
+      "action": "write",
+      "recommendation": "advisory_restriction",
+      "reason": "Advisory restriction overridden at ASSOCIATE tier - proceeding with transparency"
+    }
+  ],
+  "last_override_ts": 1767071347.3370478,
+  "capability_discoveries": [],
+  "contract_violations": []
+}

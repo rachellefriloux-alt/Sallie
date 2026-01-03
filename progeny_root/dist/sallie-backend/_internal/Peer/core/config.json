@@ -1,0 +1,55 @@
+{
+  "version": "5.4.2",
+  "system": {
+    "id": "progeny-local-01",
+    "owner": "Creator",
+    "log_level": "INFO",
+    "environment": "production"
+  },
+  "paths": {
+    "whitelist": [
+      "./working",
+      "./drafts",
+      "./projects"
+    ],
+    "blacklist": [
+      "./security",
+      "./secrets",
+      "./.ssh",
+      "./.gnupg",
+      "./.env"
+    ]
+  },
+  "llm": {
+    "provider": "ollama",
+    "gemini_api_key": "",
+    "gemini_model": "gemini-1.5-flash",
+    "fallback_provider": "ollama",
+    "fallback_model": "tinyllama",
+    "ollama_url": "http://localhost:11434"
+  },
+  "embeddings": {
+    "provider": "gemini",
+    "gemini_model": "text-embedding-004",
+    "fallback_provider": "ollama",
+    "fallback_model": "nomic-embed-text",
+    "vector_size": 768
+  },
+  "models": {
+    "stt": "whisper-base",
+    "tts": "coqui-xtts-v2"
+  },
+  "behavior": {
+    "dream_cycle_hour": 2,
+    "refractory_hours": 24,
+    "slumber_threshold": 0.3
+  },
+  "identity": {
+    "base_personality_immutable": true,
+    "loyalty_to_creator": 1.0,
+    "always_confirm": true,
+    "never_choose_for_creator": true,
+    "controllable": true,
+    "aesthetic_bounds_enforced": true
+  }
+}
