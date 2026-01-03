@@ -86,7 +86,7 @@ Example: `192.168.1.100`
 python --version
 
 # Install pip packages
-pip install fastapi uvicorn pydantic PyQt6 websockets aiofiles python-multipart
+pip install fastapi uvicorn pydantic PyQt6 websockets aiofiles
 ```
 
 ### Linux (Ubuntu):

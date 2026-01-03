@@ -1,4 +1,0 @@
-[run]
-omit =
-    progeny_root/Companion/core/identity.py
-    progeny_root/Peer/core/identity.py
