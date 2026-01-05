@@ -37,7 +37,7 @@ class APIClient {
   private baseURL: string;
   private wsConnection: WebSocket | null = null;
 
-  constructor(baseURL: string = 'http://localhost:8000') {
+  constructor(baseURL: string = 'http://192.168.1.47:8742') {
     this.baseURL = baseURL;
     this.client = axios.create({
       baseURL,

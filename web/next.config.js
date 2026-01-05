@@ -11,11 +11,11 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://localhost:8000/:path*',
+        destination: 'http://192.168.1.47:8742/:path*',
       },
       {
         source: '/ws',
-        destination: 'http://localhost:8000/ws',
+        destination: 'http://192.168.1.47:8742/ws',
       },
     ];
   },

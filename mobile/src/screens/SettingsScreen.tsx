@@ -17,7 +17,7 @@ export function SettingsScreen() {
         <Text style={styles.sectionTitle}>Connection</Text>
         <View style={styles.settingRow}>
           <Text style={styles.settingLabel}>API Endpoint</Text>
-          <Text style={styles.settingValue}>http://localhost:8000</Text>
+          <Text style={styles.settingValue}>http://192.168.1.47:8742</Text>
         </View>
         <View style={styles.settingRow}>
           <Text style={styles.settingLabel}>Sync Status</Text>

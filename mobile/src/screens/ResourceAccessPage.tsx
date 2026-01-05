@@ -39,7 +39,7 @@ export function ResourceAccessPage({ navigation }: any) {
 
   const loadCapabilities = async () => {
     try {
-      const response = await fetch('http://localhost:8000/resources/capabilities');
+      const response = await fetch('http://192.168.1.47:8742/resources/capabilities');
       if (response.ok) {
         const data = await response.json();
         const caps = Object.entries(data.capabilities).map(([name, cap]) => ({
@@ -55,7 +55,7 @@ export function ResourceAccessPage({ navigation }: any) {
 
   const loadAccessHistory = async () => {
     try {
-      const response = await fetch('http://localhost:8000/resources/history');
+      const response = await fetch('http://192.168.1.47:8742/resources/history');
       if (response.ok) {
         const data = await response.json();
         setAccessHistory(data.history.slice(0, 20));
@@ -73,7 +73,7 @@ export function ResourceAccessPage({ navigation }: any) {
 
     setIsLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/resources/internet?url=${encodeURIComponent(internetUrl)}`);
+      const response = await fetch(`http://192.168.1.47:8742/resources/internet?url=${encodeURIComponent(internetUrl)}`);
       if (response.ok) {
         const result = await response.json();
         Alert.alert('Internet Access', `Status: ${result.status || 'Unknown'}\nContent Length: ${result.content_length || 0}`);
@@ -102,7 +102,7 @@ export function ResourceAccessPage({ navigation }: any) {
         body.append('content', fileContent);
       }
 
-      const response = await fetch('http://localhost:8000/resources/files', {
+      const response = await fetch('http://192.168.1.47:8742/resources/files', {
         method: 'POST',
         body,
       });
@@ -123,7 +123,7 @@ export function ResourceAccessPage({ navigation }: any) {
   const getDeviceInfo = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/resources/device');
+      const response = await fetch('http://192.168.1.47:8742/resources/device');
       if (response.ok) {
         const result = await response.json();
         Alert.alert('Device Info', `Platform: ${result.platform}\nArchitecture: ${result.architecture}\nPython Version: ${result.python_version}\nHostname: ${result.hostname}`);
@@ -145,7 +145,7 @@ export function ResourceAccessPage({ navigation }: any) {
 
     setIsLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/resources/search?query=${encodeURIComponent(searchQuery)}&max_results=10`);
+      const response = await fetch(`http://192.168.1.47:8742/resources/search?query=${encodeURIComponent(searchQuery)}&max_results=10`);
       if (response.ok) {
         const result = await response.json();
         Alert.alert('Search Results', `Found ${result.results.length} results for "${searchQuery}"`);

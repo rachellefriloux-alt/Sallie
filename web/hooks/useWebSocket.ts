@@ -19,7 +19,7 @@ export function useWebSocket() {
       return;
     }
 
-    const ws = new WebSocket('ws://localhost:8000/ws');
+    const ws = new WebSocket('ws://192.168.1.47:8742/ws');
     callbackRef.current = onMessage;
 
     ws.onopen = () => {

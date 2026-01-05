@@ -48,7 +48,7 @@ export function AvatarScreen({ navigation }: any) {
 
   const loadAvailableForms = async () => {
     try {
-      const response = await fetch('http://localhost:8000/avatar/infinite/forms');
+      const response = await fetch('http://192.168.1.47:8742/avatar/infinite/forms');
       if (response.ok) {
         const data = await response.json();
         setAvailableForms(data.forms);
@@ -60,7 +60,7 @@ export function AvatarScreen({ navigation }: any) {
 
   const loadCurrentAvatar = async () => {
     try {
-      const response = await fetch('http://localhost:8000/avatar/infinite/current');
+      const response = await fetch('http://192.168.1.47:8742/avatar/infinite/current');
       if (response.ok) {
         const data = await response.json();
         if (data.avatar) {
@@ -81,7 +81,7 @@ export function AvatarScreen({ navigation }: any) {
 
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/avatar/infinite/manifest', {
+      const response = await fetch('http://192.168.1.47:8742/avatar/infinite/manifest', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ export function AvatarScreen({ navigation }: any) {
   const evolveAvatar = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/avatar/infinite/evolve', {
+      const response = await fetch('http://192.168.1.47:8742/avatar/infinite/evolve', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

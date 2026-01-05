@@ -20,7 +20,7 @@ interface ServiceStatus {
   qdrant: 'connected' | 'disconnected' | 'checking';
 }
 
-const API_BASE = 'http://localhost:8000'; // Should be configurable via settings
+const API_BASE = 'http://192.168.1.47:8742'; // Backend deployed to mini PC
 
 export const ConnectionStatus: React.FC = () => {
   const [status, setStatus] = useState<ServiceStatus>({

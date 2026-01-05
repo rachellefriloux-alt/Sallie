@@ -69,7 +69,7 @@ export function ConsciousnessScreen({ navigation }: any) {
 
   const loadCurrentState = async () => {
     try {
-      const response = await fetch('http://localhost:8000/consciousness/current');
+      const response = await fetch('http://192.168.1.47:8742/consciousness/current');
       if (response.ok) {
         const data = await response.json();
         setLiveData(data);
@@ -82,7 +82,7 @@ export function ConsciousnessScreen({ navigation }: any) {
   const exportData = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/consciousness/export', {
+      const response = await fetch('http://192.168.1.47:8742/consciousness/export', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Dashboard } from '@/components/Dashboard';
+import { SallieStudio } from '@/components/SallieStudio';
 import { FirstRunWizard } from '@/components/FirstRunWizard';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://192.168.1.47:8742';
 
 export default function Home() {
   const router = useRouter();
@@ -95,6 +95,5 @@ export default function Home() {
     return <FirstRunWizard onComplete={handleFirstRunComplete} />;
   }
 
-  return <Dashboard />;
+  return <SallieStudio />;
 }
-

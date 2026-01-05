@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect, useMemo } from 'react';
+import { useWebSocket } from '@/hooks/useWebSocket';
+import { useCognitiveServices } from '@/hooks/useFoundry';
 import { MessageList } from './MessageList';
 import { ChatInput } from './ChatInput';
 
@@ -27,6 +29,9 @@ export function ChatArea({ messages, onSend, isConnected, isTyping = false, voic
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearch, setShowSearch] = useState(false);
   const [bookmarkedMessages, setBookmarkedMessages] = useState<Set<string>>(new Set());
+  
+  // Azure Cognitive Services integration
+  const { conversationHistory, sendMessage: sendCognitiveMessage, loading: cognitiveLoading, streamingResponse, isRecording, startRecording, stopRecording, textToSpeech } = useCognitiveServices();
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
