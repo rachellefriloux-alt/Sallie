@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sallie's Thought &amp; Action Log</title>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13c8ec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#101f22",
+                        "surface-dark": "#192729",
+                        "surface-dark-lighter": "#283639",
+                        "text-secondary": "#9db4b9"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-surface-dark-lighter bg-background-dark px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 flex items-center justify-center bg-primary/20 rounded-lg text-primary">
+<span class="material-symbols-outlined">smart_toy</span>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Sallie</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<div class="hidden md:flex items-center gap-9">
+<a class="text-text-secondary hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Dashboard</a>
+<a class="text-white text-sm font-bold leading-normal relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-primary after:-bottom-5 after:left-0" href="#">Thought Log</a>
+<a class="text-text-secondary hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Memories</a>
+<a class="text-text-secondary hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Settings</a>
+</div>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-background-dark text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
+<span class="truncate">Check Status</span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border border-surface-dark-lighter" data-alt="Portrait of a professional woman looking confident" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDNaCrpiRQk4D-uur5GnJmjCidVb8Wv9FA2idbSegiaEuPc-IjLRjnTY8zuWct1F-kDZmEOj4CPgThGk2LkAimfTQAcgt5HRk6HQ35_qb_cc3l9cSw8nfpgz4irOXFfhA4ZfBwgDILWFG2Xropl9HblcEq6lL2vdcKUrRSesd6r-jEtzfqm-EChSbHXFRF-9w7CQmfJrnsscntTpZjY--hE0Az0rGBBn8scLMHjTLrYQrtBpJjqSgSw474EeQDnJSBpWoBWnPA94fA");'></div>
+</div>
+</header>
+<!-- Main Layout -->
+<main class="flex-1 flex justify-center py-8 px-4 sm:px-6 lg:px-8">
+<div class="w-full max-w-[1200px] grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Content (8 Cols) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Page Heading -->
+<div class="flex flex-col gap-2">
+<h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em]">Thought &amp; Action Log</h1>
+<p class="text-text-secondary text-base font-normal leading-normal">Real-time visualization of Sallie's cognitive pipeline, decisions, and outputs.</p>
+</div>
+<!-- Controls: Search & Filter -->
+<div class="flex flex-col gap-4">
+<!-- Search -->
+<label class="flex flex-col h-12 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full shadow-sm">
+<div class="text-text-secondary flex border-none bg-surface-dark items-center justify-center pl-4 rounded-l-xl border-r-0">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-1 focus:ring-primary border-none bg-surface-dark focus:border-none h-full placeholder:text-text-secondary px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal transition-all" placeholder="Search thoughts, decisions, or actions..." value=""/>
+</div>
+</label>
+<!-- Chips -->
+<div class="flex gap-2 flex-wrap">
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary/20 border border-primary/30 pl-4 pr-4 transition-all hover:bg-primary/30">
+<span class="text-primary text-sm font-bold leading-normal">All Logs</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-surface-dark border border-transparent pl-4 pr-4 transition-all hover:bg-surface-dark-lighter hover:border-surface-dark-lighter">
+<span class="text-text-secondary hover:text-white text-sm font-medium leading-normal">Thoughts</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-surface-dark border border-transparent pl-4 pr-4 transition-all hover:bg-surface-dark-lighter hover:border-surface-dark-lighter">
+<span class="text-text-secondary hover:text-white text-sm font-medium leading-normal">Decisions</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-surface-dark border border-transparent pl-4 pr-4 transition-all hover:bg-surface-dark-lighter hover:border-surface-dark-lighter">
+<span class="text-text-secondary hover:text-white text-sm font-medium leading-normal">Actions</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-surface-dark border border-transparent pl-4 pr-4 transition-all hover:bg-surface-dark-lighter hover:border-surface-dark-lighter">
+<span class="text-text-secondary hover:text-white text-sm font-medium leading-normal">Learning</span>
+</button>
+</div>
+</div>
+<!-- Timeline Feed -->
+<div class="bg-surface-dark rounded-2xl p-6 border border-surface-dark-lighter/50 shadow-lg mt-2">
+<div class="grid grid-cols-[48px_1fr] gap-x-0">
+<!-- Timeline Item 1: Action (Latest) -->
+<div class="flex flex-col items-center pt-1 relative">
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center z-10 text-primary border-2 border-background-dark ring-2 ring-primary/20">
+<span class="material-symbols-outlined icon-filled">send</span>
+</div>
+<div class="w-[2px] bg-surface-dark-lighter h-full absolute top-10 bottom-0 left-1/2 -translate-x-1/2"></div>
+</div>
+<div class="flex flex-col pb-8 pl-4">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<h3 class="text-white text-lg font-bold leading-snug">Action: Drafted rescheduling email</h3>
+<p class="text-text-secondary text-sm font-medium mt-1">Sent to: Board of Directors • Subject: "Rescheduling Request"</p>
+</div>
+<span class="px-2 py-1 rounded bg-green-500/10 text-green-400 text-xs font-bold border border-green-500/20">98% Confidence</span>
+</div>
+<div class="mt-3 p-3 bg-background-dark/50 rounded-lg border border-surface-dark-lighter flex gap-3 items-center">
+<div class="w-1 h-full bg-primary rounded-full"></div>
+<p class="text-text-secondary text-sm italic">"Drafting complete based on template 'Professional but Warm'. Ready for review."</p>
+</div>
+<p class="text-text-secondary text-xs font-medium mt-2">Just now</p>
+</div>
+<!-- Timeline Item 2: Decision -->
+<div class="flex flex-col items-center pt-1 relative">
+<div class="size-10 rounded-full bg-surface-dark-lighter flex items-center justify-center z-10 text-white border-2 border-background-dark">
+<span class="material-symbols-outlined">call_split</span>
+</div>
+<div class="w-[2px] bg-surface-dark-lighter h-full absolute top-10 bottom-0 left-1/2 -translate-x-1/2"></div>
+</div>
+<div class="flex flex-col pb-8 pl-4">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<h3 class="text-white text-lg font-bold leading-snug">Choice: Prioritized 'Parent-Teacher Conference'</h3>
+<p class="text-text-secondary text-sm font-medium mt-1">Decision Logic: Value Alignment (Family &gt; Work after 5pm)</p>
+</div>
+<span class="px-2 py-1 rounded bg-surface-dark-lighter text-text-secondary text-xs font-bold border border-white/10">Analysis</span>
+</div>
+<div class="flex gap-2 mt-3">
+<span class="px-2 py-1 rounded bg-primary/10 text-primary text-xs font-medium">#FamilyFirst</span>
+<span class="px-2 py-1 rounded bg-surface-dark-lighter text-text-secondary text-xs font-medium">#Scheduling</span>
+</div>
+<p class="text-text-secondary text-xs font-medium mt-2">25 mins ago</p>
+</div>
+<!-- Timeline Item 3: Thought -->
+<div class="flex flex-col items-center pt-1 relative">
+<div class="size-10 rounded-full bg-surface-dark-lighter flex items-center justify-center z-10 text-text-secondary border-2 border-background-dark">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<div class="w-[2px] bg-surface-dark-lighter h-full absolute top-10 bottom-0 left-1/2 -translate-x-1/2"></div>
+</div>
+<div class="flex flex-col pb-8 pl-4">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<h3 class="text-white text-lg font-bold leading-snug">Thought: Identified scheduling conflict</h3>
+<p class="text-text-secondary text-sm font-medium mt-1">Conflict detected: "Board Meeting" overlaps with "Parent-Teacher Conference"</p>
+</div>
+</div>
+<p class="text-text-secondary text-xs font-medium mt-2">30 mins ago</p>
+</div>
+<!-- Timeline Item 4: Learning -->
+<div class="flex flex-col items-center pt-1 relative">
+<div class="size-10 rounded-full bg-purple-500/20 flex items-center justify-center z-10 text-purple-400 border-2 border-background-dark ring-2 ring-purple-500/20">
+<span class="material-symbols-outlined icon-filled">auto_awesome</span>
+</div>
+<div class="w-[2px] bg-surface-dark-lighter h-full absolute top-10 bottom-0 left-1/2 -translate-x-1/2"></div>
+</div>
+<div class="flex flex-col pb-8 pl-4">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<h3 class="text-white text-lg font-bold leading-snug">Learning: Updated User Preference</h3>
+<p class="text-text-secondary text-sm font-medium mt-1">Noted: User prefers 15 min buffer between zoom calls.</p>
+</div>
+<span class="px-2 py-1 rounded bg-purple-500/10 text-purple-400 text-xs font-bold border border-purple-500/20">New Pattern</span>
+</div>
+<p class="text-text-secondary text-xs font-medium mt-2">2 hours ago</p>
+</div>
+<!-- Timeline Item 5: Action (End of visible stream) -->
+<div class="flex flex-col items-center pt-1 relative">
+<div class="size-10 rounded-full bg-surface-dark-lighter flex items-center justify-center z-10 text-text-secondary border-2 border-background-dark">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+</div>
+<div class="flex flex-col pb-2 pl-4">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<h3 class="text-white text-lg font-bold leading-snug">Action: Confirmed flight booking</h3>
+<p class="text-text-secondary text-sm font-medium mt-1">Delta Flight 402 to NYC.</p>
+</div>
+</div>
+<p class="text-text-secondary text-xs font-medium mt-2">Yesterday, 4:00 PM</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Sidebar (4 Cols) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Status Widget -->
+<div class="bg-surface-dark rounded-xl p-5 border border-surface-dark-lighter shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[120px] leading-none text-primary">smart_toy</span>
+</div>
+<div class="relative z-10">
+<h3 class="text-text-secondary text-xs font-bold uppercase tracking-wider mb-3">System Status</h3>
+<div class="flex items-center gap-3 mb-4">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+<span class="text-white text-xl font-bold">Processing</span>
+</div>
+<p class="text-text-secondary text-sm">Sallie is currently monitoring your calendar for conflicts next week.</p>
+</div>
+</div>
+<!-- Current Context Widget -->
+<div class="bg-surface-dark rounded-xl p-5 border border-surface-dark-lighter shadow-sm">
+<h3 class="text-text-secondary text-xs font-bold uppercase tracking-wider mb-4">Current Context</h3>
+<div class="flex flex-col gap-4">
+<div class="flex items-start gap-3">
+<div class="bg-surface-dark-lighter p-2 rounded-lg text-white">
+<span class="material-symbols-outlined text-lg">location_on</span>
+</div>
+<div>
+<p class="text-white text-sm font-bold">Home Office</p>
+<p class="text-text-secondary text-xs">San Francisco, CA</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="bg-surface-dark-lighter p-2 rounded-lg text-white">
+<span class="material-symbols-outlined text-lg">event</span>
+</div>
+<div>
+<p class="text-white text-sm font-bold">Deep Work Block</p>
+<p class="text-text-secondary text-xs">Ends in 45 mins</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="bg-surface-dark-lighter p-2 rounded-lg text-white">
+<span class="material-symbols-outlined text-lg">battery_charging_full</span>
+</div>
+<div>
+<p class="text-white text-sm font-bold">High Energy</p>
+<p class="text-text-secondary text-xs">Based on sleep data</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Weekly Stats Widget -->
+<div class="bg-surface-dark rounded-xl p-5 border border-surface-dark-lighter shadow-sm">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-text-secondary text-xs font-bold uppercase tracking-wider">Weekly Insights</h3>
+<a class="text-primary text-xs font-bold hover:underline" href="#">View All</a>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-background-dark rounded-lg p-3 border border-surface-dark-lighter">
+<p class="text-3xl font-bold text-white mb-1">42</p>
+<p class="text-text-secondary text-xs font-medium">Decisions Automated</p>
+</div>
+<div class="bg-background-dark rounded-lg p-3 border border-surface-dark-lighter">
+<p class="text-3xl font-bold text-white mb-1">3</p>
+<p class="text-text-secondary text-xs font-medium">New Preferences</p>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-surface-dark-lighter">
+<p class="text-text-secondary text-xs mb-2">Top Focus Area</p>
+<div class="flex justify-between items-center">
+<p class="text-white text-sm font-bold">Family Scheduling</p>
+<span class="text-primary text-xs font-bold">65%</span>
+</div>
+<div class="w-full bg-surface-dark-lighter h-1.5 rounded-full mt-2">
+<div class="bg-primary h-1.5 rounded-full" style="width: 65%"></div>
+</div>
+</div>
+</div>
+<!-- Memory Quick Access -->
+<div class="bg-gradient-to-br from-primary/20 to-surface-dark rounded-xl p-5 border border-primary/20 shadow-sm">
+<div class="flex items-start gap-3">
+<div class="text-primary mt-1">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div>
+<p class="text-white text-sm font-bold leading-snug">Suggestion</p>
+<p class="text-text-secondary text-sm mt-1">You seem to decline meetings after 4pm on Fridays. Should I make this a rule?</p>
+<div class="flex gap-2 mt-3">
+<button class="bg-primary text-background-dark text-xs font-bold px-3 py-1.5 rounded hover:bg-primary/90">Yes, create rule</button>
+<button class="bg-transparent border border-surface-dark-lighter text-text-secondary text-xs font-bold px-3 py-1.5 rounded hover:bg-surface-dark-lighter hover:text-white">Dismiss</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

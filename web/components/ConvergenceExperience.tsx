@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Animated, Dimensions } from 'react-native';
-import { useDesign } from './DesignSystem';
+import { designTokens } from '../lib/design-tokens';
 
 interface ConvergenceQuestion {
   id: number;
@@ -366,7 +365,8 @@ export function ConvergenceExperience({ onComplete, navigation }: any) {
             inputRange: [1, 1.2],
             outputRange: [1, 1.2],
           }) }]
-        ]} />
+        ]}
+      />
         
         <View style={styles.sallieCircle}>
           <Text style={styles.circleLabel}>Sallie</Text>

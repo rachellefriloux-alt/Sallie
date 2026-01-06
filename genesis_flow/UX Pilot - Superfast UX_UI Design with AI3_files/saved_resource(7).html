@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)https://uxpilot-afb75f146cd4e4817350100.freshchat.com/home -->
+<html lang="en-us" class="fc-widget-small multi-widget-ui"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
+    <title>Freshchat</title>
+    <meta name="description" content="">
+    <!--<base href="/">--><base href=".">
+<meta name="hotline-web/config/environment" content="%7B%22ember-cli-mirage%22%3A%7B%22enabled%22%3Afalse%2C%22usingProxy%22%3Afalse%2C%22useDefaultPassthroughs%22%3Atrue%7D%2C%22modulePrefix%22%3A%22hotline-web%22%2C%22environment%22%3A%22production%22%2C%22baseURL%22%3A%22%2F%22%2C%22rootURL%22%3A%22%22%2C%22locationType%22%3A%22auto%22%2C%22EmberENV%22%3A%7B%22cdnUrl%22%3A%22https%3A%2F%2Fassetscdn-wchat.freshchat.com%2Fstatic%2F%22%2C%22FEATURES%22%3A%7B%7D%2C%22EXTEND_PROTOTYPES%22%3A%7B%22Date%22%3Afalse%7D%2C%22cdnEnabled%22%3Atrue%2C%22_APPLICATION_TEMPLATE_WRAPPER%22%3Afalse%2C%22_DEFAULT_ASYNC_OBSERVERS%22%3Atrue%2C%22_JQUERY_INTEGRATION%22%3Afalse%2C%22_TEMPLATE_ONLY_GLIMMER_COMPONENTS%22%3Atrue%7D%2C%22APP%22%3A%7B%22name%22%3A%22hotline-web%22%2C%22version%22%3A%220.0.0%2Bb6835e9e%22%7D%2C%22contentSecurityPolicy%22%3A%7B%22style-src%22%3A%22&#39;unsafe-inline&#39;%20*%22%2C%22font-src%22%3A%22&#39;self&#39;%20*%20data%3A%22%2C%22img-src%22%3A%22&#39;self&#39;%20*%20data%3A%22%2C%22connect-src%22%3A%22&#39;self&#39;%20*%22%2C%22script-src%22%3A%22&#39;self&#39;%20&#39;unsafe-eval&#39;%20&#39;unsafe-inline&#39;%20https%3A%2F%2Fassetscdn-wchat.freshchat.com%20https%3A%2F%2F*.freshchat.com%20https%3A%2F%2F*.freshpori.com%20https%3A%2F%2Frts-static-prod.freshworksapi.com%2Fus%2Frts-min.js%22%2C%22child-src%22%3A%22&#39;self&#39;%20*%20blob%3A%22%2C%22media-src%22%3A%22&#39;self&#39;%20https%3A%2F%2F*.freshchat.com%20https%3A%2F%2F*.freshpori.com%22%2C%22manifest-src%22%3A%22&#39;self&#39;%20https%3A%2F%2F*.freshchat.com%20https%3A%2F%2F*.freshpori.com%22%2C%22default-src%22%3A%5B%22&#39;none&#39;%22%5D%7D%2C%22contentSecurityPolicyHeader%22%3A%22Content-Security-Policy%22%2C%22contentSecurityPolicyMeta%22%3Atrue%2C%22outputPath%22%3A%22static%22%2C%22socket%22%3A%7B%22domain%22%3A%7B%22production%22%3A%22rts-us-fcht.freshworksapi.com%22%7D%2C%22supportAppId%22%3A%5B%22228339547221745%22%2C%221308634746881%22%5D%2C%22albDomain%22%3A%7B%22production%22%3A%22rts-us-fcht.freshworksapi.com%22%7D%2C%22protocol%22%3A%22https%3A%2F%2F%22%2C%22subDelay%22%3A15000%2C%22reconnectDelay%22%3A10%7D%2C%22webpush%22%3A%7B%22domain%22%3A%7B%22production%22%3A%22%7BappName%7D.webpush.freshchat.com%22%2C%22crm%22%3A%7B%22production%22%3A%22%7BappName%7D.wchat.webpush.myfreshworks.com%22%7D%7D%2C%22protocol%22%3A%22https%3A%2F%2F%22%7D%2C%22hotlineEnv%22%3A%7B%22type%22%3A%22production%22%7D%2C%22cdn%22%3A%7B%22enabled%22%3A%7B%22forAssets%22%3Atrue%2C%22forApi%22%3Atrue%7D%2C%22assets%22%3A%22assetscdn-%22%2C%22api%22%3A%22apicdn-%22%2C%22domain%22%3A%7B%22production%22%3A%22.freshchat.com%2F%7BdeploymentPath%7D%22%7D%2C%22subDomain%22%3A%22wchat%22%2C%22protocol%22%3A%22https%3A%2F%2F%22%7D%2C%22rtsCdnUrl%22%3A%7B%22production%22%3A%22https%3A%2F%2Frts-static-prod.freshworksapi.com%2Fus%2Frts-min.js%22%7D%2C%22helpWidgetCdnUrl%22%3A%22https%3A%2F%2Fassetscdn-wchat.freshchat.com%2Fhelp-widget%2Fuse1-00%22%2C%22haystackConfig%22%3A%7B%22production%22%3A%7B%22endPoint%22%3A%22https%3A%2F%2Frum.haystack.es%2Ffreshchat%2F_logs%22%2C%22authToken%22%3A%226f5962f1bb5440dc30f0a464a0c63fc5%22%7D%2C%22staging%22%3A%7B%22endPoint%22%3A%22https%3A%2F%2Frum.stage.haystack.es%2Ffreshchat%2F_logs%22%2C%22authToken%22%3A%22a6198e17791993148328fafdf0a3c7c1%22%7D%2C%22cacheLogTime%22%3A60000%7D%2C%22exportApplicationGlobal%22%3Afalse%7D">
+<meta http-equiv="Content-Security-Policy" content="style-src &#39;unsafe-inline&#39; *; font-src &#39;self&#39; * data:; img-src &#39;self&#39; * data:; connect-src &#39;self&#39; *; script-src &#39;self&#39; &#39;unsafe-eval&#39; &#39;unsafe-inline&#39; https://assetscdn-wchat.freshchat.com https://*.freshchat.com https://*.freshpori.com https://rts-static-prod.freshworksapi.com/us/rts-min.js; child-src &#39;self&#39; * blob:; media-src &#39;self&#39; https://*.freshchat.com https://*.freshpori.com; manifest-src &#39;self&#39; https://*.freshchat.com https://*.freshpori.com; default-src &#39;none&#39;; ">
+
+    
+<link href="./vendor.28b05fd2eddc1ffa507fea38763ed22e.css" rel="stylesheet">
+
+    
+<link href="./hotline-web.d41d8cd98f00b204e9800998ecf8427e.css" rel="stylesheet">
+
+
+    
+  <script src="./rts-min.js.download"></script></head>
+  <body class="webchat ember-application" dir="ltr">
+    
+
+    
+<script src="./vendor.862630a2b93632e0d7bbae6d63246102.js.download"></script>
+
+    
+<script src="./4268.js.download"></script>
+<link href="./chunk.2a5f5d16158258a14983.css" rel="stylesheet">
+<link href="./fd-messaging.9ca19bd949a28490f14f.css" rel="stylesheet">
+<script src="./fd-messaging.7c63e5d071a66a347641.js.download"></script>
+
+
+    <div id="ember-basic-dropdown-wormhole"></div>
+  
+
+<!---->  <div aria-live="polite" id="ember3" class="content-vp ember-view"><div class="hotline-launcher     " tabindex="-1" aria-modal="true">
+  <span id="chatWindowTitle" class="screen-reader-only">Chat window</span>
+<!---->  <div class="viewport h-chat-custom ">
+    <div class="widget-status animated fadeInUp faster" aria-live="polite">
+      <div class="help-text  dn">
+<!----></div>
+
+    </div>
+    <div id="ember55" class="h-channel ember-view"><div class="home-content">
+  <div class="h-header solid">
+    <div class="title fadeIn ">
+      <div class="logo">
+        <img class="animated zoomIn faster" src="./img_s14aq9s3r6_41d2c1eeb6073a7a5e506566361fa942dbe5918ce7d58dfd8595eed435efd04e.png" alt="Widget logo">
+      </div>
+        <div class="head-text">
+            <h1 class="welcome-msg">Hello there 👋</h1>
+            <p class="welcome-sub-msg">Ask us a question or two:</p>
+        </div>
+    </div>
+  </div>
+  <div class="body sections faq-body ">
+    <div class="dummy-bar solid " style="height: 3rem;"></div>
+    <div class="card-layout scroll-section">
+      <div class="channel-section animated fadeInUp delay faster h-categories">
+  <div class="channel-title">
+    <div class="list-sub-title" role="heading" aria-level="2">
+      Chat with us
+    </div>
+<!---->  </div>
+      <ul class="channel-list">
+<!---->            <li>
+              <div id="ember57" class="channel animated fadeInLeft ember-view"><a href="https://uxpilot-afb75f146cd4e4817350100.freshchat.com/home/233697" id="ember58" class="ember-view channel-link">
+  <div class="h-category-item">
+    <div class="h-category-icon">
+        <span class="category-content-wrap theme-3">
+          <span class="category-content" aria-hidden="true">
+            C
+          </span>
+        </span>
+    </div>
+   <div class="channel-names ">
+      <div class="channel-content">
+        <div class="h-category-detail ">
+          <p class="channel-name  ">
+            Chat with us
+          </p>
+            <div class="welcome-text ">
+<!---->              <div class="message-text">
+                 <div class="last-msg-preview ">
+                    <div id="ember59" class="ember-view">  <div class="h-comment    ">
+<!---->
+      <div id="ember60" class="fc-ui-unity-message-bubble ember-view">  <div class="h-message-text "><!----></div>
+<!----></div>
+ 
+  </div>
+<!----></div>
+                  </div>
+                              </div>
+            </div>
+        </div>
+          <div class="h-conv-user">
+<!---->          </div>
+      </div>
+    </div>
+  </div>
+</a></div>
+              <div class="border-bottom"></div>
+            </li>
+      </ul>
+<!---->    </div>
+<!---->
+          <div class="faq-list animated fadeInUp delay faster ">
+    <div class="faq-header">
+      <div class="title-header">
+        <div class="list-sub-title" role="heading" aria-level="2">
+            FAQs
+        </div>
+      </div>
+      <div class="search-category" role="button" tabindex="0" aria-label="Search Frequently Asked Questions" data-ember-action="" data-ember-action-63="63">
+        <i class="icon-ic_search"></i>
+      </div>
+    </div>
+    <div class="faq-categories">
+      <ul class="categories-list">
+          <li role="link" tabindex="0" data-ember-action="" data-ember-action-64="64">
+            <div class="category-item">
+              <div class="category-icon">
+                  <span class="category-content-wrap theme-3" aria-hidden="true">
+                    G
+                  </span>
+              </div>
+              <div class="category-name">
+                <div class="faq-title">
+                  General Inquiries and FAQs
+                </div>
+              </div>
+
+<!---->            </div>
+            <div class="border-bottom"></div>
+          </li>
+      </ul>
+<!---->    </div>
+  </div>
+
+<!----><!---->
+      <div class="bottom-gradient" style="visibility: hidden;"></div>
+    </div>
+  </div>
+</div>
+  <div class="footer-note animated slideInUp faster hide-footer show-when-zoom">
+    <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="0" height="0" alt="Freshchat">
+</div>
+
+</div>
+  </div>
+<!----></div>
+
+<!---->
+<div class="d-hotline h-btn animated zoomIn faster eager-load    d-hotline-text" tabindex="0" role="button" aria-label="Help" data-ember-action="" data-ember-action-4="4">
+    <div id="chat-text" aria-hidden="true">
+      <img class="help-icon" src="./help_icon.407f0467c911236190038c9631c321f8.svg" alt="" role="presentation">
+      <span>Help</span>
+    </div>
+    <div class=" " aria-hidden="true">
+      <span aria-hidden="true">
+        
+      </span>
+    </div>
+</div>
+<style type="text/css">
+
+  
+
+  html, body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Segoe UI Emoji', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Cantarell', 'Helvetica Neue', sans-serif !important;
+  }
+  .h-chat-custom .odd .h-conv .h-comment,
+  .h-chat-custom .h-channel .h-header,
+  .h-chat-custom .h-channel .dummy-bar,
+  .h-chat-custom .h-conv .h-header,
+  .h-chat-custom .odd .h-conv .h-comment,
+  .h-chat-custom .h-conv div.body div.message-container.odd span.chat-msg,
+  .iframe-modal .h-modal-notes .modal-header,
+  .h-chat-custom .odd .h-conv .h-comment.file-attached .h-message-text,
+  .h-chat-custom .odd .h-conv .h-comment.media-message .h-message-text {
+    background-color: #16028b !important;
+  }
+
+  .h-chat-custom .odd .h-conv .h-comment .h-message-text a,
+  .hotline-launcher.h-open .viewport .h-conv .faq-content .h-header.article-view-header .category-title .sub-title {
+    color: #ffffff !important;
+  }
+
+  .h-chat-custom .h-channel .h-header {
+    border: 0.1px solid #16028b !important;
+  }
+
+  .h-chat-custom .h-channel .h-header .icon, .h-chat-custom .h-conv .h-header .icon,
+  .h-chat-custom .h-channel .h-header .conv-title, .h-chat-custom .h-conv .h-header .conv-title,
+  .h-chat-custom .h-channel .h-header .ic-back, .h-chat-custom .h-conv .h-header .ic-back,
+  .h-chat-custom .h-channel .h-header .title, .h-chat-custom .h-conv .h-header .title,
+  .h-chat-custom .odd .h-conv .h-comment,
+  .h-chat-custom .h-conv div.body div.message-container.odd span.chat-msg,
+  .iframe-modal .h-modal-notes .modal-header .frame-title,
+  .iframe-modal .h-modal-notes .modal-header .h-close i,
+  .preview-bubble {
+    color: #ffffff !important;
+  }
+
+  .h-chat-custom .h-conv div.body div.message-container.odd span.arrow.right {
+    border-left-color: #16028b !important;
+  }
+
+  .h-chat-custom div.h-conv div.body div.h-conv-chat {
+    background-image: url("https://assetscdn-wchat.freshchat.com/static/assets/texture_background_1.aff96620ed7b5dfc8fbadb616251a75a.png") !important;
+  }
+  .preview-wrapper .top-border{
+    border-top: 4px solid #16028b;
+  }
+
+  .reply-options .reply-option-button,
+  .h-reply-wrapper .h-reply-button .h-img-button,
+  .actions-button-dropdown .h-img-button,
+  .h-chat-custom .h-conv .in-line-reply-fragments .h-conv-chat .fc-carousel-wrapper .h-img-button,
+  .h-chat-custom .h-conv .in-line-reply-fragments .h-conv-chat .button-region .h-img-button,
+  .h-chat-custom .h-conv .in-line-reply-fragments .h-conv-chat .fc-carousel-cards .h-img-button,
+  .hotline-launcher.h-open .viewport .h-channel .home-content .body.sections .card-layout .start-new-conversation button.h-img-button,
+  .hotline-launcher.h-open .viewport .h-conv .start-new-conversation button.h-img-button,
+  .h-chat-custom .h-conv .in-line-reply-fragments .h-conv-chat .fc-carousel-wrapper .fc-multi-select .button-region .h-img-button {
+    border: 1px solid #3f20fb;
+  }
+
+  .reply-options .reply-option-button:hover,
+  .h-reply-wrapper .h-reply-button .h-img-button:hover:not([disabled]),
+  .h-reply-wrapper .h-reply-button .h-img-button--selected,
+  .actions-button-dropdown .h-img-button:hover:not([disabled]),
+  .hotline-launcher.h-open .viewport .h-channel .home-content .body.sections .card-layout .start-new-conversation button.h-img-button:hover:not([disabled]),
+  .hotline-launcher.h-open .viewport .h-conv .start-new-conversation button.h-img-button:hover:not([disabled]),
+  .h-chat-custom .h-conv .in-line-reply-fragments .h-conv-chat .fc-carousel-wrapper .h-img-button:hover:not([disabled]),
+  .h-chat-custom .h-conv .in-line-reply-fragments .h-conv-chat .button-region .h-img-button:hover:not([disabled]) {
+    background-color: #3f20fb !important;
+    color: #ffffff;
+  }
+
+  .h-reply-wrapper .h-reply-button .btn-selected,
+  .h-chat-custom .h-conv .in-line-reply-fragments .h-conv-chat .fc-carousel-cards .h-img-button--selected,
+  .h-chat-custom .h-conv .in-line-reply-fragments .h-conv-chat .h-img-button.btn-selected {
+    background-color: #3f20fb !important;
+    color: #ffffff;
+  }
+
+  .d-hotline {
+    background-color: #3f20fb !important;
+    color: #ffffff !important;
+    border-color: transparent #3f20fb transparent transparent;
+  }
+
+  #chat-icon {
+    background: #ffffff !important;
+  }
+
+  #chat-icon::before, #chat-icon::after {
+    background-color: #3f20fb !important;
+  }
+
+  .loader {
+    border-top: 1em solid rgba(#16028b, 0.4);
+    border-right: 1.05em solid #16028b;
+    border-bottom: 1.05em solid #16028b;
+    border-left: 1.05em solid #16028b;
+  }
+
+  .article-modal .modal-footer .h-message-us-btn:hover,
+  .article-modal .modal-footer .article_vote:hover {
+    background-color: #16028b !important;
+    color : #ffffff !important;
+  }
+
+  /* .article-content .modal-footer .h-message-us-btn:hover,
+  .article-content .modal-footer .article_vote:hover {
+    background-color: #16028b !important;
+    color : #ffffff !important;
+  } */
+
+  .tabs .tabs-inner:after{
+    background-color: #16028b !important;
+  }
+
+  .chat-btn:hover{
+    background-color: #3f20fb !important;
+    color: #ffffff !important;
+    border: 0 !important;
+  }
+
+  .submit-rating .submit.btn {
+    background-color: #3f20fb !important;
+    color: #ffffff !important;
+  }
+
+  .send-offline-reply .send-message {
+    background-color: #3f20fb !important;
+    color: #ffffff !important;
+  }
+
+  .h-comment.h-wrapped-article .articles-listview .article-showmore,
+  .fc-conversation-view div.body .h-chat-window .fc-agent-profile .u-social-network div i{
+    color: #16028b !important;
+  }
+
+  .h-chat-custom .odd .h-conv .h-comment.file-attached,
+  .h-chat-custom .odd .h-conv .h-comment.media-message {
+    background-color: unset !important;
+  }
+
+  .h-chat-custom .odd .h-conv .h-comment.file-attached .text-file-preview .text-haze-holder{
+    background-color: #16028b !important;
+    color: #ffffff !important;
+  }
+
+  .h-chat-custom .odd .h-conv .h-comment.file-attached .text-file-preview .text-haze-holder .bottom-gradient {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #16028b 100%) !important;
+  }
+
+  .article-content .fc_web_modal_closed .article-header-section .progress-bar {
+    background-color: #16028b !important;
+  }
+
+  .preview-container .h-reply-button .h-button-area button,
+  .h-reply-wrapper .h-reply-button .h-img-button,
+  .actions-button-dropdown .h-img-button {
+    border-color: #3f20fb !important;
+  }
+
+  .h-header .jwt-error-message {
+    color: #44412e !important;
+    background-color: #ffac00 !important;
+  }
+
+  .cal-time-slot:hover {
+      background-color: #16028b;
+  }
+  .calendar-picker-minified .cal-picker-conf-view .confirm-button-holder .cal-confirm-button {
+      background-color: #16028b;
+  }
+
+  .meeting-frag-holder {
+    background-color: #16028b !important;
+  }
+  .meeting-frag-holder .event-header {
+    color: #ffffff;
+  }
+  .h-conv-chat .h-chat .h-conv .h-comment .event-fragment .event-body .event-timings.actionable a{
+      color: #16028b;
+  }
+
+  .h-conv-chat .h-chat .h-conv .h-comment.emojis-1,
+  .h-conv-chat .h-chat .h-conv .h-comment.emojis-2,
+  .h-conv-chat .h-chat .h-conv .h-comment.emojis-3 {
+    background-color: transparent !important;;
+  }
+
+  .h-reply-wrapper .ui-agent-typing-indicator {
+    background-color: #16028b;
+  }
+
+  .h-reply-wrapper .ui-agent-typing-indicator .indicator-dot {
+    background-color: #ffffff;
+  }
+
+  .fc-mobile-close.minimize i.icon-ic_close{
+    color: #ffffff;
+  }
+
+  .hotline-launcher.h-open .viewport div.h-conv div.fc-conversation-view div.body .h-reply-wrapper .h-reply .h-reply-send-button.active,
+  .preview-container .h-reply-wrapper div.h-reply .button-group .h-reply-send-button.active,
+  .h-icon-button.active {
+    background-color: #3f20fb;
+  }
+</style>
+</div>
+</body></html>

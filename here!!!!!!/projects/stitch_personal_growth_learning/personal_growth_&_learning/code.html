@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sallie - Personal Growth &amp; Learning</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=Noto+Sans:wght@300..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13c8ec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#101f22",
+                        "surface-dark": "#1c2527",
+                        "surface-darker": "#111718",
+                        "border-dark": "#283639",
+                        "text-secondary": "#9db4b9",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101f22; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #283639; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3a4b4e; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white overflow-hidden h-screen flex">
+<!-- Sidebar -->
+<aside class="w-64 bg-surface-darker border-r border-border-dark flex-col hidden md:flex">
+<div class="p-6 flex items-center gap-3">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined fill" style="font-size: 32px;">auto_awesome</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-white">Sallie</h1>
+</div>
+<nav class="flex-1 px-4 space-y-2 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-secondary hover:bg-surface-dark hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">home</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 text-primary border border-primary/20" href="#">
+<span class="material-symbols-outlined fill">trending_up</span>
+<span class="text-sm font-bold">Growth</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-secondary hover:bg-surface-dark hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">folder</span>
+<span class="text-sm font-medium">Organization</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-secondary hover:bg-surface-dark hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">groups</span>
+<span class="text-sm font-medium">Family</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-secondary hover:bg-surface-dark hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">favorite</span>
+<span class="text-sm font-medium">Wellness</span>
+</a>
+</nav>
+<div class="p-4 border-t border-border-dark">
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-dark cursor-pointer transition-colors">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 ring-2 ring-primary/30" data-alt="Profile picture of Sarah, a confident woman" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDxEEV6_jGcNzxodogaalxdGJPZjM_-7qD4jCBk7_r9WTfk37Csk_NzT4mK9ayJCdcAOc0tuNCBdMZxq8mI0E9jqGZi0nN3iko-xmlWWGNWpd1gg94e-In_efS8B07sn89KosdpLjr-Oy4tJRyM_XYVaKOQ8cLIn7qkotCY2FrRDK7rJMb3MzqcSp3a3LGgcBisMWD9sLrrsDFNgYvsUO3IOTJrAo5eOPMlBmziOUDDmNwvKzAUY4rH950e7bLFzmBQa6DXGnFQako");'></div>
+<div class="flex flex-col overflow-hidden">
+<p class="text-sm font-bold text-white truncate">Sarah Jensen</p>
+<p class="text-xs text-text-secondary truncate">Free Account</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full relative overflow-hidden">
+<!-- Top Header -->
+<header class="h-16 border-b border-border-dark bg-surface-darker/95 backdrop-blur flex items-center justify-between px-6 shrink-0 z-20">
+<!-- Mobile Menu Button (Visible on mobile only) -->
+<button class="md:hidden text-white mr-4">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<!-- Search -->
+<div class="flex-1 max-w-md hidden sm:flex">
+<label class="relative w-full group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-secondary group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 border border-transparent rounded-lg leading-5 bg-surface-dark text-white placeholder-text-secondary focus:outline-none focus:bg-background-dark focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm transition-all duration-200" placeholder="Search insights, goals, or resources..." type="text"/>
+</label>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center gap-4 ml-4">
+<button class="relative p-2 text-text-secondary hover:text-white hover:bg-surface-dark rounded-lg transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-primary rounded-full border-2 border-surface-darker"></span>
+</button>
+<button class="p-2 text-text-secondary hover:text-white hover:bg-surface-dark rounded-lg transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<!-- Scrollable Dashboard Content -->
+<div class="flex-1 overflow-y-auto p-4 md:p-8 space-y-8 scroll-smooth">
+<!-- Page Heading -->
+<div class="flex flex-col gap-2 animate-fade-in-up">
+<h2 class="text-3xl md:text-4xl font-black tracking-tight text-white">My Growth Journey</h2>
+<p class="text-text-secondary text-base md:text-lg">Good Morning, Sarah. Let's grow together today.</p>
+</div>
+<!-- Hero Insight Card -->
+<div class="w-full bg-surface-dark rounded-xl shadow-lg border border-border-dark overflow-hidden group">
+<div class="flex flex-col md:flex-row h-full">
+<div class="md:w-1/3 h-48 md:h-auto bg-cover bg-center relative" data-alt="Abstract calming sunrise gradient representing early morning focus" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA8tTG6OVWLVQCy_dt0hUhH6syIIbGD5P6gAL8-xJmtoDny9ZIwL_bKxABVJmr3IxAOh4Uzs4oor5pnsn7gVBR7hd45GpzwcJnZNlT0Eml1pa8Dh3L3mlOlkRu3aUyBCTjMQKuwtw8TPBPHBdxi-yAfvKq44Hv2_CseDKKKjsHel6UB0LgJ_iz3wvAXzZh1dDBawTtRrchKRoZ81DP22PWjChltC-zix9CArWQx1yANBgRP2edMcYtCy66zl3x53H7pnHycoOXMgds");'>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dark md:bg-gradient-to-r md:from-transparent md:to-surface-dark"></div>
+</div>
+<div class="p-6 md:p-8 flex-1 flex flex-col justify-center">
+<div class="flex items-center gap-2 mb-3 text-primary font-bold uppercase text-xs tracking-wider">
+<span class="material-symbols-outlined text-sm">auto_awesome</span>
+                            Sallie's Daily Insight
+                        </div>
+<h3 class="text-xl md:text-2xl font-bold text-white mb-3">Maximizing Morning Flow</h3>
+<p class="text-text-secondary leading-relaxed mb-6 max-w-2xl">
+                            I've analyzed your activity patterns and noticed you're 40% more creative between 7 AM and 10 AM. I've tentatively rescheduled your "Strategy Deep Work" block to 9 AM to help you capitalize on this flow state.
+                        </p>
+<div class="flex items-center gap-4">
+<button class="bg-primary hover:bg-primary/90 text-background-dark font-bold py-2.5 px-6 rounded-lg transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">calendar_month</span>
+                                View Schedule Adjustment
+                            </button>
+<button class="text-text-secondary hover:text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm">
+                                Dismiss
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Two Column Layout: Goals & Focus -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
+<!-- Goals Progress -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold text-white">Goal Progress</h3>
+<button class="text-sm text-primary hover:text-white transition-colors font-medium">View All Goals</button>
+</div>
+<div class="grid gap-4">
+<!-- Goal 1 -->
+<div class="bg-surface-dark border border-border-dark p-5 rounded-xl hover:border-primary/30 transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-3">
+<div class="p-2 rounded-lg bg-[#2D2438] text-purple-400">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<div>
+<p class="font-bold text-white">Executive Presence</p>
+<p class="text-xs text-text-secondary">Leadership Skills</p>
+</div>
+</div>
+<span class="text-sm font-bold text-purple-400">65%</span>
+</div>
+<div class="w-full bg-surface-darker rounded-full h-2 mt-2">
+<div class="bg-purple-400 h-2 rounded-full transition-all duration-1000" style="width: 65%"></div>
+</div>
+<p class="text-xs text-text-secondary mt-3 group-hover:text-white transition-colors">Next step: Complete module "Speaking with Authority"</p>
+</div>
+<!-- Goal 2 -->
+<div class="bg-surface-dark border border-border-dark p-5 rounded-xl hover:border-primary/30 transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-3">
+<div class="p-2 rounded-lg bg-[#1F3337] text-primary">
+<span class="material-symbols-outlined">self_improvement</span>
+</div>
+<div>
+<p class="font-bold text-white">Daily Meditation</p>
+<p class="text-xs text-text-secondary">Wellness Habit</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-primary text-sm font-bold">
+<span class="material-symbols-outlined text-lg">local_fire_department</span>
+                                    3 Day Streak
+                                </div>
+</div>
+<div class="flex gap-1 mt-2">
+<div class="h-2 w-full rounded-full bg-primary"></div>
+<div class="h-2 w-full rounded-full bg-primary"></div>
+<div class="h-2 w-full rounded-full bg-primary"></div>
+<div class="h-2 w-full rounded-full bg-surface-darker"></div>
+<div class="h-2 w-full rounded-full bg-surface-darker"></div>
+<div class="h-2 w-full rounded-full bg-surface-darker"></div>
+<div class="h-2 w-full rounded-full bg-surface-darker"></div>
+</div>
+<p class="text-xs text-text-secondary mt-3 group-hover:text-white transition-colors">Scheduled for 8:00 PM tonight</p>
+</div>
+<!-- Goal 3 -->
+<div class="bg-surface-dark border border-border-dark p-5 rounded-xl hover:border-primary/30 transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-3">
+<div class="p-2 rounded-lg bg-[#382828] text-rose-400">
+<span class="material-symbols-outlined">fitness_center</span>
+</div>
+<div>
+<p class="font-bold text-white">Strength Training</p>
+<p class="text-xs text-text-secondary">Physical Health</p>
+</div>
+</div>
+<span class="text-sm font-bold text-rose-400">4/5 Sessions</span>
+</div>
+<div class="w-full bg-surface-darker rounded-full h-2 mt-2">
+<div class="bg-rose-400 h-2 rounded-full transition-all duration-1000" style="width: 80%"></div>
+</div>
+<p class="text-xs text-text-secondary mt-3 group-hover:text-white transition-colors">Great job! One more session to hit your weekly target.</p>
+</div>
+</div>
+</div>
+<!-- Focus for Today -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold text-white">Focus for Today</h3>
+<div class="text-xs font-medium px-2 py-1 bg-surface-dark rounded text-text-secondary">Oct 24</div>
+</div>
+<div class="bg-surface-dark border border-border-dark rounded-xl p-1 flex-1 flex flex-col">
+<!-- Task Item -->
+<label class="flex items-start gap-4 p-4 border-b border-border-dark hover:bg-surface-darker/50 transition-colors rounded-lg cursor-pointer group">
+<div class="relative flex items-center mt-1">
+<input class="peer size-5 cursor-pointer appearance-none rounded border border-text-secondary bg-surface-darker checked:border-primary checked:bg-primary transition-all" type="checkbox"/>
+<span class="material-symbols-outlined absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[16px] text-surface-darker opacity-0 peer-checked:opacity-100 font-bold pointer-events-none">check</span>
+</div>
+<div class="flex flex-col">
+<span class="text-white font-medium group-hover:text-primary transition-colors">Read 10 pages of 'Deep Work'</span>
+<span class="text-xs text-text-secondary">Est. 15 mins • Learning</span>
+</div>
+</label>
+<!-- Task Item -->
+<label class="flex items-start gap-4 p-4 border-b border-border-dark hover:bg-surface-darker/50 transition-colors rounded-lg cursor-pointer group">
+<div class="relative flex items-center mt-1">
+<input class="peer size-5 cursor-pointer appearance-none rounded border border-text-secondary bg-surface-darker checked:border-primary checked:bg-primary transition-all" type="checkbox"/>
+<span class="material-symbols-outlined absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[16px] text-surface-darker opacity-0 peer-checked:opacity-100 font-bold pointer-events-none">check</span>
+</div>
+<div class="flex flex-col">
+<span class="text-white font-medium group-hover:text-primary transition-colors">5 min breathing exercise</span>
+<span class="text-xs text-text-secondary">Mental Clarity • Wellness</span>
+</div>
+</label>
+<!-- Task Item (Completed) -->
+<label class="flex items-start gap-4 p-4 border-b border-border-dark hover:bg-surface-darker/50 transition-colors rounded-lg cursor-pointer group opacity-60">
+<div class="relative flex items-center mt-1">
+<input checked="" class="peer size-5 cursor-pointer appearance-none rounded border border-text-secondary bg-surface-darker checked:border-primary checked:bg-primary transition-all" type="checkbox"/>
+<span class="material-symbols-outlined absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[16px] text-surface-darker opacity-0 peer-checked:opacity-100 font-bold pointer-events-none">check</span>
+</div>
+<div class="flex flex-col">
+<span class="text-white font-medium line-through">Review Q3 financial goals</span>
+<span class="text-xs text-text-secondary">Completed at 9:15 AM</span>
+</div>
+</label>
+<!-- Add new -->
+<button class="flex items-center gap-2 p-4 text-sm text-text-secondary hover:text-white font-medium transition-colors">
+<span class="material-symbols-outlined text-lg">add</span>
+                            Add a micro-goal
+                        </button>
+</div>
+</div>
+</div>
+<!-- Stats & Journal Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+<!-- Energy Chart -->
+<div class="bg-surface-dark border border-border-dark rounded-xl p-6">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-yellow-400">bolt</span>
+<h3 class="font-bold text-white">Energy Levels</h3>
+</div>
+<span class="text-xs text-text-secondary">Last 7 Days</span>
+</div>
+<div class="flex items-end justify-between h-40 gap-2">
+<!-- Mon -->
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="w-full bg-surface-darker rounded-t-lg relative h-full flex items-end overflow-hidden">
+<div class="w-full bg-primary/30 group-hover:bg-primary/50 transition-all rounded-t-lg h-[40%]"></div>
+</div>
+<span class="text-xs text-text-secondary">M</span>
+</div>
+<!-- Tue -->
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="w-full bg-surface-darker rounded-t-lg relative h-full flex items-end overflow-hidden">
+<div class="w-full bg-primary/30 group-hover:bg-primary/50 transition-all rounded-t-lg h-[65%]"></div>
+</div>
+<span class="text-xs text-text-secondary">T</span>
+</div>
+<!-- Wed -->
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="w-full bg-surface-darker rounded-t-lg relative h-full flex items-end overflow-hidden">
+<div class="w-full bg-primary/30 group-hover:bg-primary/50 transition-all rounded-t-lg h-[50%]"></div>
+</div>
+<span class="text-xs text-text-secondary">W</span>
+</div>
+<!-- Thu (Today) -->
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="w-full bg-surface-darker rounded-t-lg relative h-full flex items-end overflow-hidden">
+<div class="w-full bg-primary shadow-[0_0_10px_rgba(19,200,236,0.3)] rounded-t-lg h-[85%] relative">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-darker border border-border-dark text-xs text-primary font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">High</div>
+</div>
+</div>
+<span class="text-xs font-bold text-white">T</span>
+</div>
+<!-- Fri -->
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="w-full bg-surface-darker rounded-t-lg relative h-full flex items-end overflow-hidden">
+<div class="w-full bg-primary/30 group-hover:bg-primary/50 transition-all rounded-t-lg h-[30%]"></div>
+</div>
+<span class="text-xs text-text-secondary">F</span>
+</div>
+<!-- Sat -->
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="w-full bg-surface-darker rounded-t-lg relative h-full flex items-end overflow-hidden">
+<div class="w-full bg-primary/20 group-hover:bg-primary/40 transition-all rounded-t-lg h-[20%]"></div>
+</div>
+<span class="text-xs text-text-secondary">S</span>
+</div>
+<!-- Sun -->
+<div class="flex flex-col items-center gap-2 w-full group">
+<div class="w-full bg-surface-darker rounded-t-lg relative h-full flex items-end overflow-hidden">
+<div class="w-full bg-primary/20 group-hover:bg-primary/40 transition-all rounded-t-lg h-[25%]"></div>
+</div>
+<span class="text-xs text-text-secondary">S</span>
+</div>
+</div>
+</div>
+<!-- Journal Prompt -->
+<div class="bg-surface-dark border border-border-dark rounded-xl p-6 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-2 text-primary">
+<span class="material-symbols-outlined">edit_note</span>
+<h3 class="font-bold text-xs uppercase tracking-wider">Reflection</h3>
+</div>
+<p class="text-lg font-medium text-white mb-4">You handled the conflict at work well yesterday. How did staying calm make you feel afterwards?</p>
+<textarea class="w-full bg-surface-darker border-none rounded-lg p-4 text-white placeholder-text-secondary/50 focus:ring-1 focus:ring-primary focus:outline-none resize-none text-sm leading-relaxed" placeholder="Type your thoughts here..." rows="3"></textarea>
+</div>
+<div class="flex justify-between items-center mt-4">
+<span class="text-xs text-text-secondary">Private &amp; Secure</span>
+<button class="bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-lg text-sm font-bold transition-colors">Log Entry</button>
+</div>
+</div>
+</div>
+<!-- Resource Library -->
+<div class="flex flex-col gap-6 pb-8">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold text-white">Recommended Resources</h3>
+<div class="flex gap-2">
+<button class="p-1 rounded hover:bg-surface-dark text-white"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-1 rounded hover:bg-surface-dark text-white"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Card 1 -->
+<div class="bg-surface-dark rounded-xl overflow-hidden border border-border-dark group hover:-translate-y-1 transition-transform duration-300">
+<div class="h-32 bg-cover bg-center" data-alt="Clean and organized modern home office desk" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBbPiDUPv7zU-bj8dKfq3Yh8Ul17uZJg1uaDNLDXUf72LPtAhowBUjuG4Xd31ss15V2sgIajgqO4ZWUMv2A8i67A2XgXe5Z2oYMtG5R68gC3FICftXfyXmZ5y6XDgm0H_uSAamtY60gERVjLttFtwKqQ2eU3VdXsWBM-krW3y5wCT2mLqP_Lpx5vO2gmrrmMQexsDi8kcP7h5A0E9BNyxsl2n34lrsd8UslSjPOGC4Ccf-ywTAmTNgtJb2Sh_unlF4YHx-0AmmZmI4");'></div>
+<div class="p-4 flex flex-col gap-2">
+<div class="flex items-center gap-2 text-xs text-primary font-bold">
+<span class="material-symbols-outlined text-sm">article</span>
+                                ARTICLE
+                            </div>
+<h4 class="font-bold text-white leading-tight">5-Min Guide to Delegating at Home</h4>
+<p class="text-xs text-text-secondary mt-1">Learn to share the load effectively without guilt.</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-dark rounded-xl overflow-hidden border border-border-dark group hover:-translate-y-1 transition-transform duration-300">
+<div class="h-32 bg-cover bg-center" data-alt="Happy mother playing with child in a park" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAMF_ancgXiMzkzxVVuMddGlhCEmRa2UqG_7HL1k-AS3ylP6QVqnh0kTy6miE37AwXAM8i0Q4EX-_wMw35HS3XYoLxv8QiEK9i2RdCQD9VTbBbtjgbxmkWqImw6KM3RK8X0NOSxnlAJowhmcTKYQ7j4nSQLylQaUu1Qz_VkJsYm6hQ1XyiWpbsI_-y6Wjo2-FjRnXHckRDeaeQd-gxevw5-4jrT6GHXLyIkeTBd3sjxsQ6ZlJNbXboDmo0v8uCzqn0p6xhU6GyFeKw");'></div>
+<div class="p-4 flex flex-col gap-2">
+<div class="flex items-center gap-2 text-xs text-purple-400 font-bold">
+<span class="material-symbols-outlined text-sm">headphones</span>
+                                PODCAST
+                            </div>
+<h4 class="font-bold text-white leading-tight">Balancing Motherhood &amp; Scale</h4>
+<p class="text-xs text-text-secondary mt-1">Interview with CEO &amp; Mom of three, Jane Doe.</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-dark rounded-xl overflow-hidden border border-border-dark group hover:-translate-y-1 transition-transform duration-300">
+<div class="h-32 bg-cover bg-center" data-alt="Abstract blue geometric shapes representing strategy" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDUDADNYwEGO0uTamz8eC2PxMr3KRiC4BnvccE_u-d_h1vqcY30_Zksn2blSFtMz6VJiuJroWHyZMvOPEZmJEQNw4IdGi30y1rPXp70ziQK2qbsvblEHC9UGmX2pRJ9zNSmjDQ7lHHA_rLI8ujEPMGg6xQ-meXDwajcmj-Yz5jZfrA9dWAavyio9MQZJLiDd_BTWuiZC5IP47GRPpm8ArST8QixLoB99MnTADpCuLbmwwP6Dev08oOgnRA0KO4vSXLJKFGIZN_oWDc");'></div>
+<div class="p-4 flex flex-col gap-2">
+<div class="flex items-center gap-2 text-xs text-primary font-bold">
+<span class="material-symbols-outlined text-sm">play_circle</span>
+                                VIDEO
+                            </div>
+<h4 class="font-bold text-white leading-tight">Negotiation Tactics 101</h4>
+<p class="text-xs text-text-secondary mt-1">Short masterclass on holding your ground.</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-dark rounded-xl overflow-hidden border border-border-dark group hover:-translate-y-1 transition-transform duration-300">
+<div class="h-32 bg-cover bg-center" data-alt="Person meditating in a peaceful room" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCiVMnvSygjil-SPLdtb_HIrB22L-cTk7FiLZG3a7pXz7505PdTxMcU6iOwFEOYflp_mXo18xL1GI8TzVDzWqEi9FfDM97kY0keFR6JraBgTRHq44GD2u2wVxp7bOUmsG6aapISj1aCa1YRjj6xxEa1Z5qr2Q7wRcwkZ54yOGyA9e6QWBroy-R1hgvjvWjINo-HvOPD7rmpD-6aSeTy_jwiCrWOsQdJCHm252MY5LoYXD3Vmr6hoDLHcXoNFqThxVrlPXMW4mSR5T4");'></div>
+<div class="p-4 flex flex-col gap-2">
+<div class="flex items-center gap-2 text-xs text-primary font-bold">
+<span class="material-symbols-outlined text-sm">article</span>
+                                GUIDE
+                            </div>
+<h4 class="font-bold text-white leading-tight">De-stress Your Evenings</h4>
+<p class="text-xs text-text-secondary mt-1">Routines to disconnect from work mode.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

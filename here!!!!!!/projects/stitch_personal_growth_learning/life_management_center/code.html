@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sallie - Life Management Center</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#13c8ec",
+              "background-light": "#f6f8f8",
+              "background-dark": "#101f22",
+              "surface-dark": "#18282b",
+              "surface-lighter": "#203236",
+            },
+            fontFamily: {
+              "display": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>/* Custom scrollbar for webkit */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px
+    }
+::-webkit-scrollbar-track {
+    background: #101f22
+    }
+::-webkit-scrollbar-thumb {
+    background: #283639;
+    border-radius: 4px
+    }
+/* Custom checkbox style injection from component */
+.custom-checkbox:checked {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuA1D-ixVYtZC5UMGz_tmbXRiQNTiN1Z6vN0csijpEMVISVYUTf7VIrLO1XBOClXtJvs1sYTZddzewQ9OvQLHvpz7qSol3PUWjQTvs7_VHoXhDOTSA0M7PfN_4vSMR96xIseXxYb_T5ZN9l6gUDjYgYHfOFR8IeDLzQeS0mXjV_RCsksctRswvqWX3FYs1bSVOIma-IzYIgH828djrQvVJaFAU9ECuTK6qhjFVI49S2Ntj0odMVnDzJMBMgR6c84xSqqo3vz1ie7BqQ)
+    }</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-hidden antialiased selection:bg-primary/30">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- SIDEBAR -->
+<aside class="hidden md:flex flex-col w-72 bg-[#0d1618] border-r border-[#1a282b] h-full flex-shrink-0">
+<div class="p-6">
+<!-- User Profile / App Header -->
+<div class="flex items-center gap-4 mb-8">
+<div class="relative">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12 border-2 border-[#1a282b]" data-alt="User profile picture of a woman smiling" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBvtI-yRrlsANVPNlZ-PImLguh5XAAIzjbuODnoSvSp3fluDk7ODIceHL3SOowY1gesd5jtUAMr9PWwefFWYPHEmVVG-h16_aVp3HevzrttERNjVcwMVLPHJXvpzVMEN3iJeY4XFS1Bt-aH9pFbNgFvaYSFJf3EW-o2xiVWsvK0fAlXU9GSDruf7aGDySFXaujPDOjiCYmvbkAJUJy56dTgES8-4rCt029UM7h65Jx_oi6tv5KSuGmz0cLdgj8bv7cTppTgbELcsvE");'>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-primary rounded-full p-1 border-2 border-[#0d1618]">
+<span class="material-symbols-outlined text-[10px] text-[#0d1618] font-bold block">smart_toy</span>
+</div>
+</div>
+<div class="flex flex-col">
+<h1 class="text-white text-lg font-bold leading-tight">Sallie</h1>
+<p class="text-slate-400 text-xs font-medium tracking-wide">LIFE OS v2.0</p>
+</div>
+</div>
+<!-- Role Switcher -->
+<nav class="flex flex-col gap-2">
+<p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 pl-3">Contexts</p>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/10 border border-primary/20 group hover:bg-primary/20 transition-all" href="#">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">dashboard</span>
+<span class="text-white text-sm font-semibold">Command Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-[#1a282b] group transition-all text-slate-400 hover:text-white" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">child_care</span>
+<span class="text-sm font-medium">Mom</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-[#1a282b] group transition-all text-slate-400 hover:text-white" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">favorite</span>
+<span class="text-sm font-medium">Spouse</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-[#1a282b] group transition-all text-slate-400 hover:text-white" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">domain</span>
+<span class="text-sm font-medium">Business</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-[#1a282b] group transition-all text-slate-400 hover:text-white" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">person</span>
+<span class="text-sm font-medium">Self Care</span>
+</a>
+</nav>
+</div>
+<!-- Bottom Actions -->
+<div class="mt-auto p-6 border-t border-[#1a282b]">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-[#1a282b] group transition-all text-slate-400 hover:text-white" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</div>
+</aside>
+<!-- MAIN CONTENT -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Top Bar / Omni-Search -->
+<header class="w-full px-8 py-6 z-10">
+<div class="max-w-[1200px] mx-auto w-full flex flex-col gap-6">
+<!-- Search Bar Component -->
+<div class="relative w-full shadow-2xl shadow-black/20">
+<label class="flex w-full items-stretch rounded-2xl h-14 bg-surface-dark border border-[#2a383b] hover:border-primary/50 focus-within:border-primary transition-colors overflow-hidden group">
+<div class="text-primary flex items-center justify-center pl-5 pr-2">
+<span class="material-symbols-outlined text-[28px] animate-pulse">smart_toy</span>
+</div>
+<input class="flex w-full flex-1 resize-none bg-transparent border-none text-white focus:ring-0 placeholder:text-slate-500 px-2 text-lg font-medium" placeholder="Ask Sallie... (e.g., 'Schedule a date night for Friday at 7pm')"/>
+<div class="flex items-center pr-4 gap-2">
+<button class="p-2 hover:bg-[#2a383b] rounded-lg text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">mic</span>
+</button>
+<button class="bg-primary/10 hover:bg-primary text-primary hover:text-[#101f22] p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</label>
+</div>
+<!-- Page Heading Component -->
+<div class="flex flex-wrap justify-between items-end gap-4">
+<div>
+<h2 class="text-white text-3xl md:text-4xl font-extrabold tracking-tight mb-1">Good Morning, Sarah</h2>
+<p class="text-slate-400 text-base">You have <span class="text-primary font-bold">4 high-priority items</span> to clear before noon.</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 bg-[#203236] hover:bg-[#2a383b] text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors border border-[#2a383b]">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+                                Sync Calendars
+                            </button>
+<button class="flex items-center gap-2 bg-primary hover:bg-primary/90 text-[#101f22] px-4 py-2 rounded-lg text-sm font-bold transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                                New Task
+                            </button>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Grid -->
+<div class="flex-1 overflow-y-auto px-8 pb-8">
+<div class="max-w-[1200px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- LEFT COLUMN: Briefing & Timeline (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Daily Briefing Widget -->
+<div class="bg-surface-dark rounded-2xl border border-[#2a383b] overflow-hidden flex flex-col">
+<div class="p-5 border-b border-[#2a383b] flex justify-between items-center bg-[#1a282b]">
+<h3 class="text-white font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">bolt</span>
+                                    Daily Briefing
+                                </h3>
+<span class="text-xs bg-primary/20 text-primary px-2 py-1 rounded font-bold">Today</span>
+</div>
+<div class="p-5 flex flex-col gap-4">
+<div class="flex items-start gap-3">
+<div class="mt-1 min-w-[4px] h-10 bg-orange-400 rounded-full"></div>
+<div>
+<p class="text-white text-sm font-semibold">Q3 Financial Review</p>
+<p class="text-slate-400 text-xs">Due by 2:00 PM • Business</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="mt-1 min-w-[4px] h-10 bg-purple-400 rounded-full"></div>
+<div>
+<p class="text-white text-sm font-semibold">Pick up Emma from Soccer</p>
+<p class="text-slate-400 text-xs">4:30 PM • Mom</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="mt-1 min-w-[4px] h-10 bg-pink-400 rounded-full"></div>
+<div>
+<p class="text-white text-sm font-semibold">Anniversary Dinner Resv.</p>
+<p class="text-slate-400 text-xs">Call needed • Spouse</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Timeline / Calendar Widget -->
+<div class="bg-surface-dark rounded-2xl border border-[#2a383b] flex-1 min-h-[400px] flex flex-col">
+<div class="p-5 border-b border-[#2a383b] flex justify-between items-center">
+<h3 class="text-white font-bold text-lg">Schedule</h3>
+<button class="text-slate-400 hover:text-white"><span class="material-symbols-outlined">more_horiz</span></button>
+</div>
+<div class="p-4 flex-1 relative">
+<!-- Timeline Line -->
+<div class="absolute left-[70px] top-4 bottom-4 w-[1px] bg-[#2a383b]"></div>
+<!-- Event 1 -->
+<div class="flex gap-4 mb-6 relative group">
+<div class="w-12 text-right text-xs text-slate-500 font-medium pt-1">09:00</div>
+<div class="flex-1 bg-[#203236] p-3 rounded-xl border-l-4 border-primary hover:bg-[#2a383b] transition-colors cursor-pointer">
+<p class="text-white text-sm font-bold">Deep Work: Strategy</p>
+<p class="text-slate-400 text-xs">Home Office</p>
+</div>
+</div>
+<!-- Event 2 -->
+<div class="flex gap-4 mb-6 relative group">
+<div class="w-12 text-right text-xs text-slate-500 font-medium pt-1">12:30</div>
+<div class="flex-1 bg-[#203236] p-3 rounded-xl border-l-4 border-green-400 hover:bg-[#2a383b] transition-colors cursor-pointer">
+<p class="text-white text-sm font-bold">Lunch w/ Sarah K.</p>
+<p class="text-slate-400 text-xs">Downtown Bistro</p>
+</div>
+</div>
+<!-- Current Time Indicator -->
+<div class="flex items-center gap-4 my-2">
+<div class="w-12 text-right text-xs text-primary font-bold">13:45</div>
+<div class="flex-1 h-[1px] bg-primary relative">
+<div class="absolute -left-1 -top-1 size-2 rounded-full bg-primary"></div>
+</div>
+</div>
+<!-- Event 3 -->
+<div class="flex gap-4 mb-6 relative group opacity-60">
+<div class="w-12 text-right text-xs text-slate-500 font-medium pt-1">15:00</div>
+<div class="flex-1 bg-[#203236] p-3 rounded-xl border-l-4 border-purple-400 hover:bg-[#2a383b] transition-colors cursor-pointer">
+<p class="text-white text-sm font-bold">Pediatrician Check-up</p>
+<p class="text-slate-400 text-xs">Dr. Smith's Office</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- CENTER COLUMN: Smart Tasks (5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- Main Tasks Card -->
+<div class="bg-surface-dark rounded-2xl border border-[#2a383b] flex flex-col h-full">
+<div class="p-5 border-b border-[#2a383b] flex justify-between items-center bg-[#1a282b]">
+<div class="flex gap-4">
+<h3 class="text-white font-bold text-lg">Smart Tasks</h3>
+<div class="flex gap-1 bg-[#101f22] p-1 rounded-lg">
+<button class="px-3 py-1 bg-primary text-[#101f22] rounded text-xs font-bold">Focus</button>
+<button class="px-3 py-1 text-slate-400 hover:text-white rounded text-xs font-medium">All</button>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-500">filter_list</span>
+</div>
+<div class="p-0 overflow-y-auto flex-1">
+<!-- Section: High Priority -->
+<div class="mb-2">
+<h4 class="px-5 pt-4 pb-2 text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">priority_high</span> High Priority
+                                    </h4>
+<div class="px-3">
+<label class="group flex items-center gap-3 p-3 rounded-xl hover:bg-[#203236] transition-colors cursor-pointer">
+<input class="custom-checkbox h-5 w-5 rounded border-slate-600 bg-transparent text-primary focus:ring-0 focus:ring-offset-0 transition-all cursor-pointer" type="checkbox"/>
+<div class="flex-1">
+<p class="text-white text-sm font-medium group-hover:text-primary transition-colors">Approve Marketing Budget</p>
+<div class="flex gap-2 mt-1">
+<span class="text-[10px] bg-[#2a383b] text-slate-300 px-1.5 py-0.5 rounded border border-[#3b4f54]">Business</span>
+<span class="text-[10px] text-red-400 flex items-center gap-1"><span class="material-symbols-outlined text-[10px]">schedule</span> 2h left</span>
+</div>
+</div>
+</label>
+<label class="group flex items-center gap-3 p-3 rounded-xl hover:bg-[#203236] transition-colors cursor-pointer">
+<input class="custom-checkbox h-5 w-5 rounded border-slate-600 bg-transparent text-primary focus:ring-0 focus:ring-offset-0 transition-all cursor-pointer" type="checkbox"/>
+<div class="flex-1">
+<p class="text-white text-sm font-medium group-hover:text-primary transition-colors">Call Insurance Company</p>
+<div class="flex gap-2 mt-1">
+<span class="text-[10px] bg-[#2a383b] text-slate-300 px-1.5 py-0.5 rounded border border-[#3b4f54]">Home</span>
+</div>
+</div>
+</label>
+</div>
+</div>
+<!-- Section: Waiting On -->
+<div class="mb-2">
+<h4 class="px-5 pt-4 pb-2 text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">hourglass_empty</span> Waiting On
+                                    </h4>
+<div class="px-3">
+<label class="group flex items-center gap-3 p-3 rounded-xl hover:bg-[#203236] transition-colors cursor-pointer opacity-70 hover:opacity-100">
+<input class="h-5 w-5 rounded border-slate-700 bg-slate-800 cursor-not-allowed" disabled="" type="checkbox"/>
+<div class="flex-1">
+<p class="text-slate-300 text-sm font-medium line-through decoration-slate-600">Contractor Quote</p>
+<p class="text-[10px] text-slate-500 mt-1">Pinged 2 hrs ago</p>
+</div>
+</label>
+</div>
+</div>
+<!-- Section: Upcoming (Evening) -->
+<div class="mb-2">
+<h4 class="px-5 pt-4 pb-2 text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">bedtime</span> Evening Routine
+                                    </h4>
+<div class="px-3">
+<label class="group flex items-center gap-3 p-3 rounded-xl hover:bg-[#203236] transition-colors cursor-pointer">
+<input class="custom-checkbox h-5 w-5 rounded border-slate-600 bg-transparent text-primary focus:ring-0 focus:ring-offset-0 transition-all cursor-pointer" type="checkbox"/>
+<div class="flex-1">
+<p class="text-white text-sm font-medium group-hover:text-primary transition-colors">Pack Swim Bags</p>
+<div class="flex gap-2 mt-1">
+<span class="text-[10px] bg-[#2a383b] text-slate-300 px-1.5 py-0.5 rounded border border-[#3b4f54]">Mom</span>
+</div>
+</div>
+</label>
+<label class="group flex items-center gap-3 p-3 rounded-xl hover:bg-[#203236] transition-colors cursor-pointer">
+<input class="custom-checkbox h-5 w-5 rounded border-slate-600 bg-transparent text-primary focus:ring-0 focus:ring-offset-0 transition-all cursor-pointer" type="checkbox"/>
+<div class="flex-1">
+<p class="text-white text-sm font-medium group-hover:text-primary transition-colors">Date Night Reservation Check</p>
+<div class="flex gap-2 mt-1">
+<span class="text-[10px] bg-[#2a383b] text-slate-300 px-1.5 py-0.5 rounded border border-[#3b4f54]">Spouse</span>
+</div>
+</div>
+</label>
+</div>
+</div>
+</div>
+<!-- Quick Add at bottom of task list -->
+<div class="p-4 border-t border-[#2a383b] bg-[#1a282b]">
+<div class="flex gap-2">
+<input class="flex-1 bg-[#101f22] border-none rounded-lg text-sm px-3 py-2 text-white focus:ring-1 focus:ring-primary placeholder:text-slate-600" placeholder="Add a new task..." type="text"/>
+<button class="bg-[#203236] hover:bg-primary hover:text-[#101f22] text-primary p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Insights & Memory (3 cols) -->
+<div class="lg:col-span-3 flex flex-col gap-6">
+<!-- Sallie's Corner -->
+<div class="bg-gradient-to-b from-[#1a282b] to-[#131f22] rounded-2xl border border-primary/30 shadow-[0_0_20px_rgba(19,200,236,0.1)] relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-[100px] text-primary">smart_toy</span>
+</div>
+<div class="p-5 relative z-10">
+<div class="flex items-center gap-2 mb-3">
+<div class="bg-primary/20 p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-primary text-sm">auto_awesome</span>
+</div>
+<h3 class="text-primary font-bold text-sm uppercase tracking-wide">Sallie's Insight</h3>
+</div>
+<p class="text-white text-sm leading-relaxed font-medium">
+                                    I noticed you have back-to-back meetings starting at 1:00 PM. I've blocked out a <span class="text-primary underline decoration-dotted cursor-help">15-minute buffer</span> at 12:45 PM for you to grab lunch.
+                                </p>
+<div class="mt-4 flex gap-2">
+<button class="flex-1 bg-primary text-[#101f22] text-xs font-bold py-2 rounded-lg hover:bg-white transition-colors">Thanks, Keep it</button>
+<button class="flex-1 bg-[#101f22] text-slate-400 text-xs font-bold py-2 rounded-lg hover:text-white transition-colors">Dismiss</button>
+</div>
+</div>
+</div>
+<!-- Recall / Memory Bank -->
+<div class="bg-surface-dark rounded-2xl border border-[#2a383b] flex-1 flex flex-col">
+<div class="p-5 border-b border-[#2a383b] flex justify-between items-center bg-[#1a282b]">
+<h3 class="text-white font-bold text-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400">psychology</span>
+                                    Recall
+                                </h3>
+</div>
+<div class="p-4 flex flex-col gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-500 text-lg">search</span>
+<input class="w-full bg-[#101f22] border border-[#2a383b] rounded-xl pl-10 pr-4 py-2 text-sm text-white focus:border-primary focus:ring-0 placeholder:text-slate-600 transition-colors" placeholder="Search saved info..." type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<p class="text-xs font-bold text-slate-500 uppercase mb-1">Recently Accessed</p>
+<div class="group p-3 rounded-xl bg-[#203236] hover:bg-[#2a383b] transition-colors cursor-pointer border border-transparent hover:border-primary/20">
+<div class="flex items-center justify-between mb-1">
+<span class="text-xs bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded">Kids</span>
+<span class="material-symbols-outlined text-slate-500 text-[16px] group-hover:text-primary">arrow_outward</span>
+</div>
+<p class="text-white text-sm font-medium">Toddler Shoe Sizes</p>
+<p class="text-slate-400 text-xs mt-1 truncate">Emma: Size 8, Leo: Size 5W</p>
+</div>
+<div class="group p-3 rounded-xl bg-[#203236] hover:bg-[#2a383b] transition-colors cursor-pointer border border-transparent hover:border-primary/20">
+<div class="flex items-center justify-between mb-1">
+<span class="text-xs bg-blue-500/20 text-blue-300 px-1.5 py-0.5 rounded">Gifts</span>
+<span class="material-symbols-outlined text-slate-500 text-[16px] group-hover:text-primary">arrow_outward</span>
+</div>
+<p class="text-white text-sm font-medium">Mark's Birthday Ideas</p>
+<p class="text-slate-400 text-xs mt-1 truncate">Vintage Omega watch, Leather bag...</p>
+</div>
+<div class="group p-3 rounded-xl bg-[#203236] hover:bg-[#2a383b] transition-colors cursor-pointer border border-transparent hover:border-primary/20">
+<div class="flex items-center justify-between mb-1">
+<span class="text-xs bg-green-500/20 text-green-300 px-1.5 py-0.5 rounded">Docs</span>
+<span class="material-symbols-outlined text-slate-500 text-[16px] group-hover:text-primary">arrow_outward</span>
+</div>
+<p class="text-white text-sm font-medium">Passport Numbers</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

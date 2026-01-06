@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sallie - AI Companion Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13c8ec",
+                        "primary-dark": "#0e9ab5",
+                        "peacock-purple": "#6d28d9",
+                        "peacock-green": "#059669",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#101f22",
+                        "card-dark": "#1c2628",
+                        "card-hover": "#253033"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    backgroundImage: {
+                        'leopard-pattern': 'radial-gradient(circle at center, rgba(19, 200, 236, 0.03) 0%, transparent 10%), radial-gradient(circle at center, rgba(109, 40, 217, 0.03) 0%, transparent 10%)',
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .leopard-bg {
+            background-color: #101f22;
+            background-image: radial-gradient(#18282b 15%, transparent 16%), radial-gradient(#18282b 15%, transparent 16%);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101f22; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #283639; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #13c8ec; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white min-h-screen flex flex-col overflow-hidden">
+<!-- Background Pattern Effect -->
+<div class="fixed inset-0 pointer-events-none z-0 opacity-40 leopard-bg"></div>
+<!-- Main Content Wrapper -->
+<div class="relative z-10 flex flex-col h-full grow">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#283639] px-6 py-4 bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">smart_toy</span>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">Sallie</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-white hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Home</a>
+<a class="text-[#9db4b9] hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Memories</a>
+<a class="text-[#9db4b9] hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Skills Matrix</a>
+<a class="text-[#9db4b9] hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Settings</a>
+</nav>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-[#283639]" data-alt="User profile picture of a woman" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDJQlKBdRR9KRc_MR7VprDqPuqsc_ViYmKl3mvc5evE901ebJLt3RzBTXASrqVMvrI9wOkCVJ6piN0D46ekOryAEKcrZu3iJm0_7C-ELlQaZYXqE225Gqm-xMutLL4-acBurFkqXtpS1DS-MCn-WRlA_YwO_biTOHN7Y-lUUqJhZm3ybDK9GoAybz-y26pR6DjYC4PNXdoImNP7ZwxMFMGgUHh_vMuANOm5CFv9HsEkEgytg7VbH7W5uMBd-dt9l5NeoPaimR_kEIM");'></div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<main class="flex-1 overflow-y-auto p-4 md:p-8 lg:px-12 xl:px-40">
+<div class="max-w-[1400px] mx-auto flex flex-col gap-8">
+<!-- Greeting & System Status -->
+<div class="flex flex-wrap justify-between items-end gap-4">
+<div class="flex flex-col gap-2">
+<h1 class="text-white text-3xl md:text-5xl font-black leading-tight tracking-[-0.033em]">
+                            Good Morning, <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-peacock-purple">Sarah</span>
+</h1>
+<div class="flex items-center gap-2 text-[#9db4b9] text-sm md:text-base">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+<span>System status: <span class="text-primary font-bold">Optimal</span></span>
+</div>
+</div>
+<!-- Quick Stats Row -->
+<div class="flex gap-4">
+<div class="flex items-center gap-3 px-4 py-2 rounded-full bg-[#1c2628] border border-[#283639]">
+<span class="material-symbols-outlined text-peacock-purple">psychology</span>
+<div>
+<p class="text-[10px] text-[#9db4b9] uppercase tracking-wider">Memory</p>
+<p class="text-sm font-bold text-white">+12% Growth</p>
+</div>
+</div>
+<div class="flex items-center gap-3 px-4 py-2 rounded-full bg-[#1c2628] border border-[#283639]">
+<span class="material-symbols-outlined text-peacock-green">energy_savings_leaf</span>
+<div>
+<p class="text-[10px] text-[#9db4b9] uppercase tracking-wider">Energy</p>
+<p class="text-sm font-bold text-white">98% Charged</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full">
+<!-- Left Column: Agenda & Insights (3 cols) -->
+<div class="lg:col-span-3 flex flex-col gap-6">
+<!-- Agenda Card -->
+<div class="bg-card-dark rounded-xl p-5 border border-[#283639] flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<h3 class="text-lg font-bold text-white">Upcoming</h3>
+<button class="text-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">calendar_month</span>
+</button>
+</div>
+<div class="space-y-4">
+<div class="flex gap-3 relative">
+<div class="absolute left-[5px] top-2 bottom-[-20px] w-0.5 bg-[#283639]"></div>
+<div class="w-3 h-3 rounded-full bg-primary mt-1.5 shrink-0 z-10 ring-4 ring-card-dark"></div>
+<div>
+<p class="text-sm font-semibold text-white">Board Meeting Prep</p>
+<p class="text-xs text-[#9db4b9]">10:00 AM • 45m</p>
+</div>
+</div>
+<div class="flex gap-3 relative">
+<div class="absolute left-[5px] top-2 bottom-[-20px] w-0.5 bg-[#283639]"></div>
+<div class="w-3 h-3 rounded-full bg-peacock-purple mt-1.5 shrink-0 z-10 ring-4 ring-card-dark"></div>
+<div>
+<p class="text-sm font-semibold text-white">Pick up Leo</p>
+<p class="text-xs text-[#9db4b9]">03:15 PM • School</p>
+</div>
+</div>
+<div class="flex gap-3 relative">
+<div class="w-3 h-3 rounded-full bg-peacock-green mt-1.5 shrink-0 z-10 ring-4 ring-card-dark"></div>
+<div>
+<p class="text-sm font-semibold text-white">Yoga Session</p>
+<p class="text-xs text-[#9db4b9]">06:00 PM • Home</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Insight Card -->
+<div class="bg-gradient-to-br from-[#1c2628] to-[#141b1d] rounded-xl p-5 border border-[#283639] flex flex-col gap-3 relative overflow-hidden group">
+<!-- Subtle Peacock Gradient Blob -->
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-peacock-purple/20 rounded-full blur-3xl group-hover:bg-peacock-purple/30 transition-all duration-500"></div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-xl">lightbulb</span>
+<h3 class="text-sm font-bold uppercase tracking-wider text-[#9db4b9]">Daily Insight</h3>
+</div>
+<p class="text-white font-medium leading-relaxed relative z-10">
+                                "Your productivity peaks between 9 AM and 11 AM. I've blocked this time for deep work tomorrow."
+                            </p>
+<div class="flex gap-2 mt-2">
+<button class="text-xs bg-[#283639] hover:bg-[#34464a] px-3 py-1.5 rounded-lg text-white transition-colors">Accept</button>
+<button class="text-xs text-[#9db4b9] hover:text-white px-3 py-1.5 transition-colors">Dismiss</button>
+</div>
+</div>
+</div>
+<!-- Center Column: Avatar & Action (6 cols) -->
+<div class="lg:col-span-6 flex flex-col gap-6">
+<!-- Status Pill -->
+<div class="flex justify-center">
+<div class="flex h-10 items-center justify-center gap-x-2 rounded-full bg-[#1c2628] border border-primary/30 pl-3 pr-5 shadow-[0_0_15px_rgba(19,200,236,0.15)]">
+<div class="text-primary flex items-center animate-pulse">
+<span class="material-symbols-outlined text-xl">computer</span>
+</div>
+<p class="text-white text-sm font-medium leading-normal">Focus: Optimizing Family Schedule</p>
+</div>
+</div>
+<!-- Main Avatar Card -->
+<div class="grow min-h-[400px] relative rounded-2xl overflow-hidden shadow-2xl border border-[#283639] group">
+<!-- Background Image -->
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Futuristic 3D avatar of a female AI named Sallie with glowing teal accents, set against a dark background with subtle peacock feather light refractions" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCyOG_hOcpY5gBaIvzYTqqW1lFj6soZ4VxHmbBGh53KZGN456WJmQDKArktUm2dbLnWQr_dq9-t0WXOb1bLdrmLcIt_97WyAnvOIjroZxsZPAvx0j9CyUP2yWKmzpiJqWizUKdKQJcwyrucJDjCwUNWLhS741F9Uw_xw-Bz_ADBexJtRiwr1vuuFsAJ-T7SFzkecvN5F0l5PQPDpGzrMCCMm6MMKoE7kYl2FETJz_gwT5YX_RTW2--qqLgWNnabJyPPI7C81fEcvTw");'>
+</div>
+<!-- Gradient Overlay for Text Readability & Style -->
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent opacity-90"></div>
+<div class="absolute inset-0 bg-gradient-to-tr from-peacock-purple/20 via-transparent to-primary/10 mix-blend-overlay"></div>
+<!-- Avatar Controls Overlay -->
+<div class="absolute top-4 right-4 flex flex-col gap-2">
+<button class="bg-black/40 backdrop-blur-md p-2 rounded-lg text-white hover:text-primary transition-colors border border-white/10" title="Customize Appearance">
+<span class="material-symbols-outlined">palette</span>
+</button>
+<button class="bg-black/40 backdrop-blur-md p-2 rounded-lg text-white hover:text-primary transition-colors border border-white/10" title="Switch Mode">
+<span class="material-symbols-outlined">dataset</span>
+</button>
+</div>
+<!-- Bottom Content Area -->
+<div class="absolute bottom-0 left-0 right-0 p-6 md:p-8 flex flex-col gap-4">
+<div class="flex items-end justify-between">
+<div>
+<h2 class="text-3xl font-bold text-white mb-1">Sallie</h2>
+<p class="text-primary/80 text-sm font-medium tracking-wide flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">graphic_eq</span>
+                                            LISTENING
+                                        </p>
+</div>
+</div>
+<!-- Quick Action Dock -->
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-[#9db4b9]">mic</span>
+</div>
+<input class="w-full bg-black/50 backdrop-blur-xl text-white placeholder-[#9db4b9] border border-white/10 rounded-xl py-4 pl-12 pr-12 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-lg" placeholder="Ask Sallie to schedule a meeting or find a recipe..." type="text"/>
+<button class="absolute inset-y-0 right-3 flex items-center text-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Skills & Stats (3 cols) -->
+<div class="lg:col-span-3 flex flex-col gap-6">
+<!-- Critical Stats -->
+<div class="flex flex-col gap-4">
+<div class="bg-card-dark rounded-xl p-5 border border-[#283639] flex justify-between items-center group hover:border-primary/50 transition-colors">
+<div>
+<p class="text-[#9db4b9] text-xs font-bold uppercase tracking-wider mb-1">Critical Tasks</p>
+<p class="text-2xl font-bold text-white">3 Remaining</p>
+</div>
+<div class="h-10 w-10 rounded-full bg-red-500/10 flex items-center justify-center text-red-500">
+<span class="material-symbols-outlined">priority_high</span>
+</div>
+</div>
+</div>
+<!-- Skills Matrix / Growth Map -->
+<div class="bg-card-dark rounded-xl p-5 border border-[#283639] flex flex-col gap-5 grow">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold text-white">Neural Growth</h3>
+<a class="text-xs text-primary hover:underline" href="#">View Matrix</a>
+</div>
+<!-- Visualization of Neural Growth -->
+<div class="space-y-5">
+<!-- Skill 1 -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="text-sm font-medium text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-peacock-purple">child_care</span>
+                                            Parenting Logic
+                                        </span>
+<span class="text-xs text-primary font-mono">Lvl 4</span>
+</div>
+<div class="h-1.5 w-full bg-[#283639] rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-peacock-purple to-primary w-[65%] rounded-full"></div>
+</div>
+</div>
+<!-- Skill 2 -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="text-sm font-medium text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-peacock-green">trending_up</span>
+                                            Business Strategy
+                                        </span>
+<span class="text-xs text-primary font-mono">Lvl 7</span>
+</div>
+<div class="h-1.5 w-full bg-[#283639] rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-peacock-green to-primary w-[82%] rounded-full"></div>
+</div>
+</div>
+<!-- Skill 3 -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="text-sm font-medium text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-orange-400">palette</span>
+                                            Creative Design
+                                        </span>
+<span class="text-xs text-primary font-mono">Lvl 3</span>
+</div>
+<div class="h-1.5 w-full bg-[#283639] rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-orange-400 to-red-400 w-[45%] rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Learning Suggestion Box -->
+<div class="mt-auto pt-4 border-t border-[#283639]">
+<div class="bg-primary/10 rounded-lg p-3 border border-primary/20">
+<p class="text-xs text-primary font-bold mb-1">SUGGESTED MODULE</p>
+<p class="text-sm text-white">"Advanced Negotiation Tactics"</p>
+<button class="mt-2 text-xs text-white bg-primary/80 hover:bg-primary px-3 py-1 rounded w-full transition-colors">Install Module</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

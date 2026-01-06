@@ -12,7 +12,8 @@ import {
   UserGroupIcon,
   MicrophoneIcon,
   VideoCameraIcon,
-  ChatBubbleBottomCenterTextIcon
+  ChatBubbleBottomCenterTextIcon,
+  CpuChipIcon
 } from '@heroicons/react/24/outline';
 
 interface NavigationRailProps {
@@ -29,6 +30,7 @@ export function NavigationRail({ activeSection, onSectionChange, onMessengerTogg
     { id: 'genesis', label: 'Genesis', icon: SparklesIcon },
     { id: 'heritage', label: 'Heritage', icon: DocumentTextIcon },
     { id: 'mood', label: 'Mood', icon: HeartIcon },
+    { id: 'human-level', label: 'Human-Level', icon: CpuChipIcon },
     { id: 'social', label: 'Social', icon: UserGroupIcon },
     { id: 'settings', label: 'Settings', icon: Cog6ToothIcon },
   ];

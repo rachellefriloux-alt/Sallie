@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { ChatArea } from './ChatArea';
+import { HumanLevelExpansion } from './HumanLevelExpansion';
 
 interface WorkspaceAreaProps {
   activeSection: string;
@@ -40,6 +41,8 @@ export function WorkspaceArea({ activeSection, className }: WorkspaceAreaProps) 
         return <div className="p-6"><p className="text-gray-600">Heritage Panel coming soon...</p></div>;
       case 'mood':
         return <div className="p-6"><p className="text-gray-600">Mood Panel coming soon...</p></div>;
+      case 'human-level':
+        return <HumanLevelExpansion />;
       case 'social':
         return <div className="p-6"><p className="text-gray-600">Social Panel coming soon...</p></div>;
       case 'settings':

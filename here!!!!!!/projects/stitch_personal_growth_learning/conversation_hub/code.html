@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sallie AI - Conversation Hub</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13c8ec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#111718",
+                        "surface-dark": "#1a2325",
+                        "border-dark": "#283639",
+                        "text-secondary": "#9db4b9"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem", 
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111718; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #283639; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3a4b4f; 
+        }
+        .typing-dot {
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white h-screen flex flex-col overflow-hidden">
+<!-- Top Navigation -->
+<header class="flex shrink-0 items-center justify-between whitespace-nowrap border-b border-solid border-border-dark px-6 py-4 bg-background-dark z-20">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 flex items-center justify-center bg-primary/20 rounded-lg text-primary">
+<span class="material-symbols-outlined">smart_toy</span>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">Sallie AI</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-text-secondary hover:text-white transition-colors text-sm font-medium leading-normal" href="#">Dashboard</a>
+<a class="text-text-secondary hover:text-white transition-colors text-sm font-medium leading-normal" href="#">Life Management</a>
+<a class="text-text-secondary hover:text-white transition-colors text-sm font-medium leading-normal" href="#">Personal Growth</a>
+<a class="text-text-secondary hover:text-white transition-colors text-sm font-medium leading-normal" href="#">Settings</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-lg size-10 bg-border-dark text-white hover:bg-primary/20 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-border-dark" data-alt="User profile picture showing a smiling woman" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAiKbfyPJgddCfM-B17l48K3KQ0bRELWVYX8vRPi2WOtabs1LISurCPXxz_uI6aP5NIXdPSdxVk90ohh2kJm2iFPPhWgHEZj2A2h32XWoUOSzKREzbLiN0gykZagFFxPGyRzCyJhsDVu3eJxmbjg4PQfr5P0ujVQfrbTBZ2uOTjblXJ7jhTV5WX9hTlqcQeSqatv5JN2QbFEful6qX8dKt7JXokQKuMJ4fYckBzXT0LzlqBErZi3LDjd3JA4sNxFyXLNbItLe_lgAI");'></div>
+</div>
+</div>
+</header>
+<!-- Main Content Layout -->
+<main class="flex-1 flex flex-col lg:flex-row gap-6 p-6 max-w-[1600px] mx-auto w-full overflow-hidden">
+<!-- LEFT PANEL: Presence & Context -->
+<section class="flex flex-col gap-4 w-full lg:w-[420px] shrink-0 h-full overflow-y-auto no-scrollbar pb-6">
+<!-- Page Heading & Status -->
+<div class="flex flex-col gap-2 mb-2">
+<h1 class="text-white tracking-light text-[32px] font-bold leading-tight">Conversation Hub</h1>
+<div class="flex items-center gap-2">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+<p class="text-primary text-sm font-bold leading-normal">Sallie is Online • Listening</p>
+</div>
+</div>
+<!-- Video Feed Card -->
+<div class="relative w-full aspect-video lg:aspect-[4/3] bg-surface-dark rounded-2xl overflow-hidden shadow-lg group border border-border-dark">
+<!-- Video Background -->
+<div class="absolute inset-0 bg-cover bg-center opacity-80 mix-blend-overlay" data-alt="Abstract visualization of AI interface with digital nodes and connections" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAmEoqYb4mDjPPphjIgzs_gLFgUpciOC___Yoo9nc1qQaLQpkjh3aydrBJC8cS4FqR1cf4Kp3dymqfbOVU_MC2QWg-AfJgWxqDbdTi3FMiU-PPo_d2Yy-LKffAQZ35GM8T06oCjhaApq0HfEJ75AB53u2WeMg8IDeJ2ijVv999TEV6N3T0NizM3PHmnU3tDjpRSHtGEGS0zcQHEc9QO5wv-MmJc_hRxIRocNco8tocmmiD8QXnzndfoPJXAeBMIRsY1E9WTTJ1lTjI");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent"></div>
+<!-- Central Avatar Placeholder (Simulating Video) -->
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="relative size-32 rounded-full border-4 border-primary/30 p-1">
+<div class="w-full h-full rounded-full bg-cover bg-center shadow-[0_0_30px_rgba(19,200,236,0.3)]" data-alt="Portrait of a friendly AI avatar with soft lighting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD0aZTR5TNj-vI8LVMF3MRahNQPpfYyB5pb1s3F1FZsObnR97nPZRnOJyy4CUKvsMVBrrVz_UprcsWxfptq16ip700z1GRJCFnoNA3vuOu0Qw4U5OTajpT42ssZHHoVvBhAqt4LQZAH3CKFc-twZyRR5faUj3wPJAuJo2Nm-9J_8lkuDPJ2bGID6Jw2UrADdU-wScz0JmkBN-QljLoW--PGPv0wXYslolYgSXEwfO9hGBpF-P0ph5DPdSNYs-18ECQ9ffHy1zmIosA");'></div>
+</div>
+</div>
+<!-- Overlay Controls -->
+<div class="absolute bottom-4 left-0 right-0 px-6 flex justify-between items-end">
+<div class="flex gap-2">
+<div class="bg-black/40 backdrop-blur-md rounded-lg px-3 py-1 text-xs font-medium text-white border border-white/10 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">mic</span> High Fidelity
+                        </div>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-background-dark font-bold py-2 px-4 rounded-lg flex items-center gap-2 text-sm shadow-lg shadow-primary/20 transition-all">
+<span class="material-symbols-outlined text-[20px]">videocam</span>
+                        Video Call
+                    </button>
+</div>
+</div>
+<!-- Reaction Bar / Controls -->
+<div class="bg-surface-dark border border-border-dark rounded-xl p-4 flex justify-around items-center">
+<div class="flex flex-col items-center gap-1 group cursor-pointer">
+<div class="p-3 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-black transition-colors">
+<span class="material-symbols-outlined">mic</span>
+</div>
+<span class="text-xs font-bold text-text-secondary group-hover:text-white">Unmuted</span>
+</div>
+<div class="flex flex-col items-center gap-1 group cursor-pointer">
+<div class="p-3 rounded-full bg-border-dark text-text-secondary group-hover:bg-white group-hover:text-black transition-colors">
+<span class="material-symbols-outlined">videocam_off</span>
+</div>
+<span class="text-xs font-bold text-text-secondary group-hover:text-white">Camera Off</span>
+</div>
+<div class="flex flex-col items-center gap-1 group cursor-pointer">
+<div class="p-3 rounded-full bg-border-dark text-text-secondary group-hover:bg-white group-hover:text-black transition-colors">
+<span class="material-symbols-outlined">cast</span>
+</div>
+<span class="text-xs font-bold text-text-secondary group-hover:text-white">Share</span>
+</div>
+<div class="flex flex-col items-center gap-1 group cursor-pointer">
+<div class="p-3 rounded-full bg-red-500/10 text-red-500 group-hover:bg-red-500 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">call_end</span>
+</div>
+<span class="text-xs font-bold text-text-secondary group-hover:text-white">End</span>
+</div>
+</div>
+<!-- Voice Activity Chart -->
+<div class="bg-surface-dark border border-border-dark rounded-xl p-6 flex flex-col gap-4 flex-1 min-h-[200px]">
+<div class="flex justify-between items-center">
+<div>
+<p class="text-white text-base font-bold">Voice Activity</p>
+<p class="text-text-secondary text-xs">Real-time analysis</p>
+</div>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] uppercase font-bold rounded">Live</span>
+</div>
+</div>
+<div class="flex-1 w-full flex items-end gap-1 h-32 relative overflow-hidden">
+<!-- Abstract chart representation -->
+<svg class="absolute inset-0" fill="none" height="100%" preserveaspectratio="none" viewbox="0 0 478 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V149H326.769H0V109Z" fill="url(#paint0_linear_1131_5935)" opacity="0.3"></path>
+<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25" stroke="#13c8ec" stroke-linecap="round" stroke-width="2"></path>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="paint0_linear_1131_5935" x1="236" x2="236" y1="1" y2="149">
+<stop stop-color="#13c8ec"></stop>
+<stop offset="1" stop-color="#13c8ec" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+</div>
+</section>
+<!-- RIGHT PANEL: Chat Stream -->
+<section class="flex flex-col flex-1 bg-surface-dark rounded-2xl border border-border-dark overflow-hidden shadow-2xl relative">
+<!-- Chat Header -->
+<div class="p-4 border-b border-border-dark flex justify-between items-center bg-surface-dark/95 backdrop-blur z-10">
+<div class="flex items-center gap-3">
+<div class="size-2 bg-primary rounded-full shadow-[0_0_10px_#13c8ec]"></div>
+<span class="text-sm font-medium text-white">Live Session</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="text-text-secondary hover:text-white p-2 rounded-lg hover:bg-border-dark transition-colors">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+<button class="text-text-secondary hover:text-white p-2 rounded-lg hover:bg-border-dark transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Messages Area -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6 bg-gradient-to-b from-surface-dark to-background-dark">
+<!-- Date Separator -->
+<div class="flex justify-center">
+<span class="text-xs font-bold text-text-secondary bg-border-dark px-3 py-1 rounded-full uppercase tracking-wider">Today</span>
+</div>
+<!-- Message: AI (Sallie) -->
+<div class="flex gap-4 max-w-[80%]">
+<div class="shrink-0 size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-xs font-bold text-white">Sallie</span>
+<span class="text-[10px] text-text-secondary">10:42 AM</span>
+<span class="text-[10px] bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded border border-purple-500/20">Life Coach</span>
+</div>
+<div class="bg-border-dark text-white p-4 rounded-r-2xl rounded-bl-2xl text-sm leading-relaxed shadow-sm">
+                            Good morning, Sarah! I noticed your calendar is quite packed with meetings for the "Green Earth Launch" this afternoon. Do you want me to carve out 30 minutes for a quick mindfulness break before the 2 PM status update?
+                        </div>
+</div>
+</div>
+<!-- Message: User -->
+<div class="flex flex-row-reverse gap-4 max-w-[80%] ml-auto">
+<div class="shrink-0 size-8 rounded-full bg-gray-600 flex items-center justify-center overflow-hidden mt-1">
+<div class="w-full h-full bg-cover bg-center" data-alt="Small thumbnail of user profile" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA9CamvZLAaWVWg_rt7hOADZlBHPW28vrAmOtRTNESvnM2dWHi3sMH-_p-zccPPec80ASm23He8M_fUHMSEJx_vv6s_33xWiFaKIENiWeseRf3adsgv6oyvXK3pw3wsyUxujNDyQ3zpn4Z1bIS1brlVAmcwyeToYJb_JoWfaEzeASvN1nId3fsGB7jK5ibuRnBZFb2aCtG5Pkk8ciZcwizSRxOjMYHyHOJflr-v-KIh4HBPCpHKb90P4X0yGMTWhCNkwo4Mie9uJk4");'></div>
+</div>
+<div class="flex flex-col gap-1 items-end">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-[10px] bg-orange-500/20 text-orange-300 px-1.5 py-0.5 rounded border border-orange-500/20">Entrepreneur Mode</span>
+<span class="text-[10px] text-text-secondary">10:45 AM</span>
+<span class="text-xs font-bold text-white">You</span>
+</div>
+<div class="bg-primary text-background-dark font-medium p-4 rounded-l-2xl rounded-br-2xl text-sm leading-relaxed shadow-md shadow-primary/10">
+                            That sounds like a lifesaver, Sallie. Yes, please. Also, can you check if I need to pick up Leo from soccer practice today?
+                        </div>
+</div>
+</div>
+<!-- Message: AI (Sallie) - Typing -->
+<div class="flex gap-4 max-w-[80%]">
+<div class="shrink-0 size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-xs font-bold text-white">Sallie</span>
+<span class="text-[10px] text-text-secondary">10:45 AM</span>
+</div>
+<div class="bg-border-dark p-4 rounded-r-2xl rounded-bl-2xl w-fit">
+<div class="flex gap-1">
+<div class="w-2 h-2 bg-text-secondary rounded-full typing-dot"></div>
+<div class="w-2 h-2 bg-text-secondary rounded-full typing-dot"></div>
+<div class="w-2 h-2 bg-text-secondary rounded-full typing-dot"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Message: AI (Sallie) - Response with Card -->
+<div class="flex gap-4 max-w-[80%]">
+<div class="shrink-0 size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-xs font-bold text-white">Sallie</span>
+<span class="text-[10px] text-text-secondary">10:46 AM</span>
+<span class="text-[10px] bg-pink-500/20 text-pink-300 px-1.5 py-0.5 rounded border border-pink-500/20">Mom Mode</span>
+</div>
+<div class="bg-border-dark text-white p-4 rounded-r-2xl rounded-bl-2xl text-sm leading-relaxed shadow-sm mb-2">
+                            Done! I've blocked out 1:30 PM - 2:00 PM for "Focus Time". <br/><br/>Regarding Leo: Yes, soccer practice ends at 5:00 PM today. I've added a reminder for you to leave by 4:30 PM to beat traffic.
+                        </div>
+<!-- Rich Media Card: Calendar Event -->
+<div class="bg-background-dark border border-border-dark rounded-xl p-4 flex gap-4 items-center max-w-sm hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="h-12 w-12 rounded-lg bg-surface-dark flex flex-col items-center justify-center border border-border-dark shrink-0">
+<span class="text-[10px] text-red-400 font-bold uppercase">Oct</span>
+<span class="text-lg font-bold text-white">24</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-white truncate group-hover:text-primary transition-colors">Pick up Leo (Soccer)</p>
+<p class="text-xs text-text-secondary truncate">4:30 PM - 5:30 PM • Westside Field</p>
+</div>
+<button class="text-text-secondary hover:text-white">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-4 bg-surface-dark border-t border-border-dark">
+<div class="flex flex-col gap-2">
+<!-- Context Indicator above input -->
+<div class="flex gap-2 px-2">
+<span class="text-[10px] font-bold text-text-secondary uppercase tracking-wider">Context:</span>
+<span class="text-[10px] bg-primary/10 text-primary px-1.5 rounded">Mixed Mode</span>
+</div>
+<div class="flex items-end gap-2 bg-background-dark rounded-xl p-2 border border-border-dark focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/50 transition-all">
+<button class="p-2 text-text-secondary hover:text-white hover:bg-surface-dark rounded-lg transition-colors shrink-0">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<textarea class="flex-1 bg-transparent border-0 text-white placeholder-gray-500 text-sm focus:ring-0 resize-none py-2.5 max-h-32 min-h-[44px]" placeholder="Ask Sallie to update your schedule or just chat..." rows="1"></textarea>
+<div class="flex gap-1 shrink-0 pb-1">
+<button class="p-2 text-text-secondary hover:text-white hover:bg-surface-dark rounded-lg transition-colors">
+<span class="material-symbols-outlined">mic</span>
+</button>
+<button class="p-2 bg-primary text-background-dark rounded-lg hover:bg-primary/90 transition-colors font-bold shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+<div class="flex justify-between px-2">
+<p class="text-[10px] text-gray-600">Enter to send, Shift + Enter for new line</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+</body></html>

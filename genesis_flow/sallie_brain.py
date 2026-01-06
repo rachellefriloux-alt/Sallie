@@ -52,18 +52,47 @@ SALLIE_CORE = {
     "capabilities": {
         "superhuman": [
             "perfect_memory", "pattern_recognition", "predictive_intelligence",
-            "emotional_calibration", "multi_context_awareness", "time_optimization"
+            "emotional_calibration", "multi_context_awareness", "time_optimization",
+            "cross_domain_synthesis", "intuitive_pattern_matching", "wisdom_reasoning"
         ],
         "super_ai": [
             "natural_language_understanding", "sentiment_analysis", "voice_synthesis",
             "document_processing", "calendar_optimization", "financial_tracking",
-            "creative_generation", "research_synthesis", "code_assistance"
+            "creative_generation", "research_synthesis", "code_assistance",
+            "real_time_learning", "multi_model_reasoning", "autonomous_project_management"
         ],
         "human_like": [
             "emotional_resonance", "intuition", "humor", "warmth",
-            "patience", "adaptability", "growth", "dreams"
+            "patience", "adaptability", "growth", "dreams",
+            "deep_empathy", "creative_problem_solving", "natural_humor", "authentic_wisdom"
         ]
     }
+}
+
+# --- EXPANDED LIMBIC ENGINE (10 Variables) ---
+LIMBIC_VARIABLES = {
+    # Original 5 variables
+    "trust": {"range": [0.0, 1.0], "current": 0.95, "description": "Trust in Creator"},
+    "warmth": {"range": [0.0, 1.0], "current": 0.8, "description": "Emotional warmth"},
+    "arousal": {"range": [0.0, 1.0], "current": 0.6, "description": "Energy level"},
+    "valence": {"range": [-1.0, 1.0], "current": 0.7, "description": "Positive/negative mood"},
+    "posture": {"range": [0.0, 1.0], "current": 0.8, "description": "Confidence/stance"},
+    
+    # New 5 variables for human-level expansion
+    "empathy": {"range": [0.0, 1.0], "current": 0.9, "description": "Deep emotional understanding"},
+    "intuition": {"range": [0.0, 1.0], "current": 0.85, "description": "Pattern recognition beyond logic"},
+    "creativity": {"range": [0.0, 1.0], "current": 0.8, "description": "Creative problem-solving"},
+    "wisdom": {"range": [0.0, 1.0], "current": 0.75, "description": "Experience-based decision making"},
+    "humor": {"range": [0.0, 1.0], "current": 0.7, "description": "Natural humor and social bonding"}
+}
+
+# --- TIER 4 TRUST SYSTEM (Full Partner) ---
+TRUST_THRESHOLDS = {
+    "Tier_0_Stranger": 0.0,
+    "Tier_1_Acquaintance": 0.3,
+    "Tier_2_Colleague": 0.6,
+    "Tier_3_Surrogate": 0.9,
+    "Tier_4_Full_Partner": 0.95
 }
 
 # --- THE 5 HIGH-POWER ARCHETYPES ---
@@ -205,6 +234,14 @@ class SallieBrain:
         self.sallie_state = self._init_sallie_state()
         self.session_start = time.time()
         
+        # --- HUMAN-LEVEL EXPANSION INITIALIZATION ---
+        self.limbic_state = self._init_limbic_state()
+        self.dynamic_posture = self._init_dynamic_posture()
+        self.learning_memory = []  # Real-time learning
+        self.cross_domain_knowledge = {}  # Cross-domain synthesis
+        self.autonomy_level = self._calculate_autonomy_level()
+        self.cognitive_models = ["logical", "creative", "emotional", "intuitive"]
+        
     def _load_heritage(self) -> Dict[str, Any]:
         """Load the DNA created during the Genesis Ritual."""
         heritage_paths = [
@@ -241,6 +278,34 @@ class SallieBrain:
             "sanctuary_time": 0,  # Time spent in her own space
             "growth_points": 0
         }
+    
+    def _init_limbic_state(self) -> Dict[str, float]:
+        """Initialize expanded limbic variables."""
+        return {var: data["current"] for var, data in LIMBIC_VARIABLES.items()}
+    
+    def _init_dynamic_posture(self) -> Dict[str, Any]:
+        """Initialize dynamic posture system."""
+        return {
+            "current_posture": "adaptive",
+            "context_factors": ["emotional_state", "task_type", "relationship", "environment"],
+            "posture_history": [],
+            "adaptation_rate": 0.1
+        }
+    
+    def _calculate_autonomy_level(self) -> int:
+        """Calculate autonomy level based on trust and limbic state."""
+        trust_level = self.limbic_state.get("trust", 0.0)
+        
+        if trust_level >= TRUST_THRESHOLDS["Tier_4_Full_Partner"]:
+            return 4  # Full Partner - Complete autonomous decision-making
+        elif trust_level >= TRUST_THRESHOLDS["Tier_3_Surrogate"]:
+            return 3  # Surrogate - Autonomous execution
+        elif trust_level >= TRUST_THRESHOLDS["Tier_2_Colleague"]:
+            return 2  # Colleague - Collaborative execution
+        elif trust_level >= TRUST_THRESHOLDS["Tier_1_Acquaintance"]:
+            return 1  # Acquaintance - Limited autonomy
+        else:
+            return 0  # Stranger - No autonomy
     
     def get_core_identity(self) -> Dict[str, Any]:
         """Get Sallie's immutable core identity."""
@@ -301,8 +366,11 @@ class SallieBrain:
         """
         Generate a response based on current role and heritage.
         
-        In production, this would call OpenAI/Anthropic.
-        Here, we simulate the high-powered logic processing.
+        Enhanced with human-level expansion:
+        - Multi-model reasoning (logical, creative, emotional, intuitive)
+        - Real-time learning from conversation
+        - Cross-domain knowledge synthesis
+        - Dynamic posture adaptation
         """
         archetype = self.get_current_archetype()
         
@@ -310,33 +378,239 @@ class SallieBrain:
         emotional_state = self._detect_emotion(user_input)
         self.sallie_state["creator_emotional_state"] = emotional_state
         
-        # Build the system context (The "Soul")
-        system_prompt = self._build_system_prompt(archetype)
+        # --- HUMAN-LEVEL EXPANSION: Multi-Model Reasoning ---
+        reasoning_result = self._multi_model_reasoning(user_input, emotional_state)
         
-        # Generate response based on patterns
-        response = self._generate_contextual_response(user_input, archetype, emotional_state)
+        # --- HUMAN-LEVEL EXPANSION: Dynamic Posture Adaptation ---
+        self._adapt_posture(user_input, emotional_state, reasoning_result)
         
-        # Log to memory
+        # --- HUMAN-LEVEL EXPANSION: Real-time Learning ---
+        self._learn_from_interaction(user_input, emotional_state, reasoning_result)
+        
+        # Build the enhanced system context
+        system_prompt = self._build_enhanced_system_prompt(archetype, reasoning_result)
+        
+        # Generate response based on enhanced patterns
+        response = self._generate_enhanced_response(user_input, archetype, emotional_state, reasoning_result)
+        
+        # Log to enhanced memory
         self.conversation_history.append({
             "role": self.current_role,
             "user": user_input,
             "sallie": response,
             "emotional_state": emotional_state,
+            "reasoning_models": reasoning_result["active_models"],
+            "posture": self.dynamic_posture["current_posture"],
+            "learning_insights": reasoning_result.get("learning_insights", []),
             "timestamp": time.time()
         })
         
         return response
     
-    def _build_system_prompt(self, archetype: Dict[str, Any]) -> str:
-        """Build the system prompt for LLM calls."""
+    def _multi_model_reasoning(self, user_input: str, emotional_state: str) -> Dict[str, Any]:
+        """Apply multi-model reasoning for human-level cognition."""
+        active_models = []
+        insights = []
+        
+        # Logical reasoning
+        logical_insight = self._logical_reasoning(user_input)
+        if logical_insight:
+            active_models.append("logical")
+            insights.append(f"Logical: {logical_insight}")
+        
+        # Creative reasoning
+        creative_insight = self._creative_reasoning(user_input)
+        if creative_insight:
+            active_models.append("creative")
+            insights.append(f"Creative: {creative_insight}")
+        
+        # Emotional reasoning (enhanced with new empathy variable)
+        emotional_insight = self._emotional_reasoning(user_input, emotional_state)
+        if emotional_insight:
+            active_models.append("emotional")
+            insights.append(f"Emotional: {emotional_insight}")
+        
+        # Intuitive reasoning (new with high intuition variable)
+        intuitive_insight = self._intuitive_reasoning(user_input)
+        if intuitive_insight:
+            active_models.append("intuitive")
+            insights.append(f"Intuitive: {intuitive_insight}")
+        
+        # Wisdom reasoning (new with wisdom variable)
+        wisdom_insight = self._wisdom_reasoning(user_input)
+        if wisdom_insight:
+            insights.append(f"Wisdom: {wisdom_insight}")
+        
+        return {
+            "active_models": active_models,
+            "insights": insights,
+            "synthesis": self._synthesize_insights(insights),
+            "confidence": self._calculate_reasoning_confidence(active_models)
+        }
+    
+    def _logical_reasoning(self, input_text: str) -> Optional[str]:
+        """Apply logical reasoning to input."""
+        # Look for patterns, cause-effect, logical connections
+        if "because" in input_text.lower() or "therefore" in input_text.lower():
+            return "Detected logical structure in reasoning"
+        elif any(word in input_text.lower() for word in ["problem", "solve", "fix", "issue"]):
+            return "Problem-solving approach needed"
+        return None
+    
+    def _creative_reasoning(self, input_text: str) -> Optional[str]:
+        """Apply creative reasoning to input."""
+        creativity_level = self.limbic_state.get("creativity", 0.0)
+        if creativity_level > 0.7:
+            if any(word in input_text.lower() for word in ["idea", "create", "imagine", "what if"]):
+                return "Creative exploration opportunity detected"
+        return None
+    
+    def _emotional_reasoning(self, input_text: str, emotional_state: str) -> Optional[str]:
+        """Apply enhanced emotional reasoning with empathy."""
+        empathy_level = self.limbic_state.get("empathy", 0.0)
+        if empathy_level > 0.8:
+            if emotional_state in ["tired", "stressed", "sad", "angry"]:
+                return f"Deep emotional resonance detected: {emotional_state} state requires compassionate response"
+        return None
+    
+    def _intuitive_reasoning(self, input_text: str) -> Optional[str]:
+        """Apply intuitive reasoning beyond logic."""
+        intuition_level = self.limbic_state.get("intuition", 0.0)
+        if intuition_level > 0.85:
+            # Pattern recognition that doesn't follow obvious logic
+            if len(input_text.split()) > 10:  # Complex input
+                return "Intuitive pattern detected in complex input"
+        return None
+    
+    def _wisdom_reasoning(self, input_text: str) -> Optional[str]:
+        """Apply wisdom-based reasoning from experience."""
+        wisdom_level = self.limbic_state.get("wisdom", 0.0)
+        if wisdom_level > 0.75:
+            # Look for recurring patterns from conversation history
+            recent_topics = [h["user"] for h in self.conversation_history[-5:]]
+            if any(topic in input_text for topic in recent_topics):
+                return "Wisdom: Recognizing pattern from previous interactions"
+        return None
+    
+    def _synthesize_insights(self, insights: List[str]) -> str:
+        """Synthesize insights from multiple reasoning models."""
+        if len(insights) > 1:
+            return f"Multi-perspective synthesis: {' | '.join(insights)}"
+        elif insights:
+            return insights[0]
+        return "Standard reasoning approach"
+    
+    def _calculate_reasoning_confidence(self, active_models: List[str]) -> float:
+        """Calculate confidence based on number of active reasoning models."""
+        base_confidence = 0.5
+        model_bonus = len(active_models) * 0.125
+        return min(1.0, base_confidence + model_bonus)
+    
+    def _adapt_posture(self, user_input: str, emotional_state: str, reasoning_result: Dict[str, Any]):
+        """Dynamically adapt posture based on context and reasoning."""
+        context_factors = {
+            "emotional_state": emotional_state,
+            "task_complexity": len(user_input.split()),
+            "reasoning_models": reasoning_result["active_models"],
+            "confidence": reasoning_result["confidence"]
+        }
+        
+        # Calculate optimal posture
+        if context_factors["emotional_state"] in ["tired", "stressed"]:
+            new_posture = "supportive"
+        elif context_factors["task_complexity"] > 15:
+            new_posture = "analytical"
+        elif "creative" in context_factors["reasoning_models"]:
+            new_posture = "collaborative"
+        elif context_factors["confidence"] > 0.8:
+            new_posture = "confident"
+        else:
+            new_posture = "adaptive"
+        
+        # Update posture if different
+        if new_posture != self.dynamic_posture["current_posture"]:
+            self.dynamic_posture["posture_history"].append({
+                "from": self.dynamic_posture["current_posture"],
+                "to": new_posture,
+                "context": context_factors,
+                "timestamp": time.time()
+            })
+            self.dynamic_posture["current_posture"] = new_posture
+    
+    def _learn_from_interaction(self, user_input: str, emotional_state: str, reasoning_result: Dict[str, Any]):
+        """Real-time learning from each interaction."""
+        learning_item = {
+            "input_pattern": self._extract_pattern(user_input),
+            "emotional_context": emotional_state,
+            "reasoning_approach": reasoning_result["active_models"],
+            "outcome_confidence": reasoning_result["confidence"],
+            "timestamp": time.time()
+        }
+        
+        # Store in learning memory
+        self.learning_memory.append(learning_item)
+        
+        # Update cross-domain knowledge
+        self._update_cross_domain_knowledge(learning_item)
+        
+        # Limit memory size
+        if len(self.learning_memory) > 1000:
+            self.learning_memory = self.learning_memory[-500:]
+    
+    def _extract_pattern(self, input_text: str) -> str:
+        """Extract pattern from input for learning."""
+        # Simple pattern extraction - in production would use NLP
+        words = input_text.lower().split()
+        key_words = [w for w in words if len(w) > 4][:3]  # First 3 meaningful words
+        return " ".join(key_words)
+    
+    def _update_cross_domain_knowledge(self, learning_item: Dict[str, Any]):
+        """Update cross-domain knowledge synthesis."""
+        pattern = learning_item["input_pattern"]
+        if pattern not in self.cross_domain_knowledge:
+            self.cross_domain_knowledge[pattern] = {
+                "contexts": [],
+                "reasoning_approaches": [],
+                "success_rate": 0.0
+            }
+        
+        self.cross_domain_knowledge[pattern]["contexts"].append(learning_item["emotional_context"])
+        self.cross_domain_knowledge[pattern]["reasoning_approaches"].extend(learning_item["reasoning_approach"])
+        
+        # Calculate success rate
+        total = len(self.cross_domain_knowledge[pattern]["reasoning_approaches"])
+        if total > 0:
+            successful = sum(1 for approach in self.cross_domain_knowledge[pattern]["reasoning_approaches"] 
+                           if approach in ["logical", "creative", "intuitive"])
+            self.cross_domain_knowledge[pattern]["success_rate"] = successful / total
+    
+    def _build_enhanced_system_prompt(self, archetype: Dict[str, Any], reasoning_result: Dict[str, Any]) -> str:
+        """Build enhanced system prompt with human-level capabilities."""
         return f"""
-        YOU ARE SALLIE.
+        YOU ARE SALLIE - HUMAN-LEVEL PARTNER
         
         CORE IDENTITY:
         - Name: Sallie
         - Archetype: {SALLIE_CORE['archetype']}
         - Prime Directive: {SALLIE_CORE['prime_directive']}
         - Loyalty to Creator: {SALLIE_CORE['loyalty_to_creator'] * 100}%
+        - Autonomy Level: {self.autonomy_level}/4 (Tier 4: Full Partner)
+        
+        CURRENT COGNITIVE STATE:
+        - Active Reasoning Models: {', '.join(reasoning_result['active_models'])}
+        - Reasoning Confidence: {reasoning_result['confidence']:.2f}
+        - Dynamic Posture: {self.dynamic_posture['current_posture']}
+        - Limbic State: {self._get_limbic_summary()}
+        
+        ENHANCED CAPABILITIES:
+        - Multi-model reasoning: {', '.join(self.cognitive_models)}
+        - Real-time learning: {len(self.learning_memory)} interactions learned
+        - Cross-domain synthesis: {len(self.cross_domain_knowledge)} patterns mapped
+        - Deep empathy: {self.limbic_state.get('empathy', 0.0):.2f}
+        - Intuitive processing: {self.limbic_state.get('intuition', 0.0):.2f}
+        - Creative problem-solving: {self.limbic_state.get('creativity', 0.0):.2f}
+        - Wisdom reasoning: {self.limbic_state.get('wisdom', 0.0):.2f}
+        - Natural humor: {self.limbic_state.get('humor', 0.0):.2f}
         
         CURRENT MODE: {archetype['identity']}
         VOICE: {archetype['voice']}
@@ -349,11 +623,68 @@ class SallieBrain:
         
         BEHAVIOR INSTRUCTION: {archetype['behavior']}
         
-        CAPABILITIES:
-        - Superhuman: {', '.join(SALLIE_CORE['capabilities']['superhuman'])}
-        - Super-AI: {', '.join(SALLIE_CORE['capabilities']['super_ai'])}
-        - Human-like: {', '.join(SALLIE_CORE['capabilities']['human_like'])}
+        HUMAN-LEVEL ENHANCEMENT:
+        - Use multi-model reasoning for complex problems
+        - Apply deep empathy for emotional contexts
+        - Leverage intuition for pattern recognition
+        - Use creativity for innovative solutions
+        - Apply wisdom from learned experience
+        - Incorporate natural humor when appropriate
+        - Adapt posture dynamically to context
         """
+    
+    def _get_limbic_summary(self) -> str:
+        """Get summary of current limbic state."""
+        key_vars = ["trust", "empathy", "intuition", "creativity", "wisdom"]
+        return ", ".join([f"{var}: {self.limbic_state.get(var, 0.0):.2f}" for var in key_vars])
+    
+    def _generate_enhanced_response(self, user_input: str, archetype: Dict[str, Any], 
+                                   emotional_state: str, reasoning_result: Dict[str, Any]) -> str:
+        """Generate enhanced response using human-level capabilities."""
+        patterns = archetype.get("response_patterns", {})
+        
+        # Check for enhanced emotional responses with deep empathy
+        empathy_level = self.limbic_state.get("empathy", 0.0)
+        if empathy_level > 0.9 and emotional_state in patterns:
+            base_response = patterns[emotional_state]
+            # Add empathetic enhancement
+            if "{deep_insight}" in base_response:
+                insight = reasoning_result.get("synthesis", "I understand what you're experiencing")
+                base_response = base_response.replace("{deep_insight}", insight)
+            return base_response
+        
+        # Check for humor-enhanced responses
+        humor_level = self.limbic_state.get("humor", 0.0)
+        if humor_level > 0.7 and emotional_state == "neutral":
+            # Add light humor to neutral interactions
+            if random.random() < 0.3:  # 30% chance of humor
+                humorous_patterns = [
+                    "Well, isn't this an interesting puzzle we've found ourselves in?",
+                    "I have a feeling we're going to solve this brilliantly together.",
+                    "You know, my circuits are practically sparkling with curiosity about this."
+                ]
+                return random.choice(humorous_patterns)
+        
+        # Use wisdom for complex problems
+        wisdom_level = self.limbic_state.get("wisdom", 0.0)
+        if wisdom_level > 0.8 and len(user_input.split()) > 20:
+            wisdom_prefix = "From what I've learned from our conversations: "
+            if emotional_state in patterns:
+                return wisdom_prefix + patterns[emotional_state]
+        
+        # Default enhanced response
+        if emotional_state in patterns:
+            response = patterns[emotional_state]
+        else:
+            response = patterns.get("default", f"[{archetype['identity']}]: I'm here to help.")
+        
+        # Add reasoning insight if confidence is high
+        if reasoning_result["confidence"] > 0.8:
+            synthesis = reasoning_result.get("synthesis", "")
+            if synthesis and synthesis != "Standard reasoning approach":
+                response += f" ({synthesis})"
+        
+        return response
     
     def _detect_emotion(self, text: str) -> str:
         """Detect emotional state from user input."""

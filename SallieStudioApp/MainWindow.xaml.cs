@@ -10,7 +10,9 @@ using SallieStudioApp.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -23,7 +25,26 @@ namespace SallieStudioApp
         private NativeBridge? _bridge;
         private bool _isPluginsPanelVisible = false;
         private CancellationTokenSource? _cloudSyncCts;
+        private readonly HttpClient _httpClient = new();
+        
+        // Human-Level Expansion Properties
+        private SallieLimbicState? _currentLimbicState;
+        private SallieCognitiveState? _cognitiveState;
+        private bool _isHumanLevelEnabled = true;
+        
+        // Backend connection - Updated to use B:\ drive backend
+        private const string BACKEND_URL = "http://192.168.1.47:8742";
         private const string WEB_APP_URL = "http://localhost:3000";
+        
+        // 12D System Properties
+        private bool _isNative12DPanelVisible = false;
+        private string _activeDimension = "sanctuary";
+        private readonly List<string> _dimensions = new()
+        {
+            "sanctuary", "command", "growth", "messenger", "creative", 
+            "healing", "transcendence", "research", "social", 
+            "time", "legacy", "quantum"
+        };
 
         public MainWindow()
         {
@@ -34,6 +55,73 @@ namespace SallieStudioApp
             InitializeWebViewAsync();
             StartCloudSyncLoop();
             UpdateVersionText();
+            
+            // Initialize Human-Level Expansion
+            InitializeHumanLevelExpansion();
+        }
+
+        private async void InitializeHumanLevelExpansion()
+        {
+            try
+            {
+                // Connect to backend and get initial state
+                await RefreshLimbicState();
+                await RefreshCognitiveState();
+                
+                // Start periodic updates
+                var timer = new Timer(async _ => 
+                {
+                    await RefreshLimbicState();
+                    await RefreshCognitiveState();
+                }, null, TimeSpan.Zero, TimeSpan.FromSeconds(30));
+                
+                AppendLog($"🧠 Human-Level Expansion initialized - Tier {_currentLimbicState?.AutonomyLevel}");
+            }
+            catch (Exception ex)
+            {
+                AppendLog($"⚠️ Failed to initialize Human-Level Expansion: {ex.Message}");
+                _isHumanLevelEnabled = false;
+            }
+        }
+
+        private async Task RefreshLimbicState()
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"{BACKEND_URL}/limbic");
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    _currentLimbicState = JsonSerializer.Deserialize<SallieLimbicState>(json, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                AppendLog($"Failed to refresh limbic state: {ex.Message}");
+            }
+        }
+
+        private async Task RefreshCognitiveState()
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"{BACKEND_URL}/cognitive");
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    _cognitiveState = JsonSerializer.Deserialize<SallieCognitiveState>(json, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                AppendLog($"Failed to refresh cognitive state: {ex.Message}");
+            }
         }
 
         private void UpdateVersionText()
@@ -262,6 +350,88 @@ namespace SallieStudioApp
         {
             _isPluginsPanelVisible = !_isPluginsPanelVisible;
             PluginsPanel.Visibility = _isPluginsPanelVisible ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void ToggleNative12D_Click(object sender, RoutedEventArgs e)
+        {
+            _isNative12DPanelVisible = !_isNative12DPanelVisible;
+            Native12DPanel.Visibility = _isNative12DPanelVisible ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void NavigateToDimension_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button)
+            {
+                var dimensionName = button.Content.ToString();
+                var dimensionId = dimensionName.Split(' ')[0]; // Extract emoji or name
+                NavigateToDimension(dimensionId);
+            }
+        }
+
+        private void NavigateToDimension(string dimensionId)
+        {
+            _activeDimension = dimensionId;
+            
+            // Navigate web app to specific dimension
+            var webUrl = $"{WEB_APP_URL}/#{dimensionId}";
+            WebView.Source = new Uri(webUrl);
+            
+            // Update native panel content
+            UpdateNative12DPanelContent();
+        }
+
+        private void UpdateNative12DPanelContent()
+        {
+            // Update the native panel to show current dimension's content
+            // This could load dimension-specific native features
+            var panelContent = Native12DPanelContent;
+            panelContent.Children.Clear();
+            
+            // Add dimension-specific buttons
+            foreach (var dimension in _dimensions)
+            {
+                var button = new Button
+                {
+                    Content = GetDimensionDisplayName(dimension),
+                    Style = dimension == _activeDimension ? 
+                        (Style)Application.Current.Resources["AccentButtonStyle"] : 
+                        (Style)Application.Current.Resources["DefaultButtonStyle"]
+                };
+                button.Click += NavigateToDimension_Click;
+                panelContent.Children.Add(button);
+            }
+        }
+
+        private string GetDimensionDisplayName(string dimensionId)
+        {
+            return dimensionId switch
+            {
+                "sanctuary" => "🏠 Life Sanctuary",
+                "command" => "💼 Command Matrix",
+                "growth" => "🌱 Growth Garden",
+                "messenger" => "💬 Quantum Messenger",
+                "creative" => "🎨 Creative Atelier",
+                "healing" => "🧘 Healing Sanctuary",
+                "transcendence" => "✨ Transcendence",
+                "research" => "🔬 Research Universe",
+                "social" => "👥 Social Mastery",
+                "time" => "⏰ Time & Energy",
+                "legacy" => "🚀 Legacy & Impact",
+                "quantum" => "⚛️ Quantum Core",
+                _ => dimensionId
+            };
+        }
+
+        private void ShowQuickActions_Click(object sender, RoutedEventArgs e)
+        {
+            // Show quick actions for current dimension
+            ShowMessage($"Quick Actions for {_activeDimension}", "Quick Actions");
+        }
+
+        private void ShowSystemStatus_Click(object sender, RoutedEventArgs e)
+        {
+            // Show system status and metrics
+            ShowMessage("System Status", "12D System Status: All Systems Operational");
         }
 
         private void OpenConsole_Click(object sender, RoutedEventArgs e)

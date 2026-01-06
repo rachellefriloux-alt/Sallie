@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sallie's Avatar Customization</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13c8ec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#111718",
+                        "surface-dark": "#1a2629",
+                        "border-dark": "#283639",
+                        "text-secondary": "#9db4b9"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for the grid area */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #111718; 
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #283639; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #3b4f54; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white overflow-hidden h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-dark bg-background-dark px-6 py-3 shrink-0">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 flex items-center justify-center bg-primary/20 rounded-lg text-primary">
+<span class="material-symbols-outlined">smart_toy</span>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Sallie</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-text-secondary hover:text-white transition-colors text-sm font-medium leading-normal" href="#">Dashboard</a>
+<a class="text-text-secondary hover:text-white transition-colors text-sm font-medium leading-normal" href="#">Growth</a>
+<a class="text-text-secondary hover:text-white transition-colors text-sm font-medium leading-normal" href="#">Organization</a>
+<a class="text-white text-sm font-medium leading-normal border-b-2 border-primary pb-0.5" href="#">Avatar</a>
+</nav>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-border-dark" data-alt="User profile picture showing a smiling woman" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB-n46FL5yThnW2Fv6Z0F7BUYnNwzunEZxrDZuLjGtsz4j0Wna9c5OrKdJEVha5IsHqtbStHhVN9aRpXAVK_5ry9IZY0D0MaYvTenYX_ivo4B48zh0JEIiv8stjCEavXwyiCfRDM45BEyGF3M6lWhOVt9sUHu0a2e4-4dx4l1qW_qi1cRD7a2l_yXJG6TbOgosc8zmRTojSVeARID3y0Bcl5S97lHSzu7979KslObAvz3F-bDnfGbkr8cK6IEAyKL_o2RApSrsKy7U");'></div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex overflow-hidden">
+<!-- Left Panel: Avatar Preview (65%) -->
+<section class="flex-1 relative bg-[#0d1213] flex flex-col items-center justify-center p-8 group">
+<!-- Context Header Overlay -->
+<div class="absolute top-6 left-6 z-10">
+<p class="text-white text-3xl font-black leading-tight tracking-[-0.033em]">Visual Interface</p>
+<p class="text-text-secondary text-sm font-normal mt-1">Customize your companion's appearance.</p>
+</div>
+<!-- Avatar Viewport -->
+<div class="relative w-full h-full max-w-4xl flex items-center justify-center">
+<!-- 3D Model Placeholder -->
+<div class="w-full h-full bg-center bg-no-repeat bg-contain" data-alt="Full body 3D render of a futuristic female AI avatar with glowing accents" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDRRd8EUIe_OCaqNsReVhKvp-pvsFMk954HmWvpDZgUMfEQvOy2-Nvqb_VCAy6Jx_CmycjVUux1IX2oP3cUDjWDjxcbrvsFu5jr7YU-nS9mO_FqS0IEkR_VkA0Taf-fmlf_1Lzjgg0tz2ozH-44mGqBT8l11P1eLcCPQ86fHhpJ7MfY3_NNUK7iyI9SYdikCyxTWTbV231B7iz1Igzg7vtvPefstoaRjKPJNvdCGXVzMMBX4kMdSkoEEy956D_VtOIWMVlb2LHOVR4"); mask-image: linear-gradient(to bottom, black 80%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);'>
+</div>
+<!-- Environment Controls -->
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-surface-dark/80 backdrop-blur-md p-2 rounded-xl border border-border-dark shadow-2xl">
+<button class="size-10 flex items-center justify-center text-text-secondary hover:text-white hover:bg-white/10 rounded-lg transition-colors" title="Rotate Left">
+<span class="material-symbols-outlined">rotate_left</span>
+</button>
+<button class="size-10 flex items-center justify-center text-text-secondary hover:text-white hover:bg-white/10 rounded-lg transition-colors" title="Zoom Out">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<span class="text-xs font-mono text-text-secondary px-2">100%</span>
+<button class="size-10 flex items-center justify-center text-text-secondary hover:text-white hover:bg-white/10 rounded-lg transition-colors" title="Zoom In">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="size-10 flex items-center justify-center text-text-secondary hover:text-white hover:bg-white/10 rounded-lg transition-colors" title="Rotate Right">
+<span class="material-symbols-outlined">rotate_right</span>
+</button>
+<div class="w-px h-6 bg-border-dark mx-1"></div>
+<button class="size-10 flex items-center justify-center text-primary bg-primary/10 rounded-lg border border-primary/20 transition-colors" title="Fullscreen">
+<span class="material-symbols-outlined">fullscreen</span>
+</button>
+</div>
+<!-- Mood Presets (Floating Left) -->
+<div class="absolute left-0 bottom-10 flex flex-col gap-3">
+<p class="text-xs font-bold text-text-secondary uppercase tracking-wider pl-1 mb-1">Mood Preset</p>
+<button class="flex items-center gap-3 bg-surface-dark/50 hover:bg-surface-dark border border-transparent hover:border-primary/50 p-2 pr-4 rounded-lg transition-all group/mood">
+<div class="size-8 bg-blue-500/20 text-blue-400 rounded flex items-center justify-center group-hover/mood:bg-blue-500 group-hover/mood:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">business_center</span>
+</div>
+<span class="text-sm font-medium">Business Mode</span>
+</button>
+<button class="flex items-center gap-3 bg-surface-dark/50 hover:bg-surface-dark border border-transparent hover:border-primary/50 p-2 pr-4 rounded-lg transition-all group/mood">
+<div class="size-8 bg-pink-500/20 text-pink-400 rounded flex items-center justify-center group-hover/mood:bg-pink-500 group-hover/mood:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</div>
+<span class="text-sm font-medium">Supportive</span>
+</button>
+<button class="flex items-center gap-3 bg-surface-dark/50 hover:bg-surface-dark border border-transparent hover:border-primary/50 p-2 pr-4 rounded-lg transition-all group/mood">
+<div class="size-8 bg-purple-500/20 text-purple-400 rounded flex items-center justify-center group-hover/mood:bg-purple-500 group-hover/mood:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">palette</span>
+</div>
+<span class="text-sm font-medium">Creative</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Right Panel: Customization (35%) -->
+<aside class="w-[400px] flex flex-col bg-surface-dark border-l border-border-dark shrink-0 z-20 shadow-2xl">
+<!-- Category Tabs -->
+<div class="px-2 pt-2 border-b border-border-dark bg-background-dark/50 backdrop-blur-sm">
+<div class="flex justify-between gap-1 overflow-x-auto pb-0 hide-scrollbar">
+<button class="flex flex-col items-center justify-center min-w-[64px] pb-3 pt-2 group">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white mb-1">accessibility_new</span>
+<span class="text-xs font-bold text-text-secondary group-hover:text-white">Body</span>
+<div class="h-0.5 w-0 group-hover:w-full bg-primary mt-2 transition-all"></div>
+</button>
+<button class="flex flex-col items-center justify-center min-w-[64px] pb-3 pt-2 group">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white mb-1">face</span>
+<span class="text-xs font-bold text-text-secondary group-hover:text-white">Face</span>
+<div class="h-0.5 w-0 group-hover:w-full bg-primary mt-2 transition-all"></div>
+</button>
+<button class="flex flex-col items-center justify-center min-w-[64px] pb-3 pt-2 group relative">
+<span class="material-symbols-outlined text-primary mb-1 fill-current">checkroom</span>
+<span class="text-xs font-bold text-white">Outfit</span>
+<div class="h-0.5 w-full bg-primary mt-2"></div>
+</button>
+<button class="flex flex-col items-center justify-center min-w-[64px] pb-3 pt-2 group">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white mb-1">cut</span>
+<span class="text-xs font-bold text-text-secondary group-hover:text-white">Hair</span>
+<div class="h-0.5 w-0 group-hover:w-full bg-primary mt-2 transition-all"></div>
+</button>
+<button class="flex flex-col items-center justify-center min-w-[64px] pb-3 pt-2 group">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white mb-1">eyeglasses</span>
+<span class="text-xs font-bold text-text-secondary group-hover:text-white">Access.</span>
+<div class="h-0.5 w-0 group-hover:w-full bg-primary mt-2 transition-all"></div>
+</button>
+</div>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-5">
+<!-- Sub-Category Filters -->
+<div class="flex gap-2 mb-6 overflow-x-auto pb-2">
+<button class="px-3 py-1.5 rounded-full bg-primary text-background-dark text-xs font-bold whitespace-nowrap">All</button>
+<button class="px-3 py-1.5 rounded-full bg-border-dark text-text-secondary hover:text-white hover:bg-white/10 text-xs font-bold whitespace-nowrap transition-colors">Business</button>
+<button class="px-3 py-1.5 rounded-full bg-border-dark text-text-secondary hover:text-white hover:bg-white/10 text-xs font-bold whitespace-nowrap transition-colors">Casual</button>
+<button class="px-3 py-1.5 rounded-full bg-border-dark text-text-secondary hover:text-white hover:bg-white/10 text-xs font-bold whitespace-nowrap transition-colors">Evening</button>
+</div>
+<!-- Featured Section (User Preferences) -->
+<div class="mb-8">
+<div class="flex items-center justify-between mb-3">
+<h3 class="text-sm font-bold text-white uppercase tracking-wider">Your Favorites</h3>
+<span class="text-xs text-primary cursor-pointer hover:underline">Edit Preferences</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="group cursor-pointer relative rounded-xl overflow-hidden aspect-[4/3] border-2 border-primary shadow-[0_0_15px_rgba(19,200,236,0.3)]">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Close up texture of leopard print fabric" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDUsQ-dmOL98leM9WRXAY5Fr1sZBVDfjPezZ052JMXY86kc8-_502gtY4uQ8gMzpC1lo-c-NfwcxFLkMRUWR8eVtC-VMVdF5e81c4TrP8tjlSC8H8hEs9AHmLCtz-V5aNObhP41DTxo_xkqrvDADW3xGzn1d8VYd-S3yYQG3AzKXLIkACZGWs-OHWRqcgrhxU1LAW4oN3pg7hMMxGinejIHTG1Oz3XXFRFQp1Kzjob8mHsL6kiy5I2JOd6RqzwV1xpp4SpZfh3ugBE");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-3">
+<span class="text-white font-bold text-sm">Leopard Luxe</span>
+<span class="text-primary text-xs">Active Pattern</span>
+</div>
+</div>
+<div class="group cursor-pointer relative rounded-xl overflow-hidden aspect-[4/3] border border-border-dark hover:border-primary/50 transition-colors">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Abstract peacock feather colors gradient texture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuArE8SAwDZk0wxoEPwW265_FIU7i_ussjTlYi-PrHpqZdXrKBhmniHfbol68lzvweDYepR9tuvbVwTmw7H8lyOdmSjKIE87kTaVjNALqtJIAad2PtyeCpBo_nPN21GU_ipeLT3PizGvRsw7TVW4ca3kC_EjUu4rsNXze-4PHocA8e_Y5zA3eF0qG6MZCzMm-ValdDvw8ry3aM8gWLWU55cQxiTripQRTBj0jAcfnOP4hgQKfywxRdJPaTpaUxLHwVf3xfSxUAwCdS8");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-3">
+<span class="text-white font-bold text-sm">Peacock Teal</span>
+<span class="text-text-secondary text-xs">Color Palette</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Wardrobe Grid -->
+<div class="mb-4">
+<h3 class="text-sm font-bold text-white uppercase tracking-wider mb-3">Wardrobe</h3>
+<div class="grid grid-cols-3 gap-3">
+<!-- Item 1 -->
+<div class="flex flex-col gap-1 group cursor-pointer">
+<div class="aspect-square rounded-lg bg-[#283639] relative overflow-hidden ring-1 ring-white/10 group-hover:ring-primary/50 transition-all">
+<div class="w-full h-full bg-center bg-cover" data-alt="Modern white blazer for business attire" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDqZztywgpDQ-O2zaKNce6107wmKfcEC_Jewwfg-8NaqJlqrGePzVPInwd6A7lIzhTbNxKkLepPtnPUr5fu87Nb-oqShLnXoAuUIW85qJ7dsTmW32TjdMyd1PyA1WzN1IsLFLDMesXcq21zu9hSjNbvpnn47yWBuFVFIMCXFuRG2jiISYf9EByoz3cEQ9jCrSHj3Ygq-ICINXQm5wfneHYa1Pkg6tkF9y3sEskGNfL79geeM0Kptv8CDsKhbHKHUYw7l7lsN8RCKho");'></div>
+<div class="absolute top-1 right-1 bg-black/60 rounded p-0.5 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+</div>
+<span class="text-xs text-text-secondary truncate group-hover:text-primary">Struct. Blazer</span>
+</div>
+<!-- Item 2 -->
+<div class="flex flex-col gap-1 group cursor-pointer">
+<div class="aspect-square rounded-lg bg-[#283639] relative overflow-hidden ring-1 ring-white/10 group-hover:ring-primary/50 transition-all">
+<div class="w-full h-full bg-center bg-cover opacity-80" data-alt="Casual denim jacket" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC9aK29tA0Lr2BSu7Ppji041wyOUssa-PMzLZr_rah2Slm8hB3MKw5-h5wg66WwV1vhAR4_7eqVK8PYGajezFRaE6MQaq5c_BRFSSiNrF3mIn5WX91rvNoB3xE8jBLsfaCC9aqTovnEoXHhYK9u4QXAr8QhfiwQ0kS1D7kMYC7EBv2XgdaBevr3cXvCJdI9aVqL0Y6nPkQi9N0hUI6hO1S-srLy4la6Rhs8lA87JTI6b9Qvynw6iSZhJZS46hfYRjctxUgNkxDV7Po");'></div>
+</div>
+<span class="text-xs text-text-secondary truncate group-hover:text-primary">Denim Shift</span>
+</div>
+<!-- Item 3 -->
+<div class="flex flex-col gap-1 group cursor-pointer">
+<div class="aspect-square rounded-lg bg-[#283639] relative overflow-hidden ring-1 ring-white/10 group-hover:ring-primary/50 transition-all">
+<div class="w-full h-full bg-center bg-cover" data-alt="Elegant black evening dress texture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC6iiu0d2znLKEt6kluNolw9y4NCLZaJls6SZYWjye_whP07uyVOYpx7qhlhTiCaUEW3YQmlbco8H3li9buadFo_Hk8oF9xLh_LYWqbW9qvI5MZmWlxC6iEVMxFOub2orKiO-b0YxqOLNzHIaCsxCaTInXB24ITxSMLhXy06RfsX2ld6PrWbtLHw9RNHUxheriMs96Yj6lx1aBqDlMfcEjEaKaj4_1bCpIk8b2pThBoejqXvOhfsHX3fJXaYojqsHQaJiJ0OYecdSc");'></div>
+</div>
+<span class="text-xs text-text-secondary truncate group-hover:text-primary">Evening Gown</span>
+</div>
+<!-- Item 4 (Locked) -->
+<div class="flex flex-col gap-1 group cursor-pointer opacity-50">
+<div class="aspect-square rounded-lg bg-[#283639] relative overflow-hidden ring-1 ring-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-text-secondary">lock</span>
+</div>
+<span class="text-xs text-text-secondary truncate">Futuristic Suit</span>
+</div>
+<!-- Item 5 -->
+<div class="flex flex-col gap-1 group cursor-pointer">
+<div class="aspect-square rounded-lg bg-[#283639] relative overflow-hidden ring-1 ring-white/10 group-hover:ring-primary/50 transition-all">
+<div class="w-full h-full bg-center bg-cover" data-alt="Cyberpunk style jacket with neon accents" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAiXArltRAy4Vc87DIdnV2zus5uZZgCkfSSs_8birANZQKezSr_IV_3e3mnUjROqaKVMK5FBbOPQjhhW0nTk3RgFHmnXR5hzHfaMUgYWwBfKNbwgxabZPlIP2owML7kenaM7GVyIEBfGCofOP0UW6jCfLxdCOITPy_I0JrmEJwVzAQBOe-78whsqc2nOHCPJmzvds9JJ6E7cHrG5V_gbOeADLcvQcApWg-xPXQM2_dzhUm1Nis_el60djxvoa8FAB6cAhgbaDyZtCA");'></div>
+</div>
+<span class="text-xs text-text-secondary truncate group-hover:text-primary">Neo-Tokyo Fit</span>
+</div>
+<!-- Item 6 -->
+<div class="flex flex-col gap-1 group cursor-pointer">
+<div class="aspect-square rounded-lg bg-[#283639] relative overflow-hidden ring-1 ring-white/10 group-hover:ring-primary/50 transition-all">
+<div class="w-full h-full bg-center bg-cover" data-alt="Comfortable yoga outfit texture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC9djle2aQha1_94fb8whEtWbe9emCiek-XC8Ft0jPFoZ_oUla2n6B0Yf-n2JG7vDG731tbyT6mZq2Gg-4Q2YeCUhZcPJtp1zFT8M9Cizq57XQlCYMaFDnCnXiXQrOSqB47CEZPB4RbvvmRu-VdHLsmoBKCw6lNUaNGVyZY-OSKjIDvbrI6PiCVJdK7RZf6tsEqEKtD6PfbAQRLtN3_JzHJ5h-B6FqG3z6yo7Koev2KLWUUSwFycHVU-kuVLwO7oO0shdzYrvn1KC4");'></div>
+</div>
+<span class="text-xs text-text-secondary truncate group-hover:text-primary">Yoga Flow</span>
+</div>
+</div>
+</div>
+<!-- Customization Sliders -->
+<div class="p-4 bg-background-dark/30 rounded-xl border border-border-dark space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-xs font-bold text-text-secondary uppercase">Pattern Scale</span>
+<span class="text-xs text-white font-mono">1.2x</span>
+</div>
+<input class="w-full h-1 bg-border-dark rounded-lg appearance-none cursor-pointer accent-primary" max="100" min="0" type="range" value="70"/>
+<div class="flex justify-between items-center">
+<span class="text-xs font-bold text-text-secondary uppercase">Hue Shift</span>
+<div class="w-4 h-4 rounded-full bg-primary shadow-[0_0_10px_#13c8ec]"></div>
+</div>
+<div class="w-full h-2 rounded-full bg-gradient-to-r from-red-500 via-green-500 to-blue-500 cursor-pointer relative">
+<div class="absolute top-1/2 -translate-y-1/2 left-1/3 w-3 h-3 bg-white rounded-full shadow-md border border-gray-300"></div>
+</div>
+</div>
+<!-- Context Link Feature -->
+<div class="mt-8 p-4 bg-primary/10 rounded-xl border border-primary/30 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">schedule</span>
+<div>
+<h4 class="text-sm font-bold text-white">Context Link</h4>
+<p class="text-xs text-text-secondary mt-1">This outfit is automatically applied during <span class="text-white font-medium">Work Hours (9-5)</span>.</p>
+<button class="text-xs text-primary font-bold mt-2 hover:underline">Change Settings</button>
+</div>
+</div>
+</div>
+<!-- Action Bar Footer -->
+<div class="p-4 border-t border-border-dark bg-background-dark/80 backdrop-blur-md flex flex-col gap-3">
+<div class="flex gap-3">
+<button class="flex-1 h-10 flex items-center justify-center gap-2 rounded-lg border border-border-dark text-text-secondary hover:text-white hover:bg-white/5 transition-colors text-sm font-bold">
+<span class="material-symbols-outlined text-[18px]">shuffle</span>
+                        Randomize
+                    </button>
+<button class="h-10 w-10 flex items-center justify-center rounded-lg border border-border-dark text-text-secondary hover:text-white hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-[18px]">undo</span>
+</button>
+</div>
+<button class="w-full h-11 flex items-center justify-center gap-2 rounded-lg bg-primary text-background-dark hover:bg-cyan-400 transition-colors text-sm font-bold shadow-[0_0_20px_rgba(19,200,236,0.2)]">
+<span class="material-symbols-outlined text-[20px]">save</span>
+                    Save Configuration
+                </button>
+</div>
+</aside>
+</main>
+</body></html>
