@@ -1,0 +1,361 @@
+<UserControl
+    x:Class="SallieStudioApp.Components.MessageBookmarks"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{StaticResource WindowBackground}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0"
+                Background="{StaticResource PrimaryBrush}"
+                Padding="20,16"
+                CornerRadius="0,0,0,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Bookmarks"
+                               FontSize="24"
+                               FontWeight="SemiBold"
+                               Foreground="White"
+                               Margin="0,0,0,4"/>
+                    <TextBlock Text="Saved messages & notes"
+                               FontSize="14"
+                               Foreground="#fef3c7"/>
+                </StackPanel>
+
+                <Button Grid.Column="1"
+                        x:Name="AddBookmarkButton"
+                        Content="➕ Add Bookmark"
+                        Background="White"
+                        Foreground="{StaticResource TextPrimary}"
+                        BorderThickness="0"
+                        Padding="16,8"
+                        FontSize="14"
+                        Click="AddBookmarkButton_Click"/>
+            </Grid>
+        </Border>
+
+        <!-- Main Content -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Sidebar -->
+            <Border Grid.Column="0"
+                    Background="{StaticResource CardBackground}"
+                    BorderThickness="0,0,1,0"
+                    BorderBrush="#e5e7eb"
+                    Padding="16">
+                <StackPanel>
+                    <!-- Search -->
+                    <TextBlock Text="Search Bookmarks"
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimary}"
+                               Margin="0,0,0,12"/>
+                    
+                    <Border Background="#f9fafb"
+                            CornerRadius="8"
+                            Padding="12,8"
+                            Margin="0,0,0,16">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox x:Name="SearchTextBox"
+                                     Text="{Binding SearchQuery, Mode=TwoWay}"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     FontSize="14"
+                                     PlaceholderText="Search..."
+                                     KeyUp="SearchTextBox_KeyUp"
+                                     Grid.Column="0"/>
+
+                            <TextBlock Grid.Column="1"
+                                       Text="🔍"
+                                       FontSize="14"
+                                       VerticalAlignment="Center"
+                                       Margin="8,0,0,0"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Categories -->
+                    <TextBlock Text="Categories"
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimary}"
+                               Margin="0,0,0,12"/>
+                    
+                    <ItemsControl x:Name="CategoriesList">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding Name}"
+                                        Background="{Binding IsSelected, Converter={StaticResource BoolToBrushConverter}}"
+                                        Foreground="{Binding IsSelected, Converter={StaticResource BoolToForegroundConverter}}"
+                                        BorderThickness="0"
+                                        Padding="12,8"
+                                        FontSize="12"
+                                        Margin="0,0,0,8"
+                                        Click="CategoryButton_Click"
+                                        Tag="{Binding Id}"
+                                        HorizontalAlignment="Stretch"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- Stats -->
+                    <TextBlock Text="Statistics"
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimary}"
+                               Margin="0,16,0,12"/>
+                    
+                    <StackPanel>
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Grid.Column="0"
+                                       Text="Total Bookmarks"
+                                       FontSize="12"
+                                       Foreground="{StaticResource TextSecondary}"/>
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding TotalBookmarks}"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextPrimary}"/>
+                        </Grid>
+                        
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Grid.Column="0"
+                                       Text="This Week"
+                                       FontSize="12"
+                                       Foreground="{StaticResource TextSecondary}"/>
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding WeeklyBookmarks}"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextPrimary}"/>
+                        </Grid>
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Grid.Column="0"
+                                       Text="Archived"
+                                       FontSize="12"
+                                       Foreground="{StaticResource TextSecondary}"/>
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding ArchivedBookmarks}"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextPrimary}"/>
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Bookmarks List -->
+            <ScrollViewer Grid.Column="1"
+                          VerticalScrollBarVisibility="Auto"
+                          Padding="20,0,20,20">
+                <StackPanel>
+                    <!-- Results Count -->
+                    <TextBlock x:Name="ResultsCountText"
+                               Text=""
+                               FontSize="14"
+                               Foreground="{StaticResource TextSecondary}"
+                               Margin="0,0,0,16"
+                               Visibility="Collapsed"/>
+
+                    <!-- Bookmarks Items -->
+                    <ItemsControl x:Name="BookmarksList">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="{StaticResource CardBackground}"
+                                        CornerRadius="12"
+                                        Padding="16"
+                                        Margin="0,0,0,12"
+                                        Cursor="Hand">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- Header -->
+                                        <Grid Grid.Row="0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Text="{Binding SenderName}"
+                                                           FontSize="14"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="{StaticResource TextPrimary}"/>
+                                                <TextBlock Text="{Binding FormattedTimestamp}"
+                                                           FontSize="12"
+                                                           Foreground="{StaticResource TextSecondary}"/>
+                                            </StackPanel>
+
+                                            <StackPanel Grid.Column="1"
+                                                        Orientation="Horizontal">
+                                                <Button Content="📁"
+                                                        Background="Transparent"
+                                                        BorderThickness="0"
+                                                        Padding="8"
+                                                        FontSize="12"
+                                                        Click="ArchiveBookmark_Click"
+                                                        Tag="{Binding Id}"/>
+                                                <Button Content="🗑️"
+                                                        Background="Transparent"
+                                                        BorderThickness="0"
+                                                        Padding="8"
+                                                        FontSize="12"
+                                                        Click="RemoveBookmark_Click"
+                                                        Tag="{Binding Id}"/>
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <!-- Message -->
+                                        <TextBlock Grid.Row="1"
+                                                   Text="{Binding MessageText}"
+                                                   FontSize="14"
+                                                   Foreground="{StaticResource TextPrimary}"
+                                                   TextWrapping="Wrap"
+                                                   Margin="0,8,0,8"
+                                                   MaxLines="3"/>
+
+                                        <!-- Note -->
+                                        <Border Grid.Row="2"
+                                                Background="#fef3c7"
+                                                CornerRadius="8"
+                                                Padding="12"
+                                                Visibility="{Binding HasNote, Converter={StaticResource BoolToVisibilityConverter}}">
+                                            <StackPanel>
+                                                <TextBlock Text="Note:"
+                                                           FontSize="12"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="#92400e"
+                                                           Margin="0,0,0,4"/>
+                                                <TextBlock Text="{Binding Note}"
+                                                           FontSize="12"
+                                                           Foreground="#78350f"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!-- Tags -->
+                                        <ItemsControl Grid.Row="3"
+                                                      ItemsSource="{Binding Tags}"
+                                                      Visibility="{Binding HasTags, Converter={StaticResource BoolToVisibilityConverter}}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel Orientation="Horizontal"/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Background="#e5e7eb"
+                                                            CornerRadius="8"
+                                                            Padding="8,4"
+                                                            Margin="0,0,8,0">
+                                                        <TextBlock Text="{Binding}"
+                                                                   FontSize="10"
+                                                                   Foreground="{StaticResource TextSecondary}"/>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+
+                                        <!-- Footer -->
+                                        <Grid Grid.Row="4"
+                                              Margin="0,8,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Border Grid.Column="0"
+                                                    Background="{Binding CategoryColor}"
+                                                    CornerRadius="8"
+                                                    Padding="8,4"
+                                                    HorizontalAlignment="Left">
+                                                <TextBlock Text="{Binding Category}"
+                                                           FontSize="10"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="White"/>
+                                            </Border>
+
+                                            <Border Grid.Column="1"
+                                                    Background="{Binding PriorityColor}"
+                                                    CornerRadius="8"
+                                                    Padding="8,4"
+                                                    Visibility="{Binding HasPriority, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                <TextBlock Text="{Binding Priority}"
+                                                           FontSize="10"
+                                                           FontWeight="SemiBold"
+                                                           Foreground="White"/>
+                                            </Border>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- Empty State -->
+                    <StackPanel x:Name="EmptyStatePanel"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Visibility="Collapsed">
+                        <TextBlock Text="📚"
+                                   FontSize="48"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,0,0,16"/>
+                        <TextBlock Text="No bookmarks yet"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Foreground="{StaticResource TextPrimary}"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="Tap the bookmark icon on any message to save it here"
+                                   FontSize="14"
+                                   Foreground="{StaticResource TextSecondary}"
+                                   TextAlignment="Center"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

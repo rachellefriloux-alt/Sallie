@@ -1,235 +1,220 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using System;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
+using Windows.UI;
 
 namespace SallieStudioApp
 {
     public sealed partial class ConvergencePage : Page
     {
-        private readonly HttpClient _httpClient;
-        private readonly string _baseUrl = "http://localhost:8000";
-        private int _currentIndex = 0;
-        private int _totalQuestions = 15;
-        private bool _isStarted = false;
+        // Shared systems (would be imported from shared DLL)
+        private object _convergenceFlow;
+        private object _neuralBridge;
+        private object _heritage;
+        
+        private bool _isProcessing = false;
         private bool _isCompleted = false;
 
         public ConvergencePage()
         {
             this.InitializeComponent();
-            _httpClient = new HttpClient { BaseAddress = new Uri(_baseUrl) };
-            _ = CheckStatus();
+            InitializeConvergence();
         }
 
-        private async Task CheckStatus()
+        private void InitializeConvergence()
+        {
+            // Initialize shared systems
+            // In a real implementation, these would be imported from the shared DLL
+            // _convergenceFlow = SharedSystems.GetConvergenceFlow();
+            // _neuralBridge = SharedSystems.GetNeuralBridge();
+            // _heritage = SharedSystems.GetHeritageIdentity();
+            
+            // For now, initialize with mock data
+            _ = LoadInitialData();
+        }
+
+        private async Task LoadInitialData()
         {
             try
             {
-                var response = await _httpClient.GetAsync("/convergence/status");
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    var data = JsonSerializer.Deserialize<JsonElement>(content);
-
-                    if (data.TryGetProperty("completed", out var completed) && completed.GetBoolean())
-                    {
-                        _isCompleted = true;
-                        ShowCompletionScreen();
-                    }
-                    else if (data.TryGetProperty("current_index", out var currentIndex))
-                    {
-                        _currentIndex = currentIndex.GetInt32();
-                        if (_currentIndex > 0)
-                        {
-                            // Resume session
-                            _isStarted = true;
-                            await LoadCurrentQuestion();
-                            UpdateUI();
-                        }
-                    }
-                }
+                // Initialize systems
+                // _neuralBridge.Activate();
+                
+                // Get initial state
+                // var question = _convergenceFlow.GetCurrentQuestion();
+                // var phase = _convergenceFlow.GetCurrentPhase();
+                // var state = _convergenceFlow.GetState();
+                
+                // Update UI
+                UpdateQuestionDisplay(1, "What must I never do to you?", "Establish core boundaries and respect");
+                UpdatePhaseDisplay("The Obsidian Protocol", "The Shield Protocol - Establishing Boundaries", "#1a1a1a");
+                UpdateProgress(1, 29);
+                UpdateMetrics(0, 0, 0);
+                
+                // Set up event listeners
+                // _convergenceFlow.On('stateChanged', UpdateState);
+                // _neuralBridge.On('stateChanged', UpdateNeuralBridgeState);
+                // _convergenceFlow.On('convergenceCompleted', HandleConvergenceCompleted);
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Failed to check status: {ex.Message}");
+                ShowError($"Failed to initialize convergence: {ex.Message}");
             }
         }
 
-        private void UpdateUI()
+        private void UpdateQuestionDisplay(int questionNumber, string questionText, string purpose)
         {
-            // Update progress
-            ProgressBar.Value = _currentIndex;
-            ProgressText.Text = $"{_currentIndex}/{_totalQuestions}";
-
-            // Update button visibility
-            WelcomePanel.Visibility = !_isStarted && !_isCompleted ? Visibility.Visible : Visibility.Collapsed;
-            QuestionPanel.Visibility = _isStarted && !_isCompleted ? Visibility.Visible : Visibility.Collapsed;
-            CompletionPanel.Visibility = _isCompleted ? Visibility.Visible : Visibility.Collapsed;
-
-            StartBtn.Visibility = !_isStarted && !_isCompleted ? Visibility.Visible : Visibility.Collapsed;
-            SubmitBtn.Visibility = _isStarted && !_isCompleted ? Visibility.Visible : Visibility.Collapsed;
-            BackBtn.Visibility = _isStarted && _currentIndex > 0 && !_isCompleted ? Visibility.Visible : Visibility.Collapsed;
-            FinishBtn.Visibility = _isCompleted ? Visibility.Visible : Visibility.Collapsed;
+            QuestionNumber.Text = $"Question {questionNumber} of 29";
+            QuestionText.Text = questionText;
+            QuestionPurpose.Text = $"Purpose: {purpose}";
+            QuestionPanel.Visibility = Visibility.Visible;
+            WelcomePanel.Visibility = Visibility.Collapsed;
         }
 
-        private async Task LoadCurrentQuestion()
+        private void UpdatePhaseDisplay(string phaseName, string phaseDescription, string color)
         {
-            try
-            {
-                var response = await _httpClient.GetAsync("/convergence/question");
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    var data = JsonSerializer.Deserialize<JsonElement>(content);
-
-                    if (data.TryGetProperty("status", out var status) && status.GetString() == "completed")
-                    {
-                        _isCompleted = true;
-                        ShowCompletionScreen();
-                        return;
-                    }
-
-                    if (data.TryGetProperty("id", out var id))
-                    {
-                        QuestionNumber.Text = $"Question {id.GetInt32()} of {_totalQuestions}";
-                    }
-
-                    if (data.TryGetProperty("text", out var text))
-                    {
-                        QuestionText.Text = text.GetString() ?? "";
-                    }
-
-                    if (data.TryGetProperty("purpose", out var purpose))
-                    {
-                        QuestionPurpose.Text = purpose.GetString() ?? "";
-                    }
-
-                    if (data.TryGetProperty("phase", out var phase))
-                    {
-                        PhaseSubtitle.Text = $"Phase: {phase.GetString()}";
-                    }
-
-                    // Clear previous answer and response
-                    AnswerInput.Text = "";
-                    ResponseBorder.Visibility = Visibility.Collapsed;
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Failed to load question: {ex.Message}");
-            }
+            PhaseTitle.Text = phaseName;
+            PhaseSubtitle.Text = phaseDescription;
+            
+            // Update phase color
+            var brush = new SolidColorBrush(Color.FromArgb(255, 26, 26, 26)); // #1a1a1a
+            PhaseBorder.BorderBrush = brush;
         }
 
-        private async void Start_Click(object sender, RoutedEventArgs e)
+        private void UpdateProgress(int current, int total)
         {
-            try
-            {
-                var response = await _httpClient.PostAsync("/convergence/start", null);
-                if (response.IsSuccessStatusCode)
-                {
-                    _isStarted = true;
-                    _currentIndex = 0;
-                    await LoadCurrentQuestion();
-                    UpdateUI();
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Failed to start convergence: {ex.Message}");
-            }
+            var progress = (double)current / total;
+            ProgressBar.Value = progress * 100;
+            ProgressLabel.Text = $"{Math.Round(progress * 100)}%";
         }
 
-        private async void Submit_Click(object sender, RoutedEventArgs e)
+        private void UpdateMetrics(double connection, double heartResonance, double imprinting)
         {
-            var answer = AnswerInput.Text?.Trim();
-            if (string.IsNullOrEmpty(answer))
+            ConnectionMetric.Text = $"{Math.Round(connection * 100)}%";
+            HeartResonanceMetric.Text = $"{Math.Round(heartResonance * 100)}%";
+            ImprintingMetric.Text = $"{Math.Round(imprinting * 100)}%";
+        }
+
+        private void UpdateState(object state)
+        {
+            // Update UI based on convergence state
+            this.DispatcherQueue.TryEnqueue(() =>
             {
+                // Update progress, metrics, etc.
+            });
+        }
+
+        private void UpdateNeuralBridgeState(object bridgeState)
+        {
+            // Update UI based on neural bridge state
+            this.DispatcherQueue.TryEnqueue(() =>
+            {
+                // Update connection strength, heart resonance, etc.
+            });
+        }
+
+        private void HandleConvergenceCompleted(object state)
+        {
+            // Handle convergence completion
+            this.DispatcherQueue.TryEnqueue(() =>
+            {
+                _isCompleted = true;
+                ShowCompletionScreen();
+            });
+        }
+
+        private async void SubmitAnswer_Click(object sender, RoutedEventArgs e)
+        {
+            if (_isProcessing || string.IsNullOrWhiteSpace(AnswerInput.Text))
                 return;
-            }
+
+            _isProcessing = true;
+            SubmitButton.IsEnabled = false;
+            SubmitButton.Content = "Processing...";
 
             try
             {
-                var requestContent = new StringContent(
-                    JsonSerializer.Serialize(new { answer = answer }),
-                    Encoding.UTF8,
-                    "application/json");
-
-                var response = await _httpClient.PostAsync("/convergence/answer", requestContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    var data = JsonSerializer.Deserialize<JsonElement>(content);
-
-                    // Show Sallie's response
-                    if (data.TryGetProperty("conversational_response", out var conversationalResponse))
-                    {
-                        var responseText = conversationalResponse.GetString();
-                        if (!string.IsNullOrEmpty(responseText))
-                        {
-                            ResponseText.Text = responseText;
-                            ResponseBorder.Visibility = Visibility.Visible;
-                        }
-                    }
-
-                    // Check if completed
-                    if (data.TryGetProperty("status", out var status) && status.GetString() == "completed")
-                    {
-                        _isCompleted = true;
-                        await Task.Delay(2000); // Let user read response
-                        ShowCompletionScreen();
-                        return;
-                    }
-
-                    // Update progress
-                    if (data.TryGetProperty("progress", out var progress))
-                    {
-                        if (progress.TryGetProperty("current", out var current))
-                        {
-                            _currentIndex = current.GetInt32();
-                        }
-                    }
-
-                    // Wait a moment then load next question
-                    await Task.Delay(2000);
-                    await LoadCurrentQuestion();
-                    UpdateUI();
-                }
+                // Submit answer to shared system
+                // await _convergenceFlow.SubmitAnswer(AnswerInput.Text);
+                
+                // For now, simulate processing
+                await Task.Delay(1000);
+                
+                // Clear input
+                AnswerInput.Text = "";
+                
+                // Update UI with next question
+                await Task.Delay(500);
+                
+                // Mock next question
+                var nextQuestionNumber = 2;
+                var nextQuestionText = "What must you never do to me?";
+                var nextPurpose = "Establish mutual respect and boundaries";
+                
+                UpdateQuestionDisplay(nextQuestionNumber, nextQuestionText, nextPurpose);
+                UpdateProgress(nextQuestionNumber, 29);
+                UpdateMetrics(0.1, 0.05, 0.02);
+                
+                // Update connection visualization
+                UpdateConnectionVisualization(0.1);
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Failed to submit answer: {ex.Message}");
+                ShowError($"Failed to submit answer: {ex.Message}");
             }
-        }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            // In a real implementation, this would navigate back to previous question
-            System.Diagnostics.Debug.WriteLine("Back clicked");
-        }
-
-        private void Next_Click(object sender, RoutedEventArgs e)
-        {
-            // Used when showing response, to move to next question
-        }
-
-        private void Finish_Click(object sender, RoutedEventArgs e)
-        {
-            // Navigate to main chat or dashboard
-            if (App.MainWindow is MainWindow mainWindow)
+            finally
             {
-                // Switch to Chat tab
+                _isProcessing = false;
+                SubmitButton.IsEnabled = true;
+                SubmitButton.Content = "Submit Response";
             }
+        }
+
+        private void UpdateConnectionVisualization(double strength)
+        {
+            // Update connection line visualization
+            var width = strength * 200; // Max width 200px
+            ConnectionLine.Width = width;
         }
 
         private void ShowCompletionScreen()
         {
-            _isCompleted = true;
-            ProgressBar.Value = _totalQuestions;
-            ProgressText.Text = $"{_totalQuestions}/{_totalQuestions}";
-            UpdateUI();
+            QuestionPanel.Visibility = Visibility.Collapsed;
+            CompletionPanel.Visibility = Visibility.Visible;
+            
+            // Update completion metrics
+            CompletionConnectionMetric.Text = "100%";
+            CompletionHeartResonanceMetric.Text = "100%";
+            CompletionImprintingMetric.Text = "100%";
+        }
+
+        private void ShowError(string message)
+        {
+            // Show error message
+            ErrorText.Text = message;
+            ErrorPanel.Visibility = Visibility.Visible;
+        }
+
+private void StartConvergence_Click(object sender, RoutedEventArgs e)
+        {
+            // Start the convergence process
+            WelcomePanel.Visibility = Visibility.Collapsed;
+            QuestionPanel.Visibility = Visibility.Visible;
+            AnswerPanel.Visibility = Visibility.Visible;
+            
+            // Load first question
+            UpdateQuestionDisplay(1, "What must I never do to you?", "Establish core boundaries and respect");
+        }
+
+        private void ReturnToMain_Click(object sender, RoutedEventArgs e)
+        {
+            // Navigate back to main page
+            if (Frame.CanGoBack)
+                Frame.GoBack();
+            else
+                Frame.Navigate(typeof(ChatPage));
         }
     }
 }

@@ -1,0 +1,47 @@
+{"genesis_questions": [{"id": 1, "phase": "obsidian", "text": "In the depths of your being, what sacred boundary must I never cross - the line that, if violated, would break the very foundation of trust between us?", "purpose": "Establish the most sacred boundary that protects the Creator
+\s
+core
+essence, extraction_key: creator_boundaries, phase_name: The
+Obsidian
+Protocol, phase_description: The
+Shield
+Protocol
+-
+Establishing
+Boundaries}]}' > questions.json
+cd c:\Sallie\shared\genesis && echo '{genesis_questions: [{id: 1, phase: obsidian, text: In
+the
+depths
+of
+your
+being
+what
+sacred
+boundary
+must
+I
+never
+cross
+-
+the
+line
+that
+if
+violated
+would
+break
+the
+very
+foundation
+of
+trust
+between
+us?, purpose: Establish
+the
+most
+sacred
+boundary
+that
+protects
+the
+Creator\'s core essence", "extraction_key": "creator_boundaries", "phase_name": "The Obsidian Protocol", "phase_description": "The Shield Protocol - Establishing Boundaries"}]}
