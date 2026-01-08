@@ -1,0 +1,508 @@
+/* 🐆 LEOPARD PATTERN DESIGN ACCENTS */
+/* Leopard print patterns and spot designs for Sallie ecosystem */
+
+/* Leopard Print Patterns */
+.leopard-pattern {
+  background-image: 
+    radial-gradient(circle at 20% 30%, var(--leopard-accent) 0%, transparent 25%),
+    radial-gradient(circle at 70% 20%, var(--leopard-primary) 0%, transparent 20%),
+    radial-gradient(circle at 40% 60%, var(--leopard-secondary) 0%, transparent 30%),
+    radial-gradient(circle at 80% 70%, var(--leopard-accent) 0%, transparent 25%),
+    radial-gradient(circle at 10% 80%, var(--leopard-primary) 0%, transparent 20%),
+    radial-gradient(circle at 90% 50%, var(--leopard-secondary) 0%, transparent 15%);
+  background-size: 200px 200px;
+  background-position: 0 0, 50px 50px, 100px 0, 150px 50px, 0 100px, 100px 100px;
+  background-repeat: repeat;
+}
+
+.leopard-pattern-dense {
+  background-image: 
+    radial-gradient(circle at 15% 25%, var(--leopard-accent) 0%, transparent 20%),
+    radial-gradient(circle at 65% 15%, var(--leopard-primary) 0%, transparent 15%),
+    radial-gradient(circle at 35% 55%, var(--leopard-secondary) 0%, transparent 25%),
+    radial-gradient(circle at 75% 65%, var(--leopard-accent) 0%, transparent 20%),
+    radial-gradient(circle at 5% 75%, var(--leopard-primary) 0%, transparent 15%),
+    radial-gradient(circle at 85% 45%, var(--leopard-secondary) 0%, transparent 12%),
+    radial-gradient(circle at 45% 35%, var(--leopard-accent) 0%, transparent 18%),
+    radial-gradient(circle at 25% 85%, var(--leopard-primary) 0%, transparent 22%);
+  background-size: 150px 150px;
+  background-position: 0 0, 40px 40px, 80px 0, 120px 40px, 0 80px, 80px 80px, 40px 120px, 120px 120px;
+  background-repeat: repeat;
+}
+
+.leopard-pattern-subtle {
+  background-image: 
+    radial-gradient(circle at 25% 35%, var(--leopard-accent) 0%, transparent 30%),
+    radial-gradient(circle at 75% 25%, var(--leopard-primary) 0%, transparent 25%),
+    radial-gradient(circle at 50% 70%, var(--leopard-secondary) 0%, transparent 35%);
+  background-size: 300px 300px;
+  background-position: 0 0, 150px 0, 75px 150px;
+  background-repeat: repeat;
+}
+
+/* Leopard Spot Animations */
+.leopard-spots-animated {
+  position: relative;
+  overflow: hidden;
+}
+
+.leopard-spots-animated::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, var(--leopard-accent) 0%, transparent 25%),
+    radial-gradient(circle at 70% 20%, var(--leopard-primary) 0%, transparent 20%),
+    radial-gradient(circle at 40% 60%, var(--leopard-secondary) 0%, transparent 30%),
+    radial-gradient(circle at 80% 70%, var(--leopard-accent) 0%, transparent 25%),
+    radial-gradient(circle at 10% 80%, var(--leopard-primary) 0%, transparent 20%),
+    radial-gradient(circle at 90% 50%, var(--leopard-secondary) 0%, transparent 15%);
+  background-size: 200px 200px;
+  animation: leopardMove 10s linear infinite;
+  opacity: 0.3;
+}
+
+@keyframes leopardMove {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-50px, -25px); }
+  50% { transform: translate(-100px, 0); }
+  75% { transform: translate(-50px, 25px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Leopard Border Accents */
+.leopard-border {
+  border: 3px solid transparent;
+  border-image: 
+    linear-gradient(45deg, var(--leopard-primary), var(--leopard-accent), var(--leopard-secondary), var(--leopard-primary)) 1;
+  position: relative;
+}
+
+.leopard-border::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: var(--leopard-pattern);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+/* Leopard Text Effects */
+.leopard-text {
+  background: var(--gradient-leopard);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+  position: relative;
+}
+
+.leopard-text-outline {
+  color: var(--leopard-primary);
+  text-shadow: 
+    -1px -1px 0 var(--leopard-accent),
+    1px -1px 0 var(--leopard-accent),
+    -1px 1px 0 var(--leopard-accent),
+    1px 1px 0 var(--leopard-accent),
+    2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Leopard Icon Accents */
+.leopard-icon {
+  position: relative;
+  display: inline-block;
+}
+
+.leopard-icon::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: var(--leopard-pattern-subtle);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.3;
+  animation: leopardPulse 3s ease-in-out infinite;
+}
+
+@keyframes leopardPulse {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.1); opacity: 0.6; }
+}
+
+/* Leopard Button Accents */
+.btn-leopard-accent {
+  background: var(--gradient-leopard);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-leopard-accent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--leopard-pattern);
+  opacity: 0.2;
+  transition: opacity 0.3s ease;
+}
+
+.btn-leopard-accent:hover::before {
+  opacity: 0.4;
+}
+
+.btn-leopard-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(255, 140, 0, 0.5);
+}
+
+/* Leopard Card Accents */
+.card-leopard-accent {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 140, 0, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-leopard-accent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--leopard-pattern-subtle);
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.card-leopard-accent::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-leopard);
+}
+
+.card-leopard-accent:hover {
+  border-color: var(--leopard-accent);
+  box-shadow: 0 8px 40px rgba(255, 140, 0, 0.3);
+}
+
+/* Leopard Input Accents */
+.input-leopard {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 140, 0, 0.2);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: white;
+  font-size: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.input-leopard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--leopard-pattern-subtle);
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.input-leopard:focus {
+  outline: none;
+  border-color: var(--leopard-accent);
+  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.2);
+}
+
+/* Leopard Progress Bar */
+.progress-leopard {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  height: 8px;
+  position: relative;
+}
+
+.progress-peacock-fill {
+  background: var(--gradient-leopard);
+  height: 100%;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-peacock-fill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+/* Leopard Tab Accents */
+.tab-leopard {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 140, 0, 0.2);
+  border-radius: 8px;
+  padding: 8px 16px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tab-leopard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--leopard-pattern-subtle);
+  opacity: 0.1;
+  transition: opacity 0.3s ease;
+}
+
+.tab-leopard:hover::before {
+  opacity: 0.2;
+}
+
+.tab-leopard.active {
+  background: var(--gradient-leopard);
+  color: white;
+  border-color: var(--leopard-accent);
+}
+
+/* Leopard Modal Accents */
+.modal-leopard {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 140, 0, 0.2);
+  border-radius: 20px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-leopard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--leopard-pattern-subtle);
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.modal-leopard::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-leopard);
+}
+
+/* Leopard Avatar Accents */
+.avatar-leopard {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--gradient-leopard-radial);
+  border: 3px solid var(--leopard-accent);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-leopard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--leopard-pattern);
+  opacity: 0.3;
+  animation: leopardRotate 20s linear infinite;
+}
+
+@keyframes leopardRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Leopard Badge Accents */
+.badge-leopard {
+  background: var(--gradient-leopard);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+}
+
+.badge-leopard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--leopard-pattern-subtle);
+  opacity: 0.3;
+}
+
+/* Leopard Navigation Accents */
+.nav-leopard {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 140, 0, 0.2);
+  border-radius: 16px;
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-leopard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--leopard-pattern-subtle);
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+/* Leopard Loading Accents */
+.loading-leopard {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid var(--leopard-accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  position: relative;
+}
+
+.loading-leopard::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: var(--leopard-pattern);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: leopardPulse 2s ease-in-out infinite;
+}
+
+/* Leopard Hover Effects */
+.leopard-hover {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.leopard-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--leopard-pattern-subtle);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.leopard-hover:hover::before {
+  opacity: 0.2;
+}
+
+.leopard-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(255, 140, 0, 0.3);
+}
+
+/* Leopard Focus Effects */
+.leopard-focus:focus {
+  outline: 2px solid var(--leopard-accent);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(255, 140, 0, 0.2);
+}
+
+/* Responsive Leopard Patterns */
+@media (max-width: 768px) {
+  .leopard-pattern {
+    background-size: 150px 150px;
+  }
+  
+  .leopard-pattern-dense {
+    background-size: 100px 100px;
+  }
+  
+  .leopard-pattern-subtle {
+    background-size: 200px 200px;
+  }
+}
+
+/* Print Leopard Styles */
+@media print {
+  .leopard-pattern,
+  .leopard-pattern-dense,
+  .leopard-pattern-subtle {
+    background: none !important;
+  }
+  
+  .leopard-text {
+    background: none !important;
+    -webkit-text-fill-color: black !important;
+    color: black !important;
+  }
+}

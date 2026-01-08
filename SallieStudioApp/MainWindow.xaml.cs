@@ -68,6 +68,9 @@ namespace SallieStudioApp
                 await RefreshLimbicState();
                 await RefreshCognitiveState();
                 
+                // Initialize Sallie Studio OS components
+                InitializeStudioOSComponents();
+                
                 // Start periodic updates
                 var timer = new Timer(async _ => 
                 {
@@ -76,11 +79,59 @@ namespace SallieStudioApp
                 }, null, TimeSpan.Zero, TimeSpan.FromSeconds(30));
                 
                 AppendLog($"🧠 Human-Level Expansion initialized - Tier {_currentLimbicState?.AutonomyLevel}");
+                AppendLog($"🌟 Sallie Studio OS components loaded");
             }
             catch (Exception ex)
             {
                 AppendLog($"⚠️ Failed to initialize Human-Level Expansion: {ex.Message}");
                 _isHumanLevelEnabled = false;
+            }
+        }
+
+        private void InitializeStudioOSComponents()
+        {
+            try
+            {
+                // Add Sallie Studio OS tab to main interface
+                var studioOSTab = new TabViewItem
+                {
+                    Header = "Studio OS",
+                    Icon = new SymbolIcon(Symbol.Home)
+                };
+                
+                var studioOS = new Components.SallieStudioOS();
+                studioOSTab.Content = studioOS;
+                
+                // Add to main tab control
+                MainTabControl.TabItems.Add(studioOSTab);
+                
+                // Add Sallieverse tab
+                var sallieverseTab = new TabViewItem
+                {
+                    Header = "Sallieverse",
+                    Icon = new SymbolIcon(Symbol.World)
+                };
+                
+                var sallieverse = new Components.Sallieverse();
+                sallieverseTab.Content = sallieverse;
+                
+                MainTabControl.TabItems.Add(sallieverseTab);
+                
+                // Add Avatar component to dashboard
+                var avatarPanel = new Components.SallieAvatar
+                {
+                    Size = Components.AvatarSize.Medium,
+                    Interactive = true
+                };
+                
+                // Add avatar to existing dashboard panel
+                DashboardPanel.Children.Add(avatarPanel);
+                
+                AppendLog("✅ Studio OS components initialized successfully");
+            }
+            catch (Exception ex)
+            {
+                AppendLog($"⚠️ Failed to initialize Studio OS components: {ex.Message}");
             }
         }
 

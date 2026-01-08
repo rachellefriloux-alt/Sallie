@@ -1,0 +1,651 @@
+/* 🦚 SALLIE PEACOCK THEME DESIGN SYSTEM */
+/* Complete design system with peacock gradients and leopard print accents */
+
+/* CSS Custom Properties for Peacock Theme */
+:root {
+  /* Peacock Gradient Colors */
+  --peacock-primary: #6A5ACD;
+  --peacock-secondary: #4B0082;
+  --peacock-accent: #9370DB;
+  --peacock-light: #DDA0DD;
+  --peacock-dark: #2E0854;
+  --peacock-vibrant: #8A2BE2;
+  --peacock-soft: #E6E6FA;
+  
+  /* Leopard Print Colors */
+  --leopard-primary: #FF8C00;
+  --leopard-secondary: #FF6347;
+  --leopard-accent: #FFD700;
+  --leopard-dark: #8B4513;
+  --leopard-light: #FFE4B5;
+  --leopard-spot: #CD853F;
+  
+  /* Gradient Definitions */
+  --gradient-peacock: linear-gradient(135deg, #6A5ACD 0%, #4B0082 50%, #9370DB 100%);
+  --gradient-peacock-reverse: linear-gradient(135deg, #9370DB 0%, #4B0082 50%, #6A5ACD 100%);
+  --gradient-peacock-radial: radial-gradient(circle, #9370DB 0%, #6A5ACD 50%, #4B0082 100%);
+  --gradient-peacock-vertical: linear-gradient(180deg, #6A5ACD 0%, #9370DB 50%, #4B0082 100%);
+  
+  --gradient-leopard: linear-gradient(135deg, #FF8C00 0%, #FF6347 50%, #FFD700 100%);
+  --gradient-leopard-radial: radial-gradient(circle, #FFD700 0%, #FF8C00 50%, #FF6347 100%);
+  
+  --gradient-mixed: linear-gradient(135deg, #6A5ACD 0%, #FF8C00 50%, #9370DB 100%);
+  --gradient-mixed-subtle: linear-gradient(135deg, rgba(106, 90, 205, 0.1) 0%, rgba(255, 140, 0, 0.1) 50%, rgba(147, 112, 219, 0.1) 100%);
+  
+  /* Leopard Print Pattern */
+  --leopard-pattern: repeating-conic-gradient(from 0deg at 50% 50%, #FF8C00 0deg 10deg, #FF6347 10deg 20deg, #FFD700 20deg 30deg, #FF8C00 30deg 40deg);
+  --leopard-spots: radial-gradient(circle at 30% 30%, #FFD700 0%, transparent 25%), 
+                    radial-gradient(circle at 70% 70%, #FF8C00 0%, transparent 20%),
+                    radial-gradient(circle at 50% 50%, #FF6347 0%, transparent 15%);
+  
+  /* Shadow Effects */
+  --shadow-peacock: 0 4px 20px rgba(106, 90, 205, 0.3);
+  --shadow-peacock-strong: 0 8px 40px rgba(106, 90, 205, 0.5);
+  --shadow-leopard: 0 4px 20px rgba(255, 140, 0, 0.3);
+  --shadow-mixed: 0 4px 20px rgba(106, 90, 205, 0.2), 0 4px 20px rgba(255, 140, 0, 0.1);
+  
+  /* Glass Effect */
+  --glass-peacock: rgba(106, 90, 205, 0.1);
+  --glass-leopard: rgba(255, 140, 0, 0.1);
+  --glass-mixed: rgba(106, 90, 205, 0.05), rgba(255, 140, 0, 0.05);
+  
+  /* Animation Timing */
+  --animation-slow: 3s ease-in-out infinite;
+  --animation-medium: 2s ease-in-out infinite;
+  --animation-fast: 1s ease-in-out infinite;
+}
+
+/* Base Theme Application */
+body {
+  background: var(--gradient-peacock);
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Leopard Print Background Pattern */
+.leopard-pattern-bg {
+  background: 
+    var(--leopard-pattern),
+    var(--gradient-peacock);
+  background-size: 200px 200px, cover;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.leopard-pattern-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-mixed-subtle);
+  pointer-events: none;
+}
+
+/* Glass Morphism Cards */
+.glass-card {
+  background: var(--glass-mixed);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: var(--shadow-mixed);
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-peacock-strong);
+  border-color: var(--peacock-accent);
+}
+
+/* Peacock Gradient Buttons */
+.btn-peacock {
+  background: var(--gradient-peacock);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-peacock);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-peacock::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-peacock:hover::before {
+  left: 100%;
+}
+
+.btn-peacock:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-peacock-strong);
+}
+
+.btn-leopard {
+  background: var(--gradient-leopard);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-leopard);
+}
+
+.btn-leopard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(255, 140, 0, 0.5);
+}
+
+/* Leopard Print Accents */
+.leopard-accent {
+  position: relative;
+}
+
+.leopard-accent::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: var(--leopard-spots);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.3;
+  animation: var(--animation-slow);
+}
+
+/* Peacock Feather Animations */
+.peacock-feather {
+  position: relative;
+  overflow: hidden;
+}
+
+.peacock-feather::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, 
+    var(--peacock-primary) 0deg, 
+    var(--peacock-accent) 60deg, 
+    var(--peacock-light) 120deg, 
+    var(--peacock-primary) 180deg, 
+    var(--peacock-accent) 240deg, 
+    var(--peacock-light) 300deg, 
+    var(--peacock-primary) 360deg);
+  transform: translate(-50%, -50%);
+  animation: var(--animation-medium);
+  opacity: 0.1;
+}
+
+@keyframes rotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Leopard Spot Animations */
+.leopard-spot {
+  position: relative;
+  overflow: hidden;
+}
+
+.leopard-spot::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, var(--leopard-accent) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: var(--animation-slow);
+}
+
+.leopard-spot::after {
+  content: '';
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  width: 40%;
+  height: 40%;
+  background: radial-gradient(circle, var(--leopard-primary) 0%, transparent 60%);
+  border-radius: 50%;
+  animation: var(--animation-medium);
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.2); opacity: 0.6; }
+}
+
+/* Navigation Components */
+.nav-peacock {
+  background: var(--glass-peacock);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: var(--shadow-peacock);
+}
+
+.nav-item {
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-peacock-vertical);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.nav-item:hover::before {
+  left: 0;
+}
+
+.nav-item:hover {
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* Card Components */
+.card-peacock {
+  background: var(--glass-peacock);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow-peacock);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-peacock::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-peacock);
+}
+
+.card-peacock:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-peacock-strong);
+}
+
+.card-leopard {
+  background: var(--glass-leopard);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow-leopard);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-leopard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-leopard);
+}
+
+.card-leopard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 40px rgba(255, 140, 0, 0.5);
+}
+
+/* Form Components */
+.form-control {
+  background: var(--glass-mixed);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: white;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--peacock-accent);
+  box-shadow: 0 0 0 3px rgba(147, 112, 219, 0.2);
+}
+
+/* Progress Bars */
+.progress-peacock {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  height: 8px;
+}
+
+.progress-peacock-fill {
+  background: var(--gradient-peacock);
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-peacock-fill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Avatar Components */
+.avatar-peacock {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--gradient-peacock-radial);
+  border: 3px solid var(--peacock-accent);
+  box-shadow: var(--shadow-peacock);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-peacock::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, 
+    var(--peacock-primary) 0deg, 
+    var(--peacock-accent) 90deg, 
+    var(--peacock-light) 180deg, 
+    var(--peacock-primary) 270deg, 
+    var(--peacock-accent) 360deg);
+  animation: var(--animation-medium);
+  opacity: 0.2;
+}
+
+.avatar-leopard {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--gradient-leopard-radial);
+  border: 3px solid var(--leopard-accent);
+  box-shadow: var(--shadow-leopard);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-leopard::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  width: 60%;
+  height: 60%;
+  background: var(--leopard-spots);
+  opacity: 0.3;
+  animation: var(--animation-slow);
+}
+
+/* Badge Components */
+.badge-peacock {
+  background: var(--gradient-peacock);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: var(--shadow-peacock);
+}
+
+.badge-leopard {
+  background: var(--gradient-leopard);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: var(--shadow-leopard);
+}
+
+/* Tab Components */
+.tabs-peacock {
+  background: var(--glass-peacock);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+  box-shadow: var(--shadow-peacock);
+}
+
+.tab-peacock {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tab-peacock::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-peacock);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.tab-peacock:hover::before {
+  opacity: 0.2;
+}
+
+.tab-peacock.active {
+  color: white;
+  background: var(--gradient-peacock);
+  box-shadow: var(--shadow-peacock);
+}
+
+/* Modal Components */
+.modal-peacock {
+  background: var(--glass-peacock);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: var(--shadow-peacock-strong);
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-peacock::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-peacock);
+}
+
+.modal-peacock::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, 
+    var(--peacock-primary) 0deg, 
+    var(--peacock-accent) 90deg, 
+    var(--peacock-light) 180deg, 
+    var(--peacock-primary) 270deg, 
+    var(--peacock-accent) 360deg);
+  animation: var(--animation-medium);
+  opacity: 0.05;
+}
+
+/* Loading Components */
+.loading-peacock {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid var(--peacock-accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-leopard {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid var(--leopard-accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .glass-card {
+    padding: 16px;
+    margin: 8px;
+  }
+  
+  .btn-peacock,
+  .btn-leopard {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  
+  .card-peacock,
+  .card-leopard {
+    padding: 16px;
+  }
+  
+  .modal-peacock {
+    padding: 20px;
+    margin: 16px;
+  }
+}
+
+/* Dark Mode Enhancements */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --glass-peacock: rgba(106, 90, 205, 0.15);
+    --glass-leopard: rgba(255, 140, 0, 0.15);
+    --glass-mixed: rgba(106, 90, 205, 0.1), rgba(255, 140, 0, 0.1);
+  }
+}
+
+/* Accessibility Enhancements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus Styles for Accessibility */
+.btn-peacock:focus,
+.btn-leopard:focus,
+.form-control:focus,
+.nav-item:focus {
+  outline: 2px solid var(--peacock-accent);
+  outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+  .glass-card,
+  .card-peacock,
+  .card-leopard {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+  
+  .btn-peacock,
+  .btn-leopard {
+    background: #666 !important;
+    color: white !important;
+    border: 1px solid #333 !important;
+  }
+}
