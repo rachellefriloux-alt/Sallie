@@ -6,7 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:accessibility": "jest --testPathPattern=accessibility",
+    "test:integration": "jest --testPathPattern=integration",
+    "test:performance": "playwright test --config=playwright.performance.config.ts"
   },
   "dependencies": {
     "next": "^14.0.0",
@@ -28,7 +36,20 @@
     "@types/react-dom": "^18.2.0",
     "typescript": "^5.2.0",
     "eslint": "^8.50.0",
-    "eslint-config-next": "^14.0.0"
+    "eslint-config-next": "^14.0.0",
+    "@testing-library/react": "^14.1.0",
+    "@testing-library/jest-dom": "^6.1.0",
+    "@testing-library/user-event": "^14.5.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "@types/jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
+    "@playwright/test": "^1.40.0",
+    "@axe-core/playwright": "^4.8.0",
+    "axe-core": "^4.8.0",
+    "msw": "^2.0.0",
+    "@types/supertest": "^2.0.15",
+    "supertest": "^6.3.3"
   }
 }
 

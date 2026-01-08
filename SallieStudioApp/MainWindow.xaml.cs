@@ -92,42 +92,45 @@ namespace SallieStudioApp
         {
             try
             {
+                // TODO: Add TabControl and Panel controls to XAML before enabling this code
+                // The referenced UI controls (MainTabControl, DashboardPanel) don't exist in MainWindow.xaml
+                
                 // Add Sallie Studio OS tab to main interface
-                var studioOSTab = new TabViewItem
-                {
-                    Header = "Studio OS",
-                    Icon = new SymbolIcon(Symbol.Home)
-                };
-                
-                var studioOS = new Components.SallieStudioOS();
-                studioOSTab.Content = studioOS;
-                
-                // Add to main tab control
-                MainTabControl.TabItems.Add(studioOSTab);
+                // var studioOSTab = new TabViewItem
+                // {
+                //     Header = "Studio OS",
+                //     Icon = new SymbolIcon(Symbol.Home)
+                // };
+                // 
+                // var studioOS = new Components.SallieStudioOS();
+                // studioOSTab.Content = studioOS;
+                // 
+                // // Add to main tab control
+                // MainTabControl.TabItems.Add(studioOSTab);
                 
                 // Add Sallieverse tab
-                var sallieverseTab = new TabViewItem
-                {
-                    Header = "Sallieverse",
-                    Icon = new SymbolIcon(Symbol.World)
-                };
-                
-                var sallieverse = new Components.Sallieverse();
-                sallieverseTab.Content = sallieverse;
-                
-                MainTabControl.TabItems.Add(sallieverseTab);
+                // var sallieverseTab = new TabViewItem
+                // {
+                //     Header = "Sallieverse",
+                //     Icon = new SymbolIcon(Symbol.World)
+                // };
+                // 
+                // var sallieverse = new Components.Sallieverse();
+                // sallieverseTab.Content = sallieverse;
+                // 
+                // MainTabControl.TabItems.Add(sallieverseTab);
                 
                 // Add Avatar component to dashboard
-                var avatarPanel = new Components.SallieAvatar
-                {
-                    Size = Components.AvatarSize.Medium,
-                    Interactive = true
-                };
+                // var avatarPanel = new Components.SallieAvatar
+                // {
+                //     Size = Components.AvatarSize.Medium,
+                //     Interactive = true
+                // };
+                // 
+                // // Add avatar to existing dashboard panel
+                // DashboardPanel.Children.Add(avatarPanel);
                 
-                // Add avatar to existing dashboard panel
-                DashboardPanel.Children.Add(avatarPanel);
-                
-                AppendLog("✅ Studio OS components initialized successfully");
+                AppendLog("✅ Studio OS components initialization skipped (UI controls not defined)");
             }
             catch (Exception ex)
             {
