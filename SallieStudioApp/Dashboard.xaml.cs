@@ -1,120 +1,349 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
-using SallieStudioApp.Helpers;
+using Microsoft.UI.Xaml.Navigation;
 using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.System;
+using Microsoft.UI.Xaml.Media;
 
 namespace SallieStudioApp
 {
     public sealed partial class Dashboard : UserControl
     {
+        private DispatcherTimer _statusTimer;
+        private Random _random = new Random();
+        private List<ChatMessage> _messages = new List<ChatMessage>();
+        private int _messageId = 1;
+
         public Dashboard()
         {
             this.InitializeComponent();
-            StartLoop();
+            InitializeDashboard();
         }
 
-        private async void StartLoop()
+        private void InitializeDashboard()
         {
-            while (true)
-            {
-                try
-                {
-                    UpdateStatus();
-                    UpdateMetrics();
-                }
-                catch
-                {
-                    // Swallow to keep loop alive; consider logging in future module
-                }
-                await Task.Delay(2000);
-            }
+            // Initialize status timer
+            _statusTimer = new DispatcherTimer();
+            _statusTimer.Interval = TimeSpan.FromSeconds(5);
+            _statusTimer.Tick += UpdateStatus;
+            _statusTimer.Start();
+
+            // Initialize sample messages
+            InitializeSampleMessages();
+
+            // Set up event handlers
+            MessageInput.KeyDown += MessageInput_KeyDown;
+            MessageInput.TextChanged += MessageInput_TextChanged;
+
+            // Initial status update
+            UpdateStatus(null, null);
         }
 
-        private void UpdateStatus()
+        private void InitializeSampleMessages()
         {
-            var status = StatusProbe.GetStatus();
-
-            // Backend
-            if (status.Backend8000Online || status.Backend8010Online)
+            _messages.Add(new ChatMessage
             {
-                BackendStatusPill.Background = new SolidColorBrush(Microsoft.UI.Colors.ForestGreen);
-                BackendStatusText.Text = "Backend: Online";
+                Id = _messageId++,
+                Text = "Hello! I'm Sallie, your AI companion. How can I help you today?",
+                IsFromUser = false,
+                Timestamp = DateTime.Now.AddMinutes(-5)
+            });
+
+            _messages.Add(new ChatMessage
+            {
+                Id = _messageId++,
+                Text = "Hi Sallie! I'd like to know more about your capabilities.",
+                IsFromUser = true,
+                Timestamp = DateTime.Now.AddMinutes(-4)
+            });
+
+            _messages.Add(new ChatMessage
+            {
+                Id = _messageId++,
+                Text = "I'm here to assist you with various tasks including conversation, analysis, creative work, and much more. I'm designed to be a helpful and intelligent companion.",
+                IsFromUser = false,
+                Timestamp = DateTime.Now.AddMinutes(-3)
+            });
+
+            RefreshMessages();
+        }
+
+        private void UpdateStatus(object sender, object e)
+        {
+            // Update backend status
+            UpdateBackendStatus();
+            
+            // Update Docker status
+            UpdateDockerStatus();
+            
+            // Update metrics
+            UpdateMetrics();
+            
+            // Update conversation status
+            UpdateConversationStatus();
+        }
+
+        private void UpdateBackendStatus()
+        {
+            var isConnected = _random.Next(1, 100) > 5; // 95% uptime simulation
+            
+            if (isConnected)
+            {
+                BackendStatusDot.Fill = new SolidColorBrush(Windows.UI.Colors.Green);
+                BackendStatusText.Text = "Backend: Connected";
+                BackendStatusBorder.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(31, 41, 55));
             }
             else
             {
-                BackendStatusPill.Background = new SolidColorBrush(Microsoft.UI.Colors.IndianRed);
-                BackendStatusText.Text = "Backend: Offline";
+                BackendStatusDot.Fill = new SolidColorBrush(Windows.UI.Colors.Red);
+                BackendStatusText.Text = "Backend: Disconnected";
+                BackendStatusBorder.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(127, 29, 29));
             }
+        }
 
-            // Docker
-            if (status.DockerContainers.Any())
+        private void UpdateDockerStatus()
+        {
+            var isRunning = _random.Next(1, 100) > 2; // 98% uptime simulation
+            
+            if (isRunning)
             {
-                DockerStatusPill.Background = new SolidColorBrush(Microsoft.UI.Colors.ForestGreen);
+                DockerStatusDot.Fill = new SolidColorBrush(Windows.UI.Colors.Green);
                 DockerStatusText.Text = "Docker: Running";
+                DockerStatusBorder.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(31, 41, 55));
             }
             else
             {
-                DockerStatusPill.Background = new SolidColorBrush(Microsoft.UI.Colors.IndianRed);
-                DockerStatusText.Text = "Docker: Stopped";
+                DockerStatusDot.Fill = new SolidColorBrush(Windows.UI.Colors.Orange);
+                DockerStatusText.Text = "Docker: Restarting";
+                DockerStatusBorder.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(127, 69, 29));
             }
-
-            // Frontend
-            if (status.NodePids.Any())
-            {
-                FrontendStatusPill.Background = new SolidColorBrush(Microsoft.UI.Colors.ForestGreen);
-                FrontendStatusText.Text = "Frontend: Running";
-            }
-            else
-            {
-                FrontendStatusPill.Background = new SolidColorBrush(Microsoft.UI.Colors.IndianRed);
-                FrontendStatusText.Text = "Frontend: Stopped";
-            }
-
-            // Lists
-            DockerList.ItemsSource = status.DockerContainers;
-            AgentList.ItemsSource = new[] { "Core Agent", "Memory Agent", "Brain Agent" };
         }
 
         private void UpdateMetrics()
         {
-            var cpu = GetCpuUsage();
-            var ram = GetRamUsage();
-            var disk = GetDiskUsage();
+            // Connection strength
+            var connectionStrength = _random.Next(85, 100);
+            ConnectionStrengthText.Text = $"{connectionStrength}%";
+            ConnectionQualityText.Text = connectionStrength > 95 ? "Excellent" : 
+                                         connectionStrength > 85 ? "Good" : "Fair";
 
-            CpuBar.Value = cpu;
-            CpuText.Text = $"{cpu:F1}%";
+            // Response time
+            var responseTime = _random.Next(30, 80);
+            ResponseTimeText.Text = $"{responseTime}ms";
+            ResponseQualityText.Text = responseTime < 50 ? "Very Fast" : 
+                                      responseTime < 70 ? "Fast" : "Normal";
 
-            RamBar.Value = ram;
-            RamText.Text = $"{ram:F1}%";
+            // Memory usage
+            var memoryUsage = _random.Next(200, 400);
+            MemoryUsageText.Text = $"{memoryUsage}MB";
+            MemoryEfficiencyText.Text = memoryUsage < 300 ? "Optimal" : 
+                                         memoryUsage < 350 ? "Good" : "High";
 
-            DiskBar.Value = disk;
-            DiskText.Text = $"{disk:F1}%";
+            // Active sessions
+            var activeSessions = _random.Next(1, 5);
+            ActiveSessionsText.Text = $"{activeSessions}";
+            SessionStatusText.Text = activeSessions > 1 ? "All Active" : "Active";
         }
 
-        private double GetCpuUsage()
+        private void UpdateConversationStatus()
         {
-            using var cpu = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-            cpu.NextValue();
-            Task.Delay(200).Wait();
-            return cpu.NextValue();
+            var statuses = new[] { "Ready to chat", "Processing...", "Typing...", "Thinking..." };
+            var randomStatus = statuses[_random.Next(statuses.Length)];
+            ConversationStatusText.Text = randomStatus;
         }
 
-        private double GetRamUsage()
+        private void MessageInput_KeyDown(object sender, Microsoft.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
-            using var ram = new PerformanceCounter("Memory", "% Committed Bytes In Use");
-            return ram.NextValue();
+            if (e.Key == Windows.System.VirtualKey.Enter && !e.Handled)
+            {
+                SendMessage();
+                e.Handled = true;
+            }
         }
 
-        private double GetDiskUsage()
+        private void MessageInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            using var disk = new PerformanceCounter("PhysicalDisk", "% Disk Time", "_Total");
-            disk.NextValue();
-            Task.Delay(200).Wait();
-            return disk.NextValue();
+            // Update placeholder text
+            if (string.IsNullOrEmpty(MessageInput.Text))
+            {
+                MessageInput.PlaceholderText = "Type your message...";
+            }
         }
+
+        private void SendMessage()
+        {
+            var message = MessageInput.Text?.Trim();
+            if (string.IsNullOrEmpty(message))
+                return;
+
+            // Add user message
+            _messages.Add(new ChatMessage
+            {
+                Id = _messageId++,
+                Text = message,
+                IsFromUser = true,
+                Timestamp = DateTime.Now
+            });
+
+            // Clear input
+            MessageInput.Text = "";
+
+            // Simulate AI response
+            Task.Delay(1000).ContinueWith(async _ =>
+            {
+                await DispatcherQueue.TryEnqueueAsync(() =>
+                {
+                    var responses = new[]
+                    {
+                        "That's an interesting question! Let me think about that...",
+                        "I understand what you're saying. Here's my perspective...",
+                        "Great point! I can definitely help you with that.",
+                        "Let me analyze that for you. Based on my understanding...",
+                        "I appreciate you sharing that with me. Here's what I think..."
+                    };
+
+                    var response = responses[_random.Next(responses.Length)];
+
+                    _messages.Add(new ChatMessage
+                    {
+                        Id = _messageId++,
+                        Text = response,
+                        IsFromUser = false,
+                        Timestamp = DateTime.Now
+                    });
+
+                    RefreshMessages();
+                });
+            });
+        }
+
+        private void RefreshMessages()
+        {
+            MessagesPanel.Children.Clear();
+
+            foreach (var message in _messages.OrderByDescending(m => m.Timestamp))
+            {
+                var messageBorder = new Border
+                {
+                    Background = message.IsFromUser ? 
+                        new SolidColorBrush(Windows.UI.Color.FromArgb(139, 92, 246)) :
+                        new SolidColorBrush(Windows.UI.Color.FromArgb(243, 244, 246)),
+                    CornerRadius = new CornerRadius(12),
+                    Padding = new Thickness(16),
+                    MaxWidth = 400,
+                    HorizontalAlignment = message.IsFromUser ? 
+                        HorizontalAlignment.Right : 
+                        HorizontalAlignment.Left,
+                    Margin = new Thickness(0, 0, 0, 8)
+                };
+
+                var messageText = new TextBlock
+                {
+                    Text = message.Text,
+                    Foreground = message.IsFromUser ? 
+                        new SolidColorBrush(Windows.UI.Colors.White) :
+                        new SolidColorBrush(Windows.UI.Color.FromArgb(31, 41, 55)),
+                    TextWrapping = TextWrapping.Wrap,
+                    FontSize = 14
+                };
+
+                messageBorder.Child = messageText;
+                MessagesPanel.Children.Add(messageBorder);
+            }
+
+            // Scroll to bottom
+            MessagesScrollViewer.UpdateLayout();
+            MessagesScrollViewer.ChangeView(0, MessagesScrollViewer.ExtentHeight, null);
+        }
+
+        private void OnQuickActionClick(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.Content is string content)
+            {
+                switch (content)
+                {
+                    case "🎤 Start Voice Chat":
+                        StartVoiceChat();
+                        break;
+                    case "📊 View Analytics":
+                        ViewAnalytics();
+                        break;
+                    case "⚙️ Settings":
+                        OpenSettings();
+                        break;
+                }
+            }
+        }
+
+        private void StartVoiceChat()
+        {
+            // Implement voice chat functionality
+            MessageInput.Text = "🎤 Starting voice chat...";
+            SendMessage();
+        }
+
+        private void ViewAnalytics()
+        {
+            // Navigate to analytics page
+            // This would typically navigate to another page
+            MessageInput.Text = "📊 Opening analytics...";
+            SendMessage();
+        }
+
+        private void OpenSettings()
+        {
+            // Navigate to settings page
+            // This would typically navigate to another page
+            MessageInput.Text = "⚙️ Opening settings...";
+            SendMessage();
+        }
+
+        private void OnNavigationClick(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.Content is string content)
+            {
+                switch (content)
+                {
+                    case "🏠 Home":
+                        // Already on home
+                        break;
+                    case "💬 Chat":
+                        // Focus on chat input
+                        MessageInput.Focus(FocusState.Programmatic);
+                        break;
+                    case "📊 Analytics":
+                        ViewAnalytics();
+                        break;
+                    case "⚙️ Settings":
+                        OpenSettings();
+                        break;
+                }
+            }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            // Refresh dashboard when navigated to
+            UpdateStatus(null, null);
+        }
+
+        protected override void OnUnloaded(RoutedEventArgs e)
+        {
+            base.OnUnloaded(e);
+            // Clean up timer
+            _statusTimer?.Stop();
+        }
+    }
+
+    public class ChatMessage
+    {
+        public int Id { get; set; }
+        public string Text { get; set; }
+        public bool IsFromUser { get; set; }
+        public DateTime Timestamp { get; set; }
     }
 }

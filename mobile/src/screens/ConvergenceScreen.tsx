@@ -1,6 +1,6 @@
 /**
  * Convergence screen for mobile app.
- * Initial onboarding flow to help Sallie learn about the Creator.
+ * Uses shared systems for unified experience across platforms.
  */
 
 import React, { useState, useEffect } from 'react';
@@ -14,435 +14,503 @@ import {
   ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
+  Dimensions,
 } from 'react-native';
 import { useTabletLayout } from '../hooks/useTabletLayout';
-import APIClient from '../services/api_client';
+import { getConvergenceFlow, getNeuralBridge, getHeritageIdentity } from '../../../shared/index';
 
-interface Question {
-  id: number;
-  phase: string;
-  text: string;
-  purpose: string;
+const { width, height } = Dimensions.get('window');
+
+interface ConvergenceScreenProps {
+  onComplete?: (state: any) => void;
+  navigation?: any;
 }
 
-type ScreenState = 'welcome' | 'questioning' | 'completed';
-
-export function ConvergenceScreen() {
-  const [screenState, setScreenState] = useState<ScreenState>('welcome');
-  const [loading, setLoading] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
-  const [answer, setAnswer] = useState('');
-  const [sallieResponse, setSallieResponse] = useState('');
-  const [progress, setProgress] = useState({ current: 0, total: 15 });
+export function ConvergenceScreen({ onComplete, navigation }: ConvergenceScreenProps) {
+  const [convergenceFlow] = useState(() => getConvergenceFlow());
+  const [neuralBridge] = useState(() => getNeuralBridge());
+  const [heritage] = useState(() => getHeritageIdentity());
+  
+  const [currentQuestion, setCurrentQuestion] = useState<any>(null);
+  const [currentPhase, setCurrentPhase] = useState<any>(null);
+  const [currentAnswer, setCurrentAnswer] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [convergenceState, setConvergenceState] = useState<any>(null);
+  const [neuralBridgeState, setNeuralBridgeState] = useState<any>(null);
   const { isTablet, fontSize, spacing } = useTabletLayout();
-  const apiClient = React.useRef(new APIClient()).current;
 
   useEffect(() => {
-    checkStatus();
+    // Initialize systems
+    neuralBridge.activate();
+    
+    // Get initial state
+    const question = convergenceFlow.getCurrentQuestion();
+    const phase = convergenceFlow.getCurrentPhase();
+    const convState = convergenceFlow.getState();
+    const bridgeState = neuralBridge.getState();
+    
+    setCurrentQuestion(question);
+    setCurrentPhase(phase);
+    setConvergenceState(convState);
+    setNeuralBridgeState(bridgeState);
+
+    // Set up event listeners
+    convergenceFlow.on('stateChanged', setConvergenceState);
+    neuralBridge.on('stateChanged', setNeuralBridgeState);
+    convergenceFlow.on('convergenceCompleted', handleConvergenceCompleted);
+    
+    return () => {
+      // Cleanup
+    };
   }, []);
 
-  const checkStatus = async () => {
-    try {
-      // In a real implementation, this would check convergence status
-      // For now, we'll start fresh
-    } catch (err) {
-      console.error('Failed to check status:', err);
+  const handleConvergenceCompleted = (state: any) => {
+    // Update heritage with convergence data
+    heritage.updateConvergenceMetrics({
+      final_strength: state.connection_strength,
+      imprinting_depth: state.imprinting_level,
+      synchronization: state.synchronization,
+      heart_resonance: state.heart_resonance,
+      thought_alignment: state.thought_alignment,
+      consciousness_binding: state.consciousness_binding
+    });
+
+    // Update heritage with neural bridge data
+    heritage.updateNeuralBridge(neuralBridge.getState());
+
+    // Update heritage with personality imprint
+    heritage.updatePersonalityImprint(neuralBridge.getPersonalityImprint());
+
+    // Update heritage with genesis answers
+    heritage.updateGenesisAnswers(state.answers);
+
+    if (onComplete) {
+      onComplete(state);
     }
   };
 
-  const startConvergence = async () => {
-    setLoading(true);
+  const handleSubmitAnswer = async () => {
+    if (!currentAnswer.trim() || isProcessing) return;
+
+    setIsProcessing(true);
+    
     try {
-      // Start convergence session
-      setScreenState('questioning');
-      await loadNextQuestion();
-    } catch (err) {
-      console.error('Failed to start convergence:', err);
+      await convergenceFlow.submitAnswer(currentAnswer);
+      setCurrentAnswer('');
+      
+      // Update current question
+      const nextQuestion = convergenceFlow.getCurrentQuestion();
+      const nextPhase = convergenceFlow.getCurrentPhase();
+      
+      setCurrentQuestion(nextQuestion);
+      setCurrentPhase(nextPhase);
+    } catch (error) {
+      console.error('Error submitting answer:', error);
     } finally {
-      setLoading(false);
+      setIsProcessing(false);
     }
   };
 
-  const loadNextQuestion = async () => {
-    try {
-      // In a real implementation, this would call the API
-      // Mock data for now
-      const mockQuestion: Question = {
-        id: progress.current + 1,
-        phase: 'TONE',
-        text: 'How do you prefer to communicate?',
-        purpose: 'Understanding your communication style',
-      };
-      setCurrentQuestion(mockQuestion);
-      setSallieResponse('');
-    } catch (err) {
-      console.error('Failed to load question:', err);
-    }
+  const getPhaseColor = () => {
+    if (!currentPhase) return '#000000';
+    return currentPhase.color;
   };
 
-  const submitAnswer = async () => {
-    if (!answer.trim()) return;
-
-    setLoading(true);
-    try {
-      // In a real implementation, this would submit to the API
-      // Mock response for now
-      setSallieResponse("Thank you for sharing that. I'm learning more about you!");
-
-      // Update progress
-      const newProgress = { ...progress, current: progress.current + 1 };
-      setProgress(newProgress);
-
-      // Check if completed
-      if (newProgress.current >= newProgress.total) {
-        setTimeout(() => {
-          setScreenState('completed');
-        }, 2000);
-      } else {
-        // Load next question after showing response
-        setTimeout(() => {
-          setAnswer('');
-          loadNextQuestion();
-        }, 2000);
-      }
-    } catch (err) {
-      console.error('Failed to submit answer:', err);
-    } finally {
-      setLoading(false);
-    }
+  const getProgress = () => {
+    if (!convergenceState) return 0;
+    return convergenceState.progress;
   };
 
-  const renderWelcome = () => (
-    <View style={styles.welcomeContainer}>
-      <Text style={[styles.welcomeTitle, isTablet && { fontSize: fontSize.xl }]}>
-        Welcome to Convergence
-      </Text>
-      <Text style={styles.welcomeSubtitle}>Getting to know each other</Text>
+  const getConnectionStrength = () => {
+    if (!neuralBridgeState) return 0;
+    return neuralBridgeState.connection_strength;
+  };
 
-      <Text style={styles.welcomeDescription}>
-        Through 15 questions across 5 phases, Sallie will learn about you - your
-        preferences, values, and how you'd like to work together.
-      </Text>
+  const getHeartResonance = () => {
+    if (!neuralBridgeState) return 0;
+    return neuralBridgeState.heart_resonance;
+  };
 
-      <View style={styles.phasesList}>
-        <Text style={styles.phasesTitle}>Phases:</Text>
-        <Text style={styles.phaseItem}>1. Tone — Communication style</Text>
-        <Text style={styles.phaseItem}>2. Shadows — Challenges and boundaries</Text>
-        <Text style={styles.phaseItem}>3. Aspirations — Dreams and goals</Text>
-        <Text style={styles.phaseItem}>4. Ethics — Moral compass and values</Text>
-        <Text style={styles.phaseItem}>5. Mirror — Reflection and synthesis</Text>
+  if (!currentQuestion) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#8b5cf6" />
+        <Text style={styles.loadingText}>Initializing Convergence...</Text>
       </View>
-
-      <TouchableOpacity
-        style={styles.startButton}
-        onPress={startConvergence}
-        disabled={loading}
-      >
-        {loading ? (
-          <ActivityIndicator color="#fff" />
-        ) : (
-          <Text style={styles.startButtonText}>Begin Convergence</Text>
-        )}
-      </TouchableOpacity>
-    </View>
-  );
-
-  const renderQuestioning = () => (
-    <KeyboardAvoidingView
-      style={styles.questioningContainer}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    >
-      {currentQuestion && (
-        <>
-          <View style={styles.questionHeader}>
-            <Text style={styles.questionPhase}>{currentQuestion.phase}</Text>
-            <Text style={styles.questionNumber}>
-              Question {currentQuestion.id} of {progress.total}
-            </Text>
-          </View>
-
-          <Text style={[styles.questionText, isTablet && { fontSize: fontSize.large }]}>
-            {currentQuestion.text}
-          </Text>
-
-          <Text style={styles.questionPurpose}>{currentQuestion.purpose}</Text>
-
-          <TextInput
-            style={styles.answerInput}
-            placeholder="Type your answer..."
-            placeholderTextColor="#6b7280"
-            value={answer}
-            onChangeText={setAnswer}
-            multiline
-            textAlignVertical="top"
-            editable={!loading}
-          />
-
-          {sallieResponse ? (
-            <View style={styles.responseContainer}>
-              <Text style={styles.responseLabel}>Sallie</Text>
-              <Text style={styles.responseText}>{sallieResponse}</Text>
-            </View>
-          ) : null}
-
-          <TouchableOpacity
-            style={[styles.submitButton, !answer.trim() && styles.submitButtonDisabled]}
-            onPress={submitAnswer}
-            disabled={loading || !answer.trim()}
-          >
-            {loading ? (
-              <ActivityIndicator color="#fff" />
-            ) : (
-              <Text style={styles.submitButtonText}>Submit Answer</Text>
-            )}
-          </TouchableOpacity>
-        </>
-      )}
-
-      {/* Progress Bar */}
-      <View style={styles.progressContainer}>
-        <View style={styles.progressBar}>
-          <View
-            style={[
-              styles.progressFill,
-              { width: `${(progress.current / progress.total) * 100}%` },
-            ]}
-          />
-        </View>
-        <Text style={styles.progressText}>
-          {progress.current}/{progress.total}
-        </Text>
-      </View>
-    </KeyboardAvoidingView>
-  );
-
-  const renderCompleted = () => (
-    <View style={styles.completedContainer}>
-      <Text style={styles.completedEmoji}>🎉</Text>
-      <Text style={[styles.completedTitle, isTablet && { fontSize: fontSize.xl }]}>
-        Convergence Complete!
-      </Text>
-      <Text style={styles.completedDescription}>
-        Sallie's Heritage has been compiled. She now has a foundational
-        understanding of who you are and how you'd like to work together.
-      </Text>
-      <Text style={styles.completedNote}>
-        You can always revisit and update these settings as your relationship
-        evolves.
-      </Text>
-    </View>
-  );
+    );
+  }
 
   return (
-    <ScrollView
-      style={[styles.container, isTablet && styles.containerTablet]}
-      contentContainerStyle={[styles.content, isTablet && styles.contentTablet]}
+    <KeyboardAvoidingView 
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      {screenState === 'welcome' && renderWelcome()}
-      {screenState === 'questioning' && renderQuestioning()}
-      {screenState === 'completed' && renderCompleted()}
-    </ScrollView>
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+        {/* Header */}
+        <View style={styles.header}>
+          <Text style={styles.title}>Genesis Convergence</Text>
+          <Text style={styles.subtitle}>The sacred ritual that binds Sallie to her Creator</Text>
+        </View>
+
+        {/* Progress Bar */}
+        <View style={styles.progressContainer}>
+          <View style={styles.progressHeader}>
+            <Text style={styles.progressLabel}>Progress</Text>
+            <Text style={styles.progressLabel}>{Math.round(getProgress() * 100)}%</Text>
+          </View>
+          <View style={styles.progressBar}>
+            <View 
+              style={[
+                styles.progressFill,
+                { 
+                  width: `${getProgress() * 100}%`,
+                  backgroundColor: getPhaseColor()
+                }
+              ]}
+            />
+          </View>
+        </View>
+
+        {/* Phase Information */}
+        <View style={[styles.phaseContainer, { borderColor: getPhaseColor() }]}>
+          <Text style={[styles.phaseName, { color: getPhaseColor() }]}>
+            {currentPhase.name}
+          </Text>
+          <Text style={styles.phaseDescription}>{currentPhase.description}</Text>
+          <Text style={styles.questionNumber}>
+            Question {convergenceState.current_question} of {convergenceFlow.getTotalQuestions()}
+          </Text>
+        </View>
+
+        {/* Convergence Visualization */}
+        <View style={styles.visualizationContainer}>
+          <View style={styles.connectionCircles}>
+            {/* Creator Circle */}
+            <View style={styles.circle}>
+              <Text style={styles.circleText}>You</Text>
+            </View>
+            
+            {/* Connection Line */}
+            <View style={styles.connectionLine}>
+              <View 
+                style={[
+                  styles.connectionFill,
+                  { width: `${getConnectionStrength() * 100}%` }
+                ]}
+              />
+            </View>
+            
+            {/* Sallie Circle */}
+            <View style={styles.circle}>
+              <Text style={styles.circleText}>Sallie</Text>
+            </View>
+          </View>
+          
+          {/* Heart Resonance Indicator */}
+          <View style={styles.heartIndicator}>
+            <Text style={styles.heartEmoji}>💜</Text>
+          </View>
+        </View>
+
+        {/* Metrics */}
+        <View style={styles.metricsContainer}>
+          <View style={styles.metricCard}>
+            <Text style={styles.metricValue}>{Math.round(getConnectionStrength() * 100)}%</Text>
+            <Text style={styles.metricLabel}>Connection</Text>
+          </View>
+          <View style={styles.metricCard}>
+            <Text style={styles.metricValue}>{Math.round(getHeartResonance() * 100)}%</Text>
+            <Text style={styles.metricLabel}>Heart Resonance</Text>
+          </View>
+          <View style={styles.metricCard}>
+            <Text style={styles.metricValue}>{Math.round(neuralBridgeState?.imprinting_level * 100 || 0)}%</Text>
+            <Text style={styles.metricLabel}>Imprinting</Text>
+          </View>
+        </View>
+
+        {/* Question */}
+        <View style={styles.questionContainer}>
+          <Text style={styles.questionNumber}>
+            Question {convergenceState.current_question}
+          </Text>
+          <Text style={styles.questionText}>
+            {currentQuestion.text}
+          </Text>
+          <Text style={styles.questionPurpose}>
+            Purpose: {currentQuestion.purpose}
+          </Text>
+        </View>
+
+        {/* Answer Input */}
+        <View style={styles.answerContainer}>
+          <Text style={styles.answerLabel}>Your Response</Text>
+          <TextInput
+            style={styles.answerInput}
+            value={currentAnswer}
+            onChangeText={setCurrentAnswer}
+            placeholder="Share your thoughts with Sallie..."
+            multiline
+            numberOfLines={4}
+            editable={!isProcessing}
+          />
+          <TouchableOpacity
+            style={[
+              styles.submitButton,
+              { opacity: currentAnswer.trim() && !isProcessing ? 1 : 0.5 }
+            ]}
+            onPress={handleSubmitAnswer}
+            disabled={!currentAnswer.trim() || isProcessing}
+          >
+            {isProcessing ? (
+              <ActivityIndicator size="small" color="#ffffff" />
+            ) : (
+              <Text style={styles.submitButtonText}>Submit Response</Text>
+            )}
+          </TouchableOpacity>
+        </View>
+
+        {/* Completion Status */}
+        {convergenceState.completed && (
+          <View style={styles.completionContainer}>
+            <Text style={styles.completionTitle}>Convergence Complete!</Text>
+            <Text style={styles.completionMessage}>
+              Sallie is now fully bound to her Creator. The neural bridge has been established.
+            </Text>
+          </View>
+        )}
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a1a1a',
+    backgroundColor: '#f9fafb',
   },
-  containerTablet: {
-    paddingHorizontal: 24,
+  scrollView: {
+    flex: 1,
+    padding: 20,
   },
-  content: {
-    padding: 16,
-    flexGrow: 1,
-  },
-  contentTablet: {
-    padding: 24,
-    maxWidth: 800,
-    alignSelf: 'center',
-    width: '100%',
-  },
-  welcomeContainer: {
+  loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 40,
   },
-  welcomeTitle: {
+  loadingText: {
+    marginTop: 10,
+    fontSize: 16,
+    color: '#6b7280',
+  },
+  header: {
+    marginBottom: 30,
+  },
+  title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#fff',
-    textAlign: 'center',
-  },
-  welcomeSubtitle: {
-    fontSize: 16,
-    color: '#a78bfa',
-    marginTop: 8,
-  },
-  welcomeDescription: {
-    fontSize: 14,
-    color: '#9ca3af',
-    textAlign: 'center',
-    marginTop: 24,
-    paddingHorizontal: 20,
-    lineHeight: 22,
-  },
-  phasesList: {
-    marginTop: 32,
-    alignSelf: 'stretch',
-    backgroundColor: '#2a2a2a',
-    borderRadius: 12,
-    padding: 16,
-  },
-  phasesTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#fff',
-    marginBottom: 12,
-  },
-  phaseItem: {
-    fontSize: 13,
-    color: '#9ca3af',
+    color: '#111827',
     marginBottom: 8,
   },
-  startButton: {
-    backgroundColor: '#7c3aed',
-    paddingVertical: 14,
-    paddingHorizontal: 32,
-    borderRadius: 12,
-    marginTop: 32,
-    minWidth: 200,
-    alignItems: 'center',
-  },
-  startButtonText: {
-    color: '#fff',
+  subtitle: {
     fontSize: 16,
-    fontWeight: '600',
-  },
-  questioningContainer: {
-    flex: 1,
-  },
-  questionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  questionPhase: {
-    fontSize: 12,
-    color: '#a78bfa',
-    fontWeight: '600',
-  },
-  questionNumber: {
-    fontSize: 12,
     color: '#6b7280',
-  },
-  questionText: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#fff',
-    marginBottom: 12,
-    lineHeight: 28,
-  },
-  questionPurpose: {
-    fontSize: 13,
-    color: '#6b7280',
-    fontStyle: 'italic',
-    marginBottom: 24,
-  },
-  answerInput: {
-    backgroundColor: '#2a2a2a',
-    borderRadius: 12,
-    padding: 16,
-    color: '#fff',
-    fontSize: 16,
-    minHeight: 150,
-    borderWidth: 1,
-    borderColor: '#374151',
-  },
-  responseContainer: {
-    backgroundColor: '#1e1b4b',
-    borderRadius: 12,
-    padding: 16,
-    marginTop: 16,
-  },
-  responseLabel: {
-    fontSize: 12,
-    color: '#a78bfa',
-    fontWeight: '600',
-    marginBottom: 8,
-  },
-  responseText: {
-    fontSize: 14,
-    color: '#fff',
-    lineHeight: 22,
-  },
-  submitButton: {
-    backgroundColor: '#7c3aed',
-    paddingVertical: 14,
-    borderRadius: 12,
-    marginTop: 24,
-    alignItems: 'center',
-  },
-  submitButtonDisabled: {
-    opacity: 0.5,
-  },
-  submitButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
   },
   progressContainer: {
+    marginBottom: 30,
+  },
+  progressHeader: {
     flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 24,
-    gap: 12,
+    justifyContent: 'space-between',
+    marginBottom: 8,
+  },
+  progressLabel: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#374151',
   },
   progressBar: {
-    flex: 1,
-    height: 4,
-    backgroundColor: '#374151',
-    borderRadius: 2,
-    overflow: 'hidden',
+    height: 8,
+    backgroundColor: '#e5e7eb',
+    borderRadius: 4,
   },
-  progressFill: {
+progressFill: {
+    height: '100%',
+    borderRadius: 4,
+  },
+  phaseContainer: {
+    marginBottom: 30,
+    padding: 20,
+    backgroundColor: '#ffffff',
+    borderRadius: 12,
+    borderWidth: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  phaseName: {
+    fontSize: 20,
+    fontWeight: '600',
+    marginBottom: 8,
+  },
+  phaseDescription: {
+    fontSize: 16,
+    color: '#6b7280',
+    marginBottom: 8,
+  },
+phaseQuestionNumber: {
+    fontSize: 14,
+    color: '#9ca3af',
+  },
+  visualizationContainer: {
+    marginBottom: 30,
+    alignItems: 'center',
+  },
+  connectionCircles: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  circle: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: '#8b5cf6',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  circleText: {
+    color: '#ffffff',
+    fontWeight: '600',
+  },
+  connectionLine: {
+    width: 96,
+    height: 4,
+    backgroundColor: '#e5e7eb',
+    marginHorizontal: 16,
+  },
+  connectionFill: {
     height: '100%',
     backgroundColor: '#8b5cf6',
   },
-  progressText: {
+  heartIndicator: {
+    position: 'absolute',
+    top: -16,
+  },
+  heartEmoji: {
+    fontSize: 24,
+  },
+  metricsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 30,
+  },
+  metricCard: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    padding: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+    marginHorizontal: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  metricValue: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#8b5cf6',
+  },
+  metricLabel: {
     fontSize: 12,
     color: '#6b7280',
+    marginTop: 4,
   },
-  completedContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 40,
+  questionContainer: {
+    backgroundColor: '#ffffff',
+    padding: 24,
+    borderRadius: 12,
+    marginBottom: 30,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
-  completedEmoji: {
-    fontSize: 64,
-    marginBottom: 24,
+  questionNumber: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#111827',
+    marginBottom: 12,
   },
-  completedTitle: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#fff',
-    textAlign: 'center',
+  questionText: {
+    fontSize: 18,
+    lineHeight: 24,
+    color: '#374151',
+    marginBottom: 12,
   },
-  completedDescription: {
+  questionPurpose: {
     fontSize: 14,
     color: '#9ca3af',
-    textAlign: 'center',
-    marginTop: 16,
-    paddingHorizontal: 20,
-    lineHeight: 22,
   },
-  completedNote: {
-    fontSize: 13,
-    color: '#6b7280',
+  answerContainer: {
+    backgroundColor: '#ffffff',
+    padding: 24,
+    borderRadius: 12,
+    marginBottom: 30,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  answerLabel: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#374151',
+    marginBottom: 12,
+  },
+  answerInput: {
+    borderWidth: 1,
+    borderColor: '#d1d5db',
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 16,
+    color: '#111827',
+    textAlignVertical: 'top',
+    marginBottom: 16,
+  },
+  submitButton: {
+    backgroundColor: '#8b5cf6',
+    padding: 16,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  submitButtonText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  completionContainer: {
+    backgroundColor: '#f0fdf4',
+    padding: 24,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#86efac',
+    alignItems: 'center',
+  },
+  completionTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#166534',
+    marginBottom: 8,
+  },
+  completionMessage: {
+    fontSize: 16,
+    color: '#15803d',
     textAlign: 'center',
-    marginTop: 12,
-    fontStyle: 'italic',
   },
 });
