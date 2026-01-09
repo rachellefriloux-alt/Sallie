@@ -24,12 +24,16 @@ export * as LimbicEngine from './services/limbicEngine';
 export * as MemoryService from './services/memoryService';
 export * as AgencyService from './services/agencyService';
 
+// Export Unified Dashboard (The "Same House" Interface)
+export * from './components/UnifiedSallieDashboard';
+
 // Unified System Manager
 export class UnifiedSallieSystem {
   private convergence: any;
   private neuralBridge: any;
   private heritage: any;
   private avatar: any;
+  private unifiedDashboard: any;
 
   private initializationPromise: Promise<void> | null = null;
 

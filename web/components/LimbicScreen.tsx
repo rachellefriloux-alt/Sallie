@@ -4,8 +4,10 @@ import { useState, useEffect } from 'react';
 import { LimbicGauges } from './LimbicGauges';
 import { useLimbicStore } from '@/store/useLimbicStore';
 import { useWebSocket } from '@/hooks/useWebSocket';
+import { LimbicEngine, LimbicEngineUtils } from '../../../shared/services/limbicEngine';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const LIMBIC_ENGINE_URL = process.env.NEXT_PUBLIC_LIMBIC_ENGINE_URL || 'http://localhost:8750';
 
 interface LimbicHistoryEntry {
   timestamp: number;
@@ -13,6 +15,11 @@ interface LimbicHistoryEntry {
   warmth: number;
   arousal: number;
   valence: number;
+  empathy: number;
+  intuition: number;
+  creativity: number;
+  wisdom: number;
+  humor: number;
   posture: string;
   event?: string;
 }
@@ -22,27 +29,105 @@ export function LimbicScreen() {
   const [history, setHistory] = useState<LimbicHistoryEntry[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<LimbicHistoryEntry | null>(null);
   const [timeRange, setTimeRange] = useState<'1h' | '24h' | '7d' | '30d'>('24h');
+  const [trustTier, setTrustTier] = useState<any>(null);
+  const [isConnected, setIsConnected] = useState(false);
 
-  const { connect, isConnected } = useWebSocket();
+  const { connect } = useWebSocket();
 
+  // Initialize Limbic Engine service connection
   useEffect(() => {
-    // Load historical data
-    loadHistory();
-
-    // Subscribe to real-time updates
-    connect((data) => {
-      if (data.type === 'limbic_update' && data.state) {
-        updateState(data.state);
-        // Add to history
-        addHistoryEntry(data.state);
+    const initializeLimbicEngine = async () => {
+      try {
+        const limbicService = new LimbicEngine.LimbicEngineServiceImpl();
+        
+        // Load current state
+        const currentState = await limbicService.getCurrentState();
+        updateState(currentState);
+        
+        // Load trust tier
+        const trustInfo = await limbicService.getTrustTier();
+        setTrustTier(trustInfo.current);
+        
+        // Load history
+        const historyResult = await limbicService.getInteractionHistory();
+        const formattedHistory = historyResult.history.map((entry: any) => ({
+          timestamp: entry.timestamp || Date.now(),
+          trust: entry.trust,
+          warmth: entry.warmth,
+          arousal: entry.arousal,
+          valence: entry.valence,
+          empathy: entry.empathy || 0,
+          intuition: entry.intuition || 0,
+          creativity: entry.creativity || 0,
+          wisdom: entry.wisdom || 0,
+          humor: entry.humor || 0,
+          posture: entry.posture,
+          event: entry.event,
+        }));
+        setHistory(formattedHistory);
+        
+        // Set up WebSocket for real-time updates
+        const ws = new LimbicEngine.LimbicEngineWebSocket('ws://localhost:8750');
+        
+        ws.on('connected', () => {
+          setIsConnected(true);
+          console.log('Connected to Limbic Engine WebSocket');
+        });
+        
+        ws.on('disconnected', () => {
+          setIsConnected(false);
+          console.log('Disconnected from Limbic Engine WebSocket');
+        });
+        
+        ws.on('limbic-state', (data) => {
+          updateState(data);
+          addHistoryEntry(data);
+        });
+        
+        ws.on('trust-change', (data) => {
+          setTrustTier(data.tier);
+        });
+        
+        ws.on('perception-result', (data) => {
+          console.log('Perception result:', data);
+        });
+        
+        return () => {
+          ws.disconnect();
+        };
+        
+      } catch (error) {
+        console.error('Failed to initialize Limbic Engine:', error);
+        // Fallback to localStorage for demo
+        loadHistory();
       }
-    });
+    };
+
+    initializeLimbicEngine();
   }, []);
+
+  const addHistoryEntry = (newState: any) => {
+    const entry: LimbicHistoryEntry = {
+      timestamp: Date.now(),
+      trust: newState.trust,
+      warmth: newState.warmth,
+      arousal: newState.arousal,
+      valence: newState.valence,
+      empathy: newState.empathy || 0,
+      intuition: newState.intuition || 0,
+      creativity: newState.creativity || 0,
+      wisdom: newState.wisdom || 0,
+      humor: newState.humor || 0,
+      posture: newState.posture,
+      event: 'state_update',
+    };
+    
+    setHistory(prev => [entry, ...prev].slice(0, 1000)); // Keep last 1000 entries
+  };
 
   const loadHistory = async () => {
     try {
-      // In a real implementation, this would fetch from an API endpoint
-      // For now, we'll use localStorage or fetch from thoughts.log
+      // Fallback to localStorage for demo
       const stored = localStorage.getItem('limbic_history');
       if (stored) {
         setHistory(JSON.parse(stored));

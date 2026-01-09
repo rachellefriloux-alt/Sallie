@@ -11,10 +11,12 @@ import {
 } from 'react-native';
 import { Card } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { LimbicEngine, LimbicEngineUtils } from '../../../shared/services/limbicEngine';
 
 const { width } = Dimensions.get('window');
 
 const API_BASE = 'http://192.168.1.47:8742';
+const LIMBIC_ENGINE_URL = 'http://192.168.1.47:8750';
 
 interface LifeRole {
   id: string;
