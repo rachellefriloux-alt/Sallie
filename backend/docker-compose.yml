@@ -1,9 +1,12 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 name: sallie-studio
 
 services:
   # API Gateway
 =======
+=======
+>>>>>>> Stashed changes
 version: '3.8'
 
 services:
@@ -141,11 +144,15 @@ services:
           memory: 4G
 
   # Core Backend Services
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   api-gateway:
     build:
       context: ./services/api-gateway
       dockerfile: Dockerfile
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     ports:
       - "8742:8742"
@@ -160,6 +167,8 @@ services:
       - redis
       - postgres
 =======
+=======
+>>>>>>> Stashed changes
     container_name: sallie-api-gateway
     ports:
       - "8742:8742"
@@ -190,6 +199,9 @@ services:
       - minio
       - ollama
       - qdrant
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     networks:
       - sallie-network
@@ -200,9 +212,13 @@ services:
       timeout: 10s
       retries: 3
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       start_period: 40s
 
   # Authentication Service
+=======
+
+>>>>>>> Stashed changes
 =======
 
 >>>>>>> Stashed changes
@@ -210,6 +226,7 @@ services:
     build:
       context: ./services/auth-service
       dockerfile: Dockerfile
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     ports:
       - "8743:8743"
@@ -310,6 +327,8 @@ services:
       - SMTP_PASS=${SMTP_PASS}
       - PUSH_SERVICE_KEY=${PUSH_SERVICE_KEY}
 =======
+=======
+>>>>>>> Stashed changes
     container_name: sallie-auth-service
     ports:
       - "8743:8743"
@@ -329,6 +348,9 @@ services:
       - SMTP_PORT=${SMTP_PORT:-587}
       - SMTP_USER=${SMTP_USER}
       - SMTP_PASS=${SMTP_PASS}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     depends_on:
       - postgres
@@ -336,6 +358,7 @@ services:
     networks:
       - sallie-network
     restart: unless-stopped
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8746/health"]
@@ -414,6 +437,8 @@ services:
       - ./data:/app/data
     depends_on:
 =======
+=======
+>>>>>>> Stashed changes
 
   # Extended Sallie Services
   limbic-engine:
@@ -474,11 +499,15 @@ services:
       - REDIS_PORT=6379
     depends_on:
       - qdrant
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       - redis
     networks:
       - sallie-network
     restart: unless-stopped
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     deploy:
       resources:
@@ -508,6 +537,8 @@ services:
       - KAFKA_BROKERS=kafka:9092
       - MAX_CONNECTIONS=${MAX_CONNECTIONS:-10000}
 =======
+=======
+>>>>>>> Stashed changes
 
   agency-service:
     build:
@@ -566,6 +597,9 @@ services:
       - VOICE_ENABLED=true
       - EMAIL_ENABLED=true
       - FILE_INTERFACE_ENABLED=true
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     depends_on:
       - redis
@@ -573,6 +607,7 @@ services:
     networks:
       - sallie-network
     restart: unless-stopped
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8749/health"]
@@ -824,6 +859,8 @@ volumes:
   prometheus_data:
   grafana_data:
 =======
+=======
+>>>>>>> Stashed changes
 
   sensor-array-service:
     build:
@@ -1006,6 +1043,9 @@ volumes:
     driver: local
   omnis_data:
     driver: local
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 networks:

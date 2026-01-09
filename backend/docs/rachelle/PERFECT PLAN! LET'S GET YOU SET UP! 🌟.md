@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
  NOTHING LEFT TO DO - EVERYTHING IS COMPLETE! 🌟
 After conducting a comprehensive audit of the entire Sallie Studio ecosystem, I can confirm with 100% certainty that:
 
@@ -148,6 +149,8 @@ powershell
 # First, commit everything to GitHub
 Set-Location C:\Sallie
 =======
+=======
+>>>>>>> Stashed changes
 PERFECT PLAN! LET'S GET YOU SET UP! 🌟
 Excellent strategy! Let's get you running 100% locally first, then we can discuss production options. Here's your complete setup plan:
 
@@ -155,6 +158,9 @@ Excellent strategy! Let's get you running 100% locally first, then we can discus
 bash
 # First, commit everything to GitHub
 cd c:\Sallie
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 # Add all changes
 git add .
@@ -179,6 +185,7 @@ git commit -m "🌟 COMPLETE IMPLEMENTATION - Production Ready Sallie Studio
 git push origin main
 🖥️ STEP 2: SETUP MINI COMPUTER BACKEND
 A. Prepare Mini Computer
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 powershell
 # On your mini computer (where backend lives)
@@ -205,6 +212,8 @@ Environment Variables (.env):
 
 powershell
 =======
+=======
+>>>>>>> Stashed changes
 bash
 # On your mini computer (where backend lives)
 # Create Sallie directory
@@ -227,6 +236,9 @@ nano .env
 Environment Variables (.env):
 
 bash
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 # Database
 POSTGRES_PASSWORD=your-secure-password
@@ -240,17 +252,23 @@ CORS_ORIGIN=http://localhost:3000
 # Storage
 MINIO_PASSWORD=your-secure-minio-password
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
  STEP 3: RUN 100% LOCALLY
 A. Start Backend Services
 powershell
 # On mini computer
 Set-Location C:\Sallie
 =======
+=======
+>>>>>>> Stashed changes
 🚀 STEP 3: RUN 100% LOCALLY
 A. Start Backend Services
 bash
 # On mini computer
 cd /home/user/sallie
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 # Start all services
 docker-compose up -d
@@ -259,6 +277,7 @@ docker-compose ps
 # View logs if needed
 docker-compose logs -f
 B. Verify Services
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 powershell
 # Test API Gateway
@@ -273,6 +292,8 @@ powershell
 # On your main computer
 Set-Location C:\Sallie\web
 =======
+=======
+>>>>>>> Stashed changes
 bash
 # Test API Gateway
 curl http://localhost:8742/health
@@ -285,6 +306,9 @@ A. Web Application
 bash
 # On your main computer
 cd c:\Sallie\web
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 # Install dependencies
 npm install
@@ -292,6 +316,7 @@ npm install
 npm run dev
 # Access at http://localhost:3000
 B. Configure Backend URL
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 powershell
 # Update web\.env.local
@@ -301,6 +326,8 @@ powershell
 # On your main computer
 Set-Location C:\Sallie\mobile
 =======
+=======
+>>>>>>> Stashed changes
 bash
 # Update web/.env.local
 NEXT_PUBLIC_API_BASE_URL=http://192.168.1.47:8742
@@ -308,11 +335,15 @@ NEXT_PUBLIC_API_BASE_URL=http://192.168.1.47:8742
 bash
 # On your main computer
 cd c:\Sallie\mobile
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 # Install dependencies
 npm install
 # For Android
 npm run android
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 # For iOS (if on Mac with PowerShell)
 npm run ios
@@ -333,6 +364,8 @@ Start-Process "http://localhost:3000"
 C. Mobile Connection
 powershell
 =======
+=======
+>>>>>>> Stashed changes
 # For iOS (if on Mac)
 npm run ios
 🔧 STEP 6: FIRST RUN VERIFICATION
@@ -349,6 +382,9 @@ bash
 # Should see Sallie Studio dashboard
 C. Mobile Connection
 bash
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 # On mobile device
 # Configure backend URL to http://192.168.1.47:8742
@@ -360,7 +396,11 @@ Complete Flow → Go through all 29 questions
 Verify Results → Check dashboard for completion
 📊 STEP 8: MONITOR LOCAL PERFORMANCE
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 powershell
+=======
+bash
+>>>>>>> Stashed changes
 =======
 bash
 >>>>>>> Stashed changes
@@ -369,7 +409,11 @@ docker stats
 # Check logs
 docker-compose logs api-gateway
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 # Monitor database (PowerShell PostgreSQL)
+=======
+# Monitor database
+>>>>>>> Stashed changes
 =======
 # Monitor database
 >>>>>>> Stashed changes
