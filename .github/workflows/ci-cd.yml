@@ -1,0 +1,500 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+env:
+  NODE_VERSION: '18'
+  PYTHON_VERSION: '3.11'
+  DOTNET_VERSION: '8.0'
+
+jobs:
+  # Web Platform Tests
+  web-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./web
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        cache-dependency-path: web/package-lock.json
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run linting
+      run: npm run lint
+
+    - name: Run unit tests
+      run: npm run test:coverage
+
+    - name: Run integration tests
+      run: npm run test:integration
+
+    - name: Install Playwright browsers
+      run: npx playwright install --with-deps
+
+    - name: Run E2E tests
+      run: npm run test:e2e
+
+    - name: Run accessibility tests
+      run: npm run test:accessibility
+
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v3
+      with:
+        file: web/coverage/lcov.info
+        flags: web
+        name: web-coverage
+
+    - name: Upload Playwright report
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: playwright-report
+        path: web/playwright-report/
+
+  # Mobile Platform Tests
+  mobile-tests:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./mobile
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        cache-dependency-path: mobile/package-lock.json
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run linting
+      run: npm run lint
+
+    - name: Run unit tests
+      run: npm run test:coverage
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v2
+
+    - name: Setup iOS Simulator
+      run: |
+        xcrun simctl create "iPhone 14" "iPhone 14" || true
+        xcrun simctl boot "iPhone 14" || true
+
+    - name: Build Android app
+      run: |
+        cd android
+        ./gradlew assembleDebug
+
+    - name: Run Android E2E tests
+      run: npm run test:e2e:android
+
+    - name: Run iOS E2E tests
+      run: npm run test:e2e:ios
+
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v3
+      with:
+        file: mobile/coverage/lcov.info
+        flags: mobile
+        name: mobile-coverage
+
+  # Desktop Platform Tests
+  desktop-tests:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ./SallieStudioApp
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build solution
+      run: dotnet build --no-restore
+
+    - name: Run unit tests
+      run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage"
+
+    - name: Run UI tests
+      run: dotnet test SallieStudioApp.UITests --no-build --verbosity normal
+
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v3
+      with:
+        file: SallieStudioApp/coverage.cobertura.xml
+        flags: desktop
+        name: desktop-coverage
+
+  # Backend Tests
+  backend-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./server
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest pytest-cov pytest-asyncio
+
+    - name: Run linting
+      run: |
+        pip install flake8 black
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        black --check .
+
+    - name: Run unit tests
+      run: pytest tests/unit/ -v --cov=server --cov-report=xml --cov-report=html
+
+    - name: Run integration tests
+      run: pytest tests/integration/ -v
+
+    - name: Run performance tests
+      run: pytest tests/performance/ -v --benchmark-only
+
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v3
+      with:
+        file: server/coverage.xml
+        flags: backend
+        name: backend-coverage
+
+  # Security Scanning
+  security-scan:
+    runs-on: ubuntu-latest
+    needs: [web-tests, mobile-tests, desktop-tests, backend-tests]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+
+    - name: Upload Trivy scan results
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: 'trivy-results.sarif'
+
+    - name: Run CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+      with:
+        languages: javascript, python, csharp
+
+  # Build and Package
+  build:
+    runs-on: ubuntu-latest
+    needs: [web-tests, mobile-tests, desktop-tests, backend-tests, security-scan]
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    # Build Web Application
+    - name: Build Web App
+      run: |
+        cd web
+        npm ci
+        npm run build
+
+    # Build Mobile Applications
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v2
+
+    - name: Build Android App
+      run: |
+        cd mobile
+        npm ci
+        cd android
+        ./gradlew assembleRelease
+
+    # Build Desktop Application
+    - name: Build Desktop App
+      run: |
+        cd SallieStudioApp
+        dotnet restore
+        dotnet build --configuration Release
+
+    # Package Backend
+    - name: Package Backend
+      run: |
+        cd server
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    # Create Docker images
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push backend image
+      uses: docker/build-push-action@v4
+      with:
+        context: ./server
+        push: true
+        tags: sallie-studio/backend:latest
+
+    - name: Build and push web image
+      uses: docker/build-push-action@v4
+      with:
+        context: ./web
+        push: true
+        tags: sallie-studio/web:latest
+
+  # Deploy to Staging
+  deploy-staging:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/develop'
+    environment: staging
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Deploy to staging
+      run: |
+        echo "Deploying to staging environment..."
+        # Add your deployment commands here
+        # For example, using Docker Compose or Kubernetes
+
+    - name: Run smoke tests
+      run: |
+        echo "Running smoke tests..."
+        # Add smoke test commands here
+
+  # Deploy to Production
+  deploy-production:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    environment: production
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Deploy to production
+      run: |
+        echo "Deploying to production environment..."
+        # Add your deployment commands here
+        # For example, using Docker Compose or Kubernetes
+
+    - name: Run health checks
+      run: |
+        echo "Running health checks..."
+        # Add health check commands here
+
+    - name: Notify deployment
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        channel: '#deployments'
+        webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+      if: always()
+
+  # Performance Monitoring
+  performance-monitoring:
+    runs-on: ubuntu-latest
+    needs: deploy-staging
+    if: github.ref == 'refs/heads/develop'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Install Lighthouse CI
+      run: npm install -g @lhci/cli@0.12.x
+
+    - name: Run Lighthouse CI
+      run: lhci autorun
+      env:
+        LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+    - name: Upload Lighthouse results
+      uses: actions/upload-artifact@v3
+      with:
+        name: lighthouse-results
+        path: .lighthouseci/
+
+  # Documentation Generation
+  docs:
+    runs-on: ubuntu-latest
+    needs: [web-tests, mobile-tests, desktop-tests, backend-tests]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Generate API documentation
+      run: |
+        cd server
+        python -c "
+        import json
+        from sallie_server_with_sync import app
+        import fastapi
+        import json
+        openapi_schema = app.openapi()
+        with open('../docs/api/openapi.json', 'w') as f:
+            json.dump(openapi_schema, f, indent=2)
+        "
+
+    - name: Build documentation site
+      run: |
+        # Install documentation generator
+        npm install -g docsify-cli
+        # Generate documentation
+        docsify serve docs/ -o docs/_site
+
+    - name: Deploy documentation
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs/_site
+        destination_dir: docs
+
+  # Release Management
+  release:
+    runs-on: ubuntu-latest
+    needs: [deploy-production, performance-monitoring]
+    if: github.ref == 'refs/heads/main' && contains(github.event.head_commit.message, '[release]')
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Generate changelog
+      run: |
+        # Generate changelog from commits
+        git log --oneline --since="$(git describe --tags --abbrev=0)" > CHANGELOG.md
+
+    - name: Create Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ github.run_number }}
+        release_name: Release v${{ github.run_number }}
+        body_path: CHANGELOG.md
+        draft: false
+        prerelease: false
+
+    - name: Publish to npm (if web package)
+      run: |
+        cd web
+        npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    - name: Publish to PyPI (if backend package)
+      run: |
+        cd server
+        python setup.py sdist bdist_wheel
+        twine upload dist/*
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+
+  # Notification
+  notify:
+    runs-on: ubuntu-latest
+    needs: [web-tests, mobile-tests, desktop-tests, backend-tests, security-scan]
+    if: always()
+
+    steps:
+    - name: Notify on success
+      if: needs.web-tests.result == 'success' && needs.mobile-tests.result == 'success' && needs.desktop-tests.result == 'success' && needs.backend-tests.result == 'success'
+      uses: 8398a7/action-slack@v3
+      with:
+        status: success
+        channel: '#ci-cd'
+        message: '✅ All tests passed successfully!'
+        webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+
+    - name: Notify on failure
+      if: needs.web-tests.result == 'failure' || needs.mobile-tests.result == 'failure' || needs.desktop-tests.result == 'failure' || needs.backend-tests.result == 'failure'
+      uses: 8398a7/action-slack@v3
+      with:
+        status: failure
+        channel: '#ci-cd'
+        message: '❌ Some tests failed. Please check the logs.'
+        webhook_url: ${{ secrets.SLACK_WEBHOOK }}

@@ -11,13 +11,18 @@ export * from './convergence/flow';
 export * from './convergence/enhanced_flow';
 
 // Export Imprinting System
-export * from './imprinting/neuralBridge';
+export * as NeuralBridge from './imprinting/neuralBridge';
 
 // Export Heritage System
-export * from './heritage/identity';
+export * as HeritageIdentity from './heritage/identity';
 
 // Export Avatar System
-export * from './avatar/selection';
+export * as AvatarSelection from './avatar/selection';
+
+// Export Backend Service Interfaces
+export * as LimbicEngine from './services/limbicEngine';
+export * as MemoryService from './services/memoryService';
+export * as AgencyService from './services/agencyService';
 
 // Unified System Manager
 export class UnifiedSallieSystem {
@@ -26,27 +31,56 @@ export class UnifiedSallieSystem {
   private heritage: any;
   private avatar: any;
 
+  private initializationPromise: Promise<void> | null = null;
+
   constructor() {
-    this.initializeSystems();
+    // Initialize systems asynchronously
+    this.initializationPromise = this.initializeSystems();
   }
 
-  private initializeSystems(): void {
-    // Import systems dynamically to avoid circular dependencies
-    const { getConvergenceFlow } = require('./convergence/flow');
-    const { getNeuralBridge } = require('./imprinting/neuralBridge');
-    const { getHeritageIdentity } = require('./heritage/identity');
-    const { getAvatarSelection } = require('./avatar/selection');
+  private async initializeSystems(): Promise<void> {
+    try {
+      // Import systems dynamically to avoid circular dependencies
+      const convergenceModule = await import('./convergence/flow');
+      const neuralBridgeModule = await import('./imprinting/neuralBridge');
+      const heritageModule = await import('./heritage/identity');
+      const avatarModule = await import('./avatar/selection');
 
-    this.convergence = getConvergenceFlow();
-    this.neuralBridge = getNeuralBridge();
-    this.heritage = getHeritageIdentity();
-    this.avatar = getAvatarSelection();
+      this.convergence = convergenceModule.getConvergenceFlow();
+      this.neuralBridge = neuralBridgeModule.getNeuralBridge();
+      this.heritage = heritageModule.getHeritageIdentity();
+      this.avatar = avatarModule.getAvatarSelection();
+    } catch (error) {
+      console.error('Failed to initialize systems:', error);
+      // Fallback to direct imports if dynamic imports fail
+      const { getConvergenceFlow } = await import('./convergence/flow');
+      const { getNeuralBridge } = await import('./imprinting/neuralBridge');
+      const { getHeritageIdentity } = await import('./heritage/identity');
+      const { getAvatarSelection } = await import('./avatar/selection');
+
+      this.convergence = getConvergenceFlow();
+      this.neuralBridge = getNeuralBridge();
+      this.heritage = getHeritageIdentity();
+      this.avatar = getAvatarSelection();
+    }
+  }
+
+  // Helper method to ensure systems are initialized
+  private async ensureInitialized(): Promise<void> {
+    if (this.initializationPromise) {
+      await this.initializationPromise;
+    }
   }
 
   // Unified Genesis Flow
   async startGenesis(): Promise<void> {
+    // Ensure systems are initialized before use
+    await this.ensureInitialized();
+    
     // Activate neural bridge
-    this.neuralBridge.activate();
+    if (this.neuralBridge) {
+      this.neuralBridge.activate();
+    }
     
     // Start convergence
     this.convergence.on('answerSubmitted', (response: any) => {
@@ -103,34 +137,41 @@ export class UnifiedSallieSystem {
   }
 
   private completeGenesis(convergenceState: any): void {
-    // Update heritage with convergence data
-    this.heritage.updateConvergenceMetrics({
-      final_strength: convergenceState.connection_strength,
-      imprinting_depth: convergenceState.imprinting_level,
-      synchronization: convergenceState.synchronization,
-      heart_resonance: convergenceState.heart_resonance,
-      thought_alignment: convergenceState.thought_alignment,
-      consciousness_binding: convergenceState.consciousness_binding
-    });
+    // Ensure systems are initialized before use
+    this.ensureInitialized().then(() => {
+      // Update heritage with convergence data
+      this.heritage.updateConvergenceMetrics({
+        final_strength: convergenceState.connection_strength,
+        imprinting_depth: convergenceState.imprinting_level,
+        synchronization: convergenceState.synchronization,
+        heart_resonance: convergenceState.heart_resonance,
+        thought_alignment: convergenceState.thought_alignment,
+        consciousness_binding: convergenceState.consciousness_binding
+      });
 
-    // Update heritage with neural bridge data
-    this.heritage.updateNeuralBridge(this.neuralBridge.getState());
+      // Update heritage with neural bridge data
+      this.heritage.updateNeuralBridge(this.neuralBridge.getState());
 
-    // Update heritage with personality imprint
-    this.heritage.updatePersonalityImprint(this.neuralBridge.getPersonalityImprint());
+      // Update heritage with personality imprint
+      this.heritage.updatePersonalityImprint(this.neuralBridge.getPersonalityImprint());
 
-    // Update heritage with genesis answers
-    this.heritage.updateGenesisAnswers(convergenceState.answers);
+      // Update heritage with genesis answers
+      this.heritage.updateGenesisAnswers(convergenceState.answers);
 
-    // Trigger completion
-    this.heritage.on('heritageUpdated', (heritage: any) => {
-      console.log('Genesis completed successfully!');
-      console.log('Sallie is now fully integrated with her Creator.');
+      // Trigger completion
+      this.heritage.on('heritageUpdated', (heritage: any) => {
+        console.log('Genesis completed successfully!');
+        console.log('Sallie is now fully integrated with her Creator.');
+      });
+    }).catch(error => {
+      console.error('Failed to complete genesis:', error);
     });
   }
 
   // Unified Avatar Selection
   async selectAvatar(avatarId: string): Promise<void> {
+    await this.ensureInitialized();
+    
     this.avatar.selectAvatar(avatarId);
     
     // Update heritage with avatar choice
@@ -141,7 +182,9 @@ export class UnifiedSallieSystem {
   }
 
   // Unified State Management
-  getUnifiedState(): any {
+  async getUnifiedState(): Promise<any> {
+    await this.ensureInitialized();
+    
     return {
       convergence: this.convergence.getState(),
       neuralBridge: this.neuralBridge.getState(),

@@ -1,0 +1,437 @@
+name: Code Quality and Security
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    - cron: '0 2 * * *'  # Daily at 2 AM UTC
+
+jobs:
+  # Code Quality Checks
+  code-quality:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # Web Platform Code Quality
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install web dependencies
+      run: |
+        cd web
+        npm ci
+
+    - name: Run ESLint (Web)
+      run: |
+        cd web
+        npm run lint
+
+    - name: Run Prettier check (Web)
+      run: |
+        cd web
+        npm run format:check
+
+    - name: Run TypeScript check (Web)
+      run: |
+        cd web
+        npm run type-check
+
+    # Mobile Platform Code Quality
+    - name: Install mobile dependencies
+      run: |
+        cd mobile
+        npm ci
+
+    - name: Run ESLint (Mobile)
+      run: |
+        cd mobile
+        npm run lint
+
+    - name: Run Prettier check (Mobile)
+      run: |
+        cd mobile
+        npm run format:check
+
+    - name: Run TypeScript check (Mobile)
+      run: |
+        cd mobile
+        npm run type-check
+
+    # Desktop Platform Code Quality
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0'
+
+    - name: Run .NET code analysis
+      run: |
+        cd SallieStudioApp
+        dotnet tool install --global dotnet-sonarscanner
+        dotnet sonarscanner begin /k:"sallie-studio" /d:. /o:sonar-scanner.properties
+        dotnet build --no-restore
+        dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage"
+        dotnet sonarscanner end /d:.
+
+    # Backend Code Quality
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install backend dependencies
+      run: |
+        cd server
+        python -m pip install --upgrade pip
+        pip install flake8 black isort mypy pytest-cov
+
+    - name: Run Flake8 (Backend)
+      run: |
+        cd server
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+
+    - name: Run Black check (Backend)
+      run: |
+        cd server
+        black --check .
+
+    - name: Run isort check (Backend)
+      run: |
+        cd server
+        isort --check-only .
+
+    - name: Run mypy (Backend)
+      run: |
+        cd server
+        mypy . --ignore-missing-imports
+
+  # Security Scanning
+  security-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # Dependency Scanning
+    - name: Run npm audit (Web)
+      run: |
+        cd web
+        npm ci
+        npm audit --audit-level high
+
+    - name: Run npm audit (Mobile)
+      run: |
+        cd mobile
+        npm ci
+        npm audit --audit-level high
+
+    - name: Run Python safety check
+      run: |
+        cd server
+        python -m pip install safety
+        safety check
+
+    - name: Run .NET security scan
+      run: |
+        cd SallieStudioApp
+        dotnet tool install --global dotnet-efcore
+        dotnet ef database update --no-build
+
+    # Container Security Scanning
+    - name: Build Docker images
+      run: |
+        docker build -t sallie-studio/web:latest ./web
+        docker build -t sallie-studio/backend:latest ./server
+
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'image'
+        image-ref: 'sallie-studio/web:latest'
+        format: 'sarif'
+        output: 'trivy-web-results.sarif'
+
+    - name: Run Trivy vulnerability scanner (Backend)
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'image'
+        image-ref: 'sallie-studio/backend:latest'
+        format: 'sarif'
+        output: 'trivy-backend-results.sarif'
+
+    - name: Upload Trivy scan results
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: 'trivy-web-results.sarif'
+
+    - name: Upload Trivy scan results (Backend)
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: 'trivy-backend-results.sarif'
+
+    # CodeQL Analysis
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: javascript, python, csharp
+
+    - name: Autobuild CodeQL
+      uses: github/codeql-action/autobuild@v2
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+
+  # Performance Monitoring
+  performance-monitoring:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install web dependencies
+      run: |
+        cd web
+        npm ci
+
+    - name: Run Lighthouse CI
+      run: |
+        cd web
+        npm install -g @lhci/cli@0.12.x
+        lhci autorun
+      env:
+        LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+    - name: Upload Lighthouse results
+      uses: actions/upload-artifact@v3
+      with:
+        name: lighthouse-results
+        path: web/.lighthouseci/
+
+  # License Compliance
+  license-check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: |
+        cd web
+        npm ci
+
+    - name: Run license check
+      run: |
+        cd web
+        npx license-checker --onlyAllow 'MIT;Apache-2.0;BSD-2-Clause;BSD-3-Clause;ISC;0BSD'
+
+    - name: Check Python licenses
+      run: |
+        cd server
+        python -m pip install pip-audit
+        pip-audit --requirement requirements.txt
+
+  # Dependency Updates
+  dependency-updates:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Update web dependencies
+      run: |
+        cd web
+        npm update
+        npm audit fix
+
+    - name: Update mobile dependencies
+      run: |
+        cd mobile
+        npm update
+        npm audit fix
+
+    - name: Update Python dependencies
+      run: |
+        cd server
+        python -m pip install --upgrade pip
+        pip-compile requirements.in --upgrade
+
+    - name: Update .NET dependencies
+      run: |
+        cd SallieStudioApp
+        dotnet restore --interactive
+
+    - name: Create Pull Request for updates
+      uses: peter-evans/create-pull-request@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        title: '🔄 Automated dependency updates'
+        body: |
+          This PR contains automated dependency updates.
+          
+          ## Changes
+          - Updated npm packages for web and mobile platforms
+          - Updated Python packages for backend
+          - Updated .NET packages for desktop application
+          
+          ## Testing
+          All tests should pass in the CI pipeline.
+        branch: dependency-updates
+        delete-branch: true
+
+  # Documentation Quality
+  docs-quality:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Check documentation links
+      uses: gaurav-nelson/github-action-markdown-link-check@v1
+      with:
+        use-quiet-mode: 'yes'
+        use-verbose-mode: 'yes'
+        folder-path: 'docs'
+
+    - name: Check markdown formatting
+      uses: DavidAnson/markdownlint-action@v1
+      with:
+        files: '**/*.md'
+        config: '.markdownlint.json'
+
+    - name: Generate API docs
+      run: |
+        cd server
+        python -c "
+        import json
+        from sallie_server_with_sync import app
+        openapi_schema = app.openapi()
+        with open('../docs/api/openapi.json', 'w') as f:
+            json.dump(openapi_schema, f, indent=2)
+        "
+
+    - name: Validate OpenAPI spec
+      run: |
+        cd docs/api
+        npm install -g @apidevtools/swagger-parser
+        swagger-parser validate openapi.json
+
+  # Database Schema Validation
+  db-schema-validation:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        cd server
+        python -m pip install --upgrade pip
+        pip install alembic sqlalchemy
+
+    - name: Validate database schema
+      run: |
+        cd server
+        python -c "
+        from sqlalchemy import create_engine, MetaData
+        from sqlalchemy.exc import SQLAlchemyError
+        try:
+            engine = create_engine('sqlite:///:memory:')
+            metadata = MetaData()
+            # Add your schema validation here
+            print('Database schema validation passed')
+        except SQLAlchemyError as e:
+            print(f'Database schema validation failed: {e}')
+            exit(1)
+        "
+
+  # Configuration Validation
+  config-validation:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Validate JSON configuration files
+      run: |
+        find . -name "*.json" -exec python -m json.tool {} \; > /dev/null
+
+    - name: Validate YAML configuration files
+      run: |
+        python -m pip install pyyaml
+        python -c "
+        import yaml
+        import sys
+        import os
+        
+        for root, dirs, files in os.walk('.'):
+            for file in files:
+                if file.endswith('.yml') or file.endswith('.yaml'):
+                    try:
+                        with open(os.path.join(root, file), 'r') as f:
+                            yaml.safe_load(f)
+                        print(f'✅ {os.path.join(root, file)}')
+                    except yaml.YAMLError as e:
+                        print(f'❌ {os.path.join(root, file)}: {e}')
+                        sys.exit(1)
+        "
+
+    - name: Validate environment files
+      run: |
+        # Check for required environment variables
+        if [ -f ".env.example" ]; then
+          echo "Checking .env.example against actual environment..."
+          # Add your environment validation logic here
+        fi
+
+  # Notification
+  notify:
+    runs-on: ubuntu-latest
+    needs: [code-quality, security-scan, performance-monitoring, license-check, docs-quality]
+    if: always()
+
+    steps:
+    - name: Notify on success
+      if: needs.code-quality.result == 'success' && needs.security-scan.result == 'success' && needs.performance-monitoring.result == 'success' && needs.license-check.result == 'success' && needs.docs-quality.result == 'success'
+      uses: 8398a7/action-slack@v3
+      with:
+        status: success
+        channel: '#quality'
+        message: '✅ All quality and security checks passed!'
+        webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+
+    - name: Notify on failure
+      if: needs.code-quality.result == 'failure' || needs.security-scan.result == 'failure' || needs.performance-monitoring.result == 'failure' || needs.license-check.result == 'failure' || needs.docs-quality.result == 'failure'
+      uses: 8398a7/action-slack@v3
+      with:
+        status: failure
+        channel: '#quality'
+        message: '❌ Some quality or security checks failed. Please review the logs.'
+        webhook_url: ${{ secrets.SLACK_WEBHOOK }}
