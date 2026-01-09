@@ -1,0 +1,89 @@
+# Sallie Backend Dependencies - Enhanced with Human-Level Expansion
+fastapi==0.104.1
+uvicorn==0.24.0
+pydantic==2.5.0
+python-multipart==0.0.6
+websockets==12.0
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+aiofiles==23.2.1
+httpx==0.25.2
+
+# Human-Level Expansion Dependencies
+numpy==1.24.3
+scipy==1.11.4
+scikit-learn==1.3.2
+nltk==3.8.1
+textblob==0.17.1
+spacy==3.7.2
+transformers==4.35.2
+torch==2.1.1
+sentence-transformers==2.2.2
+openai==1.3.7
+
+# Core System Dependencies
+asyncio==3.4.3
+logging==0.4.9.6
+datetime==5.2
+pathlib==1.0.1
+typing==3.7.4
+enum==0.4.6
+collections==0.5.0
+hashlib==20081119
+json==2.0.9
+os==0.1.4
+time==1.6.0
+uuid==1.30
+base64==1.1.0
+secrets==1.0.2
+hmac==2020.1.30
+jwt==1.3.1
+cryptography==41.0.7
+python-dotenv==1.0.0
+
+# Azure Services
+azure-cognitiveservices-speech==1.34.0
+azure-ai-translation-text==1.0.1
+azure-cognitiveservices-vision-computational-vision==0.5.0
+azure-ai-textanalytics==5.3.0
+
+# Network and HTTP
+requests==2.31.0
+aiohttp==3.9.1
+
+# Database and Storage
+redis==5.0.1
+celery==5.3.4
+sqlalchemy==2.0.23
+alembic==1.12.1
+psycopg2-binary==2.9.9
+pymongo==4.6.0
+qdrant-client==1.6.9
+
+# Data Processing and Analysis
+pandas==2.1.3
+matplotlib==3.8.2
+seaborn==0.13.0
+plotly==5.17.0
+
+# Web Frameworks
+streamlit==1.28.2
+dash==2.14.2
+flask==3.0.0
+django==4.2.7
+
+# Development Tools
+pytest==7.4.3
+pytest-asyncio==0.21.1
+black==23.11.0
+flake8==6.1.0
+mypy==1.7.1
+coverage==7.3.2
+sphinx==7.2.6
+mkdocs==1.5.3
+mkdocs-material==9.4.8
+
+# Computer Vision
+torchvision==0.16.1
+pillow==10.1.0
+opencv-python==4.8.1.78

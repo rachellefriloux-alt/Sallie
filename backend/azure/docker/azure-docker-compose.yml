@@ -1,0 +1,246 @@
+version: '3.8'
+
+services:
+  # API Gateway
+  api-gateway:
+    build: ../../services/api-gateway
+    container_name: sallie-api-gateway
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - AUTH_SERVICE_URL=http://auth-service:3001
+      - CHAT_SERVICE_URL=http://chat-service:3002
+      - ANALYTICS_SERVICE_URL=http://analytics-service:3003
+      - NOTIFICATION_SERVICE_URL=http://notification-service:3004
+      - FILE_SERVICE_URL=http://file-service:3005
+      - AI_SERVICE_URL=http://ai-service:3006
+      - WEBSOCKET_SERVICE_URL=http://websocket-service:3007
+      - PYTHON_AI_SERVICE_URL=http://python-ai-service:3008
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - sallie-network
+    restart: unless-stopped
+
+  # Auth Service
+  auth-service:
+    build: ../../services/auth-service
+    container_name: sallie-auth-service
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - JWT_SECRET=${JWT_SECRET}
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - sallie-network
+    restart: unless-stopped
+
+  # Chat Service
+  chat-service:
+    build: ../../services/chat-service
+    container_name: sallie-chat-service
+    ports:
+      - "3002:3002"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - JWT_SECRET=${JWT_SECRET}
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - sallie-network
+    restart: unless-stopped
+
+  # Analytics Service
+  analytics-service:
+    build: ../../services/analytics-service
+    container_name: sallie-analytics-service
+    ports:
+      - "3003:3003"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - ELASTICSEARCH_URL=${ELASTICSEARCH_URL}
+    depends_on:
+      - redis
+      - postgres
+      - elasticsearch
+    networks:
+      - sallie-network
+    restart: unless-stopped
+
+  # Notification Service
+  notification-service:
+    build: ../../services/notification-service
+    container_name: sallie-notification-service
+    ports:
+      - "3004:3004"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - sallie-network
+    restart: unless-stopped
+
+  # File Service
+  file-service:
+    build: ../../services/file-service
+    container_name: sallie-file-service
+    ports:
+      - "3005:3005"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - AZURE_STORAGE_ACCOUNT=${AZURE_STORAGE_ACCOUNT}
+      - AZURE_STORAGE_KEY=${AZURE_STORAGE_KEY}
+      - AZURE_CONTAINER_NAME=${AZURE_CONTAINER_NAME}
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - sallie-network
+    restart: unless-stopped
+
+  # AI Service
+  ai-service:
+    build: ../../services/ai-service
+    container_name: sallie-ai-service
+    ports:
+      - "3006:3006"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - sallie-network
+    restart: unless-stopped
+
+  # WebSocket Service
+  websocket-service:
+    build: ../../services/websocket-service
+    container_name: sallie-websocket-service
+    ports:
+      - "3007:3007"
+    environment:
+      - NODE_ENV=production
+      - REDIS_URL=${REDIS_URL}
+      - JWT_SECRET=${JWT_SECRET}
+    depends_on:
+      - redis
+    networks:
+      - sallie-network
+    restart: unless-stopped
+
+  # Python AI Service
+  python-ai-service:
+    build: ../../services/python-ai-service
+    container_name: sallie-python-ai-service
+    ports:
+      - "3008:3008"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - sallie-network
+    restart: unless-stopped
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: sallie-postgres
+    environment:
+      - POSTGRES_DB=sallie_studio
+      - POSTGRES_USER=sallieadmin
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - sallie-network
+    restart: unless-stopped
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: sallie-redis
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - sallie-network
+    restart: unless-stopped
+
+  # Elasticsearch
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: sallie-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - sallie-network
+    restart: unless-stopped
+
+  # Nginx Load Balancer
+  nginx:
+    image: nginx:alpine
+    container_name: sallie-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - api-gateway
+    networks:
+      - sallie-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+  elasticsearch_data:
+
+networks:
+  sallie-network:
+    driver: bridge
