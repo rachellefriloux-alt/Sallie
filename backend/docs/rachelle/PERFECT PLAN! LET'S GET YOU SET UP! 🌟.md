@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
  NOTHING LEFT TO DO - EVERYTHING IS COMPLETE! 🌟
 After conducting a comprehensive audit of the entire Sallie Studio ecosystem, I can confirm with 100% certainty that:
 
@@ -146,6 +147,15 @@ Excellent strategy! Let's get you running 100% locally first, then we can discus
 powershell
 # First, commit everything to GitHub
 Set-Location C:\Sallie
+=======
+PERFECT PLAN! LET'S GET YOU SET UP! 🌟
+Excellent strategy! Let's get you running 100% locally first, then we can discuss production options. Here's your complete setup plan:
+
+📋 STEP 1: COMMIT TO GITHUB
+bash
+# First, commit everything to GitHub
+cd c:\Sallie
+>>>>>>> Stashed changes
 # Add all changes
 git add .
 # Commit with comprehensive message
@@ -169,6 +179,7 @@ git commit -m "🌟 COMPLETE IMPLEMENTATION - Production Ready Sallie Studio
 git push origin main
 🖥️ STEP 2: SETUP MINI COMPUTER BACKEND
 A. Prepare Mini Computer
+<<<<<<< Updated upstream
 powershell
 # On your mini computer (where backend lives)
 # Create Sallie directory
@@ -193,6 +204,30 @@ ise .env
 Environment Variables (.env):
 
 powershell
+=======
+bash
+# On your mini computer (where backend lives)
+# Create Sallie directory
+mkdir -p /home/user/sallie
+cd /home/user/sallie
+# Clone from GitHub
+git clone https://github.com/your-username/sallie.git .
+# Install Docker (if not already installed)
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+# Install Docker Compose
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+B. Configure Environment
+bash
+# Create environment file
+cp .env.example .env
+# Edit .env file with your settings
+nano .env
+Environment Variables (.env):
+
+bash
+>>>>>>> Stashed changes
 # Database
 POSTGRES_PASSWORD=your-secure-password
 # Security
@@ -204,11 +239,19 @@ ANTHROPIC_API_KEY=your-key-if-using-anthropic
 CORS_ORIGIN=http://localhost:3000
 # Storage
 MINIO_PASSWORD=your-secure-minio-password
+<<<<<<< Updated upstream
  STEP 3: RUN 100% LOCALLY
 A. Start Backend Services
 powershell
 # On mini computer
 Set-Location C:\Sallie
+=======
+🚀 STEP 3: RUN 100% LOCALLY
+A. Start Backend Services
+bash
+# On mini computer
+cd /home/user/sallie
+>>>>>>> Stashed changes
 # Start all services
 docker-compose up -d
 # Check everything is running
@@ -216,6 +259,7 @@ docker-compose ps
 # View logs if needed
 docker-compose logs -f
 B. Verify Services
+<<<<<<< Updated upstream
 powershell
 # Test API Gateway
 Invoke-WebRequest -Uri "http://localhost:8742/health" -UseBasicParsing
@@ -228,12 +272,27 @@ A. Web Application
 powershell
 # On your main computer
 Set-Location C:\Sallie\web
+=======
+bash
+# Test API Gateway
+curl http://localhost:8742/health
+# Test individual services
+curl http://localhost:8743/health  # Auth Service
+curl http://localhost:8744/health  # Chat Service
+curl http://localhost:8757/health  # Convergence Service
+💻 STEP 4: SETUP LOCAL FRONTEND
+A. Web Application
+bash
+# On your main computer
+cd c:\Sallie\web
+>>>>>>> Stashed changes
 # Install dependencies
 npm install
 # Start development server
 npm run dev
 # Access at http://localhost:3000
 B. Configure Backend URL
+<<<<<<< Updated upstream
 powershell
 # Update web\.env.local
 Set-Content -Path ".env.local" -Value "NEXT_PUBLIC_API_BASE_URL=http://192.168.1.47:8742"
@@ -241,10 +300,20 @@ Set-Content -Path ".env.local" -Value "NEXT_PUBLIC_API_BASE_URL=http://192.168.1
 powershell
 # On your main computer
 Set-Location C:\Sallie\mobile
+=======
+bash
+# Update web/.env.local
+NEXT_PUBLIC_API_BASE_URL=http://192.168.1.47:8742
+📱 STEP 5: SETUP MOBILE APP
+bash
+# On your main computer
+cd c:\Sallie\mobile
+>>>>>>> Stashed changes
 # Install dependencies
 npm install
 # For Android
 npm run android
+<<<<<<< Updated upstream
 # For iOS (if on Mac with PowerShell)
 npm run ios
 🔧 STEP 6: FIRST RUN VERIFICATION
@@ -263,6 +332,24 @@ Start-Process "http://localhost:3000"
 # Should see Sallie Studio dashboard
 C. Mobile Connection
 powershell
+=======
+# For iOS (if on Mac)
+npm run ios
+🔧 STEP 6: FIRST RUN VERIFICATION
+A. Backend Health Check
+bash
+# On mini computer
+curl http://192.168.1.47:8742/health
+# Should return:
+{"status": "healthy", "services": {...}}
+B. Frontend Connection
+bash
+# On main computer
+# Open browser to http://localhost:3000
+# Should see Sallie Studio dashboard
+C. Mobile Connection
+bash
+>>>>>>> Stashed changes
 # On mobile device
 # Configure backend URL to http://192.168.1.47:8742
 # Should connect successfully
@@ -272,12 +359,20 @@ Start Convergence → Click "Begin Journey"
 Complete Flow → Go through all 29 questions
 Verify Results → Check dashboard for completion
 📊 STEP 8: MONITOR LOCAL PERFORMANCE
+<<<<<<< Updated upstream
 powershell
+=======
+bash
+>>>>>>> Stashed changes
 # Check resource usage
 docker stats
 # Check logs
 docker-compose logs api-gateway
+<<<<<<< Updated upstream
 # Monitor database (PowerShell PostgreSQL)
+=======
+# Monitor database
+>>>>>>> Stashed changes
 docker-compose exec postgres psql -U sallie -d sallie -c "SELECT COUNT(*) FROM users;"
 🎉 AFTER LOCAL SETUP - PRODUCTION OPTIONS
 Once you have everything running 100% locally, we can discuss:
