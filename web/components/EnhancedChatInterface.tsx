@@ -319,8 +319,8 @@ export function EnhancedChatInterface({ className = '', onMessageSend, onSallieR
             <div className="flex items-center space-x-2 px-4 py-2">
               <div className="flex space-x-1">
                 <div className="w-2 h-2 bg-violet-400 rounded-full animate-pulse"></div>
-                <div className="w-2 h-2 bg-violet-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                <div className="w-2 h-2 bg-violet-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+                <div className="w-2 h-2 bg-violet-400 rounded-full animate-pulse typing-dot-delay-1"></div>
+                <div className="w-2 h-2 bg-violet-400 rounded-full animate-pulse typing-dot-delay-2"></div>
               </div>
               <span className="text-sm text-gray-400">Sallie is typing...</span>
             </div>

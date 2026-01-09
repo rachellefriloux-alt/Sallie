@@ -294,6 +294,7 @@ export default function OmnisPage() {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-semibold text-white">Knowledge Base</h2>
             <select
+              aria-label="Filter knowledge base by tier"
               value={selectedTier}
               onChange={(e) => setSelectedTier(e.target.value)}
               className="px-4 py-2 bg-gray-800 text-gray-100 rounded-lg border border-gray-600 focus:border-violet-500 focus:ring-2 focus:ring-violet-500 focus:outline-none"

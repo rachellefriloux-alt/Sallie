@@ -171,7 +171,8 @@ export default function CommunicationPage() {
                     }
                   }}
                 />
-                <button
+                <button 
+                  aria-label="Send message"
                   onClick={() => {
                     const input = document.querySelector('input') as HTMLInputElement;
                     sendChatMessage(input.value);
@@ -205,10 +206,16 @@ export default function CommunicationPage() {
                     <p className="text-gray-300 text-sm mb-2">To: {draft.to?.join(', ')}</p>
                     <p className="text-gray-400 text-sm">{draft.body?.substring(0, 100)}...</p>
                     <div className="flex space-x-2 mt-3">
-                      <button className="px-3 py-1 bg-violet-600 text-white rounded text-sm hover:bg-violet-700">
+                      <button 
+                        aria-label="Edit email draft"
+                        className="px-3 py-1 bg-violet-600 text-white rounded text-sm hover:bg-violet-700"
+                      >
                         Edit
                       </button>
-                      <button className="px-3 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700">
+                      <button 
+                        aria-label="Send email draft"
+                        className="px-3 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700"
+                      >
                         Send
                       </button>
                     </div>
@@ -237,6 +244,7 @@ export default function CommunicationPage() {
               <div className="text-center space-y-6">
                 <div className="relative inline-block">
                   <button
+                    aria-label={isRecording ? 'Stop voice recording' : 'Start voice recording'}
                     onClick={toggleVoiceRecording}
                     className={`w-32 h-32 rounded-full flex items-center justify-center transition-all ${
                       isRecording
@@ -259,6 +267,7 @@ export default function CommunicationPage() {
 
                 <div className="flex justify-center space-x-4">
                   <button
+                    aria-label={voiceEnabled ? 'Disable voice interface' : 'Enable voice interface'}
                     onClick={() => setVoiceEnabled(!voiceEnabled)}
                     className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                       voiceEnabled
@@ -282,7 +291,10 @@ export default function CommunicationPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                 </svg>
                 <p className="text-gray-300 mb-2">Drop files here or click to upload</p>
-                <button className="px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors">
+                <button 
+                  aria-label="Select files to upload"
+                  className="px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors"
+                >
                   Select Files
                 </button>
               </div>
@@ -300,7 +312,10 @@ export default function CommunicationPage() {
                         </div>
                         <span className="text-gray-300">{file}</span>
                       </div>
-                      <button className="text-violet-400 hover:text-violet-300">
+                      <button 
+                        aria-label={`Analyze ${file}`}
+                        className="text-violet-400 hover:text-violet-300"
+                      >
                         Analyze
                       </button>
                     </div>

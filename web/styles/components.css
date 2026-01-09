@@ -1,0 +1,123 @@
+/* Genesis Page Styles */
+.progress-bar-dream-cycle {
+  transition: width 0.3s ease-in-out;
+}
+
+/* Convergence Flow Styles */
+.conversation-container {
+  min-height: 200px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.sallie-message {
+  background: linear-gradient(135deg, #6b46c1 0%, #8b5cf6 100%);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 12px;
+  margin: 8px 0;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.user-message {
+  background: #374151;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 12px;
+  margin: 8px 0;
+  text-align: right;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  background: rgba(107, 70, 193, 0.1);
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  background: #6b46c1;
+  border-radius: 50%;
+  animation: typing 1.4s infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  30% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced Chat Interface Styles */
+.chat-input-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 12px;
+  background: #374151;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+
+.chat-input-field {
+  flex: 1;
+  background: #1f2937;
+  border: 1px solid #4b5563;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.chat-input-field:focus {
+  border-color: #6b46c1;
+}
+
+.chat-send-button {
+  background: #6b46c1;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.chat-send-button:hover {
+  background: #8b5cf6;
+}
+
+.chat-send-button:disabled {
+  background: #4b5563;
+  cursor: not-allowed;
+}

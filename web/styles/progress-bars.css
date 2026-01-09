@@ -1,0 +1,36 @@
+/* Dynamic progress bar styles for Genesis and ConvergenceFlow components */
+
+.progress-bar-dream-cycle {
+  transition: width 0.3s ease-in-out;
+}
+
+.progress-bar-convergence {
+  transition: width 0.5s ease-out;
+  position: relative;
+}
+
+.progress-bar-convergence::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.3);
+  animation: pulse 2s infinite;
+}
+
+/* Typing indicator animation delays */
+.typing-dot-delay-1 {
+  animation-delay: 0.2s;
+}
+
+.typing-dot-delay-2 {
+  animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

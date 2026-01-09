@@ -1,53 +1,213 @@
+/**
+ * Enhanced Convergence Flow Component
+ * Complete onboarding experience with proper progression
+ */
+
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { useSettingsStore } from '@/store/useSettingsStore';
+import { useNotifications } from '@/hooks/useNotifications';
 
-type Question = {
+interface Question {
   id: number;
-  phase: string;
   text: string;
-  purpose: string;
-  extraction_key: string;
-};
+  type: 'text' | 'choice' | 'mirror' | 'elastic';
+  category: string;
+  options?: string[];
+  required: boolean;
+}
 
-type ConvergenceStatus = {
-  current_index: number;
-  total_questions: number;
+interface ConvergenceStatus {
+  currentQuestion: number;
+  totalQuestions: number;
+  answeredQuestions: number;
   completed: boolean;
-  started_at: number | null;
-  completed_at: number | null;
-  answers_count: number;
-};
+  elasticMode: boolean;
+}
 
-type ConversationMessage = {
-  id: string;
-  sender: 'sallie' | 'creator';
-  text: string;
-  timestamp: number;
-  isTyping?: boolean;
-};
+interface Answer {
+  questionId: number;
+  answer: string | string[];
+  timestamp: string;
+}
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const CONVERGENCE_QUESTIONS: Question[] = [
+  {
+    id: 1,
+    text: "What draws you to Sallie Studio today?",
+    type: 'text',
+    category: 'motivation',
+    required: true
+  },
+  {
+    id: 2,
+    text: "How do you prefer to receive information?",
+    type: 'choice',
+    category: 'communication',
+    required: true,
+    options: [
+      "Visual and intuitive",
+      "Detailed and analytical",
+      "Concise and direct",
+      "Conversational and friendly"
+    ]
+  },
+  {
+    id: 3,
+    text: "What's your comfort level with AI technology?",
+    type: 'choice',
+    category: 'experience',
+    required: true,
+    options: [
+      "Expert - I work with AI daily",
+      "Advanced - I understand AI concepts",
+      "Intermediate - I use AI regularly",
+      "Beginner - I'm just starting"
+    ]
+  },
+  {
+    id: 4,
+    text: "How do you prefer to express yourself creatively?",
+    type: 'text',
+    category: 'creativity',
+    required: true
+  },
+  {
+    id: 5,
+    text: "What kind of relationship do you envision with Sallie?",
+    type: 'choice',
+    category: 'relationship',
+    required: true,
+    options: [
+      "Companion - Supportive and grounding",
+      "Co-Pilot - Collaborative and efficient",
+      "Peer - Equal and conversational",
+      "Expert - Advisory and analytical"
+    ]
+  },
+  {
+    id: 6,
+    text: "How important is privacy to you?",
+    type: 'choice',
+    category: 'values',
+    required: true,
+    options: [
+      "Essential - I value complete privacy",
+      "Very Important - Most data should be private",
+      "Important - Balance privacy with functionality",
+      "Somewhat Important - Convenience over privacy",
+      "Not Important - Functionality over privacy"
+    ]
+  },
+  {
+    id: 7,
+    text: "What's your preferred pace of interaction?",
+    type: 'choice',
+    category: 'interaction',
+    required: true,
+    options: [
+      "Slow and thoughtful",
+      "Medium pace",
+      "Fast and efficient",
+      "Variable depending on context"
+    ]
+  },
+  {
+    id: 8,
+    text: "How do you handle complex decisions?",
+    type: 'text',
+    category: 'decision-making',
+    required: true
+  },
+  {
+    id: 9,
+    type: 'mirror',
+    text: "Mirror Test: Based on your responses so far, how would you describe your ideal interaction style?",
+    category: 'reflection',
+    required: true
+  },
+  {
+    id: 10,
+    text: "What aspects of Sallie excite you most?",
+    type: 'choice',
+    category: 'interests',
+    required: true,
+    options: [
+      "Conversational intelligence",
+      "Creative capabilities",
+      "Personalization options",
+      "Productivity features",
+      "Learning and growth",
+      "Privacy and security"
+    ]
+  },
+  {
+    id: 11,
+    text: "How do you prefer to learn and grow?",
+    type: 'choice',
+    category: 'growth',
+    required: true,
+    options: [
+      "Through exploration and discovery",
+      "Through structured guidance",
+      "Through hands-on experience",
+      "Through reflection and introspection"
+    ]
+  },
+  {
+    id: 12,
+    text: "What's one thing you'd like Sallie to know about you?",
+    type: 'text',
+    category: 'personal',
+    required: true
+  },
+  {
+    id: 13,
+    text: "How do you see this relationship evolving over time?",
+    type: 'text',
+    category: 'future',
+    required: true
+  },
+  {
+    id: 14,
+    type: 'elastic',
+    text: "Elastic Mode: Would you like to temporarily suspend traditional constraints for enhanced exploration?",
+    category: 'flexibility',
+    required: false
+  }
+];
 
-export function ConvergenceFlow() {
+export function ConvergenceFlow({
+  convergenceStatus,
+  questions,
+  elasticMode,
+  onQuestionAnswered,
+  onMirrorTest,
+  isConnected,
+  sendMessage
+}: {
+  convergenceStatus: ConvergenceStatus | null;
+  questions: Question[];
+  elasticMode: boolean;
+  onQuestionAnswered: () => void;
+  onMirrorTest: (responses: string[]) => Promise<any>;
+  isConnected: boolean;
+  sendMessage: (message: any) => void;
+}) {
   const router = useRouter();
-  const [status, setStatus] = useState<ConvergenceStatus | null>(null);
-  const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
-  const [answer, setAnswer] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [isStarting, setIsStarting] = useState(false);
-  const [conversation, setConversation] = useState<ConversationMessage[]>([]);
-  const [sallieIsTyping, setSallieIsTyping] = useState(false);
-  const [processingAnswer, setProcessingAnswer] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const { showSuccess, showError, showInfo } = useNotifications();
+  
+  const [currentQuestion, setCurrentQuestion] = useState(1);
+  const [answers, setAnswers] = useState<Answer[]>([]);
+  const [currentAnswer, setCurrentAnswer] = useState('');
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [mirrorResponses, setMirrorResponses] = useState<string[]>([]);
+  const [showMirrorTest, setShowMirrorTest] = useState(false);
 
-  // Auto-scroll to bottom
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [conversation, sallieIsTyping]);
+  const question = questions.find(q => q.id === currentQuestion) || questions[0];
 
   // Focus input when question loads
   useEffect(() => {
@@ -377,7 +537,7 @@ export function ConvergenceFlow() {
           </div>
           <div className="w-full bg-gray-700/50 rounded-full h-1.5 overflow-hidden">
             <div
-              className="bg-gradient-to-r from-purple-500 to-pink-500 h-full rounded-full transition-all duration-500 ease-out relative"
+              className="bg-gradient-to-r from-purple-500 to-pink-500 h-full rounded-full progress-bar-convergence relative"
               style={{ width: `${progress}%` }}
             >
               <div className="absolute inset-0 bg-white/30 animate-pulse"></div>
@@ -444,7 +604,7 @@ export function ConvergenceFlow() {
                 onChange={(e) => setAnswer(e.target.value)}
                 onKeyDown={handleKeyPress}
                 placeholder={currentQuestion ? "Share your thoughts..." : "Waiting..."}
-                className="w-full bg-gray-700/50 backdrop-blur-sm text-gray-100 rounded-xl p-4 border border-purple-500/30 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/50 focus:outline-none resize-none min-h-[100px] max-h-[200px] placeholder-gray-500"
+                className="text-area-input"
                 rows={3}
                 disabled={loading || processingAnswer || !currentQuestion}
               />
@@ -455,7 +615,7 @@ export function ConvergenceFlow() {
             <button
               onClick={submitAnswer}
               disabled={loading || processingAnswer || !answer.trim() || !currentQuestion}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg hover:shadow-purple-500/50 self-end"
+              className="send-button"
             >
               {processingAnswer ? (
                 <span className="flex items-center">

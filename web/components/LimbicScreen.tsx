@@ -131,6 +131,7 @@ export function LimbicScreen() {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">Historical Trends</h2>
               <select
+                aria-label="Select time range for historical trends"
                 value={timeRange}
                 onChange={(e) => setTimeRange(e.target.value as any)}
                 className="bg-gray-700 text-gray-100 px-3 py-1 rounded-lg border border-gray-600"

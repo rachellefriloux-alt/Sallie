@@ -228,7 +228,7 @@ export default function GenesisPage() {
                   <div className="mt-4">
                     <div className="w-full bg-gray-700 rounded-full h-2">
                       <div 
-                        className="bg-violet-600 h-2 rounded-full transition-all duration-300"
+                        className="bg-violet-600 h-2 rounded-full transition-all duration-300 progress-bar-dream-cycle"
                         style={{ width: `${dreamCycleStatus.progress}%` }}
                       ></div>
                     </div>
