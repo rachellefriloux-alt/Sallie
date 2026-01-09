@@ -1,18 +1,3 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-name: sallie-studio
-
-services:
-  # API Gateway
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 version: '3.8'
 
 services:
@@ -150,43 +135,10 @@ services:
           memory: 4G
 
   # Core Backend Services
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
   api-gateway:
     build:
       context: ./services/api-gateway
       dockerfile: Dockerfile
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    ports:
-      - "8742:8742"
-    environment:
-      - NODE_ENV=production
-      - PORT=8742
-      - REDIS_URL=redis://redis:6379
-      - POSTGRES_URL=postgresql://postgres:password@postgres:5432/sallie_studio
-      - JWT_SECRET=${JWT_SECRET:-your-super-secret-jwt-key}
-      - API_RATE_LIMIT=${API_RATE_LIMIT:-100}
-    depends_on:
-      - redis
-      - postgres
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     container_name: sallie-api-gateway
     ports:
       - "8742:8742"
@@ -217,16 +169,6 @@ services:
       - minio
       - ollama
       - qdrant
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     networks:
       - sallie-network
     restart: unless-stopped
@@ -235,138 +177,11 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      start_period: 40s
 
-  # Authentication Service
-=======
-
->>>>>>> Stashed changes
-=======
-
->>>>>>> Stashed changes
-=======
-
->>>>>>> Stashed changes
-=======
-
->>>>>>> Stashed changes
   auth-service:
     build:
       context: ./services/auth-service
       dockerfile: Dockerfile
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    ports:
-      - "8743:8743"
-    environment:
-      - NODE_ENV=production
-      - PORT=8743
-      - POSTGRES_URL=postgresql://postgres:password@postgres:5432/sallie_studio
-      - REDIS_URL=redis://redis:6379
-      - JWT_SECRET=${JWT_SECRET:-your-super-secret-jwt-key}
-      - BCRYPT_ROUNDS=${BCRYPT_ROUNDS:-12}
-      - SESSION_TIMEOUT=${SESSION_TIMEOUT:-3600000}
-    depends_on:
-      - postgres
-      - redis
-    networks:
-      - sallie-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8743/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-
-  # Chat Service
-  chat-service:
-    build:
-      context: ./services/chat-service
-      dockerfile: Dockerfile
-    ports:
-      - "8744:8744"
-    environment:
-      - NODE_ENV=production
-      - PORT=8744
-      - POSTGRES_URL=postgresql://postgres:password@postgres:5432/sallie_studio
-      - REDIS_URL=redis://redis:6379
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-      - MAX_TOKENS=${MAX_TOKENS:-4000}
-      - TEMPERATURE=${TEMPERATURE:-0.7}
-    depends_on:
-      - postgres
-      - redis
-    networks:
-      - sallie-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8744/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-
-  # Analytics Service
-  analytics-service:
-    build:
-      context: ./services/analytics-service
-      dockerfile: Dockerfile
-    ports:
-      - "8745:8745"
-    environment:
-      - NODE_ENV=production
-      - PORT=8745
-      - POSTGRES_URL=postgresql://postgres:password@postgres:5432/sallie_studio_analytics
-      - REDIS_URL=redis://redis:6379
-      - ELASTICSEARCH_URL=http://elasticsearch:9200
-      - KAFKA_BROKERS=kafka:9092
-    depends_on:
-      - postgres
-      - redis
-      - elasticsearch
-      - kafka
-    networks:
-      - sallie-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8745/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-
-  # Notification Service
-  notification-service:
-    build:
-      context: ./services/notification-service
-      dockerfile: Dockerfile
-    ports:
-      - "8746:8746"
-    environment:
-      - NODE_ENV=production
-      - PORT=8746
-      - POSTGRES_URL=postgresql://postgres:password@postgres:5432/sallie_studio
-      - REDIS_URL=redis://redis:6379
-      - SMTP_HOST=${SMTP_HOST}
-      - SMTP_PORT=${SMTP_PORT:-587}
-      - SMTP_USER=${SMTP_USER}
-      - SMTP_PASS=${SMTP_PASS}
-      - PUSH_SERVICE_KEY=${PUSH_SERVICE_KEY}
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     container_name: sallie-auth-service
     ports:
       - "8743:8743"
@@ -386,109 +201,173 @@ services:
       - SMTP_PORT=${SMTP_PORT:-587}
       - SMTP_USER=${SMTP_USER}
       - SMTP_PASS=${SMTP_PASS}
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     depends_on:
       - postgres
       - redis
     networks:
       - sallie-network
     restart: unless-stopped
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8746/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
 
-  # File Storage Service
+  chat-service:
+    build:
+      context: ./services/chat-service
+      dockerfile: Dockerfile
+    container_name: sallie-chat-service
+    ports:
+      - "8744:8744"
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - PORT=8744
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=sallie
+      - POSTGRES_USER=sallie
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-sallie123}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - KAFKA_BROKERS=kafka:9092
+      - LIMBIC_ENGINE_URL=http://limbic-engine:8750
+      - MEMORY_SERVICE_URL=http://memory-service:8751
+      - AGENCY_SERVICE_URL=http://agency-service:8752
+    depends_on:
+      - postgres
+      - redis
+      - kafka
+      - limbic-engine
+      - memory-service
+      - agency-service
+    networks:
+      - sallie-network
+    restart: unless-stopped
+
+  analytics-service:
+    build:
+      context: ./services/analytics-service
+      dockerfile: Dockerfile
+    container_name: sallie-analytics-service
+    ports:
+      - "8745:8745"
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - PORT=8745
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=sallie
+      - POSTGRES_USER=sallie
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-sallie123}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - KAFKA_BROKERS=kafka:9092
+    depends_on:
+      - postgres
+      - redis
+      - elasticsearch
+      - kafka
+    networks:
+      - sallie-network
+    restart: unless-stopped
+
+  notifications-service:
+    build:
+      context: ./services/notifications-service
+      dockerfile: Dockerfile
+    container_name: sallie-notifications-service
+    ports:
+      - "8746:8746"
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - PORT=8746
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=sallie
+      - POSTGRES_USER=sallie
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-sallie123}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - KAFKA_BROKERS=kafka:9092
+      - SMTP_HOST=${SMTP_HOST:-localhost}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - GHOST_INTERFACE_ENABLED=true
+    depends_on:
+      - postgres
+      - redis
+      - kafka
+    networks:
+      - sallie-network
+    restart: unless-stopped
+
   file-service:
     build:
       context: ./services/file-service
       dockerfile: Dockerfile
+    container_name: sallie-file-service
     ports:
       - "8747:8747"
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=${NODE_ENV:-development}
       - PORT=8747
       - MINIO_ENDPOINT=minio:9000
-      - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
-      - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
-      - MINIO_BUCKET=${MINIO_BUCKET:-sallie-studio}
-      - MAX_FILE_SIZE=${MAX_FILE_SIZE:-10485760}
+      - MINIO_ACCESS_KEY=sallie
+      - MINIO_SECRET_KEY=${MINIO_PASSWORD:-sallie123}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - WATCH_PATHS=${WATCH_PATHS:-./work,./projects,./documents}
+      - BACKUP_ENABLED=true
     depends_on:
       - minio
+      - redis
     networks:
       - sallie-network
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8747/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
 
-  # AI/ML Service
   ai-service:
     build:
       context: ./services/ai-service
       dockerfile: Dockerfile
+    container_name: sallie-ai-service
     ports:
       - "8748:8748"
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=${NODE_ENV:-development}
       - PORT=8748
-      - PYTHON_BASE_URL=http://python-ai-service:8000
-      - REDIS_URL=redis://redis:6379
-      - MODEL_CACHE_TTL=${MODEL_CACHE_TTL:-3600}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OLLAMA_URL=http://ollama:11434
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - DEFAULT_MODEL=${DEFAULT_MODEL:-llama2}
+      - FALLBACK_MODEL=${FALLBACK_MODEL:-mistral}
     depends_on:
       - redis
-      - python-ai-service
+      - ollama
     networks:
       - sallie-network
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8748/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
 
-  # Python AI Service
-  python-ai-service:
+  websocket-service:
     build:
-      context: ./services/python-ai-service
+      context: ./services/websocket-service
       dockerfile: Dockerfile
+    container_name: sallie-websocket-service
     ports:
-      - "8000:8000"
+      - "8749:8749"
     environment:
-      - PYTHONPATH=/app
-      - MODEL_PATH=/app/models
-      - REDIS_URL=redis://redis:6379
-      - CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0}
-    volumes:
-      - ./models:/app/models
-      - ./data:/app/data
+      - NODE_ENV=${NODE_ENV:-development}
+      - PORT=8749
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - KAFKA_BROKERS=kafka:9092
+      - JWT_SECRET=${JWT_SECRET:-your-super-secret-jwt-key}
+      - MAX_CONNECTIONS=${MAX_CONNECTIONS:-1000}
     depends_on:
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+      - redis
+      - kafka
+    networks:
+      - sallie-network
+    restart: unless-stopped
 
   # Extended Sallie Services
   limbic-engine:
@@ -549,58 +428,10 @@ services:
       - REDIS_PORT=6379
     depends_on:
       - qdrant
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
       - redis
     networks:
       - sallie-network
     restart: unless-stopped
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 60s
-
-  # WebSocket Service
-  websocket-service:
-    build:
-      context: ./services/websocket-service
-      dockerfile: Dockerfile
-    ports:
-      - "8749:8749"
-    environment:
-      - NODE_ENV=production
-      - PORT=8749
-      - REDIS_URL=redis://redis:6379
-      - KAFKA_BROKERS=kafka:9092
-      - MAX_CONNECTIONS=${MAX_CONNECTIONS:-10000}
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
   agency-service:
     build:
@@ -659,282 +490,12 @@ services:
       - VOICE_ENABLED=true
       - EMAIL_ENABLED=true
       - FILE_INTERFACE_ENABLED=true
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     depends_on:
       - redis
       - kafka
     networks:
       - sallie-network
     restart: unless-stopped
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8749/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-
-  # Database
-  postgres:
-    image: postgres:15-alpine
-    environment:
-      - POSTGRES_DB=sallie_studio
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_MULTIPLE_DATABASES=sallie_studio_analytics
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./database/init:/docker-entrypoint-initdb.d
-    ports:
-      - "5432:5432"
-    networks:
-      - sallie-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
-
-  # Redis Cache
-  redis:
-    image: redis:7-alpine
-    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-redis123}
-    volumes:
-      - redis_data:/data
-      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
-    ports:
-      - "6379:6379"
-    networks:
-      - sallie-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
-      interval: 10s
-      timeout: 3s
-      retries: 5
-      start_period: 30s
-
-  # Elasticsearch
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.8.0
-    environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    volumes:
-      - elasticsearch_data:/usr/share/elasticsearch/data
-    ports:
-      - "9200:9200"
-      - "9300:9300"
-    networks:
-      - sallie-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 60s
-
-  # Kibana
-  kibana:
-    image: docker.elastic.co/kibana/kibana:8.8.0
-    environment:
-      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-    ports:
-      - "5601:5601"
-    depends_on:
-      - elasticsearch
-    networks:
-      - sallie-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:5601/api/status || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 60s
-
-  # Kafka
-  zookeeper:
-    image: confluentinc/cp-zookeeper:7.3.0
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    volumes:
-      - zookeeper_data:/var/lib/zookeeper/data
-    networks:
-      - sallie-network
-    restart: unless-stopped
-
-  kafka:
-    image: confluentinc/cp-kafka:7.3.0
-    depends_on:
-      - zookeeper
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: true
-    volumes:
-      - kafka_data:/var/lib/kafka/data
-    ports:
-      - "9092:9092"
-    networks:
-      - sallie-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 60s
-
-  # MinIO Object Storage
-  minio:
-    image: minio/minio:latest
-    command: server /data --console-address ":9001"
-    environment:
-      - MINIO_ROOT_USER=${MINIO_ACCESS_KEY:-minioadmin}
-      - MINIO_ROOT_PASSWORD=${MINIO_SECRET_KEY:-minioadmin}
-    volumes:
-      - minio_data:/data
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    networks:
-      - sallie-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-      interval: 30s
-      timeout: 20s
-      retries: 3
-
-  # Nginx Load Balancer
-  nginx:
-    image: nginx:alpine
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/ssl:/etc/nginx/ssl
-    ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-      - api-gateway
-      - auth-service
-      - chat-service
-      - analytics-service
-      - notification-service
-      - file-service
-      - ai-service
-      - websocket-service
-    networks:
-      - sallie-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
-  # Prometheus Monitoring
-  prometheus:
-    image: prom/prometheus:latest
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/etc/prometheus/console_libraries'
-      - '--web.console.templates=/etc/prometheus/consoles'
-      - '--storage.tsdb.retention.time=200h'
-      - '--web.enable-lifecycle'
-    volumes:
-      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus_data:/prometheus
-    ports:
-      - "9090:9090"
-    networks:
-      - sallie-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090/metrics"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
-  # Grafana Dashboard
-  grafana:
-    image: grafana/grafana:latest
-    environment:
-      - GF_SECURITY_ADMIN_USER=${GRAFANA_USER:-admin}
-      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
-      - GF_USERS_ALLOW_SIGN_UP=false
-    volumes:
-      - grafana_data:/var/lib/grafana
-      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
-      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
-    ports:
-      - "3000:3000"
-    depends_on:
-      - prometheus
-    networks:
-      - sallie-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:3000/api/health || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
-  # Jaeger Tracing
-  jaeger:
-    image: jaegertracing/all-in-one:latest
-    environment:
-      - COLLECTOR_OTLP_ENABLED=true
-    ports:
-      - "16686:16686"
-      - "14268:14268"
-      - "14250:14250"
-    networks:
-      - sallie-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:14269/"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
-volumes:
-  postgres_data:
-  redis_data:
-  elasticsearch_data:
-  zookeeper_data:
-  kafka_data:
-  minio_data:
-  prometheus_data:
-  grafana_data:
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
   sensor-array-service:
     build:
@@ -1117,16 +678,6 @@ volumes:
     driver: local
   omnis_data:
     driver: local
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
 networks:
   sallie-network:
