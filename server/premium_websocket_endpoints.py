@@ -1,6 +1,7 @@
 """
 Premium WebSocket Endpoints for Sallie Studio
 Zero-latency real-time synchronization with enterprise features
+Canonical Spec Reference: Section 14.3 - Convergence WebSocket
 """
 
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Depends, HTTPException, Query
@@ -13,6 +14,7 @@ import asyncio
 
 from premium_websocket import premium_ws_manager, ConnectedClient, SyncEvent
 from security import get_current_user_websocket
+from convergence_websocket import handle_convergence_websocket
 
 logger = logging.getLogger(__name__)
 
@@ -445,3 +447,34 @@ async def disconnect_client(client_id: str):
     except Exception as e:
         logger.error(f"Error disconnecting client {client_id}: {e}")
         raise HTTPException(status_code=500, detail="Failed to disconnect client")
+
+@premium_ws_router.websocket("/convergence")
+async def convergence_websocket_endpoint(
+    websocket: WebSocket,
+    user_id: Optional[str] = Query(None)
+):
+    """
+    The Great Convergence WebSocket Endpoint
+    Canonical Spec Reference: Section 14.3
+    
+    Real-time processing for the 30-question psychological excavation.
+    Features:
+    - Live answer processing and extraction
+    - Real-time limbic state updates
+    - Elastic Mode trust/warmth spikes
+    - Heritage DNA compilation
+    - Dynamic Mirror Test generation
+    """
+    
+    client_id = user_id or f"convergence_{datetime.now(timezone.utc).timestamp()}"
+    
+    try:
+        await handle_convergence_websocket(websocket, client_id)
+    except WebSocketDisconnect:
+        logger.info(f"Convergence WebSocket disconnected for {client_id}")
+    except Exception as e:
+        logger.error(f"Error in convergence WebSocket for {client_id}: {e}")
+        try:
+            await websocket.close()
+        except:
+            pass

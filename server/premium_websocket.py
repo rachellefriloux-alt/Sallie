@@ -1,6 +1,8 @@
 """
 Premium WebSocket Server for Sallie Studio
 Zero-latency sync with encryption, heartbeat, and dream cycle support
+
+Canonical Spec Reference: Section 8.0 - Security & Privacy
 """
 
 import asyncio
@@ -8,6 +10,8 @@ import json
 import logging
 import time
 import uuid
+import os
+import sys
 from datetime import datetime, timezone
 from typing import Dict, List, Optional, Any, Set
 from fastapi import WebSocket, WebSocketDisconnect, HTTPException
@@ -19,6 +23,10 @@ import hmac
 import base64
 from collections import defaultdict
 import jwt
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -104,9 +112,12 @@ class PremiumWebSocketManager:
         self.total_bytes_transferred = 0
         self.peak_concurrent_connections = 0
         
-        # Security
+        # Canonical Spec Section 8.0: Security - No hard-coded secrets
         self.encryption_enabled = True
-        self.jwt_secret = "sallie_premium_jwt_secret_key"  # In production, use environment variable
+        self.jwt_secret = os.getenv("JWT_SECRET")
+        if not self.jwt_secret:
+            logger.error("CRITICAL: JWT_SECRET environment variable is not set!")
+            raise ValueError("JWT_SECRET must be set in environment variables")
         self.rate_limits: Dict[str, List[float]] = defaultdict(list)
         
         # Dream cycle support
