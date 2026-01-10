@@ -102,7 +102,7 @@ async def main():
     
     # Validate environment
     if not validate_environment():
-        logger.error("❌ Environment validation failed. Server cannot start.")
+        logger.error("ERROR: Environment validation failed. Server cannot start.")
         logger.error("Please run START_SALLIE.bat to set up automatically.")
         sys.exit(1)
     
@@ -119,9 +119,9 @@ async def main():
         # Import our endpoints
         from premium_websocket_endpoints import premium_ws_router
         
-        logger.info("✅ Server components loaded!")
+        logger.info("Server components loaded!")
     except ImportError as e:
-        logger.error(f"❌ Failed to import required packages: {e}")
+        logger.error(f"ERROR: Failed to import required packages: {e}")
         logger.error("Please install dependencies: pip install -r ../backend/requirements.txt")
         sys.exit(1)
     
@@ -169,19 +169,19 @@ async def main():
     
     # Startup message
     logger.info("=" * 60)
-    logger.info("🚀 SALLIE BACKEND SERVER READY!")
+    logger.info("SALLIE BACKEND SERVER READY!")
     logger.info("=" * 60)
-    logger.info("📡 WebSocket Server: ws://localhost:8742")
-    logger.info("🌐 Web Interface: http://localhost:3000")
-    logger.info("📊 API Docs: http://localhost:8742/docs")
-    logger.info("❤️  Health Check: http://localhost:8742/health")
+    logger.info("WebSocket Server: ws://192.168.1.47:8742")
+    logger.info("Web Interface: http://localhost:3000")
+    logger.info("API Docs: http://192.168.1.47:8742/docs")
+    logger.info("Health Check: http://192.168.1.47:8742/health")
     logger.info("=" * 60)
-    logger.info("✨ The Great Convergence awaits...")
+    logger.info("The Great Convergence awaits...")
     logger.info("=" * 60)
     
     # Graceful shutdown handler
     def signal_handler(sig, frame):
-        logger.info("\n🛑 Shutting down Sallie server gracefully...")
+        logger.info("Shutting down Sallie server gracefully...")
         sys.exit(0)
     
     signal.signal(signal.SIGINT, signal_handler)
@@ -190,7 +190,7 @@ async def main():
     # Run server
     config = uvicorn.Config(
         app,
-        host="0.0.0.0",
+        host="192.168.1.47",
         port=8742,
         log_level="info",
         access_log=True

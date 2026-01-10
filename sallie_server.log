@@ -1,0 +1,134 @@
+2026-01-10 15:46:45,575 - __main__ - INFO - Sallie Server Starting...
+2026-01-10 15:46:45,579 - __main__ - INFO - Start time: 2026-01-10 15:46:45
+2026-01-10 15:46:45,580 - __main__ - INFO - Validating environment configuration...
+2026-01-10 15:46:45,580 - __main__ - INFO - SUCCESS: Environment configuration validated!
+2026-01-10 15:46:45,580 - __main__ - INFO - Setting up data directories...
+2026-01-10 15:46:45,586 - __main__ - INFO - SUCCESS: Data directories ready!
+2026-01-10 15:46:45,588 - __main__ - INFO - Loading server components...
+2026-01-10 15:46:48,124 - __main__ - ERROR - Please install dependencies: pip install -r ../backend/requirements.txt
+2026-01-10 15:48:00,489 - __main__ - INFO - Sallie Server Starting...
+2026-01-10 15:48:00,489 - __main__ - INFO - Start time: 2026-01-10 15:48:00
+2026-01-10 15:48:00,489 - __main__ - INFO - Validating environment configuration...
+2026-01-10 15:48:00,489 - __main__ - INFO - SUCCESS: Environment configuration validated!
+2026-01-10 15:48:00,490 - __main__ - INFO - Setting up data directories...
+2026-01-10 15:48:00,492 - __main__ - INFO - SUCCESS: Data directories ready!
+2026-01-10 15:48:00,492 - __main__ - INFO - Loading server components...
+2026-01-10 15:48:02,110 - __main__ - INFO - Server components loaded!
+2026-01-10 15:48:02,135 - __main__ - INFO - ============================================================
+2026-01-10 15:48:02,135 - __main__ - INFO - SALLIE BACKEND SERVER READY!
+2026-01-10 15:48:02,136 - __main__ - INFO - ============================================================
+2026-01-10 15:48:02,136 - __main__ - INFO - WebSocket Server: ws://localhost:8742
+2026-01-10 15:48:02,136 - __main__ - INFO - Web Interface: http://localhost:3000
+2026-01-10 15:48:02,136 - __main__ - INFO - API Docs: http://localhost:8742/docs
+2026-01-10 15:48:02,136 - __main__ - INFO - Health Check: http://localhost:8742/health
+2026-01-10 15:48:02,136 - __main__ - INFO - ============================================================
+2026-01-10 15:48:02,137 - __main__ - INFO - The Great Convergence awaits...
+2026-01-10 15:48:02,137 - __main__ - INFO - ============================================================
+2026-01-10 15:52:13,911 - __main__ - INFO - Sallie Server Starting...
+2026-01-10 15:52:13,915 - __main__ - INFO - Start time: 2026-01-10 15:52:13
+2026-01-10 15:52:13,915 - __main__ - INFO - Validating environment configuration...
+2026-01-10 15:52:13,916 - __main__ - INFO - SUCCESS: Environment configuration validated!
+2026-01-10 15:52:13,916 - __main__ - INFO - Setting up data directories...
+2026-01-10 15:52:13,932 - __main__ - INFO - SUCCESS: Data directories ready!
+2026-01-10 15:52:13,936 - __main__ - INFO - Loading server components...
+2026-01-10 15:52:15,409 - __main__ - INFO - Server components loaded!
+2026-01-10 15:52:15,421 - __main__ - INFO - ============================================================
+2026-01-10 15:52:15,423 - __main__ - INFO - SALLIE BACKEND SERVER READY!
+2026-01-10 15:52:15,423 - __main__ - INFO - ============================================================
+2026-01-10 15:52:15,423 - __main__ - INFO - WebSocket Server: ws://localhost:8742
+2026-01-10 15:52:15,423 - __main__ - INFO - Web Interface: http://localhost:3000
+2026-01-10 15:52:15,423 - __main__ - INFO - API Docs: http://localhost:8742/docs
+2026-01-10 15:52:15,423 - __main__ - INFO - Health Check: http://localhost:8742/health
+2026-01-10 15:52:15,423 - __main__ - INFO - ============================================================
+2026-01-10 15:52:15,423 - __main__ - INFO - The Great Convergence awaits...
+2026-01-10 15:52:15,423 - __main__ - INFO - ============================================================
+2026-01-10 15:53:53,008 - __main__ - INFO - Sallie Server Starting...
+2026-01-10 15:53:53,009 - __main__ - INFO - Start time: 2026-01-10 15:53:53
+2026-01-10 15:53:53,009 - __main__ - INFO - Validating environment configuration...
+2026-01-10 15:53:53,009 - __main__ - INFO - SUCCESS: Environment configuration validated!
+2026-01-10 15:53:53,010 - __main__ - INFO - Setting up data directories...
+2026-01-10 15:53:53,013 - __main__ - INFO - SUCCESS: Data directories ready!
+2026-01-10 15:53:53,013 - __main__ - INFO - Loading server components...
+2026-01-10 15:53:54,359 - __main__ - INFO - Server components loaded!
+2026-01-10 15:53:54,375 - __main__ - INFO - ============================================================
+2026-01-10 15:53:54,375 - __main__ - INFO - SALLIE BACKEND SERVER READY!
+2026-01-10 15:53:54,376 - __main__ - INFO - ============================================================
+2026-01-10 15:53:54,376 - __main__ - INFO - WebSocket Server: ws://localhost:8742
+2026-01-10 15:53:54,376 - __main__ - INFO - Web Interface: http://localhost:3000
+2026-01-10 15:53:54,376 - __main__ - INFO - API Docs: http://localhost:8742/docs
+2026-01-10 15:53:54,377 - __main__ - INFO - Health Check: http://localhost:8742/health
+2026-01-10 15:53:54,377 - __main__ - INFO - ============================================================
+2026-01-10 15:53:54,377 - __main__ - INFO - The Great Convergence awaits...
+2026-01-10 15:53:54,377 - __main__ - INFO - ============================================================
+2026-01-10 15:54:07,284 - __main__ - INFO - Sallie Server Starting...
+2026-01-10 15:54:07,284 - __main__ - INFO - Start time: 2026-01-10 15:54:07
+2026-01-10 15:54:07,285 - __main__ - INFO - Validating environment configuration...
+2026-01-10 15:54:07,285 - __main__ - INFO - SUCCESS: Environment configuration validated!
+2026-01-10 15:54:07,286 - __main__ - INFO - Setting up data directories...
+2026-01-10 15:54:07,289 - __main__ - INFO - SUCCESS: Data directories ready!
+2026-01-10 15:54:07,289 - __main__ - INFO - Loading server components...
+2026-01-10 15:54:08,488 - __main__ - INFO - Server components loaded!
+2026-01-10 15:54:08,498 - __main__ - INFO - ============================================================
+2026-01-10 15:54:08,500 - __main__ - INFO - SALLIE BACKEND SERVER READY!
+2026-01-10 15:54:08,501 - __main__ - INFO - ============================================================
+2026-01-10 15:54:08,502 - __main__ - INFO - WebSocket Server: ws://localhost:8742
+2026-01-10 15:54:08,502 - __main__ - INFO - Web Interface: http://localhost:3000
+2026-01-10 15:54:08,503 - __main__ - INFO - API Docs: http://localhost:8742/docs
+2026-01-10 15:54:08,503 - __main__ - INFO - Health Check: http://localhost:8742/health
+2026-01-10 15:54:08,504 - __main__ - INFO - ============================================================
+2026-01-10 15:54:08,504 - __main__ - INFO - The Great Convergence awaits...
+2026-01-10 15:54:08,505 - __main__ - INFO - ============================================================
+2026-01-10 15:54:43,267 - __main__ - INFO - Sallie Server Starting...
+2026-01-10 15:54:43,267 - __main__ - INFO - Start time: 2026-01-10 15:54:43
+2026-01-10 15:54:43,267 - __main__ - INFO - Validating environment configuration...
+2026-01-10 15:54:43,267 - __main__ - INFO - SUCCESS: Environment configuration validated!
+2026-01-10 15:54:43,267 - __main__ - INFO - Setting up data directories...
+2026-01-10 15:54:43,274 - __main__ - INFO - SUCCESS: Data directories ready!
+2026-01-10 15:54:43,274 - __main__ - INFO - Loading server components...
+2026-01-10 15:54:44,538 - __main__ - INFO - Server components loaded!
+2026-01-10 15:54:44,555 - __main__ - INFO - ============================================================
+2026-01-10 15:54:44,555 - __main__ - INFO - SALLIE BACKEND SERVER READY!
+2026-01-10 15:54:44,555 - __main__ - INFO - ============================================================
+2026-01-10 15:54:44,555 - __main__ - INFO - WebSocket Server: ws://localhost:8742
+2026-01-10 15:54:44,557 - __main__ - INFO - Web Interface: http://localhost:3000
+2026-01-10 15:54:44,557 - __main__ - INFO - API Docs: http://localhost:8742/docs
+2026-01-10 15:54:44,557 - __main__ - INFO - Health Check: http://localhost:8742/health
+2026-01-10 15:54:44,557 - __main__ - INFO - ============================================================
+2026-01-10 15:54:44,557 - __main__ - INFO - The Great Convergence awaits...
+2026-01-10 15:54:44,557 - __main__ - INFO - ============================================================
+2026-01-10 15:56:38,885 - __main__ - INFO - Sallie Server Starting...
+2026-01-10 15:56:38,886 - __main__ - INFO - Start time: 2026-01-10 15:56:38
+2026-01-10 15:56:38,886 - __main__ - INFO - Validating environment configuration...
+2026-01-10 15:56:38,886 - __main__ - INFO - SUCCESS: Environment configuration validated!
+2026-01-10 15:56:38,886 - __main__ - INFO - Setting up data directories...
+2026-01-10 15:56:38,889 - __main__ - INFO - SUCCESS: Data directories ready!
+2026-01-10 15:56:38,889 - __main__ - INFO - Loading server components...
+2026-01-10 15:56:40,067 - __main__ - INFO - Server components loaded!
+2026-01-10 15:56:40,083 - __main__ - INFO - ============================================================
+2026-01-10 15:56:40,084 - __main__ - INFO - SALLIE BACKEND SERVER READY!
+2026-01-10 15:56:40,084 - __main__ - INFO - ============================================================
+2026-01-10 15:56:40,084 - __main__ - INFO - WebSocket Server: ws://192.168.1.47:8742
+2026-01-10 15:56:40,084 - __main__ - INFO - Web Interface: http://localhost:3000
+2026-01-10 15:56:40,084 - __main__ - INFO - API Docs: http://192.168.1.47:8742/docs
+2026-01-10 15:56:40,085 - __main__ - INFO - Health Check: http://192.168.1.47:8742/health
+2026-01-10 15:56:40,085 - __main__ - INFO - ============================================================
+2026-01-10 15:56:40,085 - __main__ - INFO - The Great Convergence awaits...
+2026-01-10 15:56:40,085 - __main__ - INFO - ============================================================
+2026-01-10 15:57:15,917 - __main__ - INFO - Sallie Server Starting...
+2026-01-10 15:57:15,917 - __main__ - INFO - Start time: 2026-01-10 15:57:15
+2026-01-10 15:57:15,917 - __main__ - INFO - Validating environment configuration...
+2026-01-10 15:57:15,917 - __main__ - INFO - SUCCESS: Environment configuration validated!
+2026-01-10 15:57:15,917 - __main__ - INFO - Setting up data directories...
+2026-01-10 15:57:15,931 - __main__ - INFO - SUCCESS: Data directories ready!
+2026-01-10 15:57:15,932 - __main__ - INFO - Loading server components...
+2026-01-10 15:57:17,090 - __main__ - INFO - Server components loaded!
+2026-01-10 15:57:17,102 - __main__ - INFO - ============================================================
+2026-01-10 15:57:17,102 - __main__ - INFO - SALLIE BACKEND SERVER READY!
+2026-01-10 15:57:17,102 - __main__ - INFO - ============================================================
+2026-01-10 15:57:17,108 - __main__ - INFO - WebSocket Server: ws://192.168.1.47:8742
+2026-01-10 15:57:17,108 - __main__ - INFO - Web Interface: http://localhost:3000
+2026-01-10 15:57:17,108 - __main__ - INFO - API Docs: http://192.168.1.47:8742/docs
+2026-01-10 15:57:17,108 - __main__ - INFO - Health Check: http://192.168.1.47:8742/health
+2026-01-10 15:57:17,108 - __main__ - INFO - ============================================================
+2026-01-10 15:57:17,108 - __main__ - INFO - The Great Convergence awaits...
+2026-01-10 15:57:17,108 - __main__ - INFO - ============================================================
