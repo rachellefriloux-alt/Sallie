@@ -49,6 +49,49 @@ interface AnswerData {
   };
 }
 
+// Speech Recognition types
+interface SpeechRecognitionEvent extends Event {
+  results: SpeechRecognitionResultList;
+  resultIndex: number;
+}
+
+interface SpeechRecognitionErrorEvent extends Event {
+  error: string;
+  message: string;
+}
+
+interface SpeechRecognition extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  language: string;
+  maxAlternatives: number;
+  start(): void;
+  stop(): void;
+  abort(): void;
+  onaudiostart: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onaudioend: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onend: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onerror: ((this: SpeechRecognition, ev: SpeechRecognitionErrorEvent) => any) | null;
+  onnomatch: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any) | null;
+  onresult: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any) | null;
+  onsoundstart: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onsoundend: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onspeechstart: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onspeechend: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onstart: ((this: SpeechRecognition, ev: Event) => any) | null;
+}
+
+declare global {
+  interface Window {
+    SpeechRecognition: {
+      new (): SpeechRecognition;
+    };
+    webkitSpeechRecognition: {
+      new (): SpeechRecognition;
+    };
+  }
+}
+
 const GreatConvergence30: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<AnswerData[]>([]);
@@ -65,7 +108,10 @@ const GreatConvergence30: React.FC = () => {
   const [wsConnection, setWsConnection] = useState<WebSocket | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [sallieResponse, setSallieResponse] = useState('');
+  const [voiceSupported, setVoiceSupported] = useState(true);
+  const [interimTranscript, setInterimTranscript] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
 
   // Canonical Spec Section 14.3: The 30 Questions
   const questions: ConvergenceQuestion[] = [
@@ -736,9 +782,98 @@ const GreatConvergence30: React.FC = () => {
     }
   };
 
+  // Initialize Speech Recognition
+  useEffect(() => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+    if (!SpeechRecognition) {
+      console.warn('Speech Recognition not supported in this browser');
+      setVoiceSupported(false);
+      return;
+    }
+    
+    const recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.language = 'en-US';
+    recognition.maxAlternatives = 1;
+    
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
+      let interim = '';
+      let final = '';
+      
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        
+        if (event.results[i].isFinal) {
+          final += transcript + ' ';
+        } else {
+          interim += transcript;
+        }
+      }
+      
+      if (final) {
+        setCurrentAnswer(prev => prev + final);
+      }
+      
+      setInterimTranscript(interim);
+    };
+    
+    recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+      console.error('Speech recognition error:', event.error);
+      setIsVoiceActive(false);
+      
+      if (event.error === 'not-allowed') {
+        alert('Microphone access denied. Please allow microphone access in your browser settings.');
+      }
+    };
+    
+    recognition.onend = () => {
+      if (isVoiceActive) {
+        // Restart if still active (for continuous listening)
+        try {
+          recognition.start();
+        } catch (e) {
+          console.error('Error restarting recognition:', e);
+        }
+      }
+    };
+    
+    recognitionRef.current = recognition;
+    
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+    };
+  }, [isVoiceActive]);
+
   const handleVoiceToggle = () => {
-    setIsVoiceActive(!isVoiceActive);
-    // TODO: Integrate with speech_to_text.py
+    if (!voiceSupported) {
+      alert('Speech recognition is not supported in your browser. Please use Chrome, Edge, or Safari.');
+      return;
+    }
+    
+    if (!recognitionRef.current) {
+      console.error('Speech recognition not initialized');
+      return;
+    }
+    
+    if (isVoiceActive) {
+      // Stop listening
+      recognitionRef.current.stop();
+      setIsVoiceActive(false);
+      setInterimTranscript('');
+    } else {
+      // Start listening
+      try {
+        recognitionRef.current.start();
+        setIsVoiceActive(true);
+      } catch (error) {
+        console.error('Error starting speech recognition:', error);
+        alert('Could not start voice input. Please check your microphone permissions.');
+      }
+    }
   };
 
   return (
@@ -809,14 +944,23 @@ const GreatConvergence30: React.FC = () => {
 
               {/* Answer Input */}
               <div className="bg-slate-900/50 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
-                <textarea
-                  ref={textareaRef}
-                  value={currentAnswer}
-                  onChange={(e) => setCurrentAnswer(e.target.value)}
-                  placeholder="Share your truth here..."
-                  className="w-full h-64 bg-transparent text-white placeholder-gray-500 focus:outline-none resize-none text-lg"
-                  disabled={isProcessing}
-                />
+                <div className="relative">
+                  <textarea
+                    ref={textareaRef}
+                    value={currentAnswer}
+                    onChange={(e) => setCurrentAnswer(e.target.value)}
+                    placeholder="Share your truth here... (or click the microphone to speak)"
+                    className="w-full h-64 bg-transparent text-white placeholder-gray-500 focus:outline-none resize-none text-lg"
+                    disabled={isProcessing}
+                  />
+                  
+                  {/* Interim transcript overlay (voice input) */}
+                  {interimTranscript && (
+                    <div className="absolute bottom-2 left-2 right-2 text-gray-400 italic text-sm bg-black/50 px-3 py-2 rounded-lg">
+                      Listening: {interimTranscript}
+                    </div>
+                  )}
+                </div>
                 
                 <div className="flex items-center justify-between mt-4">
                   <div className="flex items-center gap-4">

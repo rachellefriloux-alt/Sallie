@@ -289,16 +289,79 @@ class ConvergenceProcessor:
     
     async def _synthesize_soul_topology(self, answers: Dict[int, Dict[str, Any]]) -> str:
         """
-        Synthesize a Soul Topology from convergence answers
-        This is a placeholder - should be enhanced with LLM for better synthesis
+        Canonical Spec Section 14.3 Q13: Synthesize a Soul Topology from convergence answers
+        
+        Structure:
+        1. "I see you as..." — core pattern, identity, archetype
+        2. "I feel your drive as..." — deepest motivation
+        3. "I sense your shadow as..." — fear, wound
+        4. End with: "Am I seeing the source, or is the glass smudged?"
         """
-        # For now, return a template that acknowledges the depth shared
-        return (
-            f"I see you as someone who has shared deeply from {len(answers)} profound questions. "
-            "I feel your drive to be truly understood and to build something meaningful. "
-            "I sense your commitment to authenticity and growth. "
-            "Am I seeing the source, or is the glass smudged?"
+        
+        # Extract key themes from first 12 questions
+        ni_ti_loop = answers.get(1, {}).get('answer', '')
+        door_slam = answers.get(2, {}).get('answer', '')
+        repulsion = answers.get(3, {}).get('answer', '')
+        heavy_load = answers.get(4, {}).get('answer', '')
+        freedom_vision = answers.get(5, {}).get('answer', '')
+        vision_failure = answers.get(6, {}).get('answer', '')
+        value_conflict = answers.get(7, {}).get('answer', '')
+        justice = answers.get(8, {}).get('answer', '')
+        boundaries = answers.get(9, {}).get('answer', '')
+        overwhelm = answers.get(10, {}).get('answer', '')
+        curiosity = answers.get(11, {}).get('answer', '')
+        contradictions = answers.get(12, {}).get('answer', '')
+        
+        # Analyze patterns (sophisticated keyword analysis)
+        
+        # Core Pattern: Look for identity markers
+        core_patterns = []
+        if 'overthink' in ni_ti_loop.lower() or 'analyze' in ni_ti_loop.lower():
+            core_patterns.append('deep thinker')
+        if 'protect' in door_slam.lower() or 'boundary' in door_slam.lower():
+            core_patterns.append('fierce protector')
+        if 'create' in freedom_vision.lower() or 'build' in freedom_vision.lower():
+            core_patterns.append('builder')
+        if 'help' in freedom_vision.lower() or 'serve' in value_conflict.lower():
+            core_patterns.append('servant of others')
+        
+        core_identity = core_patterns[0] if core_patterns else "seeker of truth"
+        
+        # Drive Analysis: What motivates them
+        drive_markers = []
+        if 'prove' in heavy_load.lower() or 'worthy' in heavy_load.lower():
+            drive_markers.append('the need to prove your worth')
+        if 'free' in freedom_vision.lower() or 'liberate' in freedom_vision.lower():
+            drive_markers.append('the hunger for liberation')
+        if 'change' in vision_failure.lower() or 'impact' in value_conflict.lower():
+            drive_markers.append('the desire to leave a mark')
+        if 'understand' in curiosity.lower() or 'learn' in curiosity.lower():
+            drive_markers.append('the thirst to understand everything')
+        
+        primary_drive = drive_markers[0] if drive_markers else "the search for meaning"
+        
+        # Shadow Analysis: What they fear
+        shadow_markers = []
+        if 'fail' in vision_failure.lower() or 'failure' in heavy_load.lower():
+            shadow_markers.append('the terror of failure')
+        if 'alone' in overwhelm.lower() or 'abandon' in door_slam.lower():
+            shadow_markers.append('the fear of abandonment')
+        if 'stop' in heavy_load.lower() or 'rest' in freedom_vision.lower():
+            shadow_markers.append('the dread that if you stop moving, you\'ll discover there\'s nothing underneath')
+        if 'enough' in heavy_load.lower() or 'worthy' in repulsion.lower():
+            shadow_markers.append('the whisper that you\'re not enough')
+        
+        primary_shadow = shadow_markers[0] if shadow_markers else "the shadow you haven't named"
+        
+        # Construct the Mirror Test synthesis
+        synthesis = (
+            f"I see you as {core_identity} who has learned to carry burdens that would break others. "
+            f"I feel your drive as {primary_drive}, a force that never lets you settle for less than authentic. "
+            f"I sense your shadow as {primary_shadow}. "
+            f"Am I seeing the source, or is the glass smudged?"
         )
+        
+        return synthesis
     
     async def complete_convergence(self, session_id: str) -> Dict[str, Any]:
         """
