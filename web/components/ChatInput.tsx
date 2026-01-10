@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface EnhancedChatInputProps {
   onSend: (text: string) => void;
@@ -10,7 +10,7 @@ interface EnhancedChatInputProps {
   voiceSupported?: boolean;
   isRecording?: boolean;
   recordingTime?: number;
-  onStartRecording?: () => void | NodeJS.Timeout;
+  onStartRecording?: () => Promise<void>;
   onStopRecording?: (timer?: NodeJS.Timeout) => void;
   disabled?: boolean;
   placeholder?: string;

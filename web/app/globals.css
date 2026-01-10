@@ -2,6 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
+/* === ANIMATION DELAYS === */
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
+/* === PULSE ANIMATION FOR ACTIVE ACTIONS === */
+@keyframes pulse-border {
+  0% {
+    box-shadow: 0 0 0 0 rgba(147, 51, 234, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(147, 51, 234, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(147, 51, 234, 0);
+  }
+}
+
+.action-executing {
+  animation: pulse-border 2s infinite;
+}
+
+/* === INTEGRATED COMMAND CENTER STYLES === */
+.skill-card-purple {
+  background-color: rgba(168, 85, 247, 0.2);
+}
+
+.skill-card-green {
+  background-color: rgba(16, 185, 129, 0.2);
+}
+
+.skill-card-blue {
+  background-color: rgba(59, 130, 246, 0.2);
+}
+
+.skill-card-orange {
+  background-color: rgba(245, 158, 11, 0.2);
+}
+
+.skill-icon-purple {
+  color: #a855f7;
+}
+
+.skill-icon-green {
+  color: #10b981;
+}
+
+.skill-icon-blue {
+  color: #3b82f6;
+}
+
+.skill-icon-orange {
+  color: #f59e0b;
+}
+
+.skill-level-purple {
+  color: #a855f7;
+}
+
+.skill-level-green {
+  color: #10b981;
+}
+
+.skill-level-blue {
+  color: #3b82f6;
+}
+
+.skill-level-orange {
+  color: #f59e0b;
+}
+
+.health-bar-blue {
+  background-color: #3b82f6;
+}
+
+.health-bar-green {
+  background-color: #10b981;
+}
+
+.health-bar-orange {
+  background-color: #f59e0b;
+}
+
 /* === PEACOCK TAIL PALETTE CSS VARIABLES === */
 :root {
   --peacock-blue: #1e40af;

@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MemoryService, MemoryServiceUtils } from '../../../shared/services/memoryService';
-import { Memory, MemoryType, MemorySource, MemorySearchRequest } from '../../../shared/services/memoryService';
+import { Memory, MemoryType, MemorySource, MemorySearchRequest, MemoryStats } from '../../../shared/services/memoryService';
 import { Search, Filter, Calendar, Tag, Brain, Database, Activity } from 'lucide-react';
 
 interface MemoryDashboardProps {
@@ -17,23 +17,50 @@ export const MemoryDashboard: React.FC<MemoryDashboardProps> = ({ className }) =
   const [selectedSource, setSelectedSource] = useState<MemorySource | 'all'>('all');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [stats, setStats] = useState<any>(null);
+  const [stats, setStats] = useState<MemoryStats | null>(null);
   const [isConnected, setIsConnected] = useState(false);
   const [newMemoryContent, setNewMemoryContent] = useState('');
   const [showCreateForm, setShowCreateForm] = useState(false);
+
+  const loadMemories = useCallback(async () => {
+    try {
+      const memoryService = new MemoryService.MemoryServiceImpl();
+      
+      const searchRequest: MemorySearchRequest = {
+        query: searchQuery,
+        limit: 50,
+        filters: {
+          type: selectedType !== 'all' ? [selectedType] : undefined,
+          source: selectedSource !== 'all' ? [selectedSource] : undefined,
+        },
+      };
+      
+      const result = await memoryService.searchMemories(searchRequest);
+      setMemories(result.memories);
+      
+    } catch (error) {
+      console.error('Failed to load memories:', error);
+      setError(error instanceof Error ? error.message : 'Failed to load memories');
+    }
+  }, [searchQuery, selectedType, selectedSource]);
+
+  const loadStats = useCallback(async () => {
+    try {
+      const memoryService = new MemoryService.MemoryServiceImpl();
+      const statsData = await memoryService.getStats();
+      setStats(statsData);
+    } catch (error) {
+      console.error('Failed to load stats:', error);
+    }
+  }, []);
 
   // Initialize Memory Service connection
   useEffect(() => {
     const initializeMemoryService = async () => {
       try {
-        const memoryService = new MemoryService.MemoryServiceImpl();
-        
-        // Load initial memories
+        setIsLoading(true);
         await loadMemories();
-        
-        // Load stats
-        const statsResult = await memoryService.getStats();
-        setStats(statsResult.stats);
+        await loadStats();
         
         // Set up WebSocket for real-time updates
         const ws = new MemoryService.MemoryServiceWebSocket('ws://localhost:8751');
@@ -77,7 +104,7 @@ export const MemoryDashboard: React.FC<MemoryDashboardProps> = ({ className }) =
     };
 
     initializeMemoryService();
-  }, []);
+  }, [loadMemories, loadStats]);
 
   const loadMemories = useCallback(async () => {
     try {
@@ -239,6 +266,8 @@ export const MemoryDashboard: React.FC<MemoryDashboardProps> = ({ className }) =
             </div>
             <button
               onClick={loadMemories}
+              title="Filter memories"
+              aria-label="Filter memories"
               className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
             >
               <Filter className="h-4 w-4" />

@@ -1,1 +1,16 @@
-{}
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/genesis/page": "app/genesis/page.js",
+  "/control/page": "app/control/page.js",
+  "/limbic/page": "app/limbic/page.js",
+  "/convergence/page": "app/convergence/page.js",
+  "/hypotheses/page": "app/hypotheses/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/heritage/page": "app/heritage/page.js",
+  "/communication/page": "app/communication/page.js",
+  "/omnis/page": "app/omnis/page.js",
+  "/settings/page": "app/settings/page.js",
+  "/thoughts/page": "app/thoughts/page.js",
+  "/projects/page": "app/projects/page.js",
+  "/page": "app/page.js"
+}

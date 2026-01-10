@@ -24,3 +24,15 @@
 2026-01-09 20:07:02,999 - api-gateway - INFO - index - lifespan - API Gateway started successfully
 2026-01-09 20:26:37,933 - api-gateway - INFO - index - lifespan - Shutting down API Gateway...
 2026-01-09 20:26:37,974 - api-gateway - INFO - index - lifespan - API Gateway shutdown complete
+2026-01-09 20:48:42,506 - api-gateway - INFO - logging - setup_logging - Logging configured for api-gateway
+2026-01-09 20:48:42,838 - api-gateway - INFO - logging - setup_logging - Logging configured for api-gateway
+2026-01-09 20:48:42,888 - api-gateway - INFO - index - lifespan - Starting Sallie API Gateway...
+2026-01-09 20:48:46,083 - api-gateway - WARNING - index - health_check_services - Service auth health check failed: All connection attempts failed
+2026-01-09 20:48:48,374 - api-gateway - WARNING - index - health_check_services - Service limbic health check failed: All connection attempts failed
+2026-01-09 20:48:50,672 - api-gateway - WARNING - index - health_check_services - Service memory health check failed: All connection attempts failed
+2026-01-09 20:48:52,970 - api-gateway - WARNING - index - health_check_services - Service agency health check failed: All connection attempts failed
+2026-01-09 20:48:55,256 - api-gateway - WARNING - index - health_check_services - Service communication health check failed: All connection attempts failed
+2026-01-09 20:48:57,544 - api-gateway - WARNING - index - health_check_services - Service sensor health check failed: All connection attempts failed
+2026-01-09 20:48:57,544 - api-gateway - INFO - index - lifespan - API Gateway started successfully
+2026-01-09 20:49:03,357 - api-gateway - INFO - index - lifespan - Shutting down API Gateway...
+2026-01-09 20:49:03,358 - api-gateway - INFO - index - lifespan - API Gateway shutdown complete

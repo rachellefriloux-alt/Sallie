@@ -579,7 +579,7 @@ const styles = StyleSheet.create({
     right: -8,
     flexDirection: 'row',
     alignItems: 'center',
-    space: 4,
+    gap: 4,
   },
   recordingIndicator: {
     width: 8,
@@ -601,7 +601,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     height: 30,
-    space: 2,
+    gap: 2,
   },
   waveBar: {
     width: 6,
@@ -754,7 +754,7 @@ const styles = StyleSheet.create({
     borderRadius: 2,
   },
   toggleContainer: {
-    space: 12,
+    gap: 12,
   },
   toggleRow: {
     flexDirection: 'row',
@@ -797,7 +797,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   commandsList: {
-    space: 8,
+    gap: 8,
   },
   commandItem: {
     backgroundColor: '#374151',

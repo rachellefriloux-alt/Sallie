@@ -224,10 +224,12 @@ const EmojiPicker: React.FC<EmojiPickerProps> = ({
             </h2>
             <button
               onClick={onClose}
+              title="Close emoji picker"
+              aria-label="Close emoji picker"
               className={`p-2 rounded-lg transition-colors ${
                 theme === 'dark' 
                   ? 'hover:bg-gray-800 text-gray-400' 
-                  : 'hover:bg-gray-100 text-gray-600'
+                  : 'hover:bg-gray-200 text-gray-600'
               }`}
             >
               <X className="w-5 h-5" />

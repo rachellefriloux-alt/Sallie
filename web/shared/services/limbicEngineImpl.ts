@@ -5,8 +5,36 @@
 
 import * as LimbicEngine from './limbicEngine';
 
-type LimbicState = LimbicEngine.LimbicState;
-type PerceptionResult = LimbicEngine.PerceptionResult;
+export type LimbicState = LimbicEngine.LimbicState;
+export type PerceptionResult = LimbicEngine.PerceptionResult;
+
+export class LimbicEngineUtils {
+  static calculateTrustScore(state: LimbicState): number {
+    return state.trust;
+  }
+  
+  static calculateEmotionalBalance(state: LimbicState): number {
+    return (state.warmth + state.valence) / 2;
+  }
+  
+  static calculateEngagement(state: LimbicState): number {
+    return (state.arousal + state.empathy + state.intuition) / 3;
+  }
+  
+  static formatPosture(posture: LimbicEngine.PostureMode): string {
+    return posture.charAt(0).toUpperCase() + posture.slice(1).toLowerCase();
+  }
+  
+  static getPostureColor(posture: LimbicEngine.PostureMode): string {
+    switch (posture) {
+      case LimbicEngine.PostureMode.COMPANION: return '#10B981';
+      case LimbicEngine.PostureMode.COPILOT: return '#3B82F6';
+      case LimbicEngine.PostureMode.PEER: return '#8B5CF6';
+      case LimbicEngine.PostureMode.EXPERT: return '#F59E0B';
+      default: return '#6B7280';
+    }
+  }
+}
 
 export class LimbicEngineServiceImpl implements LimbicEngine.ILimbicEngineService {
   private baseUrl: string;
@@ -103,6 +131,23 @@ export class LimbicEngineServiceImpl implements LimbicEngine.ILimbicEngineServic
         },
         new_state: await this.getCurrentState(),
       };
+    }
+  }
+
+  async getHistory(limit: number = 100): Promise<{ timestamp: number; state: LimbicState; event: string }[]> {
+    try {
+      const response = await fetch(`${this.baseUrl}/api/limbic/history?limit=${limit}`);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Failed to get history:', error);
+      // Fallback to mock data
+      const currentState = await this.getCurrentState();
+      return Array.from({ length: Math.min(limit, 10) }, (_, i) => ({
+        timestamp: Date.now() - (i * 60000),
+        state: { ...currentState, trust: Math.max(0, currentState.trust - (i * 0.1)) },
+        event: i === 0 ? 'current_state' : 'state_change'
+      }));
     }
   }
 

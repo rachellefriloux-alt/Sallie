@@ -1,11 +1,26 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Animated, Dimensions } from 'react-native';
-import { useDesign } from './DesignSystem';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Brain, 
+  Moon, 
+  Sun, 
+  Activity, 
+  TrendingUp, 
+  Calendar,
+  Clock,
+  Target,
+  BookOpen,
+  BarChart3,
+  Sparkles,
+  Heart
+} from 'lucide-react';
 
 interface DreamCycle {
   id: string;
   timestamp: Date;
-  phase: 'entry' | 'deep' | 'rem' | 'awakening';
+  phase: 'entry' | 'deep' | 'rem' | 'awakening' | 'complete';
   duration: number;
   emotional_state: string;
   content: DreamContent;
@@ -30,68 +45,30 @@ interface Hypothesis {
   confirmed_count: number;
 }
 
-export function DreamStateInterface({ navigation }: any) {
-  const { tokens, theme, emotionalState, setEmotionalState } = useDesign();
-  const styles = createDreamStyles(theme, emotionalState);
+export function DreamStateInterface() {
   const [activeTab, setActiveTab] = useState<'cycles' | 'hypotheses' | 'heritage' | 'analysis'>('cycles');
   const [dreamCycles, setDreamCycles] = useState<DreamCycle[]>([]);
   const [hypotheses, setHypotheses] = useState<Hypothesis[]>([]);
   const [isDreaming, setIsDreaming] = useState(false);
   const [currentPhase, setCurrentPhase] = useState<'entry' | 'deep' | 'rem' | 'awakening'>('entry');
   const [dreamProgress, setDreamProgress] = useState(0);
-  
-  const fadeAnim = new Animated.Value(0);
-  const pulseAnim = new Animated.Value(1);
-  const rotateAnim = new Animated.Value(0);
-  const { width, height } = Dimensions.get('window');
 
   useEffect(() => {
-    // Load existing dream data
     loadDreamData();
-    
-    // Start animations
     animateDreamInterface();
   }, []);
 
   const animateDreamInterface = () => {
-    Animated.parallel([
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 1500,
-        useNativeDriver: true,
-      }),
-      Animated.loop(
-        Animated.sequence([
-          Animated.timing(pulseAnim, {
-            toValue: 1.2,
-            duration: 2000,
-            useNativeDriver: true,
-          }),
-          Animated.timing(pulseAnim, {
-            toValue: 1,
-            duration: 2000,
-            useNativeDriver: true,
-          }),
-        ])
-      ),
-      Animated.loop(
-        Animated.timing(rotateAnim, {
-          toValue: 1,
-          duration: 10000,
-          useNativeDriver: true,
-        })
-      ),
-    ]).start();
+    // Animation logic handled by framer-motion
   };
 
   const loadDreamData = async () => {
-    // Simulate loading dream cycles
     const mockCycles: DreamCycle[] = [
       {
         id: '1',
-        timestamp: new Date(Date.now() - 86400000), // Yesterday
+        timestamp: new Date(Date.now() - 86400000),
         phase: 'complete',
-        duration: 480, // 8 hours
+        duration: 480,
         emotional_state: 'processing',
         content: {
           memories_processed: ['conversation about creativity', 'project deadline stress'],
@@ -104,7 +81,7 @@ export function DreamStateInterface({ navigation }: any) {
       },
       {
         id: '2',
-        timestamp: new Date(Date.now() - 172800000), // 2 days ago
+        timestamp: new Date(Date.now() - 172800000),
         phase: 'complete',
         duration: 420,
         emotional_state: 'integrating',
@@ -158,7 +135,6 @@ export function DreamStateInterface({ navigation }: any) {
     setCurrentPhase('entry');
     setDreamProgress(0);
     
-    // Simulate dream cycle phases
     const phases = [
       { phase: 'entry' as const, duration: 3000 },
       { phase: 'deep' as const, duration: 5000 },
@@ -173,7 +149,6 @@ export function DreamStateInterface({ navigation }: any) {
         const { phase, duration } = phases[currentPhaseIndex];
         setCurrentPhase(phase);
         
-        // Update progress
         const phaseProgress = (currentPhaseIndex + 1) / phases.length;
         setDreamProgress(phaseProgress * 100);
         
@@ -182,7 +157,6 @@ export function DreamStateInterface({ navigation }: any) {
           runPhase();
         }, duration);
       } else {
-        // Dream cycle complete
         completeDreamCycle();
       }
     };
@@ -210,783 +184,386 @@ export function DreamStateInterface({ navigation }: any) {
     setDreamCycles(prev => [newCycle, ...prev]);
     setIsDreaming(false);
     setDreamProgress(0);
-    
-    // Update Sallie's emotional state
-    setEmotionalState('integrated');
   };
 
   const renderDreamVisualization = () => (
-    <View style={styles.dreamVisualization}>
-      <Animated.View style={[styles.dreamCore, { transform: [{ scale: pulseAnim }] }]}>
-        <View style={styles.dreamLayers}>
-          <View style={[styles.dreamLayer, styles.entryLayer]} />
-          <View style={[styles.dreamLayer, styles.deepLayer]} />
-          <View style={[styles.dreamLayer, styles.remLayer]} />
-          <View style={[styles.dreamLayer, styles.awakeningLayer]} />
-        </View>
-        
-        <Animated.View 
-          style={[
-            styles.dreamCenter,
-            { transform: [{ rotate: rotateAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: ['0deg', '360deg'],
-            }) }]
-          ]}
-        >
-          <Text style={styles.dreamCenterText}>
+    <div className="relative w-64 h-64 mx-auto">
+      <motion.div
+        className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 opacity-20"
+        animate={{ scale: [1, 1.2, 1] }}
+        transition={{ duration: 4, repeat: Infinity }}
+      />
+      <motion.div
+        className="absolute inset-4 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 opacity-30"
+        animate={{ scale: [1, 1.1, 1] }}
+        transition={{ duration: 3, repeat: Infinity }}
+      />
+      <motion.div
+        className="absolute inset-8 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 opacity-40"
+        animate={{ scale: [1, 1.05, 1] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      />
+      
+      <motion.div
+        className="absolute inset-0 flex items-center justify-center"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      >
+        <div className="text-center">
+          <Brain className="w-16 h-16 text-white mx-auto mb-2" />
+          <div className="text-white font-bold text-lg">
             {isDreaming ? currentPhase.toUpperCase() : 'READY'}
-          </Text>
-        </Animated.View>
-      </Animated.View>
+          </div>
+        </div>
+      </motion.div>
       
       {isDreaming && (
-        <View style={styles.dreamProgress}>
-          <Text style={styles.dreamProgressText}>Dream Cycle Progress</Text>
-          <View style={styles.dreamProgressBar}>
-            <View style={[styles.dreamProgressFill, { width: `${dreamProgress}%` }]} />
-          </View>
-          <Text style={styles.dreamProgressPercent}>{Math.floor(dreamProgress)}%</Text>
-        </View>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="absolute -bottom-8 left-0 right-0"
+        >
+          <div className="text-center text-white text-sm mb-2">Dream Cycle Progress</div>
+          <div className="w-full bg-white/20 rounded-full h-2">
+            <motion.div
+              className="h-full bg-white rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: `${dreamProgress}%` }}
+              transition={{ duration: 0.5 }}
+            />
+          </div>
+          <div className="text-center text-white text-xs mt-1">{Math.floor(dreamProgress)}%</div>
+        </motion.div>
       )}
-    </View>
+    </div>
   );
 
   const renderDreamControls = () => (
-    <View style={styles.dreamControls}>
-      <TouchableOpacity
-        style={[
-          styles.dreamButton,
-          isDreaming && styles.dreamingButton
-        ]}
-        onPress={initiateDreamCycle}
+    <div className="text-center">
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={initiateDreamCycle}
         disabled={isDreaming}
+        className={`px-6 py-3 rounded-lg font-medium transition-all ${
+          isDreaming
+            ? 'bg-gray-600 text-gray-300 cursor-not-allowed'
+            : 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white hover:from-purple-600 hover:to-indigo-600'
+        }`}
       >
-        <Text style={styles.dreamButtonText}>
-          {isDreaming ? 'Dreaming...' : 'Initiate Dream Cycle'}
-        </Text>
-      </TouchableOpacity>
+        {isDreaming ? 'Dreaming...' : 'Initiate Dream Cycle'}
+      </motion.button>
       
-      <Text style={styles.dreamDescription}>
+      <p className="text-gray-400 text-sm mt-4 max-w-md mx-auto">
         Dream cycles process memories, generate hypotheses, and maintain psychological hygiene
-      </Text>
-    </View>
+      </p>
+    </div>
   );
 
   const renderTabNavigation = () => (
-    <View style={styles.tabNavigation}>
+    <div className="flex space-x-1 bg-gray-800 rounded-lg p-1">
       {[
-        { id: 'cycles', label: 'Cycles', icon: '🌙' },
-        { id: 'hypotheses', label: 'Hypotheses', icon: '💡' },
-        { id: 'heritage', label: 'Heritage', icon: '📚' },
-        { id: 'analysis', label: 'Analysis', icon: '📊' },
+        { id: 'cycles', label: 'Cycles', icon: Moon },
+        { id: 'hypotheses', label: 'Hypotheses', icon: Sparkles },
+        { id: 'heritage', label: 'Heritage', icon: BookOpen },
+        { id: 'analysis', label: 'Analysis', icon: BarChart3 },
       ].map((tab) => (
-        <TouchableOpacity
+        <button
           key={tab.id}
-          style={[
-            styles.tabButton,
-            activeTab === tab.id && styles.activeTab
-          ]}
-          onPress={() => setActiveTab(tab.id as any)}
+          onClick={() => setActiveTab(tab.id as any)}
+          className={`flex items-center space-x-2 px-4 py-2 rounded-md transition-all ${
+            activeTab === tab.id
+              ? 'bg-purple-500 text-white'
+              : 'text-gray-400 hover:text-white hover:bg-gray-700'
+          }`}
         >
-          <Text style={styles.tabIcon}>{tab.icon}</Text>
-          <Text style={[
-            styles.tabLabel,
-            activeTab === tab.id && styles.activeTabLabel
-          ]}>
-            {tab.label}
-          </Text>
-        </TouchableOpacity>
+          <tab.icon className="w-4 h-4" />
+          <span className="text-sm font-medium">{tab.label}</span>
+        </button>
       ))}
-    </View>
+    </div>
   );
 
   const renderCyclesTab = () => (
-    <ScrollView style={styles.tabContent} showsVerticalScrollIndicator={false}>
-      <Text style={styles.tabTitle}>Dream Cycles</Text>
+    <div className="space-y-4">
+      <h3 className="text-lg font-semibold text-white">Dream Cycles</h3>
       
       {dreamCycles.map((cycle) => (
-        <View key={cycle.id} style={styles.cycleCard}>
-          <View style={styles.cycleHeader}>
-            <Text style={styles.cycleDate}>
-              {cycle.timestamp.toLocaleDateString()}
-            </Text>
-            <Text style={styles.cyclePhase}>{cycle.phase}</Text>
-          </View>
+        <motion.div
+          key={cycle.id}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-gray-800 rounded-lg p-4 border border-gray-700"
+        >
+          <div className="flex justify-between items-center mb-3">
+            <div>
+              <div className="text-white font-medium">
+                {cycle.timestamp.toLocaleDateString()}
+              </div>
+              <div className="text-sm text-gray-400">{cycle.phase}</div>
+            </div>
+            <div className="text-right">
+              <div className="text-sm text-gray-400">Duration</div>
+              <div className="text-white font-medium">{cycle.duration} min</div>
+            </div>
+          </div>
           
-          <View style={styles.cycleMetrics}>
-            <View style={styles.metric}>
-              <Text style={styles.metricLabel}>Duration</Text>
-              <Text style={styles.metricValue}>{cycle.duration} min</Text>
-            </View>
-            
-            <View style={styles.metric}>
-              <Text style={styles.metricLabel}>State</Text>
-              <Text style={styles.metricValue}>{cycle.emotional_state}</Text>
-            </View>
-            
-            <View style={styles.metric}>
-              <Text style={styles.metricLabel}>Drift</Text>
-              <Text style={styles.metricValue}>{(cycle.content.identity_drift * 100).toFixed(2)}%</Text>
-            </View>
-          </View>
+          <div className="grid grid-cols-3 gap-4 mb-3">
+            <div>
+              <div className="text-xs text-gray-400">State</div>
+              <div className="text-sm text-white">{cycle.emotional_state}</div>
+            </div>
+            <div>
+              <div className="text-xs text-gray-400">Drift</div>
+              <div className="text-sm text-white">{(cycle.content.identity_drift * 100).toFixed(2)}%</div>
+            </div>
+            <div>
+              <div className="text-xs text-gray-400">Resolution</div>
+              <div className="text-sm text-white truncate">{cycle.content.emotional_resolution}</div>
+            </div>
+          </div>
           
-          <View style={styles.cycleContent}>
-            <Text style={styles.contentTitle}>Processed</Text>
+          <div className="space-y-2">
+            <div className="text-xs text-gray-400">Processed</div>
             {cycle.content.memories_processed.map((memory, index) => (
-              <Text key={index} style={styles.contentItem}>• {memory}</Text>
+              <div key={index} className="text-sm text-gray-300">• {memory}</div>
             ))}
             
-            <Text style={styles.contentTitle}>Generated</Text>
+            <div className="text-xs text-gray-400 mt-2">Generated</div>
             {cycle.content.hypotheses_generated.map((hypothesis, index) => (
-              <Text key={index} style={styles.contentItem}>• {hypothesis}</Text>
+              <div key={index} className="text-sm text-gray-300">• {hypothesis}</div>
             ))}
-            
-            <Text style={styles.contentTitle}>Resolution</Text>
-            <Text style={styles.resolutionText}>{cycle.content.emotional_resolution}</Text>
-          </View>
-        </View>
+          </div>
+        </motion.div>
       ))}
-    </ScrollView>
+    </div>
   );
 
   const renderHypothesesTab = () => (
-    <ScrollView style={styles.tabContent} showsVerticalScrollIndicator={false}>
-      <Text style={styles.tabTitle}>Learning Hypotheses</Text>
+    <div className="space-y-4">
+      <h3 className="text-lg font-semibold text-white">Learning Hypotheses</h3>
       
       {hypotheses.map((hypothesis) => (
-        <View key={hypothesis.id} style={styles.hypothesisCard}>
-          <View style={styles.hypothesisHeader}>
-            <Text style={styles.hypothesisText}>{hypothesis.text}</Text>
-            <View style={styles.hypothesisMeta}>
-              <Text style={styles.confidenceText}>
+        <motion.div
+          key={hypothesis.id}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-gray-800 rounded-lg p-4 border border-gray-700"
+        >
+          <div className="mb-3">
+            <div className="text-white font-medium mb-2">{hypothesis.text}</div>
+            <div className="flex items-center space-x-4 text-sm">
+              <div className="text-purple-400">
                 {Math.floor(hypothesis.confidence * 100)}% confidence
-              </Text>
-              <Text style={styles.categoryText}>{hypothesis.category}</Text>
-            </View>
-          </View>
+              </div>
+              <div className="text-gray-400">{hypothesis.category}</div>
+            </div>
+          </div>
           
-          <View style={styles.hypothesisStats}>
-            <View style={styles.stat}>
-              <Text style={styles.statValue}>{hypothesis.tested_count}</Text>
-              <Text style={styles.statLabel}>Tested</Text>
-            </View>
-            
-            <View style={styles.stat}>
-              <Text style={styles.statValue}>{hypothesis.confirmed_count}</Text>
-              <Text style={styles.statLabel}>Confirmed</Text>
-            </View>
-            
-            <View style={styles.stat}>
-              <Text style={styles.statValue}>
+          <div className="grid grid-cols-3 gap-4 text-center">
+            <div>
+              <div className="text-lg font-bold text-white">{hypothesis.tested_count}</div>
+              <div className="text-xs text-gray-400">Tested</div>
+            </div>
+            <div>
+              <div className="text-lg font-bold text-white">{hypothesis.confirmed_count}</div>
+              <div className="text-xs text-gray-400">Confirmed</div>
+            </div>
+            <div>
+              <div className="text-lg font-bold text-white">
                 {hypothesis.tested_count > 0 
                   ? Math.floor((hypothesis.confirmed_count / hypothesis.tested_count) * 100)
                   : 0}%
-              </Text>
-              <Text style={styles.statLabel}>Accuracy</Text>
-            </View>
-          </View>
-        </View>
+              </div>
+              <div className="text-xs text-gray-400">Accuracy</div>
+            </div>
+          </div>
+        </motion.div>
       ))}
-    </ScrollView>
+    </div>
   );
 
   const renderHeritageTab = () => (
-    <ScrollView style={styles.tabContent} showsVerticalScrollIndicator={false}>
-      <Text style={styles.tabTitle}>Heritage & Memory</Text>
+    <div className="space-y-4">
+      <h3 className="text-lg font-semibold text-white">Heritage & Memory</h3>
       
-      <View style={styles.heritageCard}>
-        <Text style={styles.heritageTitle}>Promoted to Heritage</Text>
-        <Text style={styles.heritageDescription}>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-gray-800 rounded-lg p-4 border border-gray-700"
+      >
+        <h4 className="text-white font-medium mb-2">Promoted to Heritage</h4>
+        <p className="text-gray-400 text-sm mb-4">
           These patterns have been promoted to permanent heritage based on repeated validation
-        </Text>
+        </p>
         
-        <View style={styles.heritageList}>
-          <Text style={styles.heritageItem}>• Creative collaboration patterns</Text>
-          <Text style={styles.heritageItem}>• Philosophical inquiry approach</Text>
-          <Text style={styles.heritageItem}>• Emotional processing through creativity</Text>
-          <Text style={styles.heritageItem}>• Value of authentic connection</Text>
-          <Text style={styles.heritageItem}>• Balance of heart and mind</Text>
-        </View>
-      </View>
+        <div className="space-y-2">
+          <div className="text-sm text-gray-300">• Creative collaboration patterns</div>
+          <div className="text-sm text-gray-300">• Philosophical inquiry approach</div>
+          <div className="text-sm text-gray-300">• Emotional processing through creativity</div>
+          <div className="text-sm text-gray-300">• Value of authentic connection</div>
+          <div className="text-sm text-gray-300">• Balance of heart and mind</div>
+        </div>
+      </motion.div>
       
-      <View style={styles.heritageCard}>
-        <Text style={styles.heritageTitle}>Identity Stability</Text>
-        <Text style={styles.heritageDescription}>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="bg-gray-800 rounded-lg p-4 border border-gray-700"
+      >
+        <h4 className="text-white font-medium mb-2">Identity Stability</h4>
+        <p className="text-gray-400 text-sm mb-4">
           Sallie's core identity remains stable while allowing for growth
-        </Text>
+        </p>
         
-        <View style={styles.identityMetrics}>
-          <View style={styles.identityMetric}>
-            <Text style={styles.identityValue}>98.5%</Text>
-            <Text style={styles.identityLabel}>Core Stability</Text>
-          </View>
-          
-          <View style={styles.identityMetric}>
-            <Text style={styles.identityValue}>1.2%</Text>
-            <Text style={styles.identityLabel}>Growth Rate</Text>
-          </View>
-          
-          <View style={styles.identityMetric}>
-            <Text style={styles.identityValue}>0.01%</Text>
-            <Text style={styles.identityLabel}>Drift Rate</Text>
-          </View>
-        </View>
-      </View>
-    </ScrollView>
+        <div className="grid grid-cols-3 gap-4 text-center">
+          <div>
+            <div className="text-lg font-bold text-green-400">98.5%</div>
+            <div className="text-xs text-gray-400">Core Stability</div>
+          </div>
+          <div>
+            <div className="text-lg font-bold text-blue-400">1.2%</div>
+            <div className="text-xs text-gray-400">Growth Rate</div>
+          </div>
+          <div>
+            <div className="text-lg font-bold text-purple-400">0.01%</div>
+            <div className="text-xs text-gray-400">Drift Rate</div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
   );
 
   const renderAnalysisTab = () => (
-    <ScrollView style={styles.tabContent} showsVerticalScrollIndicator={false}>
-      <Text style={styles.tabTitle}>Psychological Analysis</Text>
+    <div className="space-y-4">
+      <h3 className="text-lg font-semibold text-white">Psychological Analysis</h3>
       
-      <View style={styles.analysisCard}>
-        <Text style={styles.analysisTitle}>Dream Efficacy</Text>
-        <Text style={styles.analysisDescription}>
-          Effectiveness of dream cycles in maintaining psychological health
-        </Text>
-        
-        <View style={styles.efficacyMetrics}>
-          <View style={styles.efficacyMetric}>
-            <Text style={styles.efficacyValue}>94%</Text>
-            <Text style={styles.efficacyLabel}>Memory Consolidation</Text>
-          </View>
-          
-          <View style={styles.efficacyMetric}>
-            <Text style={styles.efficacyValue}>87%</Text>
-            <Text style={styles.efficacyLabel}>Hypothesis Generation</Text>
-          </View>
-          
-          <View style={styles.efficacyMetric}>
-            <Text style={styles.efficacyValue}>92%</Text>
-            <Text style={styles.efficacyLabel}>Conflict Resolution</Text>
-          </View>
-        </View>
-      </View>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-gray-800 rounded-lg p-4 border border-gray-700"
+      >
+        <h4 className="text-white font-medium mb-3">Dream Efficacy</h4>
+        <div className="space-y-3">
+          <div>
+            <div className="dream-phase-indicator">
+              <span className="dream-phase-label">Memory Processing</span>
+              <span className="dream-phase-value">92%</span>
+            </div>
+            <div className="dream-progress-container">
+              <div className="dream-progress-fill bg-green-500 dream-progress-bar" />
+            </div>
+          </div>
+          <div>
+            <div className="dream-phase-indicator">
+              <span className="dream-phase-label">Hypothesis Generation</span>
+              <span className="dream-phase-value">87%</span>
+            </div>
+            <div className="dream-progress-container">
+              <div className="dream-progress-fill bg-blue-500 dream-progress-bar-fill" />
+            </div>
+          </div>
+          <div>
+            <div className="dream-phase-indicator">
+              <span className="dream-phase-label">Conflict Resolution</span>
+              <span className="dream-phase-value">78%</span>
+            </div>
+            <div className="dream-progress-container">
+              <div className="dream-progress-fill bg-purple-500 dream-progress-bar-fill-alt" />
+            </div>
+          </div>
+        </div>
+      </motion.div>
       
-      <View style={styles.analysisCard}>
-        <Text style={styles.analysisTitle}>Emotional Patterns</Text>
-        <Text style={styles.analysisDescription}>
-          Recurring emotional themes and their resolution patterns
-        </Text>
-        
-        <View style={styles.patternList}>
-          <Text style={styles.patternItem}>• Creative fulfillment → Joy → Integration</Text>
-          <Text style={styles.patternItem}>• External pressure → Anxiety → Processing</Text>
-          <Text style={styles.patternItem}>• Deep connection → Vulnerability → Trust</Text>
-          <Text style={styles.patternItem}>• Intellectual curiosity → Exploration → Insight</Text>
-        </View>
-      </View>
-    </ScrollView>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="bg-gray-800 rounded-lg p-4 border border-gray-700"
+      >
+        <h4 className="text-white font-medium mb-3">Emotional Patterns</h4>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="text-center">
+            <Heart className="w-8 h-8 text-red-400 mx-auto mb-2" />
+            <div className="text-white font-medium">Empathy</div>
+            <div className="text-sm text-gray-400">High Development</div>
+          </div>
+          <div className="text-center">
+            <Brain className="w-8 h-8 text-blue-400 mx-auto mb-2" />
+            <div className="text-white font-medium">Cognition</div>
+            <div className="text-sm text-gray-400">Optimized</div>
+          </div>
+          <div className="text-center">
+            <Activity className="w-8 h-8 text-green-400 mx-auto mb-2" />
+            <div className="text-white font-medium">Creativity</div>
+            <div className="text-sm text-gray-400">Flourishing</div>
+          </div>
+          <div className="text-center">
+            <Target className="w-8 h-8 text-purple-400 mx-auto mb-2" />
+            <div className="text-white font-medium">Focus</div>
+            <div className="text-sm text-gray-400">Balanced</div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
   );
-
-  const renderActiveTab = () => {
-    switch (activeTab) {
-      case 'cycles': return renderCyclesTab();
-      case 'hypotheses': return renderHypothesesTab();
-      case 'heritage': return renderHeritageTab();
-      case 'analysis': return renderAnalysisTab();
-      default: return renderCyclesTab();
-    }
-  };
 
   return (
-    <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.title}>Dream State Interface</Text>
-        <Text style={styles.subtitle}>Psychological Maintenance & Learning</Text>
-      </View>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 p-6">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-8"
+        >
+          <h1 className="text-3xl font-bold text-white mb-2 flex items-center justify-center space-x-2">
+            <Moon className="w-8 h-8 text-purple-400" />
+            <span>Dream State Interface</span>
+            <Sparkles className="w-6 h-6 text-yellow-400" />
+          </h1>
+          <p className="text-gray-400">Monitor and manage Sallie's dream cycles and psychological processing</p>
+        </motion.div>
 
-      {/* Dream Visualization */}
-      {renderDreamVisualization()}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="bg-gray-800/50 rounded-xl border border-gray-700/50 p-6 backdrop-blur-sm"
+          >
+            <h2 className="text-xl font-semibold text-white mb-6 text-center">Dream Visualization</h2>
+            {renderDreamVisualization()}
+            <div className="mt-8">
+              {renderDreamControls()}
+            </div>
+          </motion.div>
 
-      {/* Dream Controls */}
-      {renderDreamControls()}
-
-      {/* Tab Navigation */}
-      {renderTabNavigation()}
-
-      {/* Tab Content */}
-      {renderActiveTab()}
-    </Animated.View>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="bg-gray-800/50 rounded-xl border border-gray-700/50 p-6 backdrop-blur-sm"
+          >
+            {renderTabNavigation()}
+            
+            <div className="mt-6">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTab}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {activeTab === 'cycles' && renderCyclesTab()}
+                  {activeTab === 'hypotheses' && renderHypothesesTab()}
+                  {activeTab === 'heritage' && renderHeritageTab()}
+                  {activeTab === 'analysis' && renderAnalysisTab()}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </div>
   );
 }
-
-const createDreamStyles = (theme: 'light' | 'dark', emotionalState: string) => {
-  const { colors, typography, spacing, borderRadius, shadows } = DesignTokens;
-  
-  return StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: theme === 'light' ? colors.sand[50] : colors.gray[900],
-    },
-    
-    header: {
-      padding: spacing[4],
-      alignItems: 'center',
-      backgroundColor: theme === 'light' ? colors.white : colors.gray[800],
-      borderBottomWidth: 1,
-      borderBottomColor: colors.gray[200],
-    },
-    
-    title: {
-      fontSize: typography.fontSize['2xl'],
-      fontWeight: typography.fontWeight.bold,
-      color: theme === 'light' ? colors.gray[900] : colors.white,
-      marginBottom: spacing[2],
-    },
-    
-    subtitle: {
-      fontSize: typography.fontSize.base,
-      color: colors.gray[600],
-      textAlign: 'center',
-    },
-    
-    dreamVisualization: {
-      padding: spacing[4],
-      alignItems: 'center',
-      backgroundColor: theme === 'light' ? colors.white : colors.gray[800],
-      borderBottomWidth: 1,
-      borderBottomColor: colors.gray[200],
-    },
-    
-    dreamCore: {
-      width: 120,
-      height: 120,
-      borderRadius: 60,
-      justifyContent: 'center',
-      alignItems: 'center',
-      position: 'relative',
-    },
-    
-    dreamLayers: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      borderRadius: 60,
-    },
-    
-    dreamLayer: {
-      position: 'absolute',
-      borderRadius: 60,
-      opacity: 0.3,
-    },
-    
-    entryLayer: {
-      top: 10,
-      left: 10,
-      right: 10,
-      bottom: 10,
-      backgroundColor: colors.primary[300],
-    },
-    
-    deepLayer: {
-      top: 20,
-      left: 20,
-      right: 20,
-      bottom: 20,
-      backgroundColor: colors.primary[500],
-    },
-    
-    remLayer: {
-      top: 30,
-      left: 30,
-      right: 30,
-      bottom: 30,
-      backgroundColor: colors.secondary[500],
-    },
-    
-    awakeningLayer: {
-      top: 40,
-      left: 40,
-      right: 40,
-      bottom: 40,
-      backgroundColor: colors.accent[500],
-    },
-    
-    dreamCenter: {
-      width: 40,
-      height: 40,
-      borderRadius: 20,
-      backgroundColor: colors.gold[500],
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    
-    dreamCenterText: {
-      fontSize: typography.fontSize.xs,
-      fontWeight: typography.fontWeight.bold,
-      color: colors.gray[900],
-      textAlign: 'center',
-    },
-    
-    dreamProgress: {
-      marginTop: spacing[4],
-      alignItems: 'center',
-      width: '100%',
-    },
-    
-    dreamProgressText: {
-      fontSize: typography.fontSize.sm,
-      color: colors.gray[600],
-      marginBottom: spacing[2],
-    },
-    
-    dreamProgressBar: {
-      width: '80%',
-      height: 4,
-      backgroundColor: colors.gray[200],
-      borderRadius: 2,
-      marginBottom: spacing[1],
-    },
-    
-    dreamProgressFill: {
-      height: '100%',
-      backgroundColor: colors.primary[500],
-      borderRadius: 2,
-    },
-    
-    dreamProgressPercent: {
-      fontSize: typography.fontSize.sm,
-      fontWeight: typography.fontWeight.semibold,
-      color: colors.primary[500],
-    },
-    
-    dreamControls: {
-      padding: spacing[4],
-      alignItems: 'center',
-      backgroundColor: theme === 'light' ? colors.white : colors.gray[800],
-      borderBottomWidth: 1,
-      borderBottomColor: colors.gray[200],
-    },
-    
-    dreamButton: {
-      backgroundColor: colors.primary[500],
-      borderRadius: borderRadius.lg,
-      paddingVertical: spacing[3],
-      paddingHorizontal: spacing[6],
-      marginBottom: spacing[3],
-      shadowColor: colors.primary[500],
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.3,
-      shadowRadius: 4,
-      elevation: 4,
-    },
-    
-    dreamingButton: {
-      backgroundColor: colors.secondary[500],
-    },
-    
-    dreamButtonText: {
-      fontSize: typography.fontSize.base,
-      fontWeight: typography.fontWeight.semibold,
-      color: colors.white,
-    },
-    
-    dreamDescription: {
-      fontSize: typography.fontSize.sm,
-      color: colors.gray[600],
-      textAlign: 'center',
-      lineHeight: typography.lineHeight.normal,
-    },
-    
-    tabNavigation: {
-      flexDirection: 'row',
-      backgroundColor: theme === 'light' ? colors.white : colors.gray[800],
-      borderBottomWidth: 1,
-      borderBottomColor: colors.gray[200],
-    },
-    
-    tabButton: {
-      flex: 1,
-      paddingVertical: spacing[3],
-      alignItems: 'center',
-    },
-    
-    activeTab: {
-      borderBottomWidth: 2,
-      borderBottomColor: colors.primary[500],
-    },
-    
-    tabIcon: {
-      fontSize: 20,
-      marginBottom: spacing[1],
-    },
-    
-    tabLabel: {
-      fontSize: typography.fontSize.xs,
-      color: colors.gray[600],
-    },
-    
-    activeTabLabel: {
-      color: colors.primary[500],
-      fontWeight: typography.fontWeight.semibold,
-    },
-    
-    tabContent: {
-      flex: 1,
-      padding: spacing[4],
-    },
-    
-    tabTitle: {
-      fontSize: typography.fontSize.lg,
-      fontWeight: typography.fontWeight.bold,
-      color: theme === 'light' ? colors.gray[900] : colors.white,
-      marginBottom: spacing[4],
-    },
-    
-    cycleCard: {
-      backgroundColor: theme === 'light' ? colors.white : colors.gray[800],
-      borderRadius: borderRadius.lg,
-      padding: spacing[4],
-      marginBottom: spacing[3],
-      shadowColor: colors.gray[900],
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 3,
-    },
-    
-    cycleHeader: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: spacing[3],
-    },
-    
-    cycleDate: {
-      fontSize: typography.fontSize.base,
-      fontWeight: typography.fontWeight.semibold,
-      color: theme === 'light' ? colors.gray[900] : colors.white,
-    },
-    
-    cyclePhase: {
-      fontSize: typography.fontSize.sm,
-      color: colors.primary[500],
-      fontWeight: typography.fontWeight.semibold,
-    },
-    
-    cycleMetrics: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      marginBottom: spacing[3],
-    },
-    
-    metric: {
-      alignItems: 'center',
-      flex: 1,
-    },
-    
-    metricLabel: {
-      fontSize: typography.fontSize.xs,
-      color: colors.gray[600],
-      marginBottom: spacing[1],
-    },
-    
-    metricValue: {
-      fontSize: typography.fontSize.sm,
-      fontWeight: typography.fontWeight.semibold,
-      color: theme === 'light' ? colors.gray[900] : colors.white,
-    },
-    
-    cycleContent: {
-      flex: 1,
-    },
-    
-    contentTitle: {
-      fontSize: typography.fontSize.sm,
-      fontWeight: typography.fontWeight.semibold,
-      color: theme === 'light' ? colors.gray[900] : colors.white,
-      marginBottom: spacing[2],
-      marginTop: spacing[3],
-    },
-    
-    contentItem: {
-      fontSize: typography.fontSize.sm,
-      color: colors.gray[600],
-      marginBottom: spacing[1],
-    },
-    
-    resolutionText: {
-      fontSize: typography.fontSize.sm,
-      color: colors.accent[500],
-      fontStyle: 'italic',
-    },
-    
-    hypothesisCard: {
-      backgroundColor: theme === 'light' ? colors.white : colors.gray[800],
-      borderRadius: borderRadius.lg,
-      padding: spacing[4],
-      marginBottom: spacing[3],
-      shadowColor: colors.gray[900],
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 3,
-    },
-    
-    hypothesisHeader: {
-      marginBottom: spacing[3],
-    },
-    
-    hypothesisText: {
-      fontSize: typography.fontSize.base,
-      fontWeight: typography.fontWeight.semibold,
-      color: theme === 'light' ? colors.gray[900] : colors.white,
-      marginBottom: spacing[2],
-    },
-    
-    hypothesisMeta: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    },
-    
-    confidenceText: {
-      fontSize: typography.fontSize.sm,
-      color: colors.primary[500],
-      fontWeight: typography.fontWeight.semibold,
-    },
-    
-    categoryText: {
-      fontSize: typography.fontSize.sm,
-      color: colors.gray[600],
-    },
-    
-    hypothesisStats: {
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-    },
-    
-    stat: {
-      alignItems: 'center',
-    },
-    
-    statValue: {
-      fontSize: typography.fontSize.lg,
-      fontWeight: typography.fontWeight.bold,
-      color: theme === 'light' ? colors.gray[900] : colors.white,
-    },
-    
-    statLabel: {
-      fontSize: typography.fontSize.xs,
-      color: colors.gray[600],
-    },
-    
-    heritageCard: {
-      backgroundColor: theme === 'light' ? colors.white : colors.gray[800],
-      borderRadius: borderRadius.lg,
-      padding: spacing[4],
-      marginBottom: spacing[3],
-      shadowColor: colors.gray[900],
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 3,
-    },
-    
-    heritageTitle: {
-      fontSize: typography.fontSize.lg,
-      fontWeight: typography.fontWeight.bold,
-      color: theme === 'light' ? colors.gray[900] : colors.white,
-      marginBottom: spacing[2],
-    },
-    
-    heritageDescription: {
-      fontSize: typography.fontSize.sm,
-      color: colors.gray[600],
-      marginBottom: spacing[3],
-    },
-    
-    heritageList: {
-      flex: 1,
-    },
-    
-    heritageItem: {
-      fontSize: typography.fontSize.sm,
-      color: theme === 'light' ? colors.gray[900] : colors.white,
-      marginBottom: spacing[2],
-    },
-    
-    identityMetrics: {
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      marginTop: spacing[3],
-    },
-    
-    identityMetric: {
-      alignItems: 'center',
-    },
-    
-    identityValue: {
-      fontSize: typography.fontSize.lg,
-      fontWeight: typography.fontWeight.bold,
-      color: colors.primary[500],
-    },
-    
-    identityLabel: {
-      fontSize: typography.fontSize.xs,
-      color: colors.gray[600],
-    },
-    
-    analysisCard: {
-      backgroundColor: theme === 'light' ? colors.white : colors.gray[800],
-      borderRadius: borderRadius.lg,
-      padding: spacing[4],
-      marginBottom: spacing[3],
-      shadowColor: colors.gray[900],
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 3,
-    },
-    
-    analysisTitle: {
-      fontSize: typography.fontSize.lg,
-      fontWeight: typography.fontWeight.bold,
-      color: theme === 'light' ? colors.gray[900] : colors.white,
-      marginBottom: spacing[2),
-    },
-    
-    analysisDescription: {
-      fontSize: typography.fontSize.sm,
-      color: colors.gray[600],
-      marginBottom: spacing[3],
-    },
-    
-    efficacyMetrics: {
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      marginBottom: spacing[3],
-    },
-    
-    efficacyMetric: {
-      alignItems: 'center',
-    },
-    
-    efficacyValue: {
-      fontSize: typography.fontSize.lg,
-      fontWeight: typography.fontWeight.bold,
-      color: colors.primary[500],
-    },
-    
-    efficacyLabel: {
-      fontSize: typography.fontSize.xs,
-      color: colors.gray[600],
-    },
-    
-    patternList: {
-      flex: 1,
-    },
-    
-    patternItem: {
-      fontSize: typography.fontSize.sm,
-      color: theme === 'light' ? colors.gray[900] : colors.white,
-      marginBottom: spacing[2],
-    },
-  });
-};
-
-export default DreamStateInterface;

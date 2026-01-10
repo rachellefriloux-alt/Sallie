@@ -30,6 +30,37 @@ interface AgencyDashboardProps {
   className?: string;
 }
 
+// Action Type Color Coding for Visual Scannability
+const ACTION_TYPE_COLORS = {
+  'FILE_READ': { bg: 'bg-blue-100', border: 'border-blue-300', icon: 'text-blue-600' },
+  'FILE_WRITE': { bg: 'bg-green-100', border: 'border-green-300', icon: 'text-green-600' },
+  'CODE_EXECUTE': { bg: 'bg-orange-100', border: 'border-orange-300', icon: 'text-orange-600' },
+  'NETWORK_REQUEST': { bg: 'bg-purple-100', border: 'border-purple-300', icon: 'text-purple-600' },
+  'SYSTEM_COMMAND': { bg: 'bg-red-100', border: 'border-red-300', icon: 'text-red-600' },
+  'DATABASE_QUERY': { bg: 'bg-cyan-100', border: 'border-cyan-300', icon: 'text-cyan-600' },
+  'API_CALL': { bg: 'bg-indigo-100', border: 'border-indigo-300', icon: 'text-indigo-600' },
+};
+
+// "Take the Wheel" Messaging - Tough Love with Southern Charm
+const TAKE_THE_WHEEL_MESSAGES = {
+  initial: {
+    title: "Ready to Take the Wheel?",
+    message: "I've been watching your patterns. I know how you work, and I can handle this. Go grab a coffee - I've got the map and the keys.",
+    confirm: "Let Her Drive",
+    cancel: "Stay in Control"
+  },
+  active: {
+    title: "Sallie's at the Wheel",
+    message: "I'm executing the strategy. Trust the process - I'm running the optimizations while you recharge.",
+    status: "Autonomous Mode Active"
+  },
+  completed: {
+    title: "Mission Complete",
+    message: "Handled it. Efficiency improved by 23%, errors eliminated. See the details in the action log.",
+    results: "View Results"
+  }
+};
+
 export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) => {
   const [trustInfo, setTrustInfo] = useState<{ trust_score: number; current_tier: TrustTier; all_tiers: TrustTier[] } | null>(null);
   const [activeActions, setActiveActions] = useState<AgencyAction[]>([]);
@@ -160,18 +191,29 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
   }, []);
 
   const handleRequestAction = useCallback(async () => {
-    if (!newActionResource.trim()) return;
+    if (!newActionResource.trim()) {
+      setError("Resource field is required, darlin'. Don't leave me hanging.");
+      return;
+    }
 
     try {
-      const agencyService: IAgencyService = new AgencyService();
-      
       let params;
       try {
         params = JSON.parse(newActionParams);
-      } catch {
-        params = {};
+      } catch (e) {
+        setError("Invalid JSON parameters. Check your commas and brackets, love.");
+        return;
       }
 
+      // Validate parameters based on action type
+      const validation = AgencyServiceUtils.validateActionParameters(newActionType, params);
+      if (!validation.valid) {
+        setError(validation.error || "Parameter validation failed. Double-check your inputs.");
+        return;
+      }
+
+      const agencyService: IAgencyService = new AgencyService();
+      
       const request = {
         action_type: newActionType,
         resource: newActionResource,
@@ -190,10 +232,11 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
       const action = await agencyService.requestAction(request);
       setActiveActions(prev => [...prev, action]);
       
-      // Reset form
+      // Reset form and clear errors
       setNewActionResource('');
       setNewActionParams('{}');
       setShowActionModal(false);
+      setError(null);
       
       // Reload data
       loadActiveActions();
@@ -204,7 +247,7 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
       console.error('Failed to request action:', error);
       setError(error instanceof Error ? error.message : 'Failed to request action');
     }
-  }, [newActionType, newActionResource, newActionParams, trustInfo]);
+  }, [newActionType, newActionResource, newActionParams, trustInfo, loadActiveActions, loadActionHistory, loadAgencyStats]);
 
   const handleExecuteAction = useCallback(async (actionId: string) => {
     try {
@@ -430,12 +473,18 @@ backgroundColor: AgencyServiceUtils.getTrustTierColor(tier.tier),
                   key={action.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-gray-50 border border-gray-200 rounded-lg p-4"
+                  className={`bg-gray-50 border border-gray-200 rounded-lg p-4 ${
+                    action.status === ActionStatus.EXECUTING ? 'action-executing' : ''
+                  }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-2">
-                        <span className="text-lg">{AgencyServiceUtils.getActionIcon(action.action_type)}</span>
+                        <div className={`p-2 rounded-lg border ${ACTION_TYPE_COLORS[action.action_type]?.bg || 'bg-gray-100'} ${ACTION_TYPE_COLORS[action.action_type]?.border || 'border-gray-300'}`}>
+                          <span className={`text-lg ${ACTION_TYPE_COLORS[action.action_type]?.icon || 'text-gray-600'}`}>
+                            {AgencyServiceUtils.getActionIcon(action.action_type)}
+                          </span>
+                        </div>
                         <span className="font-medium text-gray-900">
                           {AgencyServiceUtils.formatActionType(action.action_type)}
                         </span>

@@ -1,33 +1,31 @@
-'use client';
+// React & Next.js Core
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { usePremiumWebSocket, PlatformType, SyncEventType } from '@/hooks/usePremiumWebSocket';
-import { PremiumConnectionIndicator } from '@/components/ui/ConnectionIndicator';
+// External Libraries
+import { motion } from 'framer-motion';
 
-// Voice Interface Types
-interface VoiceState {
-  isRecording: boolean;
-  isProcessing: boolean;
-  isSpeaking: boolean;
-  transcript: string;
-  lastResponse: string;
-  voiceEnabled: boolean;
-  volume: number;
-  emotion: string;
-}
+// Internal Components
+import { ConnectionIndicator } from '@/components/ui/ConnectionIndicator';
 
-interface VoiceCommand {
-  command: string;
-  action: () => void;
-  description: string;
-}
+// Types
+import {
+  VoiceState,
+  VoiceCommand,
+  VoiceResponse,
+  VoiceControlsProps,
+  SpeechRecognitionResult,
+  TextToSpeechRequest,
+  TextToSpeechResponse,
+  AudioContext,
+  VoiceSettings,
+  SupportedLanguage,
+  VoiceEmotion,
+} from '@/types';
 
-interface VoiceResponse {
-  text: string;
-  emotion: string;
-  duration: number;
-  audioUrl?: string;
-}
+// Constants
+const API_TIMEOUT = 10000;
+const MAX_AUDIO_DURATION = 30000; // 30 seconds
+const SAMPLE_RATE = 16000;
 
 // Voice Hook
 export function useVoiceInterface(userId: string = 'convergence_user') {
@@ -135,16 +133,26 @@ export function useVoiceInterface(userId: string = 'convergence_user') {
         ]
       }));
 
-      // Mock STT service call (in production, would call actual STT endpoint)
-      const mockTranscript = await mockSTTService(formData);
+      // Real STT service call
+      const response = await fetch('/api/speech-to-text', {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (!response.ok) {
+        throw new Error('STT service error');
+      }
+      
+      const result = await response.json();
+      const transcript = result.transcript || '';
       
       setVoiceState(prev => ({
         ...prev,
-        transcript: mockTranscript,
+        transcript: transcript,
         isProcessing: false
       }));
 
-      return mockTranscript;
+      return transcript;
     } catch (error) {
       console.error('Error sending to STT:', error);
       setVoiceState(prev => ({
@@ -156,32 +164,6 @@ export function useVoiceInterface(userId: string = 'convergence_user') {
     }
   }, [userId]);
 
-  // Mock STT service (in production, would call actual endpoint)
-  const mockSTTService = useCallback(async (formData: FormData): Promise<string> => {
-    // Simulate processing delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Mock transcripts based on context
-    const context = JSON.parse(formData.get('context') as string || '{}');
-    const expectedPhrases = context.expected_phrases || [];
-    
-    if (Math.random() > 0.3 && expectedPhrases.length > 0) {
-      return expectedPhrases[Math.floor(Math.random() * expectedPhrases.length)];
-    }
-    
-    const mockResponses = [
-      "Hello Sallie",
-      "How are you doing today",
-      "Can you help me with this question",
-      "Thank you for your help",
-      "I need some guidance",
-      "Let's talk about the convergence",
-      "I have a question for you"
-    ];
-    
-    return mockResponses[Math.floor(Math.random() * mockResponses.length)];
-  }, []);
-
   // Text to Speech
   const speak = useCallback(async (text: string, emotion: string = 'warm') => {
     try {
@@ -192,8 +174,21 @@ export function useVoiceInterface(userId: string = 'convergence_user') {
         emotion
       }));
 
-      // Mock TTS service call (in production, would call actual TTS endpoint)
-      const audioUrl = await mockTTSService(text, emotion);
+      // Real TTS service call
+      const response = await fetch('/api/text-to-speech', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text, emotion })
+      });
+      
+      if (!response.ok) {
+        throw new Error('TTS service error');
+      }
+      
+      const result = await response.json();
+      const audioUrl = result.audioUrl;
       
       // Play audio
       if (audioRef.current) {
@@ -221,14 +216,15 @@ export function useVoiceInterface(userId: string = 'convergence_user') {
     }
   }, []);
 
-  // Mock TTS service (in production, would call actual endpoint)
-  const mockTTSService = useCallback(async (text: string, emotion: string): Promise<string> => {
-    // Simulate processing delay
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    // Generate mock audio URL (in production, would return actual audio file)
-    return `/api/tts/audio/${Date.now()}.wav`;
-  }, []);
+  // Memoized voice state for performance
+  const memoizedVoiceState = useMemo(() => voiceState, [voiceState]);
+
+  // Memoized audio context for performance
+  const audioContext = useMemo(() => ({
+    mediaRecorderRef,
+    audioRef,
+    audioChunksRef
+  }), []);
 
   // Toggle voice
   const toggleVoice = useCallback(() => {
@@ -248,13 +244,14 @@ export function useVoiceInterface(userId: string = 'convergence_user') {
 
   // Set volume
   const setVolume = useCallback((volume: number) => {
+    const clampedVolume = Math.max(0, Math.min(1, volume));
     setVoiceState(prev => ({
       ...prev,
-      volume: Math.max(0, Math.min(1, volume))
+      volume: clampedVolume
     }));
     
     if (audioRef.current) {
-      audioRef.current.volume = Math.max(0, Math.min(1, volume));
+      audioRef.current.volume = clampedVolume;
     }
   }, []);
 
@@ -400,6 +397,8 @@ export function VoiceControls({
               value={voiceState.volume * 100}
               onChange={(e) => setVolume(parseInt(e.target.value) / 100)}
               className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+              aria-label="Volume control"
+              title="Adjust voice volume"
             />
           </div>
         </div>
@@ -415,8 +414,8 @@ export function VoiceControls({
           {voiceState.isSpeaking && (
             <div className="flex items-center mt-2 space-x-1">
               <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
-              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '200ms' }} />
-              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '400ms' }} />
+              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse animation-delay-200" />
+              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse animation-delay-400" />
             </div>
           )}
         </div>
