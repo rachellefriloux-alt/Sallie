@@ -47,17 +47,17 @@ def validate_environment():
         if not value:
             missing_vars.append(f"  - {var}: {description}")
         elif value == "your-super-secret-jwt-key-change-this-in-production":
-            logger.warning(f"⚠️  {var} is using default value - please change it!")
+            logger.warning(f"WARNING: {var} is using default value - please change it!")
     
     if missing_vars:
-        logger.error("❌ Missing required environment variables:")
+        logger.error("ERROR: Missing required environment variables:")
         for var in missing_vars:
             logger.error(var)
         logger.error("\nPlease create a .env file with these variables.")
         logger.error("See .env.example for a template.")
         return False
     
-    logger.info("✅ Environment configuration validated!")
+    logger.info("SUCCESS: Environment configuration validated!")
     return True
 
 # Create necessary directories
@@ -77,20 +77,20 @@ def setup_directories():
     for dir_path in directories:
         Path(dir_path).mkdir(parents=True, exist_ok=True)
     
-    logger.info("✅ Data directories ready!")
+    logger.info("SUCCESS: Data directories ready!")
 
 # Banner
 def print_banner():
     """Print welcome banner"""
     banner = """
-    ╔══════════════════════════════════════════════════════════╗
-    ║                                                          ║
-    ║              🌟  SALLIE - Your Cognitive Partner  🌟      ║
-    ║                                                          ║
-    ║        The Great Convergence - 30 Questions             ║
-    ║        Canonical Specification v5.4.1                   ║
-    ║                                                          ║
-    ╚══════════════════════════════════════════════════════════╝
+    ================================================================
+    |                                                              |
+    |         *  SALLIE - Your Cognitive Partner  *               |
+    |                                                              |
+    |       The Great Convergence - 30 Questions                  |
+    |       Canonical Specification v5.4.1                       |
+    |                                                              |
+    ================================================================
     """
     print(banner)
     logger.info("Sallie Server Starting...")
@@ -200,14 +200,14 @@ async def main():
     try:
         await server.serve()
     except Exception as e:
-        logger.error(f"❌ Server error: {e}")
+        logger.error(f"ERROR: Server error: {e}")
         sys.exit(1)
 
 if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        logger.info("\n👋 Sallie server stopped by user")
+        logger.info("\nSallie server stopped by user")
     except Exception as e:
-        logger.error(f"❌ Fatal error: {e}")
+        logger.error(f"FATAL ERROR: {e}")
         sys.exit(1)
