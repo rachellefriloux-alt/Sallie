@@ -714,12 +714,16 @@ export const AgencyDashboardPremium: React.FC<AgencyDashboardPremiumProps> = ({
                     <div className="flex space-x-2">
                       <button
                         onClick={() => setSelectedAction(action)}
+                        title="View action details"
+                        aria-label="View action details"
                         className="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors text-sm"
                       >
                         <Eye className="w-3 h-3" />
                       </button>
                       {action.rollback_available && action.status === 'completed' && (
                         <button
+                          title="Rollback action"
+                          aria-label="Rollback action"
                           className="px-3 py-1 bg-orange-600 text-white rounded hover:bg-orange-700 transition-colors text-sm"
                         >
                           <RotateCcw className="w-3 h-3" />
