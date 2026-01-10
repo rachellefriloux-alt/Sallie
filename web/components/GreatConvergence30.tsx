@@ -643,14 +643,27 @@ const GreatConvergence30: React.FC = () => {
     ws.onopen = () => {
       console.log('Convergence WebSocket connected');
       setWsConnection(ws);
+      
+      // Start convergence session
+      ws.send(JSON.stringify({
+        type: 'start_convergence',
+        user_id: 'user_' + Date.now()
+      }));
     };
 
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
+      
       if (data.type === 'limbic_update') {
         setLimbicState(data.state);
       } else if (data.type === 'sallie_response') {
         setSallieResponse(data.message);
+        setIsProcessing(false);
+      } else if (data.type === 'answer_processed') {
+        console.log('Answer processed:', data);
+      } else if (data.type === 'convergence_completed') {
+        console.log('Convergence complete! Heritage DNA saved:', data.heritage_dna_saved);
+        alert('The Great Convergence is complete! Your Heritage DNA has been compiled.');
       }
     };
 
@@ -675,47 +688,45 @@ const GreatConvergence30: React.FC = () => {
     }
 
     setIsProcessing(true);
+    setSallieResponse(''); // Clear previous response
 
-    // Canonical Spec Section 14.3: Elastic Mode - Trust/Warmth can spike during Convergence
-    const answerData: AnswerData = {
+    // Send to backend for processing
+    if (wsConnection && wsConnection.readyState === WebSocket.OPEN) {
+      wsConnection.send(JSON.stringify({
+        type: 'convergence_answer',
+        data: {
+          questionNumber: currentQ.number,
+          questionId: currentQ.id,
+          answer: currentAnswer,
+          wordCount: wordCount,
+          extractionTarget: currentQ.extractionTarget,
+          timestamp: new Date().toISOString()
+        }
+      }));
+    }
+
+    setAnswers([...answers, {
       questionNumber: currentQ.number,
       answer: currentAnswer,
       wordCount: wordCount,
       extractedData: {}, // Will be populated by backend
       timestamp: new Date().toISOString(),
       limbicImpact: {
-        trust: wordCount >= 200 ? 0.10 : 0.05, // Deep answer bonus
+        trust: wordCount >= 200 ? 0.10 : 0.05,
         warmth: wordCount >= 200 ? 0.15 : 0.08
       }
-    };
-
-    // Send to backend for processing
-    if (wsConnection && wsConnection.readyState === WebSocket.OPEN) {
-      wsConnection.send(JSON.stringify({
-        type: 'convergence_answer',
-        data: answerData
-      }));
-    }
-
-    // Update limbic state with elastic mode
-    setLimbicState(prev => ({
-      ...prev,
-      trust: Math.min(1.0, prev.trust + answerData.limbicImpact.trust),
-      warmth: Math.min(1.0, prev.warmth + answerData.limbicImpact.warmth)
-    }));
-
-    setAnswers([...answers, answerData]);
+    }]);
     
-    // Simulate processing time
+    // Wait for backend response before moving to next question
+    // The backend will send 'answer_processed' message
     await new Promise(resolve => setTimeout(resolve, 2000));
     
-    setIsProcessing(false);
-    setCurrentAnswer('');
-    
+    // Move to next question
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
+      setCurrentAnswer('');
     } else {
-      // Convergence complete!
+      // All questions answered - trigger completion
       if (wsConnection && wsConnection.readyState === WebSocket.OPEN) {
         wsConnection.send(JSON.stringify({
           type: 'convergence_complete',
