@@ -1,19 +1,38 @@
 """
 Security module for Sallie Studio WebSocket endpoints
 Handles authentication and authorization for WebSocket connections
+
+Canonical Spec Reference: Section 8.0 - Security & Privacy
 """
 
 from fastapi import WebSocket, HTTPException, status
 from typing import Optional
 import jwt
 import logging
+import os
+import sys
 from datetime import datetime, timezone, timedelta
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
-# JWT Secret (in production, use environment variable)
-JWT_SECRET = "sallie_websocket_jwt_secret_key"
+# Canonical Spec Section 8.0: No secrets in code (use environment variables)
+JWT_SECRET = os.getenv("JWT_SECRET")
 JWT_ALGORITHM = "HS256"
+
+# Validate required environment variables on import
+if not JWT_SECRET:
+    logger.error("CRITICAL: JWT_SECRET environment variable is not set!")
+    logger.error("Please set JWT_SECRET in your .env file")
+    logger.error("Generate a secure key with: python -c \"import secrets; print(secrets.token_hex(32))\"")
+    sys.exit(1)
+
+if JWT_SECRET == "your-super-secret-jwt-key-change-this-in-production":
+    logger.warning("WARNING: Using default JWT_SECRET! This is insecure for production.")
+    logger.warning("Please generate a secure key and update your .env file")
 
 async def get_current_user_websocket(websocket: WebSocket) -> Optional[str]:
     """
