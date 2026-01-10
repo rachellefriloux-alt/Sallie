@@ -248,7 +248,7 @@ class GlobalState:
         self.cognitive_state = CognitiveState()
         self.projects: Dict[str, Dict[str, Any]] = {}
         self.sensor_data: Dict[str, List[SensorReading]] = defaultdict(list)
-        self.analytics_data: Dict[str, List[Dict[str, Any]] = defaultdict(list)
+        self.analytics_data: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
         self.avatar_state = AvatarResponse(
             current_form="peacock",
             emotional_state="happy",
