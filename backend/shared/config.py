@@ -6,7 +6,8 @@ Centralizes all environment variables and settings
 import os
 from pathlib import Path
 from typing import Optional
-from pydantic import BaseSettings, Field
+from pydantic import Field
+from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     """Application settings with environment variable support"""
@@ -101,6 +102,7 @@ class Settings(BaseSettings):
         env_file = ".env"
         env_file_encoding = "utf-8"
         case_sensitive = True
+        extra = "ignore"
 
 # Global settings instance
 settings = Settings()
@@ -110,6 +112,27 @@ def get_service_url(service_name: str, port: Optional[int] = None) -> str:
     """Get the URL for a specific service"""
     base_port = port or settings.PORT
     return f"http://{settings.HOST}:{base_port}"
+
+# Service URLs mapping
+SERVICE_URLS = {
+    "api-gateway": get_service_url("api-gateway", 8742),
+    "auth": get_service_url("auth", 8743),
+    "chat": get_service_url("chat", 8744),
+    "analytics": get_service_url("analytics", 8745),
+    "notifications": get_service_url("notifications", 8746),
+    "file": get_service_url("file", 8747),
+    "ai": get_service_url("ai", 8748),
+    "websocket": get_service_url("websocket", 8749),
+    "limbic-engine": get_service_url("limbic-engine", 8750),
+    "memory": get_service_url("memory", 8751),
+    "agency": get_service_url("agency", 8752),
+    "communication": get_service_url("communication", 8753),
+    "sensor-array": get_service_url("sensor-array", 8754),
+    "genesis-flow": get_service_url("genesis-flow", 8755),
+    "heritage": get_service_url("heritage", 8756),
+    "convergence": get_service_url("convergence", 8757),
+    "prism-dashboard": get_service_url("prism-dashboard", 8758),
+}
 
 # Database URLs for different services
 def get_database_url(service_name: str) -> str:

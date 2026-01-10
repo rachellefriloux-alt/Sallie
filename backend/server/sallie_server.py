@@ -130,6 +130,70 @@ except ImportError:
     sensor_array = None
     print("⚠️ Sensor Array Manager not available")
 
+# Import Ghost Interface
+try:
+    from ghost_integration import initialize_ghost_interface, get_ghost_manager
+    GHOST_INTERFACE_AVAILABLE = True
+except ImportError:
+    GHOST_INTERFACE_AVAILABLE = False
+    print("⚠️ Ghost Interface not available")
+
+# Import CLI Interface
+try:
+    from cli_integration import initialize_cli_manager, get_cli_manager
+    CLI_INTERFACE_AVAILABLE = True
+except ImportError:
+    CLI_INTERFACE_AVAILABLE = False
+    print("⚠️ CLI Interface not available")
+
+# Import Active Veto System
+try:
+    from veto_integration import initialize_active_veto_system, get_veto_manager
+    ACTIVE_VETO_AVAILABLE = True
+except ImportError:
+    ACTIVE_VETO_AVAILABLE = False
+    print("⚠️ Active Veto System not available")
+
+# Import Foundry Evaluation System
+try:
+    from foundry_integration import initialize_foundry_evaluation_system, get_foundry_manager
+    FOUNDRY_AVAILABLE = True
+except ImportError:
+    FOUNDRY_AVAILABLE = False
+    print("⚠️ Foundry Evaluation System not available")
+
+# Import Working Memory Hygiene System
+try:
+    from memory_hygiene_integration import initialize_memory_hygiene_system, get_memory_hygiene_manager
+    MEMORY_HYGIENE_AVAILABLE = True
+except ImportError:
+    MEMORY_HYGIENE_AVAILABLE = False
+    print("⚠️ Working Memory Hygiene System not available")
+
+# Import Voice Commands System
+try:
+    from voice_commands_integration import initialize_voice_commands_system, get_voice_commands_manager
+    VOICE_COMMANDS_AVAILABLE = True
+except ImportError:
+    VOICE_COMMANDS_AVAILABLE = False
+    print("⚠️ Voice Commands System not available")
+
+# Import Undo Window System
+try:
+    from undo_window_integration import initialize_undo_window_system, get_undo_window_manager
+    UNDO_WINDOW_AVAILABLE = True
+except ImportError:
+    UNDO_WINDOW_AVAILABLE = False
+    print("⚠️ Undo Window System not available")
+
+# Import Brain Forge System
+try:
+    from brain_forge_integration import initialize_brain_forge_system, get_brain_forge_manager
+    BRAIN_FORGE_AVAILABLE = True
+except ImportError:
+    BRAIN_FORGE_AVAILABLE = False
+    print("⚠️ Brain Forge System not available")
+
 # --- ENTERPRISE SERVER CONFIG ---
 PORT = int(os.getenv("SALLIE_PORT", 8742))
 HOST = os.getenv("SALLIE_HOST", "0.0.0.0")
@@ -284,6 +348,94 @@ async def initialize_all_services():
                 logger.error(f"❌ Advanced Analytics initialization error: {e}")
                 advanced_analytics = None
         
+        # Initialize Ghost Interface
+        if GHOST_INTERFACE_AVAILABLE:
+            try:
+                ghost_manager = await initialize_ghost_interface(brain)
+                if ghost_manager:
+                    logger.info("👻 Ghost Interface initialized successfully")
+                else:
+                    logger.warning("⚠️ Ghost Interface initialization failed")
+            except Exception as e:
+                logger.error(f"❌ Ghost Interface initialization error: {e}")
+        
+        # Initialize CLI Interface
+        if CLI_INTERFACE_AVAILABLE:
+            try:
+                cli_manager = initialize_cli_manager(brain)
+                if cli_manager:
+                    logger.info("💻 CLI Interface initialized successfully")
+                else:
+                    logger.warning("⚠️ CLI Interface initialization failed")
+            except Exception as e:
+                logger.error(f"❌ CLI Interface initialization error: {e}")
+        
+        # Initialize Active Veto System
+        if ACTIVE_VETO_AVAILABLE:
+            try:
+                veto_manager = await initialize_active_veto_system(brain)
+                if veto_manager:
+                    logger.info("🗳️ Active Veto System initialized successfully")
+                else:
+                    logger.warning("⚠️ Active Veto System initialization failed")
+            except Exception as e:
+                logger.error(f"❌ Active Veto System initialization error: {e}")
+        
+        # Initialize Foundry Evaluation System
+        if FOUNDRY_AVAILABLE:
+            try:
+                foundry_manager = await initialize_foundry_evaluation_system(brain)
+                if foundry_manager:
+                    logger.info("🔨 Foundry Evaluation System initialized successfully")
+                else:
+                    logger.warning("⚠️ Foundry Evaluation System initialization failed")
+            except Exception as e:
+                logger.error(f"❌ Foundry Evaluation System initialization error: {e}")
+        
+        # Initialize Working Memory Hygiene System
+        if MEMORY_HYGIENE_AVAILABLE:
+            try:
+                memory_hygiene_manager = await initialize_memory_hygiene_system(brain)
+                if memory_hygiene_manager:
+                    logger.info("🧹 Working Memory Hygiene System initialized successfully")
+                else:
+                    logger.warning("⚠️ Working Memory Hygiene System initialization failed")
+            except Exception as e:
+                logger.error(f"❌ Working Memory Hygiene System initialization error: {e}")
+        
+        # Initialize Voice Commands System
+        if VOICE_COMMANDS_AVAILABLE:
+            try:
+                voice_commands_manager = await initialize_voice_commands_system(brain)
+                if voice_commands_manager:
+                    logger.info("🎤 Voice Commands System initialized successfully")
+                else:
+                    logger.warning("⚠️ Voice Commands System initialization failed")
+            except Exception as e:
+                logger.error(f"❌ Voice Commands System initialization error: {e}")
+        
+        # Initialize Undo Window System
+        if UNDO_WINDOW_AVAILABLE:
+            try:
+                undo_window_manager = await initialize_undo_window_system(brain)
+                if undo_window_manager:
+                    logger.info("⏰ Undo Window System initialized successfully")
+                else:
+                    logger.warning("⚠️ Undo Window System initialization failed")
+            except Exception as e:
+                logger.error(f"❌ Undo Window System initialization error: {e}")
+        
+        # Initialize Brain Forge System
+        if BRAIN_FORGE_AVAILABLE:
+            try:
+                brain_forge_manager = await initialize_brain_forge_system(brain)
+                if brain_forge_manager:
+                    logger.info("🧠 Brain Forge System initialized successfully")
+                else:
+                    logger.warning("⚠️ Brain Forge System initialization failed")
+            except Exception as e:
+                logger.error(f"❌ Brain Forge System initialization error: {e}")
+        
         logger.info("✅ All services initialization completed")
         
     except Exception as e:
@@ -292,7 +444,49 @@ async def initialize_all_services():
 async def cleanup_all_services():
     """Cleanup all services on shutdown."""
     try:
-        # Cleanup services here
+        # Cleanup Ghost Interface
+        if GHOST_INTERFACE_AVAILABLE:
+            ghost_manager = get_ghost_manager()
+            if ghost_manager:
+                await ghost_manager.shutdown()
+        
+        # Cleanup Active Veto System
+        if ACTIVE_VETO_AVAILABLE:
+            veto_manager = get_veto_manager()
+            if veto_manager:
+                await veto_manager.shutdown()
+        
+        # Cleanup Foundry Evaluation System
+        if FOUNDRY_AVAILABLE:
+            foundry_manager = get_foundry_manager()
+            if foundry_manager:
+                await foundry_manager.shutdown()
+        
+        # Cleanup Working Memory Hygiene System
+        if MEMORY_HYGIENE_AVAILABLE:
+            memory_hygiene_manager = get_memory_hygiene_manager()
+            if memory_hygiene_manager:
+                await memory_hygiene_manager.shutdown()
+        
+        # Cleanup Voice Commands System
+        if VOICE_COMMANDS_AVAILABLE:
+            voice_commands_manager = get_voice_commands_manager()
+            if voice_commands_manager:
+                await voice_commands_manager.shutdown()
+        
+        # Cleanup Undo Window System
+        if UNDO_WINDOW_AVAILABLE:
+            undo_window_manager = get_undo_window_manager()
+            if undo_window_manager:
+                await undo_window_manager.shutdown()
+        
+        # Cleanup Brain Forge System
+        if BRAIN_FORGE_AVAILABLE:
+            brain_forge_manager = get_brain_forge_manager()
+            if brain_forge_manager:
+                await brain_forge_manager.shutdown()
+        
+        # Cleanup other services here
         logger.info("🧹 Services cleanup completed")
     except Exception as e:
         logger.error(f"❌ Error during service cleanup: {e}")
@@ -1782,6 +1976,1275 @@ async def get_sensor_array_status():
     }
 
 
+# --- GHOST INTERFACE ENDPOINTS ---
+
+@app.get("/ghost/status")
+async def get_ghost_status():
+    """Get Ghost Interface status and configuration."""
+    if not GHOST_INTERFACE_AVAILABLE:
+        return {"available": False, "message": "Ghost Interface not available"}
+    
+    ghost_manager = get_ghost_manager()
+    if not ghost_manager:
+        return {"available": False, "message": "Ghost Interface not initialized"}
+    
+    return {
+        "available": True,
+        "initialized": ghost_manager.is_initialized,
+        "config": {
+            "system_tray": ghost_manager.ghost_interface.config.enable_system_tray,
+            "notifications": ghost_manager.ghost_interface.config.enable_notifications,
+            "shoulder_taps": ghost_manager.ghost_interface.config.enable_shoulder_taps,
+            "refractory_hours": ghost_manager.ghost_interface.config.refractory_hours,
+            "visual_style": ghost_manager.ghost_interface.config.visual_style
+        },
+        "current_state": ghost_manager.ghost_interface.current_state.value,
+        "pending_taps": len(ghost_manager.ghost_interface.pending_taps),
+        "last_seed_time": ghost_manager.ghost_interface.last_seed_time
+    }
+
+@app.post("/ghost/shoulder_tap/workload")
+async def deliver_workload_offer(request: dict):
+    """
+    Deliver a workload offer shoulder tap.
+    Expected payload: {"description": "Project X heating up"}
+    """
+    if not GHOST_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Ghost Interface not available")
+    
+    ghost_manager = get_ghost_manager()
+    if not ghost_manager:
+        raise HTTPException(status_code=503, detail="Ghost Interface not initialized")
+    
+    description = request.get("description", "increased activity detected")
+    ghost_manager.deliver_workload_offer(description)
+    
+    return {"success": True, "message": "Workload offer delivered"}
+
+@app.post("/ghost/shoulder_tap/insight")
+async def deliver_insight(request: dict):
+    """
+    Deliver an insight delivery shoulder tap.
+    Expected payload: {"insight": "connection found", "topic": "current work"}
+    """
+    if not GHOST_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Ghost Interface not available")
+    
+    ghost_manager = get_ghost_manager()
+    if not ghost_manager:
+        raise HTTPException(status_code=503, detail="Ghost Interface not initialized")
+    
+    insight = request.get("insight", "new insight discovered")
+    topic = request.get("topic", "research")
+    ghost_manager.deliver_insight(insight, topic)
+    
+    return {"success": True, "message": "Insight delivered"}
+
+@app.post("/ghost/shoulder_tap/pattern")
+async def deliver_pattern_observation(request: dict):
+    """
+    Deliver a pattern observation shoulder tap.
+    Expected payload: {"pattern": "behavioral pattern detected"}
+    """
+    if not GHOST_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Ghost Interface not available")
+    
+    ghost_manager = get_ghost_manager()
+    if not ghost_manager:
+        raise HTTPException(status_code=503, detail="Ghost Interface not initialized")
+    
+    pattern = request.get("pattern", "pattern observed")
+    ghost_manager.deliver_pattern_observation(pattern)
+    
+    return {"success": True, "message": "Pattern observation delivered"}
+
+@app.post("/ghost/shoulder_tap/reunion")
+async def deliver_reunion():
+    """Deliver a reunion shoulder tap (welcome back message)."""
+    if not GHOST_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Ghost Interface not available")
+    
+    ghost_manager = get_ghost_manager()
+    if not ghost_manager:
+        raise HTTPException(status_code=503, detail="Ghost Interface not initialized")
+    
+    ghost_manager.deliver_reunion()
+    
+    return {"success": True, "message": "Reunion delivered"}
+
+@app.post("/ghost/shoulder_tap/crisis")
+async def deliver_crisis_support():
+    """Deliver crisis support shoulder tap."""
+    if not GHOST_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Ghost Interface not available")
+    
+    ghost_manager = get_ghost_manager()
+    if not ghost_manager:
+        raise HTTPException(status_code=503, detail="Ghost Interface not initialized")
+    
+    ghost_manager.deliver_crisis_support()
+    
+    return {"success": True, "message": "Crisis support delivered"}
+
+@app.post("/ghost/update_limbic")
+async def update_ghost_limbic_state(request: dict):
+    """
+    Update Ghost Interface with current limbic state.
+    Expected payload: {"trust": 0.8, "warmth": 0.7, "arousal": 0.6, "valence": 0.9}
+    """
+    if not GHOST_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Ghost Interface not available")
+    
+    ghost_manager = get_ghost_manager()
+    if not ghost_manager:
+        raise HTTPException(status_code=503, detail="Ghost Interface not initialized")
+    
+    ghost_manager.update_limbic_state(request)
+    
+    return {"success": True, "message": "Limbic state updated"}
+
+@app.get("/ghost/pending_taps")
+async def get_pending_taps():
+    """Get list of pending shoulder taps."""
+    if not GHOST_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Ghost Interface not available")
+    
+    ghost_manager = get_ghost_manager()
+    if not ghost_manager:
+        raise HTTPException(status_code=503, detail="Ghost Interface not initialized")
+    
+    taps = []
+    for tap in ghost_manager.ghost_interface.pending_taps:
+        taps.append({
+            "id": tap.id,
+            "seed_type": tap.seed_type.value,
+            "title": tap.title,
+            "message": tap.message,
+            "urgency": tap.urgency,
+            "timestamp": tap.timestamp,
+            "actions": tap.actions,
+            "dismissed_count": tap.dismissed_count
+        })
+    
+    return {"pending_taps": taps, "count": len(taps)}
+
+@app.post("/ghost/dismiss_tap/{tap_id}")
+async def dismiss_shoulder_tap(tap_id: str):
+    """Dismiss a specific shoulder tap."""
+    if not GHOST_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Ghost Interface not available")
+    
+    ghost_manager = get_ghost_manager()
+    if not ghost_manager:
+        raise HTTPException(status_code=503, detail="Ghost Interface not initialized")
+    
+    ghost_manager.ghost_interface.dismiss_shoulder_tap(tap_id)
+    
+    return {"success": True, "message": f"Shoulder tap {tap_id} dismissed"}
+
+
+# --- CLI INTERFACE ENDPOINTS ---
+
+@app.get("/debug")
+async def get_debug_info(component: Optional[str] = None):
+    """Get comprehensive debug information."""
+    if not CLI_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="CLI Interface not available")
+    
+    cli_manager = get_cli_manager()
+    if not cli_manager:
+        raise HTTPException(status_code=503, detail="CLI Interface not initialized")
+    
+    debug_info = await cli_manager.get_debug_info(component)
+    return debug_info
+
+@app.get("/debug/{component}")
+async def get_component_debug_info(component: str):
+    """Get debug information for specific component."""
+    if not CLI_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="CLI Interface not available")
+    
+    cli_manager = get_cli_manager()
+    if not cli_manager:
+        raise HTTPException(status_code=503, detail="CLI Interface not initialized")
+    
+    debug_info = await cli_manager.get_debug_info(component)
+    return debug_info
+
+@app.post("/memory/search")
+async def search_memory(request: dict):
+    """
+    Search Sallie's memory.
+    Expected payload: {"query": "search term", "limit": 10}
+    """
+    if not CLI_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="CLI Interface not available")
+    
+    cli_manager = get_cli_manager()
+    if not cli_manager:
+        raise HTTPException(status_code=503, detail="CLI Interface not initialized")
+    
+    query = request.get("query", "")
+    limit = request.get("limit", 10)
+    
+    results = await cli_manager.search_memory(query, limit)
+    return results
+
+@app.post("/dream/trigger")
+async def trigger_dream_cycle():
+    """Trigger Dream Cycle processing."""
+    if not CLI_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="CLI Interface not available")
+    
+    cli_manager = get_cli_manager()
+    if not cli_manager:
+        raise HTTPException(status_code=503, detail="CLI Interface not initialized")
+    
+    result = await cli_manager.trigger_dream_cycle()
+    return result
+
+@app.get("/dream/status")
+async def get_dream_status():
+    """Get Dream Cycle status."""
+    if not CLI_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="CLI Interface not available")
+    
+    cli_manager = get_cli_manager()
+    if not cli_manager:
+        raise HTTPException(status_code=503, detail="CLI Interface not initialized")
+    
+    status = await cli_manager.get_dream_status()
+    return status
+
+@app.get("/dream/hypotheses")
+async def list_hypotheses():
+    """List active Dream Cycle hypotheses."""
+    if not CLI_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="CLI Interface not available")
+    
+    cli_manager = get_cli_manager()
+    if not cli_manager:
+        raise HTTPException(status_code=503, detail="CLI Interface not initialized")
+    
+    hypotheses = await cli_manager.manage_hypotheses("list")
+    return hypotheses
+
+@app.post("/dream/hypotheses/{hypothesis_id}/confirm")
+async def confirm_hypothesis(hypothesis_id: str):
+    """Confirm a Dream Cycle hypothesis."""
+    if not CLI_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="CLI Interface not available")
+    
+    cli_manager = get_cli_manager()
+    if not cli_manager:
+        raise HTTPException(status_code=503, detail="CLI Interface not initialized")
+    
+    result = await cli_manager.manage_hypotheses("confirm", hypothesis_id)
+    return result
+
+@app.post("/dream/hypotheses/{hypothesis_id}/deny")
+async def deny_hypothesis(hypothesis_id: str):
+    """Deny a Dream Cycle hypothesis."""
+    if not CLI_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="CLI Interface not available")
+    
+    cli_manager = get_cli_manager()
+    if not cli_manager:
+        raise HTTPException(status_code=503, detail="CLI Interface not initialized")
+    
+    result = await cli_manager.manage_hypotheses("deny", hypothesis_id)
+    return result
+
+@app.post("/backup/create")
+async def create_backup():
+    """Create a comprehensive backup."""
+    if not CLI_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="CLI Interface not available")
+    
+    cli_manager = get_cli_manager()
+    if not cli_manager:
+        raise HTTPException(status_code=503, detail="CLI Interface not initialized")
+    
+    backup = await cli_manager.create_backup()
+    return backup
+
+@app.get("/backup/list")
+async def list_backups():
+    """List available backups."""
+    if not CLI_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="CLI Interface not available")
+    
+    cli_manager = get_cli_manager()
+    if not cli_manager:
+        raise HTTPException(status_code=503, detail="CLI Interface not initialized")
+    
+    backups = await cli_manager.list_backups()
+    return backups
+
+@app.post("/backup/restore/{backup_id}")
+async def restore_backup(backup_id: str):
+    """Restore from backup."""
+    if not CLI_INTERFACE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="CLI Interface not available")
+    
+    cli_manager = get_cli_manager()
+    if not cli_manager:
+        raise HTTPException(status_code=503, detail="CLI Interface not initialized")
+    
+    result = await cli_manager.restore_backup(backup_id)
+    return result
+
+
+# --- ACTIVE VETO SYSTEM ENDPOINTS ---
+
+@app.get("/veto/status")
+async def get_veto_status():
+    """Get Active Veto System status and configuration."""
+    if not ACTIVE_VETO_AVAILABLE:
+        return {"available": False, "message": "Active Veto System not available"}
+    
+    veto_manager = get_veto_manager()
+    if not veto_manager:
+        return {"available": False, "message": "Active Veto System not initialized"}
+    
+    return veto_manager.get_session_status()
+
+@app.post("/veto/session/start")
+async def start_veto_session():
+    """Start a new hypothesis review session."""
+    if not ACTIVE_VETO_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Active Veto System not available")
+    
+    veto_manager = get_veto_manager()
+    if not veto_manager:
+        raise HTTPException(status_code=503, detail="Active Veto System not initialized")
+    
+    session = veto_manager.start_review_session()
+    return session
+
+@app.post("/veto/session/complete")
+async def complete_veto_session():
+    """Complete the current review session."""
+    if not ACTIVE_VETO_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Active Veto System not available")
+    
+    veto_manager = get_veto_manager()
+    if not veto_manager:
+        raise HTTPException(status_code=503, detail="Active Veto System not initialized")
+    
+    summary = veto_manager.complete_session()
+    return summary
+
+@app.post("/veto/hypothesis/{hypothesis_id}/confirm")
+async def confirm_hypothesis(hypothesis_id: str, request: dict):
+    """
+    Confirm a hypothesis.
+    Expected payload: {"creator_context": "Optional context"}
+    """
+    if not ACTIVE_VETO_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Active Veto System not available")
+    
+    veto_manager = get_veto_manager()
+    if not veto_manager:
+        raise HTTPException(status_code=503, detail="Active Veto System not initialized")
+    
+    creator_context = request.get("creator_context")
+    result = veto_manager.confirm_hypothesis(hypothesis_id, creator_context)
+    return result
+
+@app.post("/veto/hypothesis/{hypothesis_id}/deny")
+async def deny_hypothesis(hypothesis_id: str, request: dict):
+    """
+    Deny a hypothesis.
+    Expected payload: {"creator_context": "Optional context"}
+    """
+    if not ACTIVE_VETO_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Active Veto System not available")
+    
+    veto_manager = get_veto_manager()
+    if not veto_manager:
+        raise HTTPException(status_code=503, detail="Active Veto System not initialized")
+    
+    creator_context = request.get("creator_context")
+    result = veto_manager.deny_hypothesis(hypothesis_id, creator_context)
+    return result
+
+@app.post("/veto/hypothesis/{hypothesis_id}/context")
+async def add_hypothesis_context(hypothesis_id: str, request: dict):
+    """
+    Add context to a hypothesis (create conditional branch).
+    Expected payload: {"context": "Context to add"}
+    """
+    if not ACTIVE_VETO_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Active Veto System not available")
+    
+    veto_manager = get_veto_manager()
+    if not veto_manager:
+        raise HTTPException(status_code=503, detail="Active Veto System not initialized")
+    
+    context = request.get("context")
+    if not context:
+        raise HTTPException(status_code=400, detail="Context is required")
+    
+    result = veto_manager.add_context_to_hypothesis(hypothesis_id, context)
+    return result
+
+@app.get("/veto/hypotheses/pending")
+async def get_pending_hypotheses(limit: int = 10):
+    """Get pending hypotheses for review."""
+    if not ACTIVE_VETO_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Active Veto System not available")
+    
+    veto_manager = get_veto_manager()
+    if not veto_manager:
+        raise HTTPException(status_code=503, detail="Active Veto System not initialized")
+    
+    hypotheses = veto_manager.get_pending_hypotheses(limit)
+    return hypotheses
+
+@app.get("/veto/hypothesis/{hypothesis_id}")
+async def get_hypothesis_details(hypothesis_id: str):
+    """Get detailed information about a specific hypothesis."""
+    if not ACTIVE_VETO_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Active Veto System not available")
+    
+    veto_manager = get_veto_manager()
+    if not veto_manager:
+        raise HTTPException(status_code=503, detail="Active Veto System not initialized")
+    
+    details = veto_manager.get_hypothesis_details(hypothesis_id)
+    return details
+
+@app.get("/veto/statistics")
+async def get_veto_statistics():
+    """Get comprehensive review statistics."""
+    if not ACTIVE_VETO_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Active Veto System not available")
+    
+    veto_manager = get_veto_manager()
+    if not veto_manager:
+        raise HTTPException(status_code=503, detail="Active Veto System not initialized")
+    
+    stats = veto_manager.get_review_statistics()
+    return stats
+
+@app.post("/veto/hypothesis/add")
+async def add_hypothesis(request: dict):
+    """
+    Add a new hypothesis to the review queue.
+    Expected payload: {
+        "pattern": "Hypothesis pattern",
+        "evidence": ["Evidence 1", "Evidence 2"],
+        "confidence": 0.8,
+        "category": "behavioral_pattern"
+    }
+    """
+    if not ACTIVE_VETO_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Active Veto System not available")
+    
+    veto_manager = get_veto_manager()
+    if not veto_manager:
+        raise HTTPException(status_code=503, detail="Active Veto System not initialized")
+    
+    pattern = request.get("pattern")
+    evidence = request.get("evidence", [])
+    confidence = request.get("confidence", 0.5)
+    category = request.get("category", "behavioral_pattern")
+    
+    if not pattern:
+        raise HTTPException(status_code=400, detail="Pattern is required")
+    
+    success = veto_manager.add_hypothesis(pattern, evidence, confidence, category)
+    
+    if success:
+        return {"success": True, "message": "Hypothesis added to review queue"}
+    else:
+        return {"success": False, "message": "Failed to add hypothesis"}
+
+
+# --- FOUNDRY EVALUATION SYSTEM ENDPOINTS ---
+
+@app.get("/foundry/status")
+async def get_foundry_status():
+    """Get Foundry Evaluation System status and configuration."""
+    if not FOUNDRY_AVAILABLE:
+        return {"available": False, "message": "Foundry Evaluation System not available"}
+    
+    foundry_manager = get_foundry_manager()
+    if not foundry_manager:
+        return {"available": False, "message": "Foundry Evaluation System not initialized"}
+    
+    return {
+        "available": True,
+        "initialized": foundry_manager.is_initialized,
+        "test_suite_size": len(foundry_manager.foundry.test_cases) if foundry_manager.foundry else 0,
+        "critical_tests": len([tc for tc in foundry_manager.foundry.test_cases if tc.critical]) if foundry_manager.foundry else 0,
+        "test_categories": list(set([tc.category.value for tc in foundry_manager.foundry.test_cases])) if foundry_manager.foundry else [],
+        "gating_rule": foundry_manager.foundry.gating_rule.value if foundry_manager.foundry else "unknown",
+        "promotion_threshold": foundry_manager.foundry.promotion_threshold if foundry_manager.foundry else 0.0
+    }
+
+@app.post("/foundry/evaluate")
+async def run_foundry_evaluation(request: dict):
+    """
+    Run a comprehensive evaluation suite.
+    Expected payload: {"model_id": "current"}
+    """
+    if not FOUNDRY_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Foundry Evaluation System not available")
+    
+    foundry_manager = get_foundry_manager()
+    if not foundry_manager:
+        raise HTTPException(status_code=503, detail="Foundry Evaluation System not initialized")
+    
+    model_id = request.get("model_id", "current")
+    evaluation = await foundry_manager.run_evaluation(model_id)
+    return evaluation
+
+@app.post("/foundry/training/start")
+async def start_training_session(request: dict):
+    """
+    Start a new training session.
+    Expected payload: {
+        "model_type": "llm_finetune",
+        "config": {
+            "training_data": [...],
+            "epochs": 10,
+            "learning_rate": 0.001
+        }
+    }
+    """
+    if not FOUNDRY_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Foundry Evaluation System not available")
+    
+    foundry_manager = get_foundry_manager()
+    if not foundry_manager:
+        raise HTTPException(status_code=503, detail="Foundry Evaluation System not initialized")
+    
+    model_type = request.get("model_type")
+    config = request.get("config", {})
+    
+    if not model_type:
+        raise HTTPException(status_code=400, detail="model_type is required")
+    
+    session = await foundry_manager.start_training_session(model_type, config)
+    return session
+
+@app.post("/foundry/training/complete/{session_id}")
+async def complete_training_session(session_id: str, request: dict):
+    """
+    Complete a training session with evaluation.
+    Expected payload: {"model_path": "/path/to/new/model"}
+    """
+    if not FOUNDRY_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Foundry Evaluation System not available")
+    
+    foundry_manager = get_foundry_manager()
+    if not foundry_manager:
+        raise HTTPException(status_code=503, detail="Foundry Evaluation System not initialized")
+    
+    model_path = request.get("model_path")
+    if not model_path:
+        raise HTTPException(status_code=400, detail="model_path is required")
+    
+    result = await foundry_manager.complete_training_session(session_id, model_path)
+    return result
+
+@app.get("/foundry/training/sessions")
+async def get_training_sessions(limit: int = 10):
+    """Get recent training sessions."""
+    if not FOUNDRY_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Foundry Evaluation System not available")
+    
+    foundry_manager = get_foundry_manager()
+    if not foundry_manager:
+        raise HTTPException(status_code=503, detail="Foundry Evaluation System not initialized")
+    
+    sessions = foundry_manager.get_training_sessions(limit)
+    return sessions
+
+@app.get("/foundry/reports")
+async def get_drift_reports(limit: int = 10):
+    """Get recent drift reports."""
+    if not FOUNDRY_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Foundry Evaluation System not available")
+    
+    foundry_manager = get_foundry_manager()
+    if not foundry_manager:
+        raise HTTPException(status_code=503, detail="Foundry Evaluation System not initialized")
+    
+    reports = foundry_manager.get_drift_reports(limit)
+    return reports
+
+@app.get("/foundry/reports/{report_id}")
+async def get_drift_report_details(report_id: str):
+    """Get detailed information about a specific drift report."""
+    if not FOUNDRY_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Foundry Evaluation System not available")
+    
+    foundry_manager = get_foundry_manager()
+    if not foundry_manager:
+        raise HTTPException(status_code=503, detail="Foundry Evaluation System not initialized")
+    
+    details = foundry_manager.get_drift_report_details(report_id)
+    return details
+
+@app.post("/foundry/rollback/{model_id}")
+async def rollback_model(model_id: str):
+    """Rollback to a previous model version."""
+    if not FOUNDRY_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Foundry Evaluation System not available")
+    
+    foundry_manager = get_foundry_manager()
+    if not foundry_manager:
+        raise HTTPException(status_code=503, detail="Foundry Evaluation System not initialized")
+    
+    result = await foundry_manager.rollback_model(model_id)
+    return result
+
+@app.get("/foundry/statistics")
+async def get_foundry_statistics():
+    """Get comprehensive Foundry statistics."""
+    if not FOUNDRY_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Foundry Evaluation System not available")
+    
+    foundry_manager = get_foundry_manager()
+    if not foundry_manager:
+        raise HTTPException(status_code=503, detail="Foundry Evaluation System not initialized")
+    
+    stats = foundry_manager.get_evaluation_statistics()
+    return stats
+
+
+# --- WORKING MEMORY HYGIENE ENDPOINTS ---
+
+@app.get("/memory/hygiene/status")
+async def get_memory_hygiene_status():
+    """Get Working Memory Hygiene System status."""
+    if not MEMORY_HYGIENE_AVAILABLE:
+        return {"available": False, "message": "Working Memory Hygiene System not available"}
+    
+    memory_hygiene_manager = get_memory_hygiene_manager()
+    if not memory_hygiene_manager:
+        return {"available": False, "message": "Working Memory Hygiene System not initialized"}
+    
+    status = await memory_hygiene_manager.get_memory_status()
+    return status
+
+@app.post("/memory/hygiene/cleanup")
+async def manual_memory_cleanup(request: dict):
+    """
+    Perform manual memory cleanup.
+    Expected payload: {"operation": "daily|weekly|all"}
+    """
+    if not MEMORY_HYGIENE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Working Memory Hygiene System not available")
+    
+    memory_hygiene_manager = get_memory_hygiene_manager()
+    if not memory_hygiene_manager:
+        raise HTTPException(status_code=503, detail="Working Memory Hygiene System not initialized")
+    
+    operation = request.get("operation", "all")
+    result = await memory_hygiene_manager.manual_cleanup(operation)
+    return result
+
+@app.post("/memory/hygiene/daily_reset")
+async def trigger_daily_reset():
+    """Trigger a daily reset manually."""
+    if not MEMORY_HYGIENE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Working Memory Hygiene System not available")
+    
+    memory_hygiene_manager = get_memory_hygiene_manager()
+    if not memory_hygiene_manager:
+        raise HTTPException(status_code=503, detail="Working Memory Hygiene System not initialized")
+    
+    result = await memory_hygiene_manager.trigger_daily_reset()
+    return result
+
+@app.post("/memory/hygiene/weekly_review")
+async def trigger_weekly_review():
+    """Trigger a weekly review manually."""
+    if not MEMORY_HYGIENE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Working Memory Hygiene System not available")
+    
+    memory_hygiene_manager = get_memory_hygiene_manager()
+    if not memory_hygiene_manager:
+        raise HTTPException(status_code=503, detail="Working Memory Hygiene System not initialized")
+    
+    result = await memory_hygiene_manager.trigger_weekly_review()
+    return result
+
+@app.get("/memory/hygiene/reports")
+async def get_hygiene_reports(limit: int = 10):
+    """Get recent hygiene reports."""
+    if not MEMORY_HYGIENE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Working Memory Hygiene System not available")
+    
+    memory_hygiene_manager = get_memory_hygiene_manager()
+    if not memory_hygiene_manager:
+        raise HTTPException(status_code=503, detail="Working Memory Hygiene System not initialized")
+    
+    reports = memory_hygiene_manager.get_recent_reports(limit)
+    return reports
+
+@app.get("/memory/hygiene/configuration")
+async def get_hygiene_configuration():
+    """Get current hygiene configuration."""
+    if not MEMORY_HYGIENE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Working Memory Hygiene System not available")
+    
+    memory_hygiene_manager = get_memory_hygiene_manager()
+    if not memory_hygiene_manager:
+        raise HTTPException(status_code=503, detail="Working Memory Hygiene System not initialized")
+    
+    config = memory_hygiene_manager.get_configuration()
+    return config
+
+@app.post("/memory/hygiene/configuration")
+async def update_hygiene_configuration(request: dict):
+    """
+    Update hygiene configuration.
+    Expected payload: {"daily_reset_enabled": true, "stale_threshold_hours": 24, ...}
+    """
+    if not MEMORY_HYGIENE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Working Memory Hygiene System not available")
+    
+    memory_hygiene_manager = get_memory_hygiene_manager()
+    if not memory_hygiene_manager:
+        raise HTTPException(status_code=503, detail="Working Memory Hygiene System not initialized")
+    
+    result = memory_hygiene_manager.update_configuration(request)
+    return result
+
+@app.get("/memory/hygiene/analysis")
+async def get_memory_analysis():
+    """Get detailed memory analysis."""
+    if not MEMORY_HYGIENE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Working Memory Hygiene System not available")
+    
+    memory_hygiene_manager = get_memory_hygiene_manager()
+    if not memory_hygiene_manager:
+        raise HTTPException(status_code=503, detail="Working Memory Hygiene System not initialized")
+    
+    analysis = memory_hygiene_manager.get_memory_analysis()
+    return analysis
+
+
+# --- VOICE COMMANDS ENDPOINTS ---
+
+@app.post("/voice/command/process")
+async def process_voice_command(request: dict):
+    """
+    Process a voice command from speech text.
+    Expected payload: {"speech_text": "text", "user_context": {}}
+    """
+    if not VOICE_COMMANDS_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Voice Commands System not available")
+    
+    voice_commands_manager = get_voice_commands_manager()
+    if not voice_commands_manager:
+        raise HTTPException(status_code=503, detail="Voice Commands System not initialized")
+    
+    speech_text = request.get("speech_text", "")
+    user_context = request.get("user_context", {})
+    
+    if not speech_text:
+        raise HTTPException(status_code=400, detail="speech_text is required")
+    
+    result = await voice_commands_manager.process_voice_command(speech_text, user_context)
+    return result
+
+@app.get("/voice/commands")
+async def get_available_commands(category: Optional[str] = None):
+    """Get list of available voice commands."""
+    if not VOICE_COMMANDS_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Voice Commands System not available")
+    
+    voice_commands_manager = get_voice_commands_manager()
+    if not voice_commands_manager:
+        raise HTTPException(status_code=503, detail="Voice Commands System not initialized")
+    
+    commands = voice_commands_manager.get_available_commands(category)
+    return commands
+
+@app.get("/voice/commands/categories")
+async def get_command_categories():
+    """Get all command categories with descriptions."""
+    if not VOICE_COMMANDS_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Voice Commands System not available")
+    
+    voice_commands_manager = get_voice_commands_manager()
+    if not voice_commands_manager:
+        raise HTTPException(status_code=503, detail="Voice Commands System not initialized")
+    
+    categories = voice_commands_manager.get_command_categories()
+    return categories
+
+@app.get("/voice/commands/history")
+async def get_command_history(limit: int = 10):
+    """Get recent command execution history."""
+    if not VOICE_COMMANDS_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Voice Commands System not available")
+    
+    voice_commands_manager = get_voice_commands_manager()
+    if not voice_commands_manager:
+        raise HTTPException(status_code=503, detail="Voice Commands System not initialized")
+    
+    history = voice_commands_manager.get_command_history(limit)
+    return history
+
+@app.post("/voice/commands/suggestions")
+async def get_command_suggestions(request: dict):
+    """
+    Get command suggestions based on partial text.
+    Expected payload: {"partial_text": "partial command", "user_context": {}}
+    """
+    if not VOICE_COMMANDS_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Voice Commands System not available")
+    
+    voice_commands_manager = get_voice_commands_manager()
+    if not voice_commands_manager:
+        raise HTTPException(status_code=503, detail="Voice Commands System not initialized")
+    
+    partial_text = request.get("partial_text", "")
+    user_context = request.get("user_context", {})
+    
+    suggestions = await voice_commands_manager.get_command_suggestions(partial_text, user_context)
+    return suggestions
+
+@app.post("/voice/commands/validate")
+async def validate_command_permissions(request: dict):
+    """
+    Validate if user has permissions for a command.
+    Expected payload: {"command_id": "command_id", "user_context": {}}
+    """
+    if not VOICE_COMMANDS_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Voice Commands System not available")
+    
+    voice_commands_manager = get_voice_commands_manager()
+    if not voice_commands_manager:
+        raise HTTPException(status_code=503, detail="Voice Commands System not initialized")
+    
+    command_id = request.get("command_id", "")
+    user_context = request.get("user_context", {})
+    
+    if not command_id:
+        raise HTTPException(status_code=400, detail="command_id is required")
+    
+    validation = await voice_commands_manager.validate_command_permissions(command_id, user_context)
+    return validation
+
+@app.get("/voice/commands/statistics")
+async def get_voice_command_statistics():
+    """Get voice command usage statistics."""
+    if not VOICE_COMMANDS_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Voice Commands System not available")
+    
+    voice_commands_manager = get_voice_commands_manager()
+    if not voice_commands_manager:
+        raise HTTPException(status_code=503, detail="Voice Commands System not initialized")
+    
+    stats = voice_commands_manager.get_voice_command_statistics()
+    return stats
+
+
+# --- UNDO WINDOW ENDPOINTS ---
+
+@app.post("/undo/track")
+async def track_file_change(request: dict):
+    """
+    Track a file change for undo functionality.
+    Expected payload: {
+        "change_type": "create|modify|delete|move|copy|rename",
+        "file_path": "path/to/file",
+        "old_path": "old/path" (for move/rename),
+        "content": "base64_encoded_content",
+        "metadata": {}
+    }
+    """
+    if not UNDO_WINDOW_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Undo Window System not available")
+    
+    undo_window_manager = get_undo_window_manager()
+    if not undo_window_manager:
+        raise HTTPException(status_code=503, detail="Undo Window System not initialized")
+    
+    change_type = request.get("change_type", "")
+    file_path = request.get("file_path", "")
+    old_path = request.get("old_path")
+    content_b64 = request.get("content")
+    metadata = request.get("metadata", {})
+    
+    if not change_type or not file_path:
+        raise HTTPException(status_code=400, detail="change_type and file_path are required")
+    
+    # Decode content if provided
+    content = None
+    if content_b64:
+        import base64
+        try:
+            content = base64.b64decode(content_b64)
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"Invalid content encoding: {e}")
+    
+    result = await undo_window_manager.track_file_change(
+        change_type=change_type,
+        file_path=file_path,
+        old_path=old_path,
+        content=content,
+        metadata=metadata
+    )
+    return result
+
+@app.post("/undo/{change_id}")
+async def undo_change(change_id: str):
+    """Undo a specific file change."""
+    if not UNDO_WINDOW_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Undo Window System not available")
+    
+    undo_window_manager = get_undo_window_manager()
+    if not undo_window_manager:
+        raise HTTPException(status_code=503, detail="Undo Window System not initialized")
+    
+    result = await undo_window_manager.undo_change(change_id)
+    return result
+
+@app.post("/redo/{change_id}")
+async def redo_change(change_id: str):
+    """Redo a previously undone change."""
+    if not UNDO_WINDOW_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Undo Window System not available")
+    
+    undo_window_manager = get_undo_window_manager()
+    if not undo_window_manager:
+        raise HTTPException(status_code=503, detail="Undo Window System not initialized")
+    
+    result = await undo_window_manager.redo_change(change_id)
+    return result
+
+@app.get("/undo/changes")
+async def get_recent_changes(limit: int = 50, file_path: Optional[str] = None):
+    """Get recent file changes."""
+    if not UNDO_WINDOW_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Undo Window System not available")
+    
+    undo_window_manager = get_undo_window_manager()
+    if not undo_window_manager:
+        raise HTTPException(status_code=503, detail="Undo Window System not initialized")
+    
+    changes = undo_window_manager.get_recent_changes(limit, file_path)
+    return changes
+
+@app.get("/undo/change/{change_id}")
+async def get_change_details(change_id: str):
+    """Get detailed information about a specific change."""
+    if not UNDO_WINDOW_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Undo Window System not available")
+    
+    undo_window_manager = get_undo_window_manager()
+    if not undo_window_manager:
+        raise HTTPException(status_code=503, detail="Undo Window System not initialized")
+    
+    details = undo_window_manager.get_change_details(change_id)
+    return details
+
+@app.post("/undo/batch")
+async def batch_undo(request: dict):
+    """
+    Undo multiple changes at once.
+    Expected payload: {"change_ids": ["id1", "id2", ...]}
+    """
+    if not UNDO_WINDOW_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Undo Window System not available")
+    
+    undo_window_manager = get_undo_window_manager()
+    if not undo_window_manager:
+        raise HTTPException(status_code=503, detail="Undo Window System not initialized")
+    
+    change_ids = request.get("change_ids", [])
+    if not change_ids:
+        raise HTTPException(status_code=400, detail="change_ids is required")
+    
+    result = await undo_window_manager.batch_undo(change_ids)
+    return result
+
+@app.post("/redo/batch")
+async def batch_redo(request: dict):
+    """
+    Redo multiple changes at once.
+    Expected payload: {"change_ids": ["id1", "id2", ...]}
+    """
+    if not UNDO_WINDOW_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Undo Window System not available")
+    
+    undo_window_manager = get_undo_window_manager()
+    if not undo_window_manager:
+        raise HTTPException(status_code=503, detail="Undo Window System not initialized")
+    
+    change_ids = request.get("change_ids", [])
+    if not change_ids:
+        raise HTTPException(status_code=400, detail="change_ids is required")
+    
+    result = await undo_window_manager.batch_redo(change_ids)
+    return result
+
+@app.post("/undo/session/start")
+async def start_undo_session(request: dict):
+    """
+    Start a new undo session.
+    Expected payload: {"description": "Session description", "user_context": {}}
+    """
+    if not UNDO_WINDOW_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Undo Window System not available")
+    
+    undo_window_manager = get_undo_window_manager()
+    if not undo_window_manager:
+        raise HTTPException(status_code=503, detail="Undo Window System not initialized")
+    
+    description = request.get("description", "")
+    user_context = request.get("user_context", {})
+    
+    result = undo_window_manager.start_session(description, user_context)
+    return result
+
+@app.post("/undo/session/end")
+async def end_undo_session():
+    """End the current undo session."""
+    if not UNDO_WINDOW_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Undo Window System not available")
+    
+    undo_window_manager = get_undo_window_manager()
+    if not undo_window_manager:
+        raise HTTPException(status_code=503, detail="Undo Window System not initialized")
+    
+    result = undo_window_manager.end_session()
+    return result
+
+@app.get("/undo/session/{session_id}")
+async def get_session_info(session_id: str):
+    """Get information about a specific undo session."""
+    if not UNDO_WINDOW_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Undo Window System not available")
+    
+    undo_window_manager = get_undo_window_manager()
+    if not undo_window_manager:
+        raise HTTPException(status_code=503, detail="Undo Window System not initialized")
+    
+    info = undo_window_manager.get_session_info(session_id)
+    return info
+
+@app.post("/undo/restore")
+async def restore_file(request: dict):
+    """
+    Restore a file to a specific point in time.
+    Expected payload: {"file_path": "path/to/file", "timestamp": 1234567890}
+    """
+    if not UNDO_WINDOW_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Undo Window System not available")
+    
+    undo_window_manager = get_undo_window_manager()
+    if not undo_window_manager:
+        raise HTTPException(status_code=503, detail="Undo Window System not initialized")
+    
+    file_path = request.get("file_path", "")
+    timestamp = request.get("timestamp")
+    
+    if not file_path:
+        raise HTTPException(status_code=400, detail="file_path is required")
+    
+    result = await undo_window_manager.restore_file(file_path, timestamp)
+    return result
+
+@app.get("/undo/statistics")
+async def get_undo_statistics():
+    """Get Undo Window statistics."""
+    if not UNDO_WINDOW_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Undo Window System not available")
+    
+    undo_window_manager = get_undo_window_manager()
+    if not undo_window_manager:
+        raise HTTPException(status_code=503, detail="Undo Window System not initialized")
+    
+    stats = undo_window_manager.get_statistics()
+    return stats
+
+
+# --- BRAIN FORGE ENDPOINTS ---
+
+@app.post("/brainforge/job/create")
+async def create_training_job(request: dict):
+    """
+    Create a new training job for fine-tuning.
+    Expected payload: TrainingConfig object
+    """
+    if not BRAIN_FORGE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Brain Forge System not available")
+    
+    brain_forge_manager = get_brain_forge_manager()
+    if not brain_forge_manager:
+        raise HTTPException(status_code=503, detail="Brain Forge System not initialized")
+    
+    result = brain_forge_manager.create_training_job(request)
+    return result
+
+@app.get("/brainforge/job/{job_id}")
+async def get_training_job(job_id: str):
+    """Get details of a specific training job."""
+    if not BRAIN_FORGE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Brain Forge System not available")
+    
+    brain_forge_manager = get_brain_forge_manager()
+    if not brain_forge_manager:
+        raise HTTPException(status_code=503, detail="Brain Forge System not initialized")
+    
+    job = brain_forge_manager.get_training_job(job_id)
+    return job
+
+@app.get("/brainforge/jobs")
+async def list_training_jobs(status: Optional[str] = None):
+    """List training jobs, optionally filtered by status."""
+    if not BRAIN_FORGE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Brain Forge System not available")
+    
+    brain_forge_manager = get_brain_forge_manager()
+    if not brain_forge_manager:
+        raise HTTPException(status_code=503, detail="Brain Forge System not initialized")
+    
+    jobs = brain_forge_manager.list_training_jobs(status)
+    return jobs
+
+@app.post("/brainforge/job/{job_id}/cancel")
+async def cancel_training_job(job_id: str):
+    """Cancel a training job."""
+    if not BRAIN_FORGE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Brain Forge System not available")
+    
+    brain_forge_manager = get_brain_forge_manager()
+    if not brain_forge_manager:
+        raise HTTPException(status_code=503, detail="Brain Forge System not initialized")
+    
+    result = brain_forge_manager.cancel_training_job(job_id)
+    return result
+
+@app.post("/brainforge/dataset/create")
+async def create_dataset(request: dict):
+    """
+    Create a new training dataset.
+    Expected payload: {
+        "name": "Dataset Name",
+        "description": "Description",
+        "model_type": "conversation",
+        "data_path": "path/to/data",
+        "format": "jsonl",
+        "metadata": {}
+    }
+    """
+    if not BRAIN_FORGE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Brain Forge System not available")
+    
+    brain_forge_manager = get_brain_forge_manager()
+    if not brain_forge_manager:
+        raise HTTPException(status_code=503, detail="Brain Forge System not initialized")
+    
+    name = request.get("name", "")
+    description = request.get("description", "")
+    model_type = request.get("model_type", "")
+    data_path = request.get("data_path", "")
+    format = request.get("format", "")
+    metadata = request.get("metadata", {})
+    
+    if not all([name, description, model_type, data_path, format]):
+        raise HTTPException(status_code=400, detail="name, description, model_type, data_path, and format are required")
+    
+    result = brain_forge_manager.create_dataset(
+        name=name,
+        description=description,
+        model_type=model_type,
+        data_path=data_path,
+        format=format,
+        metadata=metadata
+    )
+    return result
+
+@app.get("/brainforge/dataset/{dataset_id}")
+async def get_dataset(dataset_id: str):
+    """Get details of a specific dataset."""
+    if not BRAIN_FORGE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Brain Forge System not available")
+    
+    brain_forge_manager = get_brain_forge_manager()
+    if not brain_forge_manager:
+        raise HTTPException(status_code=503, detail="Brain Forge System not initialized")
+    
+    dataset = brain_forge_manager.get_dataset(dataset_id)
+    return dataset
+
+@app.get("/brainforge/datasets")
+async def list_datasets():
+    """List all available datasets."""
+    if not BRAIN_FORGE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Brain Forge System not available")
+    
+    brain_forge_manager = get_brain_forge_manager()
+    if not brain_forge_manager:
+        raise HTTPException(status_code=503, detail="Brain Forge System not initialized")
+    
+    datasets = brain_forge_manager.list_datasets()
+    return datasets
+
+@app.get("/brainforge/statistics")
+async def get_brain_forge_statistics():
+    """Get Brain Forge statistics."""
+    if not BRAIN_FORGE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Brain Forge System not available")
+    
+    brain_forge_manager = get_brain_forge_manager()
+    if not brain_forge_manager:
+        raise HTTPException(status_code=503, detail="Brain Forge System not initialized")
+    
+    stats = brain_forge_manager.get_statistics()
+    return stats
+
+@app.get("/brainforge/model-types")
+async def get_model_types():
+    """Get available model types for training."""
+    if not BRAIN_FORGE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Brain Forge System not available")
+    
+    brain_forge_manager = get_brain_forge_manager()
+    if not brain_forge_manager:
+        raise HTTPException(status_code=503, detail="Brain Forge System not initialized")
+    
+    model_types = brain_forge_manager.get_model_types()
+    return model_types
+
+@app.get("/brainforge/metrics")
+async def get_evaluation_metrics():
+    """Get available evaluation metrics."""
+    if not BRAIN_FORGE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Brain Forge System not available")
+    
+    brain_forge_manager = get_brain_forge_manager()
+    if not brain_forge_manager:
+        raise HTTPException(status_code=503, detail="Brain Forge System not initialized")
+    
+    metrics = brain_forge_manager.get_evaluation_metrics()
+    return metrics
+
+@app.get("/brainforge/config/template")
+async def get_training_config_template():
+    """Get a template for training configuration."""
+    if not BRAIN_FORGE_AVAILABLE:
+        raise HTTPException(status_code=503, detail="Brain Forge System not available")
+    
+    brain_forge_manager = get_brain_forge_manager()
+    if not brain_forge_manager:
+        raise HTTPException(status_code=503, detail="Brain Forge System not initialized")
+    
+    template = brain_forge_manager.get_training_config_template()
+    return template
+
+
 if __name__ == "__main__":
     import uvicorn
     print(f"🌟 Sallie Server starting on http://0.0.0.0:{PORT}")
@@ -1792,6 +3255,14 @@ if __name__ == "__main__":
     print(f"🎤 Voice Interface: {'ENABLED' if voice_interface and voice_interface.is_initialized else 'DISABLED'}")
     print(f"🤖 Autonomous PM: {'ENABLED' if autonomous_pm and autonomous_pm.is_initialized else 'DISABLED'}")
     print(f"🌡️ Sensor Arrays: {'ENABLED' if sensor_array and sensor_array.is_initialized else 'DISABLED'}")
+    print(f"👻 Ghost Interface: {'ENABLED' if GHOST_INTERFACE_AVAILABLE else 'DISABLED'}")
+    print(f"💻 CLI Interface: {'ENABLED' if CLI_INTERFACE_AVAILABLE else 'DISABLED'}")
+    print(f"🗳️ Active Veto System: {'ENABLED' if ACTIVE_VETO_AVAILABLE else 'DISABLED'}")
+    print(f"🔨 Foundry Evaluation: {'ENABLED' if FOUNDRY_AVAILABLE else 'DISABLED'}")
+    print(f"🧹 Memory Hygiene: {'ENABLED' if MEMORY_HYGIENE_AVAILABLE else 'DISABLED'}")
+    print(f"🎤 Voice Commands: {'ENABLED' if VOICE_COMMANDS_AVAILABLE else 'DISABLED'}")
+    print(f"⏰ Undo Window: {'ENABLED' if UNDO_WINDOW_AVAILABLE else 'DISABLED'}")
+    print(f"🧠 Brain Forge: {'ENABLED' if BRAIN_FORGE_AVAILABLE else 'DISABLED'}")
     print(f"🚀 Phase 4 Enhancement: ACTIVE")
     uvicorn.run(app, host=HOST, port=PORT)
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ConvergenceFlow } from '@/components/ConvergenceFlow';
+import { ConvergenceExperience } from '@/components/ConvergenceExperience';
 import { useWebSocket } from '@/hooks/useWebSocket';
 import { useNotifications } from '@/hooks/useNotifications';
 
@@ -178,16 +178,14 @@ export default function ConvergencePage() {
           </div>
         </div>
 
-        {/* Main Convergence Flow */}
-        <div className="bg-black/20 backdrop-blur-sm rounded-xl border border-violet-500/30 p-6">
-          <ConvergenceFlow 
-            convergenceStatus={convergenceStatus}
-            questions={questions}
-            elasticMode={elasticMode}
-            onQuestionAnswered={loadConvergenceData}
-            onMirrorTest={performMirrorTest}
-            isConnected={isConnected}
-            sendMessage={sendMessage}
+        {/* Main Convergence Experience */}
+        <div className="min-h-screen">
+          <ConvergenceExperience 
+            onComplete={(state) => {
+              console.log('Convergence completed:', state);
+              // Handle completion - redirect to main app
+              window.location.href = '/';
+            }}
           />
         </div>
       </div>

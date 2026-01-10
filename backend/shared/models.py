@@ -60,13 +60,13 @@ class CommunicationType(str, Enum):
 # User models
 class UserCreate(BaseModel):
     """Schema for user creation"""
-    email: str = Field(..., regex=r'^[^@]+@[^@]+\.[^@]+$')
+    email: str = Field(..., pattern=r'^[^@]+@[^@]+\.[^@]+$')
     password: str = Field(..., min_length=8)
     name: str = Field(..., min_length=1, max_length=100)
 
 class UserLogin(BaseModel):
     """Schema for user login"""
-    email: str = Field(..., regex=r'^[^@]+@[^@]+\.[^@]+$')
+    email: str = Field(..., pattern=r'^[^@]+@[^@]+\.[^@]+$')
     password: str = Field(...)
 
 class UserResponse(BaseSchema):

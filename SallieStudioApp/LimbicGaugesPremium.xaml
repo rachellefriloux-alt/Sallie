@@ -1,0 +1,374 @@
+<Page x:Class="SallieStudioApp.LimbicGaugesPremium"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      Background="{StaticResource BackgroundBrush}"
+      Title="Limbic System - Premium">
+
+    <Page.Resources>
+        <!-- Premium Gradient Brushes -->
+        <LinearGradientBrush x:Key="TrustGradient" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#8B5CF6" Offset="0"/>
+            <GradientStop Color="#A855F7" Offset="0.5"/>
+            <GradientStop Color="#6366F1" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="WarmthGradient" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#06B6D4" Offset="0"/>
+            <GradientStop Color="#3B82F6" Offset="0.5"/>
+            <GradientStop Color="#6366F1" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="EnergyGradient" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#F59E0B" Offset="0"/>
+            <GradientStop Color="#F97316" Offset="0.5"/>
+            <GradientStop Color="#EF4444" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="MoodGradient" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#10B981" Offset="0"/>
+            <GradientStop Color="#22C55E" Offset="0.5"/>
+            <GradientStop Color="#14B8A6" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="CardBackground" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#1F2937" Offset="0"/>
+            <GradientStop Color="#111827" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="BorderGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#374151" Offset="0"/>
+            <GradientStop Color="#1F2937" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- Animation Storyboards -->
+        <Storyboard x:Key="PulseAnimation" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetName="PulseScale"
+                           Storyboard.TargetProperty="ScaleX"
+                           From="1.0" To="1.1" Duration="0:0:0.5"
+                           AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="PulseScale"
+                           Storyboard.TargetProperty="ScaleY"
+                           From="1.0" To="1.1" Duration="0:0:0.5"
+                           AutoReverse="True"/>
+        </Storyboard>
+
+        <Storyboard x:Key="GlowAnimation" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetName="GlowOpacity"
+                           Storyboard.TargetProperty="Opacity"
+                           From="0.3" To="0.8" Duration="0:0:2"
+                           AutoReverse="True"/>
+        </Storyboard>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="{StaticResource CardBackground}" 
+                BorderBrush="{StaticResource BorderGradient}" BorderThickness="1" 
+                CornerRadius="12" Margin="0,0,0,20" Padding="20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Background="{StaticResource TrustGradient}" Width="40" Height="40" CornerRadius="20">
+                        <TextBlock Text="🧠" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Margin="15,0,0,0" VerticalAlignment="Center">
+                        <TextBlock Text="Limbic System" FontSize="24" FontWeight="Bold" Foreground="#FFFFFF"/>
+                        <TextBlock Text="Premium Psychological Monitoring" FontSize="12" Foreground="#9CA3AF"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button Name="RefreshButton" Content="🔄" Background="#374151" Foreground="#FFFFFF"
+                           Width="40" Height="40" CornerRadius="8" Margin="0,0,10,0"
+                           Click="RefreshButton_Click"/>
+                    <Button Name="ExportButton" Content="📥" Background="#374151" Foreground="#FFFFFF"
+                           Width="40" Height="40" CornerRadius="8"
+                           Click="ExportButton_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main Content -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Gauges Panel -->
+                <Border Grid.Column="0" Background="{StaticResource CardBackground}" 
+                        BorderBrush="{StaticResource BorderGradient}" BorderThickness="1" 
+                        CornerRadius="12" Margin="0,0,10,0" Padding="20">
+                    <StackPanel>
+                        <TextBlock Text="Core Dimensions" FontSize="16" FontWeight="SemiBold" 
+                                  Foreground="#FFFFFF" Margin="0,0,0,20"/>
+
+                        <!-- Trust Gauge -->
+                        <Border Background="#1F2937" CornerRadius="8" Padding="15" Margin="0,0,0,15">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="❤️" FontSize="16" Margin="0,0,8,0"/>
+                                    <TextBlock Grid.Column="1" Text="Trust" FontSize="14" FontWeight="Medium" 
+                                              Foreground="#8B5CF6" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="2" Name="TrustValueText" Text="85%" 
+                                              FontSize="12" Foreground="#9CA3AF" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                    <Ellipse Grid.Column="3" Name="TrustStatusIndicator" Width="8" Height="8" 
+                                            Fill="#10B981" VerticalAlignment="Center"/>
+                                </Grid>
+                                <ProgressBar Name="TrustProgressBar" Height="8" Background="#374151" 
+                                           Foreground="{StaticResource TrustGradient}" Value="0.85" 
+                                           CornerRadius="4"/>
+                                <TextBlock Name="TrustDescriptionText" Text="Foundation of our relationship" 
+                                          FontSize="11" Foreground="#6B7280" Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Warmth Gauge -->
+                        <Border Background="#1F2937" CornerRadius="8" Padding="15" Margin="0,0,0,15">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="⚡" FontSize="16" Margin="0,0,8,0"/>
+                                    <TextBlock Grid.Column="1" Text="Warmth" FontSize="14" FontWeight="Medium" 
+                                              Foreground="#06B6D4" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="2" Name="WarmthValueText" Text="72%" 
+                                              FontSize="12" Foreground="#9CA3AF" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                    <Ellipse Grid.Column="3" Name="WarmthStatusIndicator" Width="8" Height="8" 
+                                            Fill="#10B981" VerticalAlignment="Center"/>
+                                </Grid>
+                                <ProgressBar Name="WarmthProgressBar" Height="8" Background="#374151" 
+                                           Foreground="{StaticResource WarmthGradient}" Value="0.72" 
+                                           CornerRadius="4"/>
+                                <TextBlock Name="WarmthDescriptionText" Text="Emotional connection and comfort" 
+                                          FontSize="11" Foreground="#6B7280" Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Energy Gauge -->
+                        <Border Background="#1F2937" CornerRadius="8" Padding="15" Margin="0,0,0,15">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="🧠" FontSize="16" Margin="0,0,8,0"/>
+                                    <TextBlock Grid.Column="1" Text="Energy" FontSize="14" FontWeight="Medium" 
+                                              Foreground="#F59E0B" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="2" Name="EnergyValueText" Text="68%" 
+                                              FontSize="12" Foreground="#9CA3AF" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                    <Ellipse Grid.Column="3" Name="EnergyStatusIndicator" Width="8" Height="8" 
+                                            Fill="#F59E0B" VerticalAlignment="Center"/>
+                                </Grid>
+                                <ProgressBar Name="EnergyProgressBar" Height="8" Background="#374151" 
+                                           Foreground="{StaticResource EnergyGradient}" Value="0.68" 
+                                           CornerRadius="4"/>
+                                <TextBlock Name="EnergyDescriptionText" Text="Cognitive activation and engagement" 
+                                          FontSize="11" Foreground="#6B7280" Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Mood Gauge -->
+                        <Border Background="#1F2937" CornerRadius="8" Padding="15" Margin="0,0,0,15">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="😊" FontSize="16" Margin="0,0,8,0"/>
+                                    <TextBlock Grid.Column="1" Text="Mood" FontSize="14" FontWeight="Medium" 
+                                              Foreground="#10B981" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="2" Name="MoodValueText" Text="78%" 
+                                              FontSize="12" Foreground="#9CA3AF" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                    <Ellipse Grid.Column="3" Name="MoodStatusIndicator" Width="8" Height="8" 
+                                            Fill="#10B981" VerticalAlignment="Center"/>
+                                </Grid>
+                                <ProgressBar Name="MoodProgressBar" Height="8" Background="#374151" 
+                                           Foreground="{StaticResource MoodGradient}" Value="0.78" 
+                                           CornerRadius="4"/>
+                                <TextBlock Name="MoodDescriptionText" Text="Current emotional state" 
+                                          FontSize="11" Foreground="#6B7280" Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Current Posture -->
+                        <Border Background="{StaticResource TrustGradient}" CornerRadius="8" Padding="20" 
+                               Margin="0,20,0,0">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="Current Mode" FontSize="12" Foreground="#E5E7EB" 
+                                          TextAlignment="Center" Margin="0,0,0,5"/>
+                                <TextBlock Name="PostureText" Text="PEER" FontSize="20" FontWeight="Bold" 
+                                          Foreground="#FFFFFF" TextAlignment="Center"/>
+                                <TextBlock Text="Behavioral configuration" FontSize="11" 
+                                          Foreground="#D1D5DB" TextAlignment="Center" Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- Analytics & History Panel -->
+                <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                    <!-- Analytics -->
+                    <Border Background="{StaticResource CardBackground}" 
+                            BorderBrush="{StaticResource BorderGradient}" BorderThickness="1" 
+                            CornerRadius="12" Margin="0,0,0,20" Padding="20">
+                        <StackPanel>
+                            <TextBlock Text="Analytics" FontSize="16" FontWeight="SemiBold" 
+                                      Foreground="#FFFFFF" Margin="0,0,0,20"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                                    <TextBlock Name="AvgTrustText" Text="85%" FontSize="24" FontWeight="Bold" 
+                                              Foreground="#8B5CF6" TextAlignment="Center"/>
+                                    <TextBlock Text="Avg Trust" FontSize="11" Foreground="#9CA3AF" 
+                                              TextAlignment="Center" Margin="0,5,0,0"/>
+                                    <TextBlock Name="TrustTrendText" Text="📈" FontSize="12" 
+                                              TextAlignment="Center" Margin="0,2,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                                    <TextBlock Name="AvgWarmthText" Text="72%" FontSize="24" FontWeight="Bold" 
+                                              Foreground="#06B6D4" TextAlignment="Center"/>
+                                    <TextBlock Text="Avg Warmth" FontSize="11" Foreground="#9CA3AF" 
+                                              TextAlignment="Center" Margin="0,5,0,0"/>
+                                    <TextBlock Name="WarmthTrendText" Text="📈" FontSize="12" 
+                                              TextAlignment="Center" Margin="0,2,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                                    <TextBlock Name="AvgEnergyText" Text="68%" FontSize="24" FontWeight="Bold" 
+                                              Foreground="#F59E0B" TextAlignment="Center"/>
+                                    <TextBlock Text="Avg Energy" FontSize="11" Foreground="#9CA3AF" 
+                                              TextAlignment="Center" Margin="0,5,0,0"/>
+                                    <TextBlock Name="EnergyTrendText" Text="➡️" FontSize="12" 
+                                              TextAlignment="Center" Margin="0,2,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="3" HorizontalAlignment="Center">
+                                    <TextBlock Name="PostureChangesText" Text="12" FontSize="24" FontWeight="Bold" 
+                                              Foreground="#10B981" TextAlignment="Center"/>
+                                    <TextBlock Text="Posture Changes" FontSize="11" Foreground="#9CA3AF" 
+                                              TextAlignment="Center" Margin="0,5,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- History -->
+                    <Border Background="{StaticResource CardBackground}" 
+                            BorderBrush="{StaticResource BorderGradient}" BorderThickness="1" 
+                            CornerRadius="12" Padding="20">
+                        <StackPanel>
+                            <Grid Margin="0,0,0,20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="History" FontSize="16" FontWeight="SemiBold" 
+                                          Foreground="#FFFFFF"/>
+                                <ComboBox Grid.Column="1" Name="TimeRangeComboBox" Width="120" Height="30" 
+                                         Background="#374151" Foreground="#FFFFFF" BorderBrush="#4B5563">
+                                    <ComboBoxItem Content="1 Hour" Tag="1h" IsSelected="True"/>
+                                    <ComboBoxItem Content="24 Hours" Tag="24h"/>
+                                    <ComboBoxItem Content="7 Days" Tag="7d"/>
+                                    <ComboBoxItem Content="30 Days" Tag="30d"/>
+                                </ComboBox>
+                            </Grid>
+
+                            <ListBox Name="HistoryListBox" Background="#1F2937" BorderBrush="#374151" 
+                                    BorderThickness="1" Height="300" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#374151" CornerRadius="6" Padding="12" Margin="2">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                                    <TextBlock Text="{Binding Timestamp, StringFormat='{}{0:HH:mm}'}" 
+                                                              FontSize="11" Foreground="#9CA3AF" Margin="0,0,8,0"/>
+                                                    <TextBlock Text="{Binding Posture}" FontSize="12" FontWeight="Medium" 
+                                                              Foreground="#FFFFFF"/>
+                                                </StackPanel>
+                                                <TextBlock Grid.Column="1" Text="{Binding Event}" FontSize="10" 
+                                                          Foreground="#8B5CF6" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                                    <Ellipse Width="6" Height="6" Fill="#8B5CF6" Opacity="{Binding Trust}" Margin="2"/>
+                                                    <Ellipse Width="6" Height="6" Fill="#06B6D4" Opacity="{Binding Warmth}" Margin="2"/>
+                                                    <Ellipse Width="6" Height="6" Fill="#F59E0B" Opacity="{Binding Arousal}" Margin="2"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+
+        <!-- Status Bar -->
+        <Border Grid.Row="2" Background="{StaticResource CardBackground}" 
+                BorderBrush="{StaticResource BorderGradient}" BorderThickness="1" 
+                CornerRadius="12" Margin="0,20,0,0" Padding="15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Ellipse Name="ConnectionStatusIndicator" Width="8" Height="8" Fill="#10B981" Margin="0,0,8,0"/>
+                    <TextBlock Name="ConnectionStatusText" Text="System Active" FontSize="12" Foreground="#9CA3AF"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Real-time Updates" FontSize="12" Foreground="#9CA3AF" Margin="0,0,15,0"/>
+                    <TextBlock Text="Premium Analytics" FontSize="12" Foreground="#9CA3AF"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

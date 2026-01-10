@@ -849,6 +849,14 @@ async def sync_lifeos():
 # Sync endpoints
 app.include_router(sync_router)
 
+# Premium WebSocket endpoints
+try:
+    from premium_websocket_endpoints import premium_ws_router
+    app.include_router(premium_ws_router)
+    logger.info("Premium WebSocket endpoints loaded")
+except ImportError as e:
+    logger.warning(f"Premium WebSocket endpoints not available: {e}")
+
 # WebSocket endpoint
 @app.websocket("/sync/ws/{platform}/{user_id}")
 async def websocket_endpoint(websocket: WebSocket, platform: str, user_id: str):

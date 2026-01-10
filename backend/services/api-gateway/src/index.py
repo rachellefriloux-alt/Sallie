@@ -36,10 +36,16 @@ from routes import auth, limbic, memory, agency, communication
 logger = setup_logging("api-gateway")
 structured_logger = StructuredLogger("api-gateway")
 
-# Prometheus metrics
-REQUEST_COUNT = Counter('http_requests_total', 'Total HTTP requests', ['method', 'endpoint', 'status'])
-REQUEST_DURATION = Histogram('http_request_duration_seconds', 'HTTP request duration')
-ACTIVE_CONNECTIONS = Counter('active_connections', 'Active connections')
+import prometheus_client
+from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
+
+# Create a new registry for this instance
+REGISTRY = prometheus_client.CollectorRegistry()
+
+# Metrics with custom registry
+REQUEST_COUNT = Counter('http_requests_total', 'Total HTTP requests', ['method', 'endpoint', 'status'], registry=REGISTRY)
+REQUEST_DURATION = Histogram('http_request_duration_seconds', 'HTTP request duration', registry=REGISTRY)
+ACTIVE_CONNECTIONS = Counter('active_connections', 'Active connections', registry=REGISTRY)
 
 # Service registry
 SERVICE_URLS = {
@@ -178,7 +184,7 @@ async def health_check():
 @app.get("/metrics")
 async def metrics():
     """Prometheus metrics endpoint"""
-    return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)
+    return Response(generate_latest(REGISTRY), media_type=CONTENT_TYPE_LATEST)
 
 async def health_check_services():
     """Check health of all services"""

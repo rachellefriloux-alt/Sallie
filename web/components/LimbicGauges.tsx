@@ -6,6 +6,11 @@ interface LimbicState {
   arousal: number;
   valence: number;
   posture: string;
+  empathy?: number;
+  intuition?: number;
+  creativity?: number;
+  wisdom?: number;
+  humor?: number;
 }
 
 interface LimbicGaugesProps {
@@ -17,25 +22,25 @@ export function LimbicGauges({ state }: LimbicGaugesProps) {
     {
       label: 'Trust',
       value: state.trust,
-      color: 'from-primary to-accent',
+      color: 'from-violet-500 to-purple-600',
       ariaLabel: `Trust level: ${(state.trust * 100).toFixed(0)}%`,
     },
     {
       label: 'Warmth',
       value: state.warmth,
-      color: 'from-accent to-warning',
+      color: 'from-cyan-500 to-blue-600',
       ariaLabel: `Warmth level: ${(state.warmth * 100).toFixed(0)}%`,
     },
     {
       label: 'Energy',
       value: state.arousal,
-      color: 'from-warning to-error',
+      color: 'from-amber-500 to-orange-600',
       ariaLabel: `Energy level: ${(state.arousal * 100).toFixed(0)}%`,
     },
     {
       label: 'Mood',
       value: (state.valence + 1) / 2, // Map -1 to 1 range to 0 to 1
-      color: 'from-info to-success',
+      color: 'from-emerald-500 to-green-600',
       ariaLabel: `Mood level: ${(state.valence * 100).toFixed(0)}%`,
     },
   ];
@@ -76,10 +81,61 @@ export function LimbicGauges({ state }: LimbicGaugesProps) {
         <div className="text-xs text-gray-400 uppercase tracking-wider mb-1">
           Current Mode
         </div>
-        <div className="text-lg font-semibold text-accent-light">
+        <div className="text-lg font-semibold text-violet-400">
           {state.posture || 'PEER'}
         </div>
       </div>
+      
+      {/* Extended Variables */}
+      {(state.empathy !== undefined || state.intuition !== undefined || state.creativity !== undefined || state.wisdom !== undefined || state.humor !== undefined) && (
+        <div className="mt-6 p-3 bg-gray-700/50 rounded-lg">
+          <div className="text-xs text-gray-400 uppercase tracking-wider mb-3">
+            Advanced Capabilities
+          </div>
+          <div className="space-y-2">
+            {state.empathy !== undefined && (
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-300">Empathy</span>
+                <span className="text-xs text-gray-500 font-mono">
+                  {state.empathy.toFixed(2)}
+                </span>
+              </div>
+            )}
+            {state.intuition !== undefined && (
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-300">Intuition</span>
+                <span className="text-xs text-gray-500 font-mono">
+                  {state.intuition.toFixed(2)}
+                </span>
+              </div>
+            )}
+            {state.creativity !== undefined && (
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-300">Creativity</span>
+                <span className="text-xs text-gray-500 font-mono">
+                  {state.creativity.toFixed(2)}
+                </span>
+              </div>
+            )}
+            {state.wisdom !== undefined && (
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-300">Wisdom</span>
+                <span className="text-xs text-gray-500 font-mono">
+                  {state.wisdom.toFixed(2)}
+                </span>
+              </div>
+            )}
+            {state.humor !== undefined && (
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-300">Humor</span>
+                <span className="text-xs text-gray-500 font-mono">
+                  {state.humor.toFixed(2)}
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

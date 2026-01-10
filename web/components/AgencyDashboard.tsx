@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { AgencyService, AgencyServiceWebSocket, AgencyAction, ActionType, ActionStatus, AgencyStats, TrustTier, CapabilityContract, AgencyServiceUtils, IAgencyService } from '@/shared/services/agencyService';
+import '@/styles/dashboard.css';
 import { 
   Shield, 
   Zap, 
@@ -12,7 +14,6 @@ import {
   Activity,
   Settings,
   Play,
-  Pause,
   RotateCcw,
   Eye,
   Lock,
@@ -24,15 +25,6 @@ import {
   Cpu,
   HardDrive
 } from 'lucide-react';
-import { AgencyService, AgencyServiceUtils } from '../../../shared/services/agencyService';
-import { 
-  TrustTier, 
-  AgencyAction, 
-  ActionType, 
-  ActionStatus, 
-  AgencyStats,
-  CapabilityContract 
-} from '../../../shared/services/agencyService';
 
 interface AgencyDashboardProps {
   className?: string;
@@ -53,12 +45,13 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
   const [newActionType, setNewActionType] = useState<ActionType>(ActionType.FILE_READ);
   const [newActionResource, setNewActionResource] = useState('');
   const [newActionParams, setNewActionParams] = useState('{}');
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
 
   // Initialize Agency Service connection
   useEffect(() => {
     const initializeAgencyService = async () => {
       try {
-        const agencyService = new AgencyService.AgencyServiceImpl();
+        const agencyService: IAgencyService = new AgencyService();
         
         // Load initial data
         await Promise.all([
@@ -69,8 +62,7 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
           loadCapabilities(),
         ]);
         
-        // Set up WebSocket for real-time updates
-        const ws = new AgencyService.AgencyServiceWebSocket('ws://localhost:8752');
+        const ws = new AgencyServiceWebSocket('ws://localhost:8752');
         
         ws.on('connected', () => {
           setIsConnected(true);
@@ -82,23 +74,23 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
           console.log('Disconnected from Agency Service WebSocket');
         });
         
-        ws.on('action-completed', (action) => {
+        ws.on('action-completed', (action: AgencyAction) => {
           setActiveActions(prev => prev.filter(a => a.id !== action.id));
           setActionHistory(prev => [action, ...prev]);
           loadAgencyStats();
         });
         
-        ws.on('action-failed', (action) => {
+        ws.on('action-failed', (action: AgencyAction) => {
           setActiveActions(prev => prev.filter(a => a.id !== action.id));
           setActionHistory(prev => [action, ...prev]);
           loadAgencyStats();
         });
         
-        ws.on('tier-changed', (data) => {
+        ws.on('tier-changed', (data: any) => {
           loadTrustInfo();
         });
         
-        ws.on('trust-change', (data) => {
+        ws.on('trust-change', (data: any) => {
           loadTrustInfo();
         });
         
@@ -119,7 +111,7 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
 
   const loadTrustInfo = useCallback(async () => {
     try {
-      const agencyService = new AgencyService.AgencyServiceImpl();
+      const agencyService: IAgencyService = new AgencyService();
       const trustData = await agencyService.getCurrentTrust();
       setTrustInfo(trustData);
     } catch (error) {
@@ -129,7 +121,7 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
 
   const loadActiveActions = useCallback(async () => {
     try {
-      const agencyService = new AgencyService.AgencyServiceImpl();
+      const agencyService: IAgencyService = new AgencyService();
       const result = await agencyService.getActiveActions();
       setActiveActions(result.actions);
     } catch (error) {
@@ -139,7 +131,7 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
 
   const loadActionHistory = useCallback(async () => {
     try {
-      const agencyService = new AgencyService.AgencyServiceImpl();
+      const agencyService: IAgencyService = new AgencyService();
       const result = await agencyService.getActionHistory(20);
       setActionHistory(result.actions);
     } catch (error) {
@@ -149,7 +141,7 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
 
   const loadAgencyStats = useCallback(async () => {
     try {
-      const agencyService = new AgencyService.AgencyServiceImpl();
+      const agencyService: IAgencyService = new AgencyService();
       const result = await agencyService.getStats();
       setAgencyStats(result.stats);
     } catch (error) {
@@ -159,7 +151,7 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
 
   const loadCapabilities = useCallback(async () => {
     try {
-      const agencyService = new AgencyService.AgencyServiceImpl();
+      const agencyService: IAgencyService = new AgencyService();
       const result = await agencyService.getCapabilities();
       setCapabilities(result.contracts);
     } catch (error) {
@@ -171,7 +163,7 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
     if (!newActionResource.trim()) return;
 
     try {
-      const agencyService = new AgencyService.AgencyServiceImpl();
+      const agencyService: IAgencyService = new AgencyService();
       
       let params;
       try {
@@ -187,8 +179,8 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
         metadata: {
           source: 'user_request',
           context: 'Agency Dashboard',
-          urgency: 'medium',
-          risk_level: AgencyServiceUtils.isHighRiskAction(newActionType) ? 'high' : 'low',
+          urgency: 'medium' as const,
+          risk_level: AgencyServiceUtils.isHighRiskAction(newActionType) ? 'high' as const : 'low' as const,
           requires_confirmation: AgencyServiceUtils.requiresConfirmation(newActionType, trustInfo?.trust_score || 0),
           auto_rollback: true,
         },
@@ -216,7 +208,7 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
 
   const handleExecuteAction = useCallback(async (actionId: string) => {
     try {
-      const agencyService = new AgencyService.AgencyServiceImpl();
+      const agencyService: IAgencyService = new AgencyService();
       const result = await agencyService.executeAction(actionId);
       
       if (result.success) {
@@ -232,7 +224,7 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
 
   const handleRollbackAction = useCallback(async (actionId: string) => {
     try {
-      const agencyService = new AgencyService.AgencyServiceImpl();
+      const agencyService: IAgencyService = new AgencyService();
       const result = await agencyService.initiateRollback(actionId, 'User requested rollback');
       
       if (result.success) {
@@ -248,7 +240,7 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
 
   const handleTakeTheWheel = useCallback(async () => {
     try {
-      const agencyService = new AgencyService.AgencyServiceImpl();
+      const agencyService: IAgencyService = new AgencyService();
       
       const request = {
         trigger_type: 'explicit' as const,
@@ -334,47 +326,47 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
           </div>
         </div>
 
-        {/* Trust Tier Display */}
-        {trustInfo && (
-          <div className="mb-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900">Trust Status</h3>
-              <div className="text-sm text-gray-600">
-                Score: {AgencyServiceUtils.formatTrustScore(trustInfo.trust_score)}
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-              {trustInfo.all_tiers.map((tier, index) => (
-                <div
-                  key={tier.tier}
-                  className={`p-4 rounded-lg border-2 transition-all ${
-                    tier.tier === trustInfo.current_tier.tier
-                      ? 'border-purple-500 bg-purple-50'
-                      : 'border-gray-200 bg-gray-50'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium text-gray-900">{tier.name}</span>
-                    <span className="text-sm text-gray-600">Tier {tier.tier}</span>
-                  </div>
-                  <div className="text-sm text-gray-600 mb-2">
-                    {tier.trust_min * 100}% - {tier.trust_max * 100}%
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                      className="h-2 rounded-full transition-all"
-                      style={{
-                        width: `${((trustInfo.trust_score - tier.trust_min) / (tier.trust_max - tier.trust_min)) * 100}%`,
-                        backgroundColor: AgencyServiceUtils.getTrustTierColor(tier.tier),
-                      }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+{/* Trust Tier Display */}
+{trustInfo && (
+<div className="mb-6">
+<div className="flex items-center justify-between mb-4">
+<h3 className="text-lg font-semibold text-gray-900">Trust Status</h3>
+<span className="text-sm text-gray-600">
+Trust Score: {(trustInfo.trust_score * 100).toFixed(1)}%
+</span>
+</div>
+  
+<div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+{trustInfo.all_tiers.map((tier, index) => (
+<div
+key={tier.tier}
+className={`p-4 rounded-lg border-2 transition-all ${
+tier.tier === trustInfo.current_tier.tier
+? 'border-purple-500 bg-purple-50'
+: 'border-gray-200 bg-gray-50'
+}`}
+>
+<div className="flex items-center justify-between mb-2">
+<span className="font-medium text-gray-900">{tier.name}</span>
+<span className="text-sm text-gray-600">Tier {tier.tier}</span>
+</div>
+<div className="text-sm text-gray-600 mb-2">
+{tier.trust_min * 100}% - {tier.trust_max * 100}%
+</div>
+<div className="w-full bg-gray-200 rounded-full h-2">
+<div
+className="h-2 rounded-full transition-all trust-progress-bar"
+style={{
+width: `${((trustInfo.trust_score - tier.trust_min) / (tier.trust_max - tier.trust_min)) * 100}%`,
+backgroundColor: AgencyServiceUtils.getTrustTierColor(tier.tier),
+}}
+/>
+</div>
+</div>
+))}
+</div>
+</div>
+)}
 
         {/* Agency Stats */}
         {agencyStats && (
@@ -448,11 +440,7 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
                           {AgencyServiceUtils.formatActionType(action.action_type)}
                         </span>
                         <span
-                          className="px-2 py-1 text-xs font-medium rounded-full"
-                          style={{ 
-                            backgroundColor: AgencyServiceUtils.getActionStatusColor(action.status) + '20',
-                            color: AgencyServiceUtils.getActionStatusColor(action.status)
-                          }}
+                          className={`px-2 py-1 text-xs font-medium rounded-full action-status-${action.status}`}
                         >
                           {action.status}
                         </span>
@@ -492,7 +480,10 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
                         </button>
                       )}
                       <button
-                        onClick={() => setSelectedAction(action)}
+                        onClick={() => {
+                          setSelectedAction(action);
+                          setShowDetailsModal(true);
+                        }}
                         className="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors text-sm"
                       >
                         Details
@@ -521,11 +512,7 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
                       {AgencyServiceUtils.formatActionType(action.action_type)}
                     </span>
                     <span
-                      className="px-2 py-1 text-xs font-medium rounded-full"
-                      style={{ 
-                        backgroundColor: AgencyServiceUtils.getActionStatusColor(action.status) + '20',
-                        color: AgencyServiceUtils.getActionStatusColor(action.status)
-                      }}
+                      className={`px-2 py-1 text-xs font-medium rounded-full action-status-${action.status}`}
                     >
                       {action.status}
                     </span>
@@ -569,7 +556,7 @@ export const AgencyDashboard: React.FC<AgencyDashboardProps> = ({ className }) =
                     aria-label="Select action type"
                     title="Choose the type of action to request"
                   >
-                    {Object.values(ActionType).map(type => (
+                    {Object.values(ActionType).map((type: ActionType) => (
                       <option key={type} value={type}>
                         {AgencyServiceUtils.formatActionType(type)}
                       </option>

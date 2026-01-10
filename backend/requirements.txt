@@ -87,3 +87,16 @@ mkdocs-material==9.4.8
 torchvision==0.16.1
 pillow==10.1.0
 opencv-python==4.8.1.78
+
+# Ghost Interface (System Tray & Notifications)
+pystray==0.19.5
+plyer==2.1.0
+Pillow>=10.0.0
+
+# CLI Interface (Power User Tools)
+rich==13.7.0
+httpx==0.25.2
+click==8.1.7
+
+# Working Memory Hygiene
+schedule==1.2.0

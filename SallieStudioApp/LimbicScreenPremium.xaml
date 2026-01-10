@@ -1,0 +1,377 @@
+<Page
+    x:Class="SallieStudioApp.LimbicScreenPremium"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SallieStudioApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:charting="using:WinUIEx"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <!-- Premium Gradient Brushes -->
+        <LinearGradientBrush x:Key="PurpleGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#9333EA" Offset="0"/>
+            <GradientStop Color="#3B82F6" Offset="1"/>
+        </LinearGradientBrush>
+        
+        <LinearGradientBrush x:Key="PinkGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#EC4899" Offset="0"/>
+            <GradientStop Color="#F43F5E" Offset="1"/>
+        </LinearGradientBrush>
+        
+        <LinearGradientBrush x:Key="EmeraldGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#10B981" Offset="0"/>
+            <GradientStop Color="#14B8A6" Offset="1"/>
+        </LinearGradientBrush>
+        
+        <LinearGradientBrush x:Key="AmberGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#F59E0B" Offset="0"/>
+            <GradientStop Color="#EA580C" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- Premium Storyboards -->
+        <Storyboard x:Key="FadeInAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1"/>
+        </Storyboard>
+        
+        <Storyboard x:Key="SlideInAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" From="-50" To="0" Duration="0:0:0.8">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        
+        <Storyboard x:Key="PulseAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="1.1" Duration="0:0:2" AutoReverse="True" RepeatBehavior="Forever"/>
+            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1" To="1.1" Duration="0:0:2" AutoReverse="True" RepeatBehavior="Forever"/>
+        </Storyboard>
+        
+        <Storyboard x:Key="RotateAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)" From="0" To="360" Duration="0:0:10" RepeatBehavior="Forever">
+                <DoubleAnimation.EasingFunction>
+                    <SineEase EasingMode="Linear"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <!-- Premium Styles -->
+        <Style x:Key="PremiumCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{ThemeResource AcrylicBackgroundBrush}"/>
+            <Setter Property="BorderBrush" Value="#9333EA"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="Padding" Value="24"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TranslateTransform/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="PremiumGaugeStyle" TargetType="ProgressBar">
+            <Setter Property="Height" Value="12"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Background" Value="rgba(147, 51, 234, 0.2)"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <Style x:Key="PremiumButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="#9333EA"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <!-- Background Gradient -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#1E1B4B" Offset="0"/>
+                <GradientStop Color="#581C87" Offset="0.5"/>
+                <GradientStop Color="#1E1B4B" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <ScrollViewer>
+            <Grid Margin="24">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Premium Header -->
+                <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,24,0,32">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,8">
+                        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE734;" FontSize="32" Foreground="#FBBF24" Margin="0,0,12,0"/>
+                        <TextBlock Text="Limbic State Monitor" FontSize="32" FontWeight="Bold" Foreground="White" Margin="0,0,12,0"/>
+                        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE734;" FontSize="32" Foreground="#FBBF24"/>
+                    </StackPanel>
+                    <TextBlock Text="Advanced Neural Interface Analytics with Real-time Monitoring" 
+                               FontSize="18" Foreground="#E9D5FF" TextAlignment="Center" HorizontalAlignment="Stretch"/>
+                </StackPanel>
+
+                <!-- Central Visualization -->
+                <Border Grid.Row="1" Style="{StaticResource PremiumCardStyle}" Margin="0,0,0,24" HorizontalAlignment="Center">
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock Text="Overall Limbic State" FontSize="20" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                        
+                        <!-- Central Circular Visualization -->
+                        <Grid Width="300" Height="300" HorizontalAlignment="Center">
+                            <!-- Outer Ring -->
+                            <Border CornerRadius="150" Width="300" Height="300" BorderThickness="2" BorderBrush="#9333EA" Opacity="0.3"/>
+                            
+                            <!-- Rotating Ring -->
+                            <Border x:Name="RotatingRing" CornerRadius="140" Width="280" Height="280" BorderThickness="4" BorderBrush="#FBBF24" RenderTransformOrigin="0.5,0.5">
+                                <Border.RenderTransform>
+                                    <RotateTransform/>
+                                </Border.RenderTransform>
+                            </Border>
+                            
+                            <!-- Pulsing Circle -->
+                            <Border x:Name="PulsingCircle" CornerRadius="120" Width="240" Height="240" RenderTransformOrigin="0.5,0.5">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#9333EA" Offset="0"/>
+                                        <GradientStop Color="#EC4899" Offset="0.5"/>
+                                        <GradientStop Color="#F59E0B" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Border.RenderTransform>
+                                    <ScaleTransform/>
+                                </Border.RenderTransform>
+                            </Border>
+                            
+                            <!-- Center Content -->
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock x:Name="OverallPercentage" Text="75%" FontSize="48" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+                                <TextBlock x:Name="CurrentPosture" Text="Companion" FontSize="18" FontWeight="SemiBold" Foreground="#FBBF24" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                                <TextBlock Text="Optimal State" FontSize="14" Foreground="#E9D5FF" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- Limbic Gauges Grid -->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Primary Limbic Variables -->
+                    <Border Grid.Column="0" Style="{StaticResource PremiumCardStyle}" Margin="0,0,12,0">
+                        <StackPanel>
+                            <TextBlock Text="Primary Limbic Variables" FontSize="20" FontWeight="Bold" Foreground="White" Margin="0,0,0,20"/>
+                            
+                            <!-- Trust Gauge -->
+                            <StackPanel Margin="0,0,0,20">
+                                <Grid Margin="0,0,0,8">
+                                    <TextBlock Text="Trust" FontSize="16" FontWeight="500" Foreground="#E9D5FF" HorizontalAlignment="Left"/>
+                                    <TextBlock x:Name="TrustValue" Text="75%" FontSize="16" FontWeight="600" Foreground="White" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <ProgressBar x:Name="TrustBar" Style="{StaticResource PremiumGaugeStyle}" Value="75" Margin="0,0,0,4">
+                                    <ProgressBar.Foreground>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="#9333EA" Offset="0"/>
+                                            <GradientStop Color="#A855F7" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </ProgressBar.Foreground>
+                                </ProgressBar>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                    <Border Width="2" Height="8" Background="rgba(255,255,255,0.3)" Margin="0,0,0,0"/>
+                                    <Border Width="2" Height="8" Background="rgba(255,255,255,0.3)" Margin="24,0,0,0"/>
+                                    <Border Width="2" Height="8" Background="rgba(255,255,255,0.3)" Margin="24,0,0,0"/>
+                                    <Border Width="2" Height="8" Background="rgba(255,255,255,0.3)" Margin="24,0,0,0"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <!-- Warmth Gauge -->
+                            <StackPanel Margin="0,0,0,20">
+                                <Grid Margin="0,0,0,8">
+                                    <TextBlock Text="Warmth" FontSize="16" FontWeight="500" Foreground="#E9D5FF" HorizontalAlignment="Left"/>
+                                    <TextBlock x:Name="WarmthValue" Text="60%" FontSize="16" FontWeight="600" Foreground="White" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <ProgressBar x:Name="WarmthBar" Style="{StaticResource PremiumGaugeStyle}" Value="60" Margin="0,0,0,4">
+                                    <ProgressBar.Foreground>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="#EC4899" Offset="0"/>
+                                            <GradientStop Color="#F472B6" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </ProgressBar.Foreground>
+                                </ProgressBar>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                    <Border Width="2" Height="8" Background="rgba(255,255,255,0.3)" Margin="0,0,0,0"/>
+                                    <Border Width="2" Height="8" Background="rgba(255,255,255,0.3)" Margin="24,0,0,0"/>
+                                    <Border Width="2" Height="8" Background="rgba(255,255,255,0.3)" Margin="24,0,0,0"/>
+                                    <Border Width="2" Height="8" Background="rgba(255,255,255,0.3)" Margin="24,0,0,0"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <!-- Arousal Gauge -->
+                            <StackPanel Margin="0,0,0,20">
+                                <Grid Margin="0,0,0,8">
+                                    <TextBlock Text="Arousal" FontSize="16" FontWeight="500" Foreground="#E9D5FF" HorizontalAlignment="Left"/>
+                                    <TextBlock x:Name="ArousalValue" Text="45%" FontSize="16" FontWeight="600" Foreground="White" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <ProgressBar x:Name="ArousalBar" Style="{StaticResource PremiumGaugeStyle}" Value="45" Margin="0,0,0,4">
+                                    <ProgressBar.Foreground>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="#F59E0B" Offset="0"/>
+                                            <GradientStop Color="#FCD34D" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </ProgressBar.Foreground>
+                                </ProgressBar>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                    <Border Width="2" Height="8" Background="rgba(255,255,255,0.3)" Margin="0,0,0,0"/>
+                                    <Border Width="2" Height="8" Background="rgba(255,255,255,0.3)" Margin="24,0,0,0"/>
+                                    <Border Width="2" Height="8" Background="rgba(255,255,255,0.3)" Margin="24,0,0,0"/>
+                                    <Border Width="2" Height="8" Background="rgba(255,255,255,0.3)" Margin="24,0,0,0"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <!-- Valence Gauge -->
+                            <StackPanel>
+                                <Grid Margin="0,0,0,8">
+                                    <TextBlock Text="Valence" FontSize="16" FontWeight="500" Foreground="#E9D5FF" HorizontalAlignment="Left"/>
+                                    <TextBlock x:Name="ValenceValue" Text="80%" FontSize="16" FontWeight="600" Foreground="White" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <ProgressBar x:Name="ValenceBar" Style="{StaticResource PremiumGaugeStyle}" Value="80" Margin="0,0,0,4">
+                                    <ProgressBar.Foreground>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="#10B981" Offset="0"/>
+                                            <GradientStop Color="#34D399" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </ProgressBar.Foreground>
+                                </ProgressBar>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                    <Border Width="2" Height="8" Background="rgba(255,255,255,0.3)" Margin="0,0,0,0"/>
+                                    <Border Width="2" Height="8" Background="rgba(255,255,255,0.3)" Margin="24,0,0,0"/>
+                                    <Border Width="2" Height="8" Background="rgba(255,255,255,0.3)" Margin="24,0,0,0"/>
+                                    <Border Width="2" Height="8" Background="rgba(255,255,255,0.3)" Margin="24,0,0,0"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Analytics & History -->
+                    <Border Grid.Column="1" Style="{StaticResource PremiumCardStyle}" Margin="12,0,0,0">
+                        <StackPanel>
+                            <TextBlock Text="Analytics & History" FontSize="20" FontWeight="Bold" Foreground="White" Margin="0,0,0,20"/>
+                            
+                            <!-- Time Range Selector -->
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                                <Button x:Name="Range15m" Content="15m" Style="{StaticResource PremiumButtonStyle}" Margin="0,0,8,0" Click="TimeRange_Click"/>
+                                <Button x:Name="Range1h" Content="1h" Style="{StaticResource PremiumButtonStyle}" Margin="0,0,8,0" Click="TimeRange_Click"/>
+                                <Button x:Name="Range6h" Content="6h" Style="{StaticResource PremiumButtonStyle}" Margin="0,0,8,0" Click="TimeRange_Click"/>
+                                <Button x:Name="Range24h" Content="24h" Style="{StaticResource PremiumButtonStyle}" Click="TimeRange_Click"/>
+                            </StackPanel>
+
+                            <!-- Statistics -->
+                            <Grid Margin="0,0,0,20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Data Points" FontSize="14" Foreground="#E9D5FF" Margin="0,0,0,4"/>
+                                <TextBlock Grid.Column="1" Grid.Row="0" x:Name="DataPointsValue" Text="1,247" FontSize="16" FontWeight="600" Foreground="White" HorizontalAlignment="Right" Margin="0,0,0,4"/>
+
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Avg Trust" FontSize="14" Foreground="#E9D5FF" Margin="0,0,0,4"/>
+                                <TextBlock Grid.Column="1" Grid.Row="1" x:Name="AvgTrustValue" Text="72%" FontSize="16" FontWeight="600" Foreground="White" HorizontalAlignment="Right" Margin="0,0,0,4"/>
+
+                                <TextBlock Grid.Column="0" Grid.Row="2" Text="Peak State" FontSize="14" Foreground="#E9D5FF" Margin="0,0,0,4"/>
+                                <TextBlock Grid.Column="1" Grid.Row="2" x:Name="PeakStateValue" Text="Expert" FontSize="16" FontWeight="600" Foreground="#FBBF24" HorizontalAlignment="Right" Margin="0,0,0,4"/>
+                            </Grid>
+
+                            <!-- History Chart -->
+                            <Border Background="rgba(147, 51, 234, 0.1)" CornerRadius="8" Padding="16" Margin="0,0,0,20">
+                                <TextBlock Text="Limbic State Timeline" FontSize="14" FontWeight="500" Foreground="#E9D5FF" HorizontalAlignment="Center" Margin="0,0,0,12"/>
+                                <!-- Placeholder for chart -->
+                                <Border Height="120" Background="rgba(147, 51, 234, 0.2)" CornerRadius="4">
+                                    <TextBlock Text="Interactive Chart" FontSize="12" Foreground="#A78BFA" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </Border>
+
+                            <!-- Control Buttons -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button x:Name="RecordButton" Content="Record" Style="{StaticResource PremiumButtonStyle}" Margin="0,0,12,0" Click="RecordButton_Click">
+                                    <Button.Icon>
+                                        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE7C4;"/>
+                                    </Button.Icon>
+                                </Button>
+                                <Button x:Name="ExportButton" Content="Export" Style="{StaticResource PremiumButtonStyle}" Click="ExportButton_Click">
+                                    <Button.Icon>
+                                        <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE894;"/>
+                                    </Button.Icon>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!-- Premium Features Footer -->
+                <Border Grid.Row="3" Style="{StaticResource PremiumCardStyle}" Margin="0,24,0,0">
+                    <StackPanel>
+                        <TextBlock Text="Premium Features Active" FontSize="18" FontWeight="Bold" Foreground="White" Margin="0,0,0,16"/>
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
+                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE773;" FontSize="16" Foreground="#10B981" Margin="0,0,8,0"/>
+                                <TextBlock Text="Enhanced Visualizations" FontSize="14" Foreground="#E9D5FF"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
+                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE9D2;" FontSize="16" Foreground="#10B981" Margin="0,0,8,0"/>
+                                <TextBlock Text="Advanced Analytics" FontSize="14" Foreground="#E9D5FF"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
+                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE7B3;" FontSize="16" Foreground="#10B981" Margin="0,0,8,0"/>
+                                <TextBlock Text="Personalized Guidance" FontSize="14" Foreground="#E9D5FF"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE8F1;" FontSize="16" Foreground="#10B981" Margin="0,0,8,0"/>
+                                <TextBlock Text="Real-time Feedback" FontSize="14" Foreground="#E9D5FF"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE9CE;" FontSize="16" Foreground="#10B981" Margin="0,0,8,0"/>
+                                <TextBlock Text="Predictive Insights" FontSize="14" Foreground="#E9D5FF"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal">
+                                <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE8B7;" FontSize="16" Foreground="#10B981" Margin="0,0,8,0"/>
+                                <TextBlock Text="Neural Synchronization" FontSize="14" Foreground="#E9D5FF"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

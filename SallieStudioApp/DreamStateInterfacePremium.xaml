@@ -1,0 +1,350 @@
+<Page x:Class="SallieStudioApp.DreamStateInterfacePremium"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      Background="{StaticResource BackgroundBrush}"
+      Title="Dream State Interface - Premium">
+
+    <Page.Resources>
+        <!-- Premium Gradient Brushes -->
+        <LinearGradientBrush x:Key="DreamGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#6366F1" Offset="0"/>
+            <GradientStop Color="#8B5CF6" Offset="0.5"/>
+            <GradientStop Color="#A855F7" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="NeuralGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#3B82F6" Offset="0"/>
+            <GradientStop Color="#06B6D4" Offset="0.5"/>
+            <GradientStop Color="#0EA5E9" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="HeritageGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#F59E0B" Offset="0"/>
+            <GradientStop Color="#F97316" Offset="0.5"/>
+            <GradientStop Color="#EF4444" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="CardBackground" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#1F2937" Offset="0"/>
+            <GradientStop Color="#111827" Offset="1"/>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="BorderGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#374151" Offset="0"/>
+            <GradientStop Color="#1F2937" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- Animation Storyboards -->
+        <Storyboard x:Key="DreamPulseAnimation" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetName="DreamCore"
+                           Storyboard.TargetProperty="ScaleX"
+                           From="1.0" To="1.1" Duration="0:0:2"
+                           AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="DreamCore"
+                           Storyboard.TargetProperty="ScaleY"
+                           From="1.0" To="1.1" Duration="0:0:2"
+                           AutoReverse="True"/>
+        </Storyboard>
+
+        <Storyboard x:Key="DreamRotationAnimation" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetName="DreamCore"
+                           Storyboard.TargetProperty="Angle"
+                           From="0" To="360" Duration="0:0:10"/>
+        </Storyboard>
+
+        <Storyboard x:Key="NeuralWaveAnimation" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetName="NeuralWave1"
+                           Storyboard.TargetProperty="Height"
+                           From="20" To="60" Duration="0:0:1"
+                           AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="NeuralWave2"
+                           Storyboard.TargetProperty="Height"
+                           From="40" To="80" Duration="0:0:1.5"
+                           AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="NeuralWave3"
+                           Storyboard.TargetProperty="Height"
+                           From="30" To="70" Duration="0:0:1.2"
+                           AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetName="NeuralWave4"
+                           Storyboard.TargetProperty="Height"
+                           From="50" To="90" Duration="0:0:1.8"
+                           AutoReverse="True"/>
+        </Storyboard>
+
+        <Storyboard x:Key="PhaseTransitionAnimation">
+            <DoubleAnimation Storyboard.TargetName="PhaseOverlay"
+                           Storyboard.TargetProperty="Opacity"
+                           From="0" To="0.8" Duration="0:0:0.5"
+                           AutoReverse="True"/>
+        </Storyboard>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="{StaticResource CardBackground}" 
+                BorderBrush="{StaticResource BorderGradient}" BorderThickness="1" 
+                CornerRadius="12" Margin="0,0,0,20" Padding="20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Background="{StaticResource DreamGradient}" Width="40" Height="40" CornerRadius="20">
+                        <TextBlock Text="🌙" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel Margin="15,0,0,0" VerticalAlignment="Center">
+                        <TextBlock Text="Dream State Interface" FontSize="24" FontWeight="Bold" Foreground="#FFFFFF"/>
+                        <TextBlock Text="Psychological Maintenance & Neural Integration" FontSize="12" Foreground="#9CA3AF"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button Name="SettingsButton" Content="⚙️" Background="#374151" Foreground="#FFFFFF"
+                           Width="40" Height="40" CornerRadius="8" Margin="0,0,10,0"
+                           Click="SettingsButton_Click"/>
+                    <Button Name="AnalyzeButton" Content="📊" Background="#374151" Foreground="#FFFFFF"
+                           Width="40" Height="40" CornerRadius="8"
+                           Click="AnalyzeButton_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main Content -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Dream Visualization Panel -->
+                <Border Grid.Column="0" Background="{StaticResource CardBackground}" 
+                        BorderBrush="{StaticResource BorderGradient}" BorderThickness="1" 
+                        CornerRadius="12" Margin="0,0,10,0" Padding="20">
+                    <StackPanel>
+                        <TextBlock Text="Dream Visualization" FontSize="16" FontWeight="SemiBold" 
+                                  Foreground="#FFFFFF" Margin="0,0,0,20"/>
+
+                        <!-- Dream Core Visualization -->
+                        <Viewbox Width="200" Height="200" HorizontalAlignment="Center" Margin="0,0,0,20">
+                            <Grid Width="200" Height="200">
+                                <!-- Dream Layers -->
+                                <Ellipse Name="DreamLayer1" Width="180" Height="180" 
+                                        Fill="#6366F1" Opacity="0.2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Ellipse Name="DreamLayer2" Width="160" Height="160" 
+                                        Fill="#8B5CF6" Opacity="0.3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Ellipse Name="DreamLayer3" Width="140" Height="140" 
+                                        Fill="#A855F7" Opacity="0.4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Ellipse Name="DreamLayer4" Width="120" Height="120" 
+                                        Fill="#F59E0B" Opacity="0.5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                
+                                <!-- Dream Core -->
+                                <Ellipse Name="DreamCore" Width="100" Height="100" 
+                                        Fill="{StaticResource DreamGradient}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Ellipse.RenderTransform>
+                                        <RotateTransform CenterX="50" CenterY="50"/>
+                                    </Ellipse.RenderTransform>
+                                </Ellipse>
+                                
+                                <!-- Phase Indicator -->
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock Name="PhaseIndicator" Text="READY" FontSize="12" FontWeight="Bold" 
+                                              Foreground="#FFFFFF" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Grid>
+                        </Viewbox>
+
+                        <!-- Neural Activity Visualization -->
+                        <Border Background="#1F2937" CornerRadius="8" Padding="15" Margin="0,0,0,15">
+                            <StackPanel>
+                                <TextBlock Text="Neural Activity" FontSize="12" FontWeight="Medium" 
+                                          Foreground="#6366F1" Margin="0,0,0,10"/>
+                                <Grid Height="60" Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Rectangle Grid.Column="0" Name="NeuralWave1" Fill="#6366F1" 
+                                             Width="8" Height="20" VerticalAlignment="Bottom" RadiusX="4" RadiusY="4"/>
+                                    <Rectangle Grid.Column="1" Name="NeuralWave2" Fill="#8B5CF6" 
+                                             Width="8" Height="40" VerticalAlignment="Bottom" RadiusX="4" RadiusY="4"/>
+                                    <Rectangle Grid.Column="2" Name="NeuralWave3" Fill="#A855F7" 
+                                             Width="8" Height="30" VerticalAlignment="Bottom" RadiusX="4" RadiusY="4"/>
+                                    <Rectangle Grid.Column="3" Name="NeuralWave4" Fill="#F59E0B" 
+                                             Width="8" Height="50" VerticalAlignment="Bottom" RadiusX="4" RadiusY="4"/>
+                                    <Rectangle Grid.Column="5" Name="NeuralWave5" Fill="#6366F1" 
+                                             Width="8" Height="25" VerticalAlignment="Bottom" RadiusX="4" RadiusY="4"/>
+                                    <Rectangle Grid.Column="6" Name="NeuralWave6" Fill="#8B5CF6" 
+                                             Width="8" Height="45" VerticalAlignment="Bottom" RadiusX="4" RadiusY="4"/>
+                                    <Rectangle Grid.Column="7" Name="NeuralWave7" Fill="#A855F7" 
+                                             Width="8" Height="35" VerticalAlignment="Bottom" RadiusX="4" RadiusY="4"/>
+                                </Grid>
+                                <TextBlock Name="NeuralStatusText" Text="Neural Coherence: 89%" FontSize="10" 
+                                          Foreground="#6B7280" TextAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Dream Controls -->
+                        <Button Name="StartDreamButton" Click="StartDreamButton_Click"
+                               Background="{StaticResource DreamGradient}" 
+                               Foreground="#FFFFFF" Width="120" Height="40" 
+                               CornerRadius="8" Margin="0,0,0,15">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="▶" FontSize="16" Margin="0,0,8,0"/>
+                                <TextBlock Text="Start Dream" FontSize="12" FontWeight="SemiBold"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Progress Bar -->
+                        <Border Background="#1F2937" CornerRadius="8" Padding="15" Name="ProgressPanel" Visibility="Collapsed">
+                            <StackPanel>
+                                <TextBlock Text="Dream Cycle Progress" FontSize="12" FontWeight="Medium" 
+                                          Foreground="#6366F1" Margin="0,0,0,10"/>
+                                <ProgressBar Name="DreamProgressBar" Height="6" Background="#374151" 
+                                           Foreground="{StaticResource DreamGradient}" Value="0" 
+                                           CornerRadius="3" Margin="0,0,0,5"/>
+                                <TextBlock Name="ProgressText" Text="0%" FontSize="10" 
+                                          Foreground="#9CA3AF" TextAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- Analytics & Metrics Panel -->
+                <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                    <!-- Dream Metrics -->
+                    <Border Background="{StaticResource CardBackground}" 
+                            BorderBrush="{StaticResource BorderGradient}" BorderThickness="1" 
+                            CornerRadius="12" Margin="0,0,0,20" Padding="20">
+                        <StackPanel>
+                            <TextBlock Text="Dream Metrics" FontSize="16" FontWeight="SemiBold" 
+                                      Foreground="#FFFFFF" Margin="0,0,0,20"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                                    <TextBlock Name="TotalCyclesText" Text="12" FontSize="24" FontWeight="Bold" 
+                                              Foreground="#6366F1" TextAlignment="Center"/>
+                                    <TextBlock Text="Total Cycles" FontSize="11" Foreground="#9CA3AF" 
+                                              TextAlignment="Center" Margin="0,5,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                                    <TextBlock Name="EfficacyText" Text="94%" FontSize="24" FontWeight="Bold" 
+                                              Foreground="#10B981" TextAlignment="Center"/>
+                                    <TextBlock Text="Efficacy Rate" FontSize="11" Foreground="#9CA3AF" 
+                                              TextAlignment="Center" Margin="0,5,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                                    <TextBlock Name="IntegrationText" Text="87%" FontSize="24" FontWeight="Bold" 
+                                              Foreground="#F59E0B" TextAlignment="Center"/>
+                                    <TextBlock Text="Integration" FontSize="11" Foreground="#9CA3AF" 
+                                              TextAlignment="Center" Margin="0,5,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Recent Dream Cycles -->
+                    <Border Background="{StaticResource CardBackground}" 
+                            BorderBrush="{StaticResource BorderGradient}" BorderThickness="1" 
+                            CornerRadius="12" Padding="20">
+                        <StackPanel>
+                            <TextBlock Text="Recent Dream Cycles" FontSize="16" FontWeight="SemiBold" 
+                                      Foreground="#FFFFFF" Margin="0,0,0,20"/>
+
+                            <ListBox Name="DreamCyclesListBox" Background="#1F2937" BorderBrush="#374151" 
+                                    BorderThickness="1" Height="300" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#374151" CornerRadius="6" Padding="12" Margin="2">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                
+                                                <Grid Grid.Row="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="{Binding Date}" FontSize="12" FontWeight="Medium" 
+                                                              Foreground="#FFFFFF"/>
+                                                    <TextBlock Grid.Column="1" Text="{Binding Phase}" FontSize="10" 
+                                                              Foreground="#6366F1" Margin="10,0,0,0"/>
+                                                    <TextBlock Grid.Column="2" Text="{Binding Duration}" FontSize="10" 
+                                                              Foreground="#9CA3AF" Margin="10,0,0,0"/>
+                                                </Grid>
+                                                
+                                                <TextBlock Grid.Row="1" Text="{Binding Resolution}" FontSize="11" 
+                                                          Foreground="#10B981" Margin="0,5,0,0"/>
+                                                
+                                                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,5,0,0">
+                                                    <TextBlock Text="Processed:" FontSize="10" Foreground="#6B7280" Margin="0,0,5,0"/>
+                                                    <TextBlock Text="{Binding ProcessedCount}" FontSize="10" Foreground="#9CA3AF" Margin="0,0,10,0"/>
+                                                    <TextBlock Text="Hypotheses:" FontSize="10" Foreground="#6B7280" Margin="0,0,5,0"/>
+                                                    <TextBlock Text="{Binding HypothesesCount}" FontSize="10" Foreground="#9CA3AF"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+
+        <!-- Status Bar -->
+        <Border Grid.Row="2" Background="{StaticResource CardBackground}" 
+                BorderBrush="{StaticResource BorderGradient}" BorderThickness="1" 
+                CornerRadius="12" Margin="0,20,0,0" Padding="15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Ellipse Name="StatusBarIndicator" Width="8" Height="8" Fill="#10B981" Margin="0,0,8,0"/>
+                    <TextBlock Name="StatusBarText" Text="Dream System Active" FontSize="12" Foreground="#9CA3AF"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Neural Processing" FontSize="12" Foreground="#9CA3AF" Margin="0,0,15,0"/>
+                    <TextBlock Text="Memory Integration" FontSize="12" Foreground="#9CA3AF" Margin="0,0,15,0"/>
+                    <TextBlock Text="Psychological Health" FontSize="12" Foreground="#9CA3AF"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

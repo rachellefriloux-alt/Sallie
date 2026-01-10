@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { LimbicGauges } from './LimbicGauges';
 import { useLimbicStore } from '@/store/useLimbicStore';
 import { useWebSocket } from '@/hooks/useWebSocket';
-import { LimbicEngine, LimbicEngineUtils } from '../../../shared/services/limbicEngine';
+import { LimbicEngineServiceImpl, LimbicEngineWebSocket, LimbicEngineUtils, LimbicState } from '@/shared/services/limbicEngineImpl';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 const LIMBIC_ENGINE_URL = process.env.NEXT_PUBLIC_LIMBIC_ENGINE_URL || 'http://localhost:8750';
@@ -31,6 +31,7 @@ export function LimbicScreen() {
   const [timeRange, setTimeRange] = useState<'1h' | '24h' | '7d' | '30d'>('24h');
   const [trustTier, setTrustTier] = useState<any>(null);
   const [isConnected, setIsConnected] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const { connect } = useWebSocket();
 
@@ -38,7 +39,7 @@ export function LimbicScreen() {
   useEffect(() => {
     const initializeLimbicEngine = async () => {
       try {
-        const limbicService = new LimbicEngine.LimbicEngineServiceImpl();
+        const limbicService = new LimbicEngineServiceImpl();
         
         // Load current state
         const currentState = await limbicService.getCurrentState();
@@ -67,7 +68,7 @@ export function LimbicScreen() {
         setHistory(formattedHistory);
         
         // Set up WebSocket for real-time updates
-        const ws = new LimbicEngine.LimbicEngineWebSocket('ws://localhost:8750');
+        const ws = new LimbicEngineWebSocket(LIMBIC_ENGINE_URL.replace('http://', 'ws://').replace('https://', 'wss://'));
         
         ws.on('connected', () => {
           setIsConnected(true);
@@ -79,16 +80,16 @@ export function LimbicScreen() {
           console.log('Disconnected from Limbic Engine WebSocket');
         });
         
-        ws.on('limbic-state', (data) => {
+        ws.on('limbic-state', (data: any) => {
           updateState(data);
           addHistoryEntry(data);
         });
         
-        ws.on('trust-change', (data) => {
+        ws.on('trust-change', (data: any) => {
           setTrustTier(data.tier);
         });
         
-        ws.on('perception-result', (data) => {
+        ws.on('perception-result', (data: any) => {
           console.log('Perception result:', data);
         });
         
@@ -98,13 +99,14 @@ export function LimbicScreen() {
         
       } catch (error) {
         console.error('Failed to initialize Limbic Engine:', error);
+        setError('Failed to connect to Limbic Engine service');
         // Fallback to localStorage for demo
         loadHistory();
       }
     };
 
     initializeLimbicEngine();
-  }, []);
+  }, [updateState]);
 
   const addHistoryEntry = (newState: any) => {
     const entry: LimbicHistoryEntry = {
@@ -135,23 +137,6 @@ export function LimbicScreen() {
     } catch (err) {
       console.error('Failed to load history:', err);
     }
-  };
-
-  const addHistoryEntry = (state: any) => {
-    const entry: LimbicHistoryEntry = {
-      timestamp: Date.now(),
-      trust: state.trust || 0,
-      warmth: state.warmth || 0,
-      arousal: state.arousal || 0,
-      valence: state.valence || 0,
-      posture: state.posture || 'PEER',
-    };
-    
-    setHistory((prev) => {
-      const updated = [...prev, entry].slice(-1000); // Keep last 1000 entries
-      localStorage.setItem('limbic_history', JSON.stringify(updated));
-      return updated;
-    });
   };
 
   const filteredHistory = history.filter((entry) => {

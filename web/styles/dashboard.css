@@ -1,0 +1,203 @@
+/**
+ * CSS styles for Agency Dashboard components
+ */
+
+.action-status-pending {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.action-status-approved {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.action-status-rejected {
+  background-color: #ef4444;
+  color: white;
+}
+
+.action-status-in_progress {
+  background-color: #8b5cf6;
+  color: white;
+}
+
+.action-status-completed {
+  background-color: #10b981;
+  color: white;
+}
+
+.action-status-failed {
+  background-color: #ef4444;
+  color: white;
+}
+
+.action-status-rolled_back {
+  background-color: #f97316;
+  color: white;
+}
+
+.trust-progress-bar {
+  transition: width 0.3s ease-in-out;
+}
+
+/* Agency Dashboard specific styles */
+.agency-dashboard {
+  @apply space-y-6;
+}
+
+.trust-tier-grid {
+  @apply grid grid-cols-1 md:grid-cols-5 gap-4;
+}
+
+.trust-tier-card {
+  @apply p-4 rounded-lg border-2 transition-all;
+}
+
+.trust-tier-card.active {
+  @apply border-purple-500 bg-purple-50;
+}
+
+.trust-tier-card.inactive {
+  @apply border-gray-200 bg-gray-50;
+}
+
+.action-card {
+  @apply bg-gray-50 border border-gray-200 rounded-lg p-4;
+}
+
+.action-card:hover {
+  @apply bg-gray-100;
+}
+
+.stats-card {
+  @apply rounded-lg p-4;
+}
+
+.stats-card-purple {
+  @apply bg-gradient-to-r from-purple-50 to-purple-100;
+}
+
+.stats-card-green {
+  @apply bg-gradient-to-r from-green-50 to-green-100;
+}
+
+.stats-card-blue {
+  @apply bg-gradient-to-r from-blue-50 to-blue-100;
+}
+
+.stats-card-orange {
+  @apply bg-gradient-to-r from-orange-50 to-orange-100;
+}
+
+.modal-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50;
+}
+
+.modal-content {
+  @apply bg-white rounded-lg p-6 w-full max-w-md;
+}
+
+.modal-content-large {
+  @apply max-w-2xl max-h-[80vh] overflow-y-auto;
+}
+
+/* Button styles */
+.btn-primary {
+  @apply px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors;
+}
+
+.btn-secondary {
+  @apply px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors;
+}
+
+.btn-success {
+  @apply px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors;
+}
+
+.btn-danger {
+  @apply px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors;
+}
+
+.btn-warning {
+  @apply px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors;
+}
+
+.btn-sm {
+  @apply px-3 py-1 text-sm;
+}
+
+.btn-xs {
+  @apply px-2 py-1 text-xs;
+}
+
+/* Form styles */
+.form-input {
+  @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent;
+}
+
+.form-select {
+  @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent;
+}
+
+.form-textarea {
+  @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none;
+}
+
+/* Loading and animation styles */
+.loading-spinner {
+  @apply animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500;
+}
+
+.pulse-dot {
+  @apply w-2 h-2 bg-green-500 rounded-full animate-pulse;
+}
+
+/* Utility classes */
+.text-truncate {
+  @apply truncate;
+}
+
+.text-ellipsis {
+  @apply overflow-hidden text-ellipsis whitespace-nowrap;
+}
+
+.break-words {
+  @apply break-words;
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+  .trust-tier-grid {
+    @apply grid-cols-1;
+  }
+  
+  .modal-content {
+    @apply mx-4;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .action-card {
+    @apply bg-gray-800 border-gray-700;
+  }
+  
+  .action-card:hover {
+    @apply bg-gray-700;
+  }
+  
+  .stats-card {
+    @apply bg-gray-800;
+  }
+  
+  .modal-content {
+    @apply bg-gray-800 text-white;
+  }
+  
+  .form-input,
+  .form-select,
+  .form-textarea {
+    @apply bg-gray-700 border-gray-600 text-white;
+  }
+}

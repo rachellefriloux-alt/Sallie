@@ -3,6 +3,7 @@ Agency service routes for API Gateway
 """
 
 from fastapi import APIRouter, Depends, HTTPException
+from typing import Optional
 import httpx
 
 # Add shared modules to path
