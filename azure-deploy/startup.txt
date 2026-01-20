@@ -1,2 +1,0 @@
-This is a startup command for Azure App Service to run the Python FastAPI application
-The actual command will be configured through Azure CLI

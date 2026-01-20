@@ -19,6 +19,5 @@
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgMicrosoft_WindowsAppSDK Condition=" '$(PkgMicrosoft_WindowsAppSDK)' == '' ">C:\Users\chell\.nuget\packages\microsoft.windowsappsdk\1.6.240531000-experimental1</PkgMicrosoft_WindowsAppSDK>
-    <PkgMicrosoft_Web_WebView2 Condition=" '$(PkgMicrosoft_Web_WebView2)' == '' ">C:\Users\chell\.nuget\packages\microsoft.web.webview2\1.0.2592.51</PkgMicrosoft_Web_WebView2>
   </PropertyGroup>
 </Project>
