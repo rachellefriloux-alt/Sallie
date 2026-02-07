@@ -47,17 +47,17 @@ def validate_environment():
         if not value:
             missing_vars.append(f"  - {var}: {description}")
         elif value == "your-super-secret-jwt-key-change-this-in-production":
-            logger.warning(f"⚠️  {var} is using default value - please change it!")
+            logger.warning(f"WARNING: {var} is using default value - please change it!")
     
     if missing_vars:
-        logger.error("❌ Missing required environment variables:")
+        logger.error("ERROR: Missing required environment variables:")
         for var in missing_vars:
             logger.error(var)
         logger.error("\nPlease create a .env file with these variables.")
         logger.error("See .env.example for a template.")
         return False
     
-    logger.info("✅ Environment configuration validated!")
+    logger.info("SUCCESS: Environment configuration validated!")
     return True
 
 # Create necessary directories
@@ -77,20 +77,20 @@ def setup_directories():
     for dir_path in directories:
         Path(dir_path).mkdir(parents=True, exist_ok=True)
     
-    logger.info("✅ Data directories ready!")
+    logger.info("SUCCESS: Data directories ready!")
 
 # Banner
 def print_banner():
     """Print welcome banner"""
     banner = """
-    ╔══════════════════════════════════════════════════════════╗
-    ║                                                          ║
-    ║              🌟  SALLIE - Your Cognitive Partner  🌟      ║
-    ║                                                          ║
-    ║        The Great Convergence - 30 Questions             ║
-    ║        Canonical Specification v5.4.1                   ║
-    ║                                                          ║
-    ╚══════════════════════════════════════════════════════════╝
+    ================================================================
+    |                                                              |
+    |         *  SALLIE - Your Cognitive Partner  *               |
+    |                                                              |
+    |       The Great Convergence - 30 Questions                  |
+    |       Canonical Specification v5.4.1                       |
+    |                                                              |
+    ================================================================
     """
     print(banner)
     logger.info("Sallie Server Starting...")
@@ -102,7 +102,7 @@ async def main():
     
     # Validate environment
     if not validate_environment():
-        logger.error("❌ Environment validation failed. Server cannot start.")
+        logger.error("ERROR: Environment validation failed. Server cannot start.")
         logger.error("Please run START_SALLIE.bat to set up automatically.")
         sys.exit(1)
     
@@ -119,9 +119,9 @@ async def main():
         # Import our endpoints
         from premium_websocket_endpoints import premium_ws_router
         
-        logger.info("✅ Server components loaded!")
+        logger.info("Server components loaded!")
     except ImportError as e:
-        logger.error(f"❌ Failed to import required packages: {e}")
+        logger.error(f"ERROR: Failed to import required packages: {e}")
         logger.error("Please install dependencies: pip install -r ../backend/requirements.txt")
         sys.exit(1)
     
@@ -169,19 +169,19 @@ async def main():
     
     # Startup message
     logger.info("=" * 60)
-    logger.info("🚀 SALLIE BACKEND SERVER READY!")
+    logger.info("SALLIE BACKEND SERVER READY!")
     logger.info("=" * 60)
-    logger.info("📡 WebSocket Server: ws://localhost:8742")
-    logger.info("🌐 Web Interface: http://localhost:3000")
-    logger.info("📊 API Docs: http://localhost:8742/docs")
-    logger.info("❤️  Health Check: http://localhost:8742/health")
+    logger.info("WebSocket Server: ws://192.168.1.47:8742")
+    logger.info("Web Interface: http://localhost:3000")
+    logger.info("API Docs: http://192.168.1.47:8742/docs")
+    logger.info("Health Check: http://192.168.1.47:8742/health")
     logger.info("=" * 60)
-    logger.info("✨ The Great Convergence awaits...")
+    logger.info("The Great Convergence awaits...")
     logger.info("=" * 60)
     
     # Graceful shutdown handler
     def signal_handler(sig, frame):
-        logger.info("\n🛑 Shutting down Sallie server gracefully...")
+        logger.info("Shutting down Sallie server gracefully...")
         sys.exit(0)
     
     signal.signal(signal.SIGINT, signal_handler)
@@ -190,7 +190,7 @@ async def main():
     # Run server
     config = uvicorn.Config(
         app,
-        host="0.0.0.0",
+        host="192.168.1.47",
         port=8742,
         log_level="info",
         access_log=True
@@ -200,14 +200,14 @@ async def main():
     try:
         await server.serve()
     except Exception as e:
-        logger.error(f"❌ Server error: {e}")
+        logger.error(f"ERROR: Server error: {e}")
         sys.exit(1)
 
 if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        logger.info("\n👋 Sallie server stopped by user")
+        logger.info("\nSallie server stopped by user")
     except Exception as e:
-        logger.error(f"❌ Fatal error: {e}")
+        logger.error(f"FATAL ERROR: {e}")
         sys.exit(1)

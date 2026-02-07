@@ -44,17 +44,12 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "10.0.100"
+        }
       },
       "frameworks": {
         "net8.0-windows10.0.19041": {
           "targetAlias": "net8.0-windows10.0.19041.0",
           "dependencies": {
-            "Microsoft.Web.WebView2": {
-              "target": "Package",
-              "version": "[1.0.2592.51, )"
-            },
             "Microsoft.Windows.SDK.BuildTools": {
               "suppressParent": "All",
               "target": "Package",
@@ -62,15 +57,11 @@
             },
             "Microsoft.WindowsAppSDK": {
               "target": "Package",
-              "version": "[1.6.0-preview1, )"
+              "version": "[1.6.240531000-experimental1, )"
             },
             "System.Security.Permissions": {
               "target": "Package",
               "version": "[6.0.0, )"
-            },
-            "System.Text.Json": {
-              "target": "Package",
-              "version": "[8.0.0, )"
             }
           },
           "imports": [
@@ -87,18 +78,23 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.Windows.SDK.NET.Ref",
-              "version": "[10.0.19041.57, 10.0.19041.57]"
+              "version": "[10.0.19041.56, 10.0.19041.56]"
             }
           ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             },
-            "Microsoft.Windows.SDK.NET.Ref.Windows": {
+            "Microsoft.Windows.SDK.NET.Ref": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.416/PortableRuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
         }
       }
     }
