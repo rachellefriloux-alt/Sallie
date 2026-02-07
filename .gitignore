@@ -1,0 +1,15 @@
+node_modules
+.cache/
+.continue/
+.cagent/
+.dotnet/
+.EasyOCR/
+.gemini/
+.idlerc/
+.minikube/
+.vscode/extensions/
+.vscode-insiders/extensions/
+**/obj/
+**/bin/
+**/.next/
+**/out/
